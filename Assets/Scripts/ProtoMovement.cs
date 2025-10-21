@@ -22,7 +22,7 @@ public class ProtoMovement : MonoBehaviour
     {
         m_move = InputSystem.actions.FindAction("Move");
     }
-    
+
     void Update()
     {
         m_moveAmt = m_move.ReadValue<Vector2>() / sensitivity;
