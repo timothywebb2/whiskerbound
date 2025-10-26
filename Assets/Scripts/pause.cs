@@ -6,14 +6,16 @@ using UnityEngine.SceneManagement;
 public class pause : MonoBehaviour
 {
 
-    public GameObject pMenu;
-    public GameObject oMenu;
+    public GameObject pMenu; //pause
+    public GameObject oMenu; //options
+    public GameObject cMenu; //confirmation
     public bool isPause;
 
     void Start()
     {
           pMenu.SetActive(false);
           oMenu.SetActive(false);
+          cMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -44,10 +46,25 @@ public class pause : MonoBehaviour
 
 public void options(){
     oMenu.SetActive(true);
+    pMenu.SetActive(false);
+
 }
 
 public void back(){
+pMenu.SetActive(true);
 oMenu.SetActive(false);
+cMenu.SetActive(false);
+
 
 }
+
+public void askPlayer(){
+    cMenu.SetActive(true);
+}
+
+public void goMainMenu(){
+SceneManager.LoadScene(0);
+
+}
+
 }
