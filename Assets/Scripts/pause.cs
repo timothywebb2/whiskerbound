@@ -9,6 +9,7 @@ public class pause : MonoBehaviour
     public GameObject pMenu; //pause
     public GameObject oMenu; //options
     public GameObject cMenu; //confirmation
+    public GameObject cScreen; //controls
     public bool isPause;
 
     void Start()
@@ -16,6 +17,7 @@ public class pause : MonoBehaviour
           pMenu.SetActive(false);
           oMenu.SetActive(false);
           cMenu.SetActive(false);
+          cScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,8 +56,12 @@ public void back(){
 pMenu.SetActive(true);
 oMenu.SetActive(false);
 cMenu.SetActive(false);
+cScreen.SetActive(false);
+}
 
-
+public void controls(){
+    cScreen.SetActive(true);
+    oMenu.SetActive(false);
 }
 
 public void askPlayer(){
