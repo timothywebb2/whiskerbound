@@ -7,10 +7,12 @@ public class mainMenu : MonoBehaviour
     public GameObject mainMenuObject; //initializing objects in code for inspector attachment
     public GameObject optionsMenu;
     public GameObject creditsMenu;
+    public GameObject controlsMenu;
 
     void Start(){ // only main menu is active on start not the other canvases.
     optionsMenu.SetActive(false);
     creditsMenu.SetActive(false);
+    controlsMenu.SetActive(false);
     }
 
     public void playGame(){
@@ -28,9 +30,16 @@ public class mainMenu : MonoBehaviour
 
     }
 
+public void controls(){//ditto but close options screen
+     controlsMenu.SetActive(true);
+     optionsMenu.SetActive(false);
+        mainMenuObject.SetActive(false);
+}
+
     public void backButton(){ // no matter which back button, sends back to main screen.
   optionsMenu.SetActive(false);
     creditsMenu.SetActive(false);
+    controlsMenu.SetActive(false);
     mainMenuObject.SetActive(true);
 
     }
