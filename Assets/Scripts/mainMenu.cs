@@ -16,7 +16,7 @@ public class mainMenu : MonoBehaviour
     }
 
     public void playGame(){
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("ProtoVillage");
     }
 //prevents overlap
     public void options(){// show only options screen
