@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class ProtoMovement : MonoBehaviour
 {
@@ -17,12 +18,14 @@ public class ProtoMovement : MonoBehaviour
     private Vector2 moveInput;
     private CharacterController controller;
     private float verticalVelocity;
+    private Animator animator;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         controller = GetComponent<CharacterController>();
         moveAction = InputActions.FindActionMap("Player").FindAction("Move");
+        animator = this.GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -51,11 +54,14 @@ public class ProtoMovement : MonoBehaviour
         Vector3 moveDirection = (cameraForward * moveInput.y + cameraRight * moveInput.x);
 
         //rotate character
-        if (moveDirection.magnitude > 0.1f)
-        if (moveDirection.magnitude > 0.1f)
+        //if (moveDirection.magnitude > 0.1f)
+        /*if (moveDirection.magnitude > 0.1f)
         {
             RotateCharacter(moveDirection);
-        }
+        }*/
+
+        animator.SetFloat("XDirection", moveInput.x);
+        animator.SetFloat("YDirection", moveInput.y);
 
         Vector3 horizontalVelocity = moveDirection.normalized * speed;
         Vector3 finalVelocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);
@@ -85,5 +91,11 @@ public class ProtoMovement : MonoBehaviour
     {
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = targetRotation;
+    }
+
+    private void OnTriggerEnter(Collider whatIHit)
+    {
+        if (whatIHit.tag == "EnterOverworld")
+            SceneManager.LoadScene("ProtoFight");
     }
 }
