@@ -60,8 +60,13 @@ public class ProtoMovement : MonoBehaviour
             RotateCharacter(moveDirection);
         }*/
 
-        animator.SetFloat("XDirection", moveInput.x);
-        animator.SetFloat("YDirection", moveInput.y);
+        animator.SetInteger("XDirection", (int)moveInput.x);
+        animator.SetInteger("YDirection", (int)moveInput.y);
+
+        if (moveInput.x == 0 && moveInput.y == 0)
+            animator.speed = 0f;
+        else
+            animator.speed = 1f;
 
         Vector3 horizontalVelocity = moveDirection.normalized * speed;
         Vector3 finalVelocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);
