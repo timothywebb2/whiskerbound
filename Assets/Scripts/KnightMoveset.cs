@@ -89,9 +89,13 @@ PassTurn();
 
     public void Rally() {
 
-healOutput = Random.Range(1, 13);
-curHealth += healOutput;
-Debug.Log("Healing self by " + healOutput);
+        healOutput = Random.Range(1, 13);
+        if (curHealth + healOutput >= 50)
+            curHealth = 50;
+        else
+            curHealth += healOutput;
+
+        Debug.Log("Healing self by " + healOutput);
         if (!printing)
             StartCoroutine(printCurrentAction("Healing self by " + healOutput + " with Rally!", 0f));
 PassTurn();
