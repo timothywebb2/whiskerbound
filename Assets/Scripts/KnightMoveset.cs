@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class KnightMoveset : MonoBehaviour
 {
@@ -36,7 +37,51 @@ public class KnightMoveset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+ if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+
+            if (KnightSkills.activeSelf == true) {
+KnightSkills.SetActive(false);
+            }
+            else {
+                        if (!printing) {
+KnightSkills.SetActive(true);
+                        }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (KnightSkills.activeSelf == true) {
+Provoke();
+KnightSkills.SetActive(false);
+            }
+        }
+
+         if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (KnightSkills.activeSelf == true) {
+Cleave();
+KnightSkills.SetActive(false);
+            }
+        }
+
+         if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (KnightSkills.activeSelf == true) {
+Intercede();
+KnightSkills.SetActive(false);
+            }
+        }
+
+         if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (KnightSkills.activeSelf == true) {
+Rally();
+KnightSkills.SetActive(false);
+            }
+        }
     }
 
     public void TakeDamage(int amount) {
