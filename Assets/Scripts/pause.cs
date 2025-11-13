@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+//CECIL.CREATES - Cecil
 
 public class pause : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public void askPlayer(){
 }
 
 public void goMainMenu(){
+    isPause = false;
+    Time.timeScale = 1f; //stops going back to menu breaking the game
 SceneManager.LoadScene(0);
 
 }

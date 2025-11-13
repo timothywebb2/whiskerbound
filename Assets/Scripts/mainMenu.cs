@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//CECIL SCRIPT
+//CECIL.CREATES - rumbletaozi - Cecil 
 public class mainMenu : MonoBehaviour
 {
     public GameObject mainMenuObject; //initializing objects in code for inspector attachment
