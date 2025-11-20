@@ -22,13 +22,13 @@ public class inventoryMenu : MonoBehaviour
 
     void Start()
     {
-        //world2Map.enabled = false;
+        //world1Map.enabled = false;
         //whichMapEnabled = 1;
         //world3Map.enabled = false;
         //world4Map.enabled = false;
         //world5Map.enabled = false;
 
-        //container.SetActive(false);
+        container.SetActive(false);
     }
 
     void Update() 
@@ -49,12 +49,12 @@ public class inventoryMenu : MonoBehaviour
         }
     }
 
-    public void ExitButton()
+    /*public void ExitButton()
     {
         container.SetActive(false);
         Time.timeScale = 1;
         isPause = false;
-    }
+    }*/
 
     public void World1MapButton(int whichMapEnabled)
     {
