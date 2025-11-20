@@ -24,6 +24,7 @@ public class SorcererMoveset : MonoBehaviour
     public TextMeshProUGUI currentAction;
     public bool printing;
 
+    // testing
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
