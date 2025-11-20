@@ -19,7 +19,7 @@ public class KnightMoveset : MonoBehaviour
     public GameObject KnightSkills;
 
     public TextMeshProUGUI currentAction;
-    private bool printing;
+    public bool printing;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
