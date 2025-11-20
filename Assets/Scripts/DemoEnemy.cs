@@ -50,6 +50,11 @@ SceneManager.LoadScene(2);
         // Here is where the code will be for the enemy when they're goaded once allies are added
     }
 
+    public void gotStunned()
+    {
+        // Here is where the code will be for the enemy when they're stunned
+    }
+
     public void BeginTurn() {
         Debug.Log("Damaged player by 2");
         knightPlayer.GetComponent<KnightMoveset>().TakeDamage(2);

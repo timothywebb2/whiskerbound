@@ -4,7 +4,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem;
 
-public class KnightMoveset : MonoBehaviour
+public class SorcererMoveset : MonoBehaviour
 {
 
     public int maxHealth;
@@ -12,11 +12,14 @@ public class KnightMoveset : MonoBehaviour
     public int damageType;
     public int mightBonus;
     public int damageOutput;
+    public int shieldOutput;
+    public int thornsOutput;
     public int healOutput;
+    public GameObject knightAlly;
     public GameObject firstEnemy;
-    public bool intercedeOn;
+    //  public bool intercedeOn;
     public TextMeshProUGUI HealthText;
-    public GameObject KnightSkills;
+    public GameObject SorcererSkills;
 
     public TextMeshProUGUI currentAction;
     public bool printing;
@@ -26,9 +29,10 @@ public class KnightMoveset : MonoBehaviour
     void Start()
     {
         maxHealth = 50;
-        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
+        //   damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
+        knightAlly = GameObject.FindGameObjectWithTag("KnightBattle");
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
-        intercedeOn = false;
+     //   intercedeOn = false;
         currentAction.enabled = false;
         UpdateHUD();
 
@@ -38,97 +42,107 @@ public class KnightMoveset : MonoBehaviour
     void Update()
     {
 
+        /*
+
  if (Input.GetKeyDown(KeyCode.Alpha0))
         {
 
-            if (KnightSkills.activeSelf == true) {
-KnightSkills.SetActive(false);
+            if (SorcererSkills.activeSelf == true) {
+SorcererSkills.SetActive(false);
             }
             else {
                         if (!printing) {
-KnightSkills.SetActive(true);
+SorcererSkills.SetActive(true);
                         }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (KnightSkills.activeSelf == true) {
+            if (SorcererSkills.activeSelf == true) {
 Provoke();
-KnightSkills.SetActive(false);
+SorcererSkills.SetActive(false);
             }
         }
 
          if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (KnightSkills.activeSelf == true) {
+            if (SorcererSkills.activeSelf == true) {
 Cleave();
-KnightSkills.SetActive(false);
+SorcererSkills.SetActive(false);
             }
         }
 
          if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (KnightSkills.activeSelf == true) {
+            if (SorcererSkills.activeSelf == true) {
 Intercede();
-KnightSkills.SetActive(false);
+SorcererSkills.SetActive(false);
             }
         }
 
          if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (KnightSkills.activeSelf == true) {
+            if (SorcererSkills.activeSelf == true) {
 Rally();
-KnightSkills.SetActive(false);
+SorcererSkills.SetActive(false);
             }
         }
+
+         */
+         
     }
 
     public void TakeDamage(int amount) {
-        if (intercedeOn == false) {
-            curHealth -= amount;
+        curHealth -= amount;
             if(!printing)
                 StartCoroutine(printCurrentAction("Took " + amount + " damage!", 0.5f));
-        }
-        else if (intercedeOn == true) {
-            Debug.Log("Damage blocked!");
-            if (!printing)
-                StartCoroutine(printCurrentAction("Damage blocked!", 0.5f));
-            intercedeOn = false;
-        }
         UpdateHUD();
     }
 
-    public void Provoke() {
+    public void Incinerate() {
 
-damageOutput = Random.Range(1, 13) + Random.Range(1, 13) + mightBonus;
+damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
 firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-firstEnemy.GetComponent<DemoEnemy>().gotGoaded();
-Debug.Log("Damaged enemy by " + damageOutput + " with Provoke");
+Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
         if (!printing)
-            StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Provoke!", 0f));
+            StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Incinerate!", 0f));
 PassTurn();
 
     }
 
-    public void Cleave() {
+    public void Enervate() {
 
-damageOutput = Random.Range(1, 13) + mightBonus;
+damageOutput = Random.Range(1, 7) + mightBonus;
 firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-Debug.Log("Damaged enemy by " + damageOutput);
+        firstEnemy.GetComponent<DemoEnemy>().gotStunned();
+        Debug.Log("Damaged enemy by " + damageOutput);
         if (!printing)
-            StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Cleave!", 0f));
+            StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Enervate!", 0f));
 PassTurn();
 
     }
 
-    public void Intercede() {
+    public void Ward() {
 
-intercedeOn = true;
-Debug.Log("Intercede on!");
+Debug.Log("Ward activated!");
+        shieldOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
+        knightAlly.GetComponent<KnightMoveset>().gotShielded(shieldOutput);
         if (!printing)
-            StartCoroutine(printCurrentAction("Intercede on!", 0f));
+            StartCoroutine(printCurrentAction("Ward used on ally!", 0f));
 PassTurn();
+
+    }
+
+    public void Scourge()
+    {
+
+        Debug.Log("Scourge activated!");
+        thornsOutput = Random.Range(1, 7) + mightBonus;
+        knightAlly.GetComponent<KnightMoveset>().gotThorns(thornsOutput);
+        if (!printing)
+            StartCoroutine(printCurrentAction("Thorns used on ally!", 0f));
+        PassTurn();
 
     }
 
@@ -145,16 +159,6 @@ PassTurn();
             StartCoroutine(printCurrentAction("Healing self by " + healOutput + " with Rally!", 0f));
 PassTurn();
 
-    }
-
-    public void gotShielded(int amount)
-    {
-        // Here is where the code will go for the shield
-    }
-
-    public void gotThorns(int amount)
-    {
-        // Here is where the code will go for the shield
     }
 
     void UpdateHUD()
@@ -185,9 +189,9 @@ PassTurn();
         currentAction.enabled = false;
     }
     
-    public void OpenKnightSkills()
+    public void OpenSorcererSkills()
     {
         if (!printing)
-            KnightSkills.SetActive(true);
+            SorcererSkills.SetActive(true);
     }
 }
