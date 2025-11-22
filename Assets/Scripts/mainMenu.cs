@@ -9,6 +9,9 @@ public class mainMenu : MonoBehaviour
     public GameObject creditsMenu;
     public GameObject controlsMenu;
 
+    public GameObject KeyScreen;
+    public GameObject XboxScreen;
+
     void Start(){ // only main menu is active on start not the other canvases.
     optionsMenu.SetActive(false);
     creditsMenu.SetActive(false);
@@ -41,8 +44,18 @@ public void controls(){//ditto but close options screen
     creditsMenu.SetActive(false);
     controlsMenu.SetActive(false);
     mainMenuObject.SetActive(true);
-
     }
+
+public void xbox(){
+    XboxScreen.SetActive(true);
+    KeyScreen.SetActive(false);
+}
+
+public void key(){
+    KeyScreen.SetActive(true);
+    XboxScreen.SetActive(false);
+}
+
 
     public void quit(){
         Application.Quit();
