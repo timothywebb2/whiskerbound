@@ -5,7 +5,7 @@ public class PlayerInteractionController : MonoBehaviour
     public UI_DialoguePanel dialoguePanel;
     public UI_ShopPanel shopPanel;
 
-   
+    // 可选：拖入你的玩家移动脚本（例如PlayerMovement）
     public MonoBehaviour movementScript;
 
     private NPCInteractable currentTarget;
@@ -28,17 +28,9 @@ public class PlayerInteractionController : MonoBehaviour
         return currentTarget;
     }
 
-
     private void Update()
     {
-        if (isBusy)
-        {
-            if (dialoguePanel != null && dialoguePanel.IsOpen() && Input.GetKeyDown(KeyCode.E))
-            {
-                dialoguePanel.CloseDialogue();
-            }
-            return;
-        }
+        if (isBusy) return;
 
         if (Input.GetKeyDown(KeyCode.E) && currentTarget != null)
         {
@@ -54,7 +46,6 @@ public class PlayerInteractionController : MonoBehaviour
             }
         }
     }
-
 
     void OpenDialogueFromNPC(NPCInteractable npc)
     {
@@ -80,6 +71,7 @@ public class PlayerInteractionController : MonoBehaviour
 
         shopPanel.ShowShop(
             npc.shopTitle,
+            npc.shopInventoryDescription,
             OnShopClosed
         );
     }
