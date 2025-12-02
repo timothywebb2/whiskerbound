@@ -61,17 +61,19 @@ public class ProtoMovement : MonoBehaviour
         }*/
 
         //sprite animation with controller, should still work with keyboard
-        float deadZone = 0.3f;
+        float deadZone = 0.1f;
         Vector3 worldMove = moveDirection.normalized;
-
+Debug.Log(worldMove);
         int xDir = 0;
         int yDir = 0;
 
         if (worldMove.x > deadZone) xDir = 1;
         else if (worldMove.x < -deadZone) xDir = -1;
+        else xDir = 0;
 
         if (worldMove.z > deadZone) yDir = 1;
         else if (worldMove.z < -deadZone) yDir = -1;
+        else yDir = 0;
 
         int rotatedX = -yDir;
         int rotatedY = xDir;
