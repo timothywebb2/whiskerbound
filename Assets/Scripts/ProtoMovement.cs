@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using UnityEngine.SceneManagement;
-
+//Matthew
 public class ProtoMovement : MonoBehaviour
 {
     //references
@@ -60,13 +60,24 @@ public class ProtoMovement : MonoBehaviour
             RotateCharacter(moveDirection);
         }*/
 
-        animator.SetInteger("XDirection", (int)moveInput.x);
-        animator.SetInteger("YDirection", (int)moveInput.y);
+        //sprite animation with controller, should still work with keyboard
+        float deadZone = 0.3f;
+        Vector3 worldMove = moveDirection.normalized;
 
-        if (moveInput.x == 0 && moveInput.y == 0)
-            animator.speed = 0f;
-        else
-            animator.speed = 1f;
+        int xDir = 0;
+        int yDir = 0;
+
+        if (worldMove.x > deadZone) xDir = 1;
+        else if (worldMove.x < -deadZone) xDir = -1;
+
+        if (worldMove.z > deadZone) yDir = 1;
+        else if (worldMove.z < -deadZone) yDir = -1;
+
+        int rotatedX = -yDir;
+        int rotatedY = xDir;
+
+        animator.SetInteger("XDirection", rotatedX);
+        animator.SetInteger("YDirection", rotatedY);
 
         Vector3 horizontalVelocity = moveDirection.normalized * speed;
         Vector3 finalVelocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);
