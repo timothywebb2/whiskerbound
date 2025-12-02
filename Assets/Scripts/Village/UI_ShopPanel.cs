@@ -6,6 +6,7 @@ public class UI_ShopPanel : MonoBehaviour
 {
     public TMP_Text shopTitleText;
     public TMP_Text coinText;
+    public UI_InventoryManager inventoryManager;
 
     public int coins = 100;
 
@@ -42,6 +43,27 @@ public class UI_ShopPanel : MonoBehaviour
         else
         {
             Debug.Log("Not enough coins!");
+        }
+    }
+
+    public void TryBuyItem(string itemId, Sprite icon, string displayName, int cost, int amount)
+    {
+        if (coins < cost)
+        {
+            Debug.Log("Not enough coins!");
+            return;
+        }
+
+        coins -= cost;
+        UpdateCoinText();
+
+        if (inventoryManager != null)
+        {
+            inventoryManager.AddItem(itemId, icon, displayName, amount);
+        }
+        else
+        {
+            Debug.LogWarning("UI_ShopPanel: inventoryManager is not assigned.");
         }
     }
 
