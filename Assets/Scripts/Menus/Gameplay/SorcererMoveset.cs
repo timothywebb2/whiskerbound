@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class SorcererMoveset : MonoBehaviour
 {
@@ -20,11 +21,14 @@ public class SorcererMoveset : MonoBehaviour
     public int volcanicTally;
         public int squirrelFight;
         public bool intercedeOn;
+            public float timePassed = 0.0f;
     public GameObject knightAlly;
     public GameObject firstEnemy;
+        public bool loseCondition;
     //  public bool intercedeOn;
     public TextMeshProUGUI HealthText;
     public GameObject SorcererSkills;
+     public GameObject LoseText;
 
     public TextMeshProUGUI currentAction;
     public bool printing;
@@ -43,7 +47,9 @@ public class SorcererMoveset : MonoBehaviour
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
      //   intercedeOn = false;
         currentAction.enabled = false;
+         loseCondition = false;
         squirrelFight = 1;
+          LoseText.SetActive(false);
         UpdateHUD();
 
     }
@@ -51,6 +57,15 @@ public class SorcererMoveset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (loseCondition == true) {
+        timePassed += Time.deltaTime;
+        if (timePassed > 3.0f)
+{
+Debug.Log("Change scene");
+SceneManager.LoadScene(2);
+}
+        }
 
     
 
@@ -122,6 +137,9 @@ SorcererSkills.SetActive(false);
         }
            else if (curHealth < 25) {
             knightAlly.GetComponent<KnightMoveset>().LastStand();
+        }
+         if (curHealth <= 0) {
+            Lose();
         }
         UpdateHUD();
     }
@@ -321,4 +339,10 @@ else if (squirrelFight == 3) {
         if (!printing)
             SorcererSkills.SetActive(true);
     }
+
+    public void Lose() {
+loseCondition = true;
+LoseText.SetActive(true);
+Debug.Log("You lose!");
+}
 }

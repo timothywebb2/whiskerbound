@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class KnightMoveset : MonoBehaviour
 {
@@ -20,9 +21,12 @@ public class KnightMoveset : MonoBehaviour
     public bool sorcererLastStand;
     public GameObject firstEnemy;
     public int squirrelFight;
+    public float timePassed = 0.0f;
     public bool intercedeOn;
+    public bool loseCondition;
     public TextMeshProUGUI HealthText;
     public GameObject KnightSkills;
+    public GameObject LoseText;
 
     public TextMeshProUGUI currentAction;
     public bool printing;
@@ -40,8 +44,10 @@ public class KnightMoveset : MonoBehaviour
         thornDamage = 0;
         intercedeOn = false;
         sorcererLastStand = false;
+        loseCondition = false;
         currentAction.enabled = false;
         squirrelFight = 1;
+        LoseText.SetActive(false);
         UpdateHUD();
 
     }
@@ -49,6 +55,15 @@ public class KnightMoveset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (loseCondition == true) {
+        timePassed += Time.deltaTime;
+        if (timePassed > 3.0f)
+{
+Debug.Log("Change scene");
+SceneManager.LoadScene(2);
+}
+        }
 /*
  if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -120,6 +135,9 @@ KnightSkills.SetActive(false);
             if (!printing)
                 StartCoroutine(printCurrentAction("Damage blocked!", 1f));
             intercedeOn = false;
+        }
+        if (curHealth <= 0) {
+            Lose();
         }
         UpdateHUD();
     }
@@ -272,4 +290,10 @@ squirrelFight = amount;
         if (!printing)
             KnightSkills.SetActive(true);
     }
+
+    public void Lose() {
+loseCondition = true;
+LoseText.SetActive(true);
+Debug.Log("You lose!");
+}
 }
