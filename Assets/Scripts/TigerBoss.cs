@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class DemoEnemy : MonoBehaviour
+public class TigerBoss : MonoBehaviour
 {
 
     public int curHealth;
@@ -12,6 +12,7 @@ public class DemoEnemy : MonoBehaviour
      public GameObject sorcererPlayer;
      public int selectingMove;
           public int selectingTarget;
+          public int blessTime;
           public int damageOutput;
         public TextMeshProUGUI HealthText;
         public GameObject VictoryText;
@@ -23,10 +24,11 @@ public class DemoEnemy : MonoBehaviour
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
-        curHealth = 20;
+        curHealth = 120;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
         selectingTarget = 1;
+        blessTime = 0;
         VictoryText.SetActive(false);
         VictoryAchieved = false;
         UpdateHUD();
@@ -35,15 +37,15 @@ public class DemoEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        knightPlayer.GetComponent<KnightMoveset>().NotSquirrelFight();
-        sorcererPlayer.GetComponent<SorcererMoveset>().NotSquirrelFight();
+        knightPlayer.GetComponent<KnightMoveset>().NumberedFight(3);
+        sorcererPlayer.GetComponent<SorcererMoveset>().NumberedFight(3);
         
         if (VictoryAchieved == true) {
         timePassed += Time.deltaTime;
         if (timePassed > 3.0f)
 {
 Debug.Log("Change scene");
-SceneManager.LoadScene(3);
+SceneManager.LoadScene(2);
 }
         }
     }
@@ -66,24 +68,37 @@ SceneManager.LoadScene(3);
     }
 
     public void BeginTurn() {
-        selectingMove = Random.Range(1, 3);
+        if (blessTime > 0) {
+            curHealth += Random.Range(1, 13);
+            blessTime -= 1;
+        }
+        selectingMove = Random.Range(1, 5);
         selectingTarget = Random.Range(1, 3);
 if (selectingMove == 1) {
     if (selectingTarget == 1) {
-    Debug.Log("Lash is used!");
-    damageOutput = Random.Range(1, 7) + 1;
+    Debug.Log("Crush is used!");
+    damageOutput = Random.Range(1, 13) + Random.Range(1, 13);
     knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
     }
     if (selectingTarget == 2) {
-    Debug.Log("Lash is used!");
-    damageOutput = Random.Range(1, 7) + 1;
+    Debug.Log("Crush is used!");
+    damageOutput = Random.Range(1, 13) + Random.Range(1, 13);
     sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
     }
 }
 else if (selectingMove == 2) {
-    Debug.Log("Recuperate is used!");
-    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
-    curHealth += damageOutput;
+    Debug.Log("Sweep is used!");
+    damageOutput = Random.Range(1, 7) + Random.Range(1, 7);
+    knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
+    sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+}
+else if (selectingMove == 3) {
+    Debug.Log("Empower is used!");
+    blessTime += 3;
+}
+else if (selectingMove == 4) {
+    Debug.Log("Tiger Ward is used!");
+    curHealth += Random.Range(1, 5) + Random.Range(1, 5);
 }
     }
 
