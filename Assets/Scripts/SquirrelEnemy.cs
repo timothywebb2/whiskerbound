@@ -59,7 +59,7 @@ knightPlayer.GetComponent<KnightMoveset>().SquirrelFight();
         if (timePassed > 3.0f)
 {
 Debug.Log("Change scene");
-SceneManager.LoadScene(2);
+SceneManager.LoadScene(4);
 }
         }
     }
