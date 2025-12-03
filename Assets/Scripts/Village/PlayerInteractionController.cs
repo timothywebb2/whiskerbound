@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteractionController : MonoBehaviour
 {
@@ -10,6 +11,25 @@ public class PlayerInteractionController : MonoBehaviour
 
     private NPCInteractable currentTarget;
     private bool isBusy = false;
+
+    public InputActionReference interactActionRef;
+    private InputAction interactAction;
+
+
+    private void OnEnable()
+    {
+        if (interactActionRef != null)
+        {
+            interactAction = interactActionRef.action;
+            interactAction.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (interactAction != null)
+            interactAction.Disable();
+    }
 
     public void SetCurrentTarget(NPCInteractable npc)
     {
@@ -31,16 +51,20 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void Update()
     {
+        bool interactPressed = interactAction.WasPressedThisFrame();
+
         if (isBusy)
         {
-            if (dialoguePanel != null && dialoguePanel.IsOpen() && Input.GetKeyDown(KeyCode.E))
+            if (dialoguePanel != null &&
+                dialoguePanel.IsOpen() &&
+                interactPressed)
             {
                 dialoguePanel.CloseDialogue();
             }
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && currentTarget != null)
+        if (interactPressed && currentTarget != null)
         {
             switch (currentTarget.interactionType)
             {

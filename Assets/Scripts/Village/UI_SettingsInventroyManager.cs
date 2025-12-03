@@ -19,6 +19,13 @@ public class UI_SettingsInventoryManager : MonoBehaviour
     }
 
     // ===== Inventory panel =====
+
+    public void ToggleInventoryPanel()
+    {
+        bool newState = !panelInventory.activeSelf;
+        panelInventory.SetActive(newState);
+    }
+
     public void OpenInventoryPanel()
     {
         if (panelInventory != null) panelInventory.SetActive(true);
