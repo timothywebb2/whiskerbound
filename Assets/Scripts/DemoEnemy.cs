@@ -38,13 +38,16 @@ public class DemoEnemy : MonoBehaviour
         knightPlayer.GetComponent<KnightMoveset>().NotSquirrelFight();
         sorcererPlayer.GetComponent<SorcererMoveset>().NotSquirrelFight();
         
-        if (VictoryAchieved == true) {
-        timePassed += Time.deltaTime;
-        if (timePassed > 3.0f)
-{
+        if (VictoryAchieved == true)
+        {
+            PlayerPrefs.SetInt("BeatFerret", 1);
+            timePassed += Time.deltaTime;
+            
+            if (timePassed > 3.0f)
+            {
 Debug.Log("Change scene");
-SceneManager.LoadScene("Overworld");
-}
+                SceneManager.LoadScene("Overworld");
+            }
         }
     }
 

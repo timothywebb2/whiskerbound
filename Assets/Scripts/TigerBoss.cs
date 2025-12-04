@@ -40,13 +40,15 @@ public class TigerBoss : MonoBehaviour
         knightPlayer.GetComponent<KnightMoveset>().NumberedFight(3);
         sorcererPlayer.GetComponent<SorcererMoveset>().NumberedFight(3);
         
-        if (VictoryAchieved == true) {
-        timePassed += Time.deltaTime;
-        if (timePassed > 3.0f)
-{
+        if (VictoryAchieved == true)
+        {
+            PlayerPrefs.SetInt("BeatTiger", 1);
+            timePassed += Time.deltaTime;
+            if (timePassed > 3.0f)
+            {
 Debug.Log("Change scene");
-SceneManager.LoadScene("Overworld");
-}
+                SceneManager.LoadScene("Overworld");
+            }
         }
     }
 
