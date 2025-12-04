@@ -5,7 +5,7 @@ public class SceneChange : MonoBehaviour
 {
     public enum NewScene
     {
-        Village, Overworld
+        Village, Overworld, SquirrelFight, FerretFight, TigerFight
     }
     public NewScene myScene;
 
@@ -23,10 +23,25 @@ public class SceneChange : MonoBehaviour
                 // note: put some way to determine overworld position
                 SceneManager.LoadScene("Overworld");
             }
+            else if(myScene == NewScene.SquirrelFight)
+            {
+                PlayerPrefs.SetInt("FromSquirrel", 1);
+                SceneManager.LoadScene("SquirrelFight");
+            }
+            else if(myScene == NewScene.FerretFight)
+            {
+                PlayerPrefs.SetInt("FromFerret", 1);
+                SceneManager.LoadScene("FerretFight");
+            }
+            else if(myScene == NewScene.TigerFight)
+            {
+                PlayerPrefs.SetInt("FromTiger", 1);
+                SceneManager.LoadScene("TigerFight");
+            }
         }
     }
 
-    public bool isSceneLoaded(string sceneName)
+    /*public bool isSceneLoaded(string sceneName)
     {
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
@@ -36,5 +51,5 @@ public class SceneChange : MonoBehaviour
                 return true;
         }
         return false;
-    }
+    }*/
 }

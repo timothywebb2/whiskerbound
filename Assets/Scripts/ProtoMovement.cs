@@ -9,6 +9,9 @@ public class ProtoMovement : MonoBehaviour
     public InputActionAsset InputActions;
     public CinemachineCamera frontCamera;
     public Transform villageSpawn;
+    public Transform squirrelSpawn;
+    public Transform ferretSpawn;
+    public Transform tigerSpawn;
 
     //movement variables
     public float speed = 12f;
@@ -33,6 +36,24 @@ public class ProtoMovement : MonoBehaviour
         {
             this.transform.position = villageSpawn.transform.position;
             PlayerPrefs.SetInt("FromOverworld", 0);
+        }
+        else if(isSceneLoaded("Overworld"))
+        {
+            if(PlayerPrefs.GetInt("FromSquirrel", 0) == 1)
+            {
+                this.transform.position = squirrelSpawn.transform.position;
+                PlayerPrefs.SetInt("FromSquirrel", 0);
+            }
+            else if(PlayerPrefs.GetInt("FromFerret", 0) == 1)
+            {
+                this.transform.position = ferretSpawn.transform.position;
+                PlayerPrefs.SetInt("FromFerret", 0);
+            }
+            else if(PlayerPrefs.GetInt("FromTiger", 0) == 1)
+            {
+                this.transform.position = tigerSpawn.transform.position;
+                PlayerPrefs.SetInt("FromTiger", 0);
+            }
         }
     }
 

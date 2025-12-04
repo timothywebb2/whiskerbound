@@ -51,16 +51,18 @@ public class SquirrelEnemy : MonoBehaviour
     void Update()
     {
 
-knightPlayer.GetComponent<KnightMoveset>().SquirrelFight();
+        knightPlayer.GetComponent<KnightMoveset>().SquirrelFight();
         sorcererPlayer.GetComponent<SorcererMoveset>().SquirrelFight();
 
-        if (VictoryAchieved == true) {
-        timePassed += Time.deltaTime;
-        if (timePassed > 3.0f)
-{
+        if (VictoryAchieved == true)
+        {
+            PlayerPrefs.SetInt("BeatSquirrel", 1);
+            timePassed += Time.deltaTime;
+            if (timePassed > 3.0f)
+            {
 Debug.Log("Change scene");
-SceneManager.LoadScene(4);
-}
+                SceneManager.LoadScene(4);
+            }
         }
     }
 
