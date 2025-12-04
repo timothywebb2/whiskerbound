@@ -8,6 +8,7 @@ public class ProtoMovement : MonoBehaviour
     //references
     public InputActionAsset InputActions;
     public CinemachineCamera frontCamera;
+    public Transform villageSpawn;
 
     //movement variables
     public float speed = 12f;
@@ -26,6 +27,13 @@ public class ProtoMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         moveAction = InputActions.FindActionMap("Player").FindAction("Move");
         animator = this.GetComponent<Animator>();
+
+        // player is entering village 1 from overworld
+        if(isSceneLoaded("ProtoVillage") && PlayerPrefs.GetInt("FromOverworld", 0) == 1)
+        {
+            this.transform.position = villageSpawn.transform.position;
+            PlayerPrefs.SetInt("FromOverworld", 0);
+        }
     }
 
     private void OnEnable()
@@ -63,7 +71,7 @@ public class ProtoMovement : MonoBehaviour
         //sprite animation with controller, should still work with keyboard
         float deadZone = 0.1f;
         Vector3 worldMove = moveDirection.normalized;
-Debug.Log(worldMove);
+
         int xDir = 0;
         int yDir = 0;
 
@@ -111,9 +119,15 @@ Debug.Log(worldMove);
         transform.rotation = targetRotation;
     }
 
-    private void OnTriggerEnter(Collider whatIHit)
+    public bool isSceneLoaded(string sceneName)
     {
-        if (whatIHit.tag == "EnterOverworld")
-            SceneManager.LoadScene("ProtoFight");
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            if (scene.name == sceneName)
+                return true;
+        }
+        return false;
     }
 }
