@@ -45,7 +45,7 @@ public class TigerBoss : MonoBehaviour
         if (timePassed > 3.0f)
 {
 Debug.Log("Change scene");
-SceneManager.LoadScene(2);
+SceneManager.LoadScene("Overworld");
 }
         }
     }

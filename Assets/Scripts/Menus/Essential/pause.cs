@@ -11,6 +11,10 @@ public class pause : MonoBehaviour
     public GameObject oMenu; //options
     public GameObject cMenu; //confirmation
     public GameObject cScreen; //controls
+    public GameObject KeyScreen;
+    public GameObject XboxScreen;
+
+
     public bool isPause;
 
     void Start()
@@ -75,5 +79,16 @@ public void goMainMenu(){
 SceneManager.LoadScene(0);
 
 }
+
+public void xbox(){
+    XboxScreen.SetActive(true);
+    KeyScreen.SetActive(false);
+}
+
+public void key(){
+    KeyScreen.SetActive(true);
+    XboxScreen.SetActive(false);
+}
+
 
 }

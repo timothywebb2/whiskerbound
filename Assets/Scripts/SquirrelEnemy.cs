@@ -61,7 +61,7 @@ public class SquirrelEnemy : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene("Overworld");
             }
         }
     }
