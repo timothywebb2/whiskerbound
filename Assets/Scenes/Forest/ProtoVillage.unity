@@ -3362,6 +3362,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329306878}
   m_CullTransparentMesh: 1
+--- !u!1 &336558608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 641881780395336333, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+  m_PrefabInstance: {fileID: 1888492477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &341995530
 GameObject:
   m_ObjectHideFlags: 0
@@ -11363,6 +11368,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376102601}
   m_CullTransparentMesh: 1
+--- !u!1 &1379342954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5209695880675832871, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+  m_PrefabInstance: {fileID: 1888492477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1383947345
 GameObject:
   m_ObjectHideFlags: 0
@@ -15100,13 +15110,25 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4550142417147806117, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1421662855}
+    - target: {fileID: 4550142417147806117, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: key
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550142417147806117, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: pause, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_Name
       value: PAUSE OBJECT
       objectReference: {fileID: 0}
     - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5125546212657924306, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -15155,6 +15177,18 @@ PrefabInstance:
     - target: {fileID: 7081272871866320636, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: askPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252096075821905040, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1421662855}
+    - target: {fileID: 8252096075821905040, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: xbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252096075821905040, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: pause, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8469462244421364861, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -18942,6 +18976,14 @@ PrefabInstance:
       propertyPath: cScreen
       value: 
       objectReference: {fileID: 1888492478}
+    - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
+      propertyPath: KeyScreen
+      value: 
+      objectReference: {fileID: 336558608}
+    - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
+      propertyPath: XboxScreen
+      value: 
+      objectReference: {fileID: 1379342954}
     - target: {fileID: 4423231713978935246, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: m_Name
       value: pauseManager
