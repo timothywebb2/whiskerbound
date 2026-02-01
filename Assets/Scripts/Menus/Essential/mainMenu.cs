@@ -19,7 +19,7 @@ public class mainMenu : MonoBehaviour
     }
 
     public void playGame(){
-        SceneManager.LoadScene("ProtoVillage");
+        SceneManager.LoadScene("forestVillage");
     }
 //prevents overlap
     public void options(){// show only options screen

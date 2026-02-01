@@ -16,12 +16,12 @@ public class SceneChange : MonoBehaviour
             if(myScene == NewScene.Village)
             {
                 PlayerPrefs.SetInt("FromOverworld", 1);
-                SceneManager.LoadScene("ProtoVillage");
+                SceneManager.LoadScene("forestVillage");
             }
             else if(myScene == NewScene.Overworld)
             {
                 // note: put some way to determine overworld position
-                SceneManager.LoadScene("Overworld");
+                SceneManager.LoadScene("forestOverworld");
             }
             else if(myScene == NewScene.SquirrelFight)
             {
