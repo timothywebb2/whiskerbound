@@ -12,10 +12,26 @@ public class UI_InventorySlot : MonoBehaviour
     int quantity = 0;
 
     public bool IsEmpty => string.IsNullOrEmpty(itemId);
+    public bool HasItem(string id) => itemId == id;
 
-    public bool HasItem(string id)
+    void Awake()
     {
-        return itemId == id;
+        Clear();
+    }
+
+    public void Clear()
+    {
+        itemId = "";
+        quantity = 0;
+
+        if (iconImage != null)
+        {
+            iconImage.sprite = null;
+            iconImage.enabled = false;
+        }
+
+        if (nameText != null) nameText.text = "";
+        if (quantityText != null) quantityText.text = "";
     }
 
     public void SetItem(string id, Sprite icon, string displayName, int amount)
@@ -30,12 +46,12 @@ public class UI_InventorySlot : MonoBehaviour
         }
 
         if (nameText != null) nameText.text = displayName;
-        if (quantityText != null) quantityText.text = "" + quantity;
+        if (quantityText != null) quantityText.text = "x" + quantity;
     }
 
     public void AddAmount(int amount)
     {
         quantity += amount;
-        if (quantityText != null) quantityText.text = "" + quantity;
+        if (quantityText != null) quantityText.text = "x" + quantity;
     }
 }
