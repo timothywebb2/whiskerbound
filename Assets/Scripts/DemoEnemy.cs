@@ -13,6 +13,7 @@ public class DemoEnemy : MonoBehaviour
      public int selectingMove;
           public int selectingTarget;
           public int damageOutput;
+                    public GameObject battlePhase;
         public TextMeshProUGUI HealthText;
         public GameObject VictoryText;
         public float timePassed = 0.0f;
@@ -23,6 +24,7 @@ public class DemoEnemy : MonoBehaviour
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         curHealth = 20;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
@@ -35,8 +37,7 @@ public class DemoEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        knightPlayer.GetComponent<KnightMoveset>().NotSquirrelFight();
-        sorcererPlayer.GetComponent<SorcererMoveset>().NotSquirrelFight();
+         battlePhase.GetComponent<BattlePhase>().NumberedFight(1);
         
         if (VictoryAchieved == true)
         {

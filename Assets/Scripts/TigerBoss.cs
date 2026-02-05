@@ -14,6 +14,7 @@ public class TigerBoss : MonoBehaviour
           public int selectingTarget;
           public int blessTime;
           public int damageOutput;
+          public GameObject battlePhase;
         public TextMeshProUGUI HealthText;
         public GameObject VictoryText;
         public float timePassed = 0.0f;
@@ -29,6 +30,7 @@ public class TigerBoss : MonoBehaviour
         selectingMove = 1;
         selectingTarget = 1;
         blessTime = 0;
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         VictoryText.SetActive(false);
         VictoryAchieved = false;
         UpdateHUD();
@@ -37,8 +39,9 @@ public class TigerBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        knightPlayer.GetComponent<KnightMoveset>().NumberedFight(3);
-        sorcererPlayer.GetComponent<SorcererMoveset>().NumberedFight(3);
+     //   knightPlayer.GetComponent<KnightMoveset>().NumberedFight(3);
+     //   sorcererPlayer.GetComponent<SorcererMoveset>().NumberedFight(3);
+        battlePhase.GetComponent<BattlePhase>().NumberedFight(3);
         
         if (VictoryAchieved == true)
         {

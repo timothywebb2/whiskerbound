@@ -23,6 +23,7 @@ public class SorcererMoveset : MonoBehaviour
         public bool intercedeOn;
             public float timePassed = 0.0f;
     public GameObject knightAlly;
+            public GameObject battlePhase;
     public GameObject firstEnemy;
         public bool loseCondition;
     //  public bool intercedeOn;
@@ -45,6 +46,7 @@ public class SorcererMoveset : MonoBehaviour
         //   damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         knightAlly = GameObject.FindGameObjectWithTag("KnightBattle");
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
      //   intercedeOn = false;
         currentAction.enabled = false;
          loseCondition = false;
@@ -303,10 +305,22 @@ squirrelFight = amount;
         HealthText.text = "HP: " + curHealth;
     }
 
+       public void OpenSorcererSkills()
+    {
+        if (!printing)
+            SorcererSkills.SetActive(true);
+    }
+
+    public void Lose() {
+loseCondition = true;
+LoseText.SetActive(true);
+Debug.Log("You lose!");
+}
+
     public void PassTurn()
     {
-
-if (squirrelFight == 1) {
+battlePhase.GetComponent<BattlePhase>().ActionInputted();
+/* if (squirrelFight == 1) {
         firstEnemy.GetComponent<DemoEnemy>().BeginTurn();
 }
 else if (squirrelFight == 2) {
@@ -314,11 +328,10 @@ else if (squirrelFight == 2) {
 }
 else if (squirrelFight == 3) {
         firstEnemy.GetComponent<TigerBoss>().BeginTurn();
+        */
 }
 
-    }
-
-    IEnumerator printCurrentAction(string toPrint, float delay)
+ IEnumerator printCurrentAction(string toPrint, float delay)
     {
         yield return new WaitForSeconds(delay);
         yield return new WaitUntil(() => !printing);
@@ -333,16 +346,7 @@ else if (squirrelFight == 3) {
         printing = false;
         currentAction.enabled = false;
     }
-    
-    public void OpenSorcererSkills()
-    {
-        if (!printing)
-            SorcererSkills.SetActive(true);
-    }
 
-    public void Lose() {
-loseCondition = true;
-LoseText.SetActive(true);
-Debug.Log("You lose!");
-}
-}
+    }
+    
+

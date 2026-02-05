@@ -15,6 +15,7 @@ public class SquirrelEnemy : MonoBehaviour
      public GameObject squirrelTwo;
      public bool squirrelOneDown;
     public bool squirrelTwoDown;
+                        public GameObject battlePhase;
     public bool squirrelCoordination;
      public int selectingMove;
           public int selectingTarget;
@@ -32,6 +33,7 @@ public class SquirrelEnemy : MonoBehaviour
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         curHealth1 = 30;
         curHealth2 = 30;
         multiHitting = 1;
@@ -51,8 +53,9 @@ public class SquirrelEnemy : MonoBehaviour
     void Update()
     {
 
-        knightPlayer.GetComponent<KnightMoveset>().SquirrelFight();
-        sorcererPlayer.GetComponent<SorcererMoveset>().SquirrelFight();
+      //  knightPlayer.GetComponent<KnightMoveset>().SquirrelFight();
+     //   sorcererPlayer.GetComponent<SorcererMoveset>().SquirrelFight();
+        battlePhase.GetComponent<BattlePhase>().NumberedFight(2);
 
         if (VictoryAchieved == true)
         {
