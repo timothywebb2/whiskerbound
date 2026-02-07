@@ -26,6 +26,9 @@ public class SquirrelEnemy : MonoBehaviour
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
+    public Slider EnemyHealthBar;
+    
+     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,6 +82,9 @@ Debug.Log("Change scene");
         if (multiHitting == 1) {
         if (attackedEnemy == 1) {
 curHealth1 -= amount;
+                EnemyHealthBar.value -= amount;
+                
+                
         UpdateHUD();
         if (curHealth1 <= 0) {
             squirrelOneDown = true;
