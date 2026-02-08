@@ -996,7 +996,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8852622298489297642, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1612153464}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8974018485902119177, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2124296175}
   m_SourcePrefab: {fileID: 100100000, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
 --- !u!1 &85696427
 GameObject:
@@ -8743,6 +8746,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8852622298489297642, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
   m_PrefabInstance: {fileID: 50324093}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2124296175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124296173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07494b9ac3af7884481cf53f817497d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoSelectFirstButton
 --- !u!1001 &1823856398003355725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9301,13 +9316,28 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 718120347038334461, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1286326363}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4971034639904169203, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1823856398003355728}
   m_SourcePrefab: {fileID: 100100000, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
 --- !u!1 &1823856398003355726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4971034639904169203, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
   m_PrefabInstance: {fileID: 1823856398003355725}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1823856398003355728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823856398003355726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07494b9ac3af7884481cf53f817497d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoSelectFirstButton
 --- !u!224 &5449883921160312890 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 718120347038334461, guid: 825f840be574c4494aa2baaa535dc315, type: 3}

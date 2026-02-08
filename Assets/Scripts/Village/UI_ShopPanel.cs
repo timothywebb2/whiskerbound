@@ -4,24 +4,70 @@ using System;
 
 public class UI_ShopPanel : MonoBehaviour
 {
+    [Header("Shop Stock")]
+    public ItemData[] possibleItems;
+    public UI_ShopSlots[] shopSlots;
+
     public TMP_Text shopTitleText;
+    public TMP_Text itemListText;
     public TMP_Text coinText;
     public UI_InventoryManager inventoryManager;
+    public TMP_Text descriptionText;
 
     public int coins = 100;
 
     Action onCloseCallback;
     bool isOpen = false;
 
-    public void ShowShop(string shopTitle, Action onCloseCallback)
+    // -------------------- Show shop --------------------
+    public void ShowShop(string shopTitle, string itemsDescription, Action onCloseCallback)
     {
         if (shopTitleText != null) shopTitleText.text = shopTitle;
+        if (itemListText != null) itemListText.text = itemsDescription;
 
         this.onCloseCallback = onCloseCallback;
 
+        GenerateShopStock();
         UpdateCoinText();
+
         gameObject.SetActive(true);
         isOpen = true;
+    }
+
+    public void ShowShop(string shopTitle, Action onCloseCallback)
+    {
+        if (shopTitleText != null)
+            shopTitleText.text = shopTitle;
+
+        this.onCloseCallback = onCloseCallback;
+
+        GenerateShopStock();
+        UpdateCoinText();
+
+        gameObject.SetActive(true);
+        isOpen = true;
+    }
+
+    // -------------------- Shop functionality --------------------
+    void GenerateShopStock()
+    {
+        foreach (var slot in shopSlots)
+        {
+            ItemData item = possibleItems[UnityEngine.Random.Range(0, possibleItems.Length)];
+
+            int amount = UnityEngine.Random.Range(1, 4);
+
+            int cost = item.baseCost * amount;
+
+            slot.Setup(item, cost, amount, this);
+        }
+    }
+
+
+    public void ShowDescription(string text)
+    {
+        if (descriptionText != null)
+            descriptionText.text = text;
     }
 
     public void CloseShop()
@@ -33,38 +79,50 @@ public class UI_ShopPanel : MonoBehaviour
         onCloseCallback = null;
     }
 
-    public void PurchaseItem(int cost)
+    public bool PurchaseItem(UI_ShopSlots slot, int cost)
     {
         if (coins >= cost)
         {
             coins -= cost;
             UpdateCoinText();
+
+            inventoryManager.AddItem(
+                slot.GetItem().itemId,
+                slot.GetItem().icon,
+                slot.GetItem().displayName,
+                slot.GetAmount()
+            );
+
+            slot.SellItem();
+
+            return true;
         }
         else
         {
             Debug.Log("Not enough coins!");
+            return false;
         }
     }
 
-    public void TryBuyItem(string itemId, Sprite icon, string displayName, int cost, int amount)
+    public bool TryBuyItem(string itemId, Sprite icon, string displayName, int cost, int amount)
     {
         if (coins < cost)
         {
             Debug.Log("Not enough coins!");
-            return;
+            return false;
         }
 
         coins -= cost;
         UpdateCoinText();
 
-        if (inventoryManager != null)
-        {
-            inventoryManager.AddItem(itemId, icon, displayName, amount);
-        }
-        else
-        {
-            Debug.LogWarning("UI_ShopPanel: inventoryManager is not assigned.");
-        }
+        inventoryManager.AddItem(itemId, icon, displayName, amount);
+        return true;
+    }
+
+    public void OpenShop()
+    {
+        gameObject.SetActive(true);
+        UISelectionHelper.SelectFirstButton(transform);
     }
 
     public void AddCoins(int amount)

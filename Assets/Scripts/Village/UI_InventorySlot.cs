@@ -30,12 +30,53 @@ public class UI_InventorySlot : MonoBehaviour
         }
 
         if (nameText != null) nameText.text = displayName;
-        if (quantityText != null) quantityText.text = "" + quantity;
+        if (quantityText != null) quantityText.text = quantity.ToString();
     }
 
     public void AddAmount(int amount)
     {
         quantity += amount;
-        if (quantityText != null) quantityText.text = "" + quantity;
+        if (quantityText != null)
+            quantityText.text = quantity.ToString();
+    }
+
+
+    public void OnUseButton()
+    {
+        UseItem(GameObject.FindWithTag("Player"));
+    }
+
+    void UseItem(GameObject player)
+    {
+        if (IsEmpty) return;
+
+        var item = ItemDatabase.Instance.GetItem(itemId);
+        if (item == null)
+        {
+            Debug.Log("Item not found: " + itemId);
+            return;
+        }
+
+        item.Use(player);
+    }
+
+    void ConsumeOne()
+    {
+        quantity--;
+
+        if (quantity <= 0)
+            ClearSlot();
+        else
+            quantityText.text = quantity.ToString();
+    }
+
+    void ClearSlot()
+    {
+        itemId = "";
+        quantity = 0;
+
+        iconImage.enabled = false;
+        nameText.text = "";
+        quantityText.text = "";
     }
 }
