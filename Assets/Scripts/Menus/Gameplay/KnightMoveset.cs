@@ -24,10 +24,10 @@ public class KnightMoveset : MonoBehaviour
     public float timePassed = 0.0f;
     public bool intercedeOn;
     public bool loseCondition;
-    public TextMeshProUGUI HealthText;
+    
     public GameObject KnightSkills;
     public GameObject LoseText;
-
+    public Slider Knighthealthbar;
     public TextMeshProUGUI currentAction;
     public bool printing;
 
@@ -48,7 +48,7 @@ public class KnightMoveset : MonoBehaviour
         currentAction.enabled = false;
         squirrelFight = 1;
         LoseText.SetActive(false);
-        UpdateHUD();
+        
 
     }
 
@@ -112,10 +112,15 @@ KnightSkills.SetActive(false);
         */
     }
 
-    public void TakeDamage(int amount) {
+    public void TakeDamage(int amount) 
+    {
+        if (loseCondition) return;
+
         if (intercedeOn == false) {
             curHealth -= amount;
-            if(!printing)
+            Knighthealthbar.value -= amount;
+
+            if (!printing)
                 StartCoroutine(printCurrentAction("Knight took " + amount + " damage!", 1f));
             if (hasThorns > 0) {
                 if (squirrelFight == 1) {
@@ -139,10 +144,12 @@ KnightSkills.SetActive(false);
         if (curHealth <= 0) {
             Lose();
         }
-        UpdateHUD();
+        
     }
 
-    public void Provoke() {
+    public void Provoke() 
+    {
+if (loseCondition) return;
 
 damageOutput = Random.Range(1, 13) + Random.Range(1, 13) + mightBonus;
 if (squirrelFight == 1) {
@@ -164,7 +171,10 @@ PassTurn();
 
     }
 
-    public void Cleave() {
+    public void Cleave() 
+    {
+if (loseCondition) return;
+
 
 damageOutput = Random.Range(1, 13) + mightBonus;
 if (squirrelFight == 1) {
@@ -184,7 +194,10 @@ PassTurn();
 
     }
 
-    public void Intercede() {
+    public void Intercede() 
+    {
+if (loseCondition) return;
+
 
 // intercedeOn = true;
 sorcererAlly.GetComponent<SorcererMoveset>().IntercedeSorcerer();
@@ -195,7 +208,8 @@ PassTurn();
 
     }
 
-    public void Rally() {
+    public void Rally() 
+    {
 
      /*   healOutput = Random.Range(1, 13);
         if (curHealth + healOutput >= 50)
@@ -208,6 +222,8 @@ PassTurn();
             StartCoroutine(printCurrentAction("Healing Knight by " + healOutput + " with Rally!", 0f));
 PassTurn();
 */
+if (loseCondition) return;
+
 
 rallyRandom = Random.Range(1, 3);
 if (rallyRandom == 1) {
@@ -257,10 +273,7 @@ squirrelFight = amount;
         thornDamage = amount;
     }
 
-    void UpdateHUD()
-    {
-        HealthText.text = "HP: " + curHealth;
-    }
+    
 
     public void PassTurn()
     {
@@ -287,6 +300,8 @@ squirrelFight = amount;
     
     public void OpenKnightSkills()
     {
+        if (loseCondition) return;
+
         if (!printing)
             KnightSkills.SetActive(true);
     }
@@ -294,6 +309,7 @@ squirrelFight = amount;
     public void Lose() {
 loseCondition = true;
 LoseText.SetActive(true);
+KnightSkills.SetActive(false);
 Debug.Log("You lose!");
 }
 }

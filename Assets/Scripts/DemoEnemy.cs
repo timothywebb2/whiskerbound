@@ -13,10 +13,11 @@ public class DemoEnemy : MonoBehaviour
      public int selectingMove;
           public int selectingTarget;
           public int damageOutput;
-        public TextMeshProUGUI HealthText;
+        
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
+        public Slider EnemyHealthBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,7 +30,7 @@ public class DemoEnemy : MonoBehaviour
         selectingTarget = 1;
         VictoryText.SetActive(false);
         VictoryAchieved = false;
-        UpdateHUD();
+        
     }
 
     // Update is called once per frame
@@ -46,14 +47,15 @@ public class DemoEnemy : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("Overworld");
+                SceneManager.LoadScene("forestOverworld");
             }
         }
     }
 
     public void TakeDamage(int amount) {
         curHealth -= amount;
-        UpdateHUD();
+        EnemyHealthBar.value -= amount;
+        
         if (curHealth <= 0) {
             Victory();
         }
@@ -90,11 +92,7 @@ else if (selectingMove == 2) {
 }
     }
 
-    void UpdateHUD()
-    {
-        HealthText.text = "HP: " + curHealth;
-    }
-
+   
 public void Victory() {
 VictoryAchieved = true;
 VictoryText.SetActive(true);
