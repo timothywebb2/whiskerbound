@@ -13,31 +13,31 @@ public class DemoEnemy : MonoBehaviour
      public int selectingMove;
           public int selectingTarget;
           public int damageOutput;
-        
+                    public GameObject battlePhase;
+        public TextMeshProUGUI HealthText;
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
-        public Slider EnemyHealthBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         curHealth = 20;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
         selectingTarget = 1;
         VictoryText.SetActive(false);
         VictoryAchieved = false;
-        
+        UpdateHUD();
     }
 
     // Update is called once per frame
     void Update()
     {
-        knightPlayer.GetComponent<KnightMoveset>().NotSquirrelFight();
-        sorcererPlayer.GetComponent<SorcererMoveset>().NotSquirrelFight();
+         battlePhase.GetComponent<BattlePhase>().NumberedFight(1);
         
         if (VictoryAchieved == true)
         {
@@ -54,8 +54,7 @@ Debug.Log("Change scene");
 
     public void TakeDamage(int amount) {
         curHealth -= amount;
-        EnemyHealthBar.value -= amount;
-        
+        UpdateHUD();
         if (curHealth <= 0) {
             Victory();
         }
@@ -92,7 +91,11 @@ else if (selectingMove == 2) {
 }
     }
 
-   
+    void UpdateHUD()
+    {
+        HealthText.text = "HP: " + curHealth;
+    }
+
 public void Victory() {
 VictoryAchieved = true;
 VictoryText.SetActive(true);

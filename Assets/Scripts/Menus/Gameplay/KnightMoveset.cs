@@ -19,6 +19,7 @@ public class KnightMoveset : MonoBehaviour
     public int rallyRandom; // This is temporary
     public GameObject sorcererAlly;
     public bool sorcererLastStand;
+        public GameObject battlePhase;
     public GameObject firstEnemy;
     public int squirrelFight;
     public float timePassed = 0.0f;
@@ -39,6 +40,7 @@ public class KnightMoveset : MonoBehaviour
         damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
         sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle");
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         rallyRandom = 1;
         hasThorns = 0;
         thornDamage = 0;
@@ -264,7 +266,7 @@ squirrelFight = amount;
     public void PassTurn()
     {
 
-      //  firstEnemy.GetComponent<DemoEnemy>().BeginTurn();
+      battlePhase.GetComponent<BattlePhase>().ActionInputted();
 
     }
 
