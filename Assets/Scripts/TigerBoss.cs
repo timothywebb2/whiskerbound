@@ -48,19 +48,27 @@ public class TigerBoss : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("Overworld");
+                SceneManager.LoadScene("forestOverworld");
             }
         }
     }
 
-    public void TakeDamage(int amount) {
+    public void TakeDamage(int amount) 
+    {
+        if (VictoryAchieved) return;
+
         curHealth -= amount;
-        EnemyHealthBar.value -= amount;
-        
-        if (curHealth <= 0) {
-            Victory();
-        }
+
+        if (curHealth <= 0)
+    {
+        curHealth = 0;
+        EnemyHealthBar.value = 0;
+        Victory();
+        return;
     }
+
+    EnemyHealthBar.value = curHealth;
+}
 
     public void gotGoaded() {
         // Here is where the code will be for the enemy when they're goaded once allies are added
@@ -71,10 +79,15 @@ Debug.Log("Change scene");
         // Here is where the code will be for the enemy when they're stunned
     }
 
-    public void BeginTurn() {
+    public void BeginTurn() 
+    {
+        if (VictoryAchieved) return;
+
         if (blessTime > 0) {
             curHealth += Random.Range(1, 13);
             blessTime -= 1;
+            EnemyHealthBar.value = curHealth;
+
         }
         selectingMove = Random.Range(1, 5);
         selectingTarget = Random.Range(1, 3);
@@ -103,6 +116,8 @@ else if (selectingMove == 3) {
 else if (selectingMove == 4) {
     Debug.Log("Tiger Ward is used!");
     curHealth += Random.Range(1, 5) + Random.Range(1, 5);
+    EnemyHealthBar.value = curHealth;
+
 }
     }
 

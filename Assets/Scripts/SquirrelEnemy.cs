@@ -25,7 +25,9 @@ public class SquirrelEnemy : MonoBehaviour
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
-    public Slider EnemyHealthBar;
+    public Slider EnemyHealthBar1;
+    public Slider EnemyHealthBar2;
+
     
      
 
@@ -46,6 +48,12 @@ public class SquirrelEnemy : MonoBehaviour
         squirrelCoordination = true;
         VictoryText.SetActive(false);
         VictoryAchieved = false;
+        EnemyHealthBar1.maxValue = curHealth1;
+        EnemyHealthBar1.value = curHealth1;
+
+        EnemyHealthBar2.maxValue = curHealth2;
+        EnemyHealthBar2.value = curHealth2;
+
         
     }
 
@@ -63,7 +71,7 @@ public class SquirrelEnemy : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("Overworld");
+                SceneManager.LoadScene("forestOverworld");
             }
         }
     }
@@ -80,8 +88,9 @@ Debug.Log("Change scene");
         }
         if (multiHitting == 1) {
         if (attackedEnemy == 1) {
-curHealth1 -= amount;
-                EnemyHealthBar.value -= amount;
+                curHealth1 -= amount;
+                EnemyHealthBar1.value = curHealth1;
+
                 
                 
         
@@ -91,6 +100,8 @@ curHealth1 -= amount;
         }
         else if (attackedEnemy == 2) {
             curHealth2 -= amount;
+            EnemyHealthBar2.value = curHealth2;
+
         
         if (curHealth2 <= 0) {
             squirrelTwoDown = true;
@@ -100,6 +111,9 @@ curHealth1 -= amount;
          if (multiHitting == 2) {
 curHealth1 -= amount;
 curHealth2 -= amount;
+EnemyHealthBar1.value = curHealth1;
+EnemyHealthBar2.value = curHealth2;
+
 
 if (curHealth1 <= 0) {
             squirrelOneDown = true;
@@ -160,6 +174,7 @@ else if (selectingMove == 2) {
     Debug.Log("Recuperate is used!");
     damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
     curHealth1 += damageOutput;
+    EnemyHealthBar1.value = curHealth1;
 }
     }
     BeginTurn2();
@@ -197,6 +212,7 @@ else if (selectingMove == 2) {
     Debug.Log("Recuperate is used!");
     damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + Random.Range(1, 5) + Random.Range(1, 5) + 1;
     curHealth2 += damageOutput;
+    EnemyHealthBar2.value = curHealth2;
 }
     }
 }

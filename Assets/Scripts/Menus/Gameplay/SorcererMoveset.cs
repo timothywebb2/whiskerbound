@@ -121,7 +121,10 @@ SorcererSkills.SetActive(false);
          
     }
 
-    public void TakeDamage(int amount) {
+    public void TakeDamage(int amount) 
+    {
+        if (loseCondition) return;
+
        if (intercedeOn == false) {
             curHealth -= amount;
             Knighthealthbar.value -= amount;
@@ -146,7 +149,9 @@ SorcererSkills.SetActive(false);
         
     }
 
-    public void Incinerate() {
+    public void Incinerate() 
+    {
+        if (loseCondition) return;
 
 damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
 if (squirrelFight == 1) {
@@ -168,7 +173,9 @@ PassTurn();
 
     }
 
-    public void Enervate() {
+    public void Enervate() 
+    {
+        if (loseCondition) return;
 
 damageOutput = Random.Range(1, 7) + mightBonus;
 if (squirrelFight == 1) {
@@ -199,7 +206,9 @@ PassTurn();
 
     }
 
-    public void Ward() {
+    public void Ward() 
+    {
+        if (loseCondition) return;
 
 Debug.Log("Ward activated!");
         shieldOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
@@ -212,6 +221,7 @@ PassTurn();
 
     public void Scourge()
     {
+        if (loseCondition) return;
 
         Debug.Log("Scourge activated!");
         thornsOutput = Random.Range(1, 7) + mightBonus;
@@ -222,7 +232,10 @@ PassTurn();
 
     }
 
-    public void VolcanicHex() {
+    public void VolcanicHex() 
+    {
+        if (loseCondition) return;
+
         if (volcanicTally >= 30) {
 damageOutput = Random.Range(1, 13) + mightBonus;
 if (squirrelFight == 1) {
@@ -240,7 +253,10 @@ volcanicTally = 0;
 
     }
 
-public void RallyIncinerate() {
+public void RallyIncinerate() 
+{
+    if (loseCondition) return;
+
 damageOutput = Random.Range(1, 4) + Random.Range(1, 4) + mightBonus;
 if (squirrelFight == 1) {
 firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
@@ -257,7 +273,10 @@ Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
             StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Incinerate!", 0f));
     }
 
-    public void RallyEnervate() {
+    public void RallyEnervate() 
+    {
+        if (loseCondition) return;
+
 damageOutput = Random.Range(1, 4) + mightBonus;
 if (squirrelFight == 1) {
 firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
@@ -304,6 +323,7 @@ squirrelFight = amount;
 
     public void PassTurn()
     {
+        if (loseCondition) return;
 
 if (squirrelFight == 1) {
         firstEnemy.GetComponent<DemoEnemy>().BeginTurn();
@@ -342,6 +362,7 @@ else if (squirrelFight == 3) {
     public void Lose() {
 loseCondition = true;
 LoseText.SetActive(true);
+SorcererSkills.SetActive(false);
 Debug.Log("You lose!");
 }
 }

@@ -47,7 +47,7 @@ public class DemoEnemy : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("Overworld");
+                SceneManager.LoadScene("forestOverworld");
             }
         }
     }
