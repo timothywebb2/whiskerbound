@@ -14,11 +14,11 @@ public class TigerBoss : MonoBehaviour
           public int selectingTarget;
           public int blessTime;
           public int damageOutput;
-          public GameObject battlePhase;
-        public TextMeshProUGUI HealthText;
+        
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
+        public Slider EnemyHealthBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,18 +30,16 @@ public class TigerBoss : MonoBehaviour
         selectingMove = 1;
         selectingTarget = 1;
         blessTime = 0;
-        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         VictoryText.SetActive(false);
         VictoryAchieved = false;
-        UpdateHUD();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-     //   knightPlayer.GetComponent<KnightMoveset>().NumberedFight(3);
-     //   sorcererPlayer.GetComponent<SorcererMoveset>().NumberedFight(3);
-        battlePhase.GetComponent<BattlePhase>().NumberedFight(3);
+        knightPlayer.GetComponent<KnightMoveset>().NumberedFight(3);
+        sorcererPlayer.GetComponent<SorcererMoveset>().NumberedFight(3);
         
         if (VictoryAchieved == true)
         {
@@ -50,18 +48,27 @@ public class TigerBoss : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("Overworld");
+                SceneManager.LoadScene("forestOverworld");
             }
         }
     }
 
-    public void TakeDamage(int amount) {
+    public void TakeDamage(int amount) 
+    {
+        if (VictoryAchieved) return;
+
         curHealth -= amount;
-        UpdateHUD();
-        if (curHealth <= 0) {
-            Victory();
-        }
+
+        if (curHealth <= 0)
+    {
+        curHealth = 0;
+        EnemyHealthBar.value = 0;
+        Victory();
+        return;
     }
+
+    EnemyHealthBar.value = curHealth;
+}
 
     public void gotGoaded() {
         // Here is where the code will be for the enemy when they're goaded once allies are added
@@ -72,10 +79,15 @@ Debug.Log("Change scene");
         // Here is where the code will be for the enemy when they're stunned
     }
 
-    public void BeginTurn() {
+    public void BeginTurn() 
+    {
+        if (VictoryAchieved) return;
+
         if (blessTime > 0) {
             curHealth += Random.Range(1, 13);
             blessTime -= 1;
+            EnemyHealthBar.value = curHealth;
+
         }
         selectingMove = Random.Range(1, 5);
         selectingTarget = Random.Range(1, 3);
@@ -104,13 +116,12 @@ else if (selectingMove == 3) {
 else if (selectingMove == 4) {
     Debug.Log("Tiger Ward is used!");
     curHealth += Random.Range(1, 5) + Random.Range(1, 5);
+    EnemyHealthBar.value = curHealth;
+
 }
     }
 
-    void UpdateHUD()
-    {
-        HealthText.text = "HP: " + curHealth;
-    }
+   
 
 public void Victory() {
 VictoryAchieved = true;
