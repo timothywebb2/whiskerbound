@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139094269387944111, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 156840993601141873, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_Pivot.x
@@ -958,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8974018485902119177, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8996044982300915792, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_text
@@ -3602,6 +3602,7 @@ MonoBehaviour:
   rallyRandom: 0
   sorcererAlly: {fileID: 0}
   sorcererLastStand: 0
+  battlePhase: {fileID: 0}
   firstEnemy: {fileID: 0}
   squirrelFight: 0
   timePassed: 0
@@ -6697,6 +6698,7 @@ MonoBehaviour:
   intercedeOn: 0
   timePassed: 0
   knightAlly: {fileID: 0}
+  battlePhase: {fileID: 0}
   firstEnemy: {fileID: 0}
   loseCondition: 0
   SorcererSkills: {fileID: 1823856398003355726}
@@ -8115,6 +8117,7 @@ MonoBehaviour:
   squirrelTwo: {fileID: 0}
   squirrelOneDown: 0
   squirrelTwoDown: 0
+  battlePhase: {fileID: 0}
   squirrelCoordination: 0
   selectingMove: 0
   selectingTarget: 0
