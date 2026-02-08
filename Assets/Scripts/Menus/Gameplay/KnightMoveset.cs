@@ -24,10 +24,10 @@ public class KnightMoveset : MonoBehaviour
     public float timePassed = 0.0f;
     public bool intercedeOn;
     public bool loseCondition;
-    public TextMeshProUGUI HealthText;
+    
     public GameObject KnightSkills;
     public GameObject LoseText;
-
+    public Slider Knighthealthbar;
     public TextMeshProUGUI currentAction;
     public bool printing;
 
@@ -48,7 +48,7 @@ public class KnightMoveset : MonoBehaviour
         currentAction.enabled = false;
         squirrelFight = 1;
         LoseText.SetActive(false);
-        UpdateHUD();
+        
 
     }
 
@@ -115,7 +115,9 @@ KnightSkills.SetActive(false);
     public void TakeDamage(int amount) {
         if (intercedeOn == false) {
             curHealth -= amount;
-            if(!printing)
+            Knighthealthbar.value -= amount;
+
+            if (!printing)
                 StartCoroutine(printCurrentAction("Knight took " + amount + " damage!", 1f));
             if (hasThorns > 0) {
                 if (squirrelFight == 1) {
@@ -139,7 +141,7 @@ KnightSkills.SetActive(false);
         if (curHealth <= 0) {
             Lose();
         }
-        UpdateHUD();
+        
     }
 
     public void Provoke() {
@@ -257,10 +259,7 @@ squirrelFight = amount;
         thornDamage = amount;
     }
 
-    void UpdateHUD()
-    {
-        HealthText.text = "HP: " + curHealth;
-    }
+    
 
     public void PassTurn()
     {
