@@ -21,8 +21,7 @@ public class SquirrelEnemy : MonoBehaviour
           public int damageOutput;
           public int attackedEnemy;
           public int multiHitting;
-        public TextMeshProUGUI HealthText1;
-        public TextMeshProUGUI HealthText2;
+        
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
@@ -47,7 +46,7 @@ public class SquirrelEnemy : MonoBehaviour
         squirrelCoordination = true;
         VictoryText.SetActive(false);
         VictoryAchieved = false;
-        UpdateHUD();
+        
     }
 
     // Update is called once per frame
@@ -85,14 +84,14 @@ curHealth1 -= amount;
                 EnemyHealthBar.value -= amount;
                 
                 
-        UpdateHUD();
+        
         if (curHealth1 <= 0) {
             squirrelOneDown = true;
         }
         }
         else if (attackedEnemy == 2) {
             curHealth2 -= amount;
-        UpdateHUD();
+        
         if (curHealth2 <= 0) {
             squirrelTwoDown = true;
         }
@@ -101,7 +100,7 @@ curHealth1 -= amount;
          if (multiHitting == 2) {
 curHealth1 -= amount;
 curHealth2 -= amount;
-UpdateHUD();
+
 if (curHealth1 <= 0) {
             squirrelOneDown = true;
         }
@@ -206,11 +205,7 @@ public void multiHit() {
 multiHitting = 2;
 }
 
-    void UpdateHUD()
-    {
-        HealthText1.text = "HP: " + curHealth1;
-        HealthText2.text = "HP: " + curHealth2;
-    }
+    
 
 public void Victory() {
 VictoryAchieved = true;

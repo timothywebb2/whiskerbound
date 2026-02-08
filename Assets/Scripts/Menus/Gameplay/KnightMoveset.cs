@@ -24,7 +24,7 @@ public class KnightMoveset : MonoBehaviour
     public float timePassed = 0.0f;
     public bool intercedeOn;
     public bool loseCondition;
-    public TextMeshProUGUI HealthText;
+    
     public GameObject KnightSkills;
     public GameObject LoseText;
     public Slider Knighthealthbar;
@@ -48,7 +48,7 @@ public class KnightMoveset : MonoBehaviour
         currentAction.enabled = false;
         squirrelFight = 1;
         LoseText.SetActive(false);
-        UpdateHUD();
+        
 
     }
 
@@ -141,7 +141,7 @@ KnightSkills.SetActive(false);
         if (curHealth <= 0) {
             Lose();
         }
-        UpdateHUD();
+        
     }
 
     public void Provoke() {
@@ -259,10 +259,7 @@ squirrelFight = amount;
         thornDamage = amount;
     }
 
-    void UpdateHUD()
-    {
-        HealthText.text = "HP: " + curHealth;
-    }
+    
 
     public void PassTurn()
     {

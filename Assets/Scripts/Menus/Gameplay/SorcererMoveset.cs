@@ -26,7 +26,7 @@ public class SorcererMoveset : MonoBehaviour
     public GameObject firstEnemy;
         public bool loseCondition;
     //  public bool intercedeOn;
-    public TextMeshProUGUI HealthText;
+    
     public GameObject SorcererSkills;
      public GameObject LoseText;
     public Slider Knighthealthbar;
@@ -51,7 +51,7 @@ public class SorcererMoveset : MonoBehaviour
          loseCondition = false;
         squirrelFight = 1;
           LoseText.SetActive(false);
-        UpdateHUD();
+        
 
     }
 
@@ -143,7 +143,7 @@ SorcererSkills.SetActive(false);
          if (curHealth <= 0) {
             Lose();
         }
-        UpdateHUD();
+        
     }
 
     public void Incinerate() {
@@ -300,10 +300,7 @@ squirrelFight = 2;
 squirrelFight = amount;
     }
 
-    void UpdateHUD()
-    {
-        HealthText.text = "HP: " + curHealth;
-    }
+    
 
     public void PassTurn()
     {
