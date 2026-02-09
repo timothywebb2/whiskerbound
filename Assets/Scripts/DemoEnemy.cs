@@ -20,6 +20,7 @@ public class DemoEnemy : MonoBehaviour
        public GameObject VictoryText;
        public float timePassed = 0.0f;
        public bool VictoryAchieved;
+       public Slider EnemyHealthBar;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -59,6 +60,7 @@ Debug.Log("Change scene");
 
    public void TakeDamage(int amount) {
        curHealth -= amount;
+       EnemyHealthBar.value -= amount;
        UpdateHUD();
        if (curHealth <= 0) {
            Victory();

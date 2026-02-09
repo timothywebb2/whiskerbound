@@ -29,6 +29,8 @@ public class SquirrelEnemy : MonoBehaviour
        public GameObject VictoryText;
        public float timePassed = 0.0f;
        public bool VictoryAchieved;
+       public Slider EnemyHealthBar1;
+       public Slider EnemyHealthBar2;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -89,6 +91,7 @@ Debug.Log("Change scene");
        if (multiHitting == 1) {
        if (attackedEnemy == 1) {
 curHealth1 -= amount;
+EnemyHealthBar1.value = curHealth1;
        UpdateHUD();
        if (curHealth1 <= 0) {
            squirrelOneDown = true;
@@ -96,6 +99,7 @@ curHealth1 -= amount;
        }
        else if (attackedEnemy == 2) {
            curHealth2 -= amount;
+           EnemyHealthBar2.value = curHealth2;
        UpdateHUD();
        if (curHealth2 <= 0) {
            squirrelTwoDown = true;
@@ -105,6 +109,8 @@ curHealth1 -= amount;
         if (multiHitting == 2) {
 curHealth1 -= amount;
 curHealth2 -= amount;
+EnemyHealthBar1.value = curHealth1;
+EnemyHealthBar2.value = curHealth2;
 UpdateHUD();
 if (curHealth1 <= 0) {
            squirrelOneDown = true;
@@ -170,6 +176,7 @@ else if (selectingMove == 2) {
    Debug.Log("Recuperate is used!");
    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
    curHealth1 += damageOutput;
+   EnemyHealthBar1.value = curHealth1;
 }
    }
    BeginTurn2();
@@ -208,6 +215,7 @@ else if (selectingMove == 2) {
    Debug.Log("Recuperate is used!");
    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + Random.Range(1, 5) + Random.Range(1, 5) + 1;
    curHealth2 += damageOutput;
+   EnemyHealthBar2.value = curHealth2;
 }
    }
 }

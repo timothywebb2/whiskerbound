@@ -32,6 +32,7 @@ public class SorcererMoveset : MonoBehaviour
    public TextMeshProUGUI HealthText;
    public GameObject SorcererSkills;
     public GameObject LoseText;
+    public Slider Knighthealthbar;
 
 
    public TextMeshProUGUI currentAction;
@@ -143,6 +144,7 @@ SorcererSkills.SetActive(false);
    public void TakeDamage(int amount) {
       if (intercedeOn == false) {
            curHealth -= amount;
+           Knighthealthbar.value -= amount;
            if(!printing)
                StartCoroutine(printCurrentAction("Sorcerer took " + amount + " damage!", 1f));
        }

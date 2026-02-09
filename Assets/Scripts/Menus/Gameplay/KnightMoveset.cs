@@ -30,6 +30,7 @@ public class KnightMoveset : MonoBehaviour
    public TextMeshProUGUI HealthText;
    public GameObject KnightSkills;
    public GameObject LoseText;
+   public Slider Knighthealthbar;
 
 
    public TextMeshProUGUI currentAction;
@@ -131,6 +132,7 @@ KnightSkills.SetActive(false);
    public void TakeDamage(int amount) {
        if (intercedeOn == false) {
            curHealth -= amount;
+           Knighthealthbar.value -= amount;
            if(!printing)
                StartCoroutine(printCurrentAction("Knight took " + amount + " damage!", 1f));
            if (hasThorns > 0) {
