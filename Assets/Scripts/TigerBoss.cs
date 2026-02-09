@@ -21,6 +21,7 @@ public class TigerBoss : MonoBehaviour
        public GameObject VictoryText;
        public float timePassed = 0.0f;
        public bool VictoryAchieved;
+       public Slider EnemyHealthBar;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -67,6 +68,7 @@ Debug.Log("Change scene");
        if (curHealth <= 0) {
            Victory();
        }
+       EnemyHealthBar.value = curHealth;
    }
 
 
