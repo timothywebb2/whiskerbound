@@ -42,6 +42,14 @@ public class pause : MonoBehaviour
        
     }
 
+    public void restartScene() { 
+    var currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+        resumeGame();
+
+    }
+
+
    public void pauseGame()
     {
         //pauses game activity and turns menu on
