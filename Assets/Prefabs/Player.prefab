@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -8.23, y: -0.42, z: 10.62}
-  m_LocalScale: {x: 2.887049, y: 2.887049, z: 2.887049}
+  m_LocalScale: {x: 1.5347538, y: 1.5347538, z: 1.5347538}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,9 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9678b402aff3d438849f645db7c9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionController
-  dialoguePanel: {fileID: 0}
-  shopPanel: {fileID: 0}
+  dialoguePanel: {fileID: 454590774024048021, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
+  shopPanel: {fileID: 1660085853196020527, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
   movementScript: {fileID: 6366518617880443676}
+  interactActionRef: {fileID: -2728234713961231847, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!65 &5668142332233019385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88,8 +89,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.53, y: 0.72, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.96, y: 1.09, z: 1}
+  m_Center: {x: 0, y: 0.01, z: 0}
 --- !u!143 &4273097260304965537
 CharacterController:
   m_ObjectHideFlags: 0
@@ -108,13 +109,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 0.74
-  m_Radius: 0.26
+  m_Height: 1.19
+  m_Radius: 0.47
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.06, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &561539000258866713
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c98115be9eca2a4fab869216600528c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1dc8ce047b96f734a8a081b9d76131b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,7 +187,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 1740855daeb5b574284731c33c355e50, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
