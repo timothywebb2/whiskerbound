@@ -8,10 +8,10 @@ public class ProtoMovement : MonoBehaviour
     //references
     public InputActionAsset InputActions;
     public CinemachineCamera frontCamera;
-    public Transform villageSpawn;
+    /*public Transform villageSpawn;
     public Transform squirrelSpawn;
     public Transform ferretSpawn;
-    public Transform tigerSpawn;
+    public Transform tigerSpawn;*/
 
     //movement variables
     public float speed = 12f;
@@ -32,7 +32,7 @@ public class ProtoMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
 
         // player is entering village 1 from overworld
-        if(isSceneLoaded("ProtoVillage") && PlayerPrefs.GetInt("FromOverworld", 0) == 1)
+        /*if(isSceneLoaded("ProtoVillage") && PlayerPrefs.GetInt("FromOverworld", 0) == 1)
         {
             this.transform.position = villageSpawn.transform.position;
             PlayerPrefs.SetInt("FromOverworld", 0);
@@ -54,7 +54,7 @@ public class ProtoMovement : MonoBehaviour
                 this.transform.position = tigerSpawn.transform.position;
                 PlayerPrefs.SetInt("FromTiger", 0);
             }
-        }
+        }*/
     }
 
     private void OnEnable()
