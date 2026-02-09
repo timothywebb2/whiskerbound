@@ -1,61 +1,39 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class UI_SettingsInventoryManager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject panelSettings;
-    public GameObject panelInventory;
+    public GameObject panelSettings;    // assign Panel_Settings
+    public GameObject panelInventory;   // assign Panel_Inventory
 
-    [Header("Input Actions")]
-    public InputActionAsset inputActions;
-    private InputAction toggleSettingsAction;
-    private InputAction toggleInventoryAction;
-
-    private void Awake()
+    // ===== Settings panel =====
+    public void OpenSettingsPanel()
     {
-        toggleSettingsAction = inputActions.FindAction("UI/ToggleSettings");
-        toggleInventoryAction = inputActions.FindAction("UI/ToggleInventory");
-
-        if (toggleSettingsAction == null || toggleInventoryAction == null)
-        {
-            Debug.LogError("Could not find UI actions in InputActionAsset!");
-            return;
-        }
-
-        // Subscribe to performed events
-        toggleSettingsAction.performed += ctx => ToggleSettingsPanel();
-        toggleInventoryAction.performed += ctx => ToggleInventoryPanel();
+        if (panelSettings != null) panelSettings.SetActive(true);
+        if (panelInventory != null) panelInventory.SetActive(false);
     }
 
-    private void OnEnable()
+    public void CloseSettingsPanel()
     {
-        toggleSettingsAction?.Enable();
-        toggleInventoryAction?.Enable();
+        if (panelSettings != null) panelSettings.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        toggleSettingsAction?.Disable();
-        toggleInventoryAction?.Disable();
-    }
-
-    // ===== panels =====
-    public void ToggleSettingsPanel()
-    {
-        bool newState = !panelSettings.activeSelf;
-        panelSettings.SetActive(newState);
-
-        if (newState && panelInventory.activeSelf)
-            panelInventory.SetActive(false);
-    }
+    // ===== Inventory panel =====
 
     public void ToggleInventoryPanel()
     {
         bool newState = !panelInventory.activeSelf;
         panelInventory.SetActive(newState);
+    }
 
-        if (newState && panelSettings.activeSelf)
-            panelSettings.SetActive(false);
+    public void OpenInventoryPanel()
+    {
+        if (panelInventory != null) panelInventory.SetActive(true);
+        if (panelSettings != null) panelSettings.SetActive(false);
+    }
+
+    public void CloseInventoryPanel()
+    {
+        if (panelInventory != null) panelInventory.SetActive(false);
     }
 }

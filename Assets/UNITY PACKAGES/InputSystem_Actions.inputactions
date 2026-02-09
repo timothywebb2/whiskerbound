@@ -89,12 +89,12 @@
                 },
                 {
                     "name": "Navigate",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "c8018eb5-2030-4213-b6c0-d3ecbc6621c4",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -898,33 +898,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Navigate",
-                    "type": "Value",
-                    "id": "8db9f6fd-280d-4845-8fc9-b40aecd21e06",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "ToggleSettings",
-                    "type": "Button",
-                    "id": "b0e34dbf-7d30-48b7-8263-e01087aff0af",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ToggleInventory",
-                    "type": "Button",
-                    "id": "8aab93f5-433d-4a48-85f2-f6e3370a606a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -964,7 +937,7 @@
                 {
                     "name": "",
                     "id": "9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc",
-                    "path": "<Keyboard>/space",
+                    "path": "*/{Submit}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
@@ -975,7 +948,7 @@
                 {
                     "name": "",
                     "id": "ff1a9551-a7c5-46a3-bea9-e4a59c84f9f7",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1189,61 +1162,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "NavigateDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d04eebf1-4d2f-4c8f-9c3d-280562707a00",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "36fe325a-ab29-4163-9708-6021c6515688",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9ba69a7e-b380-481c-ab63-f851593bd021",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleSettings",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5e864003-11e9-44c9-925e-6f001b0b25c5",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleSettings",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "119e5a6c-5378-4a8d-a716-cb0c084ba7cc",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
