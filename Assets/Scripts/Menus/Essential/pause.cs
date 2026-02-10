@@ -45,6 +45,8 @@ public class pause : MonoBehaviour
     public void restartScene() { 
     var currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
         resumeGame();
 
     }
