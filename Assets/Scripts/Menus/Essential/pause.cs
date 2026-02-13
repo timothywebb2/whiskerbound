@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class pause : MonoBehaviour
 {
 
-    public GameObject pMenu; //pause
+    public GameObject pMenu; //full pause object
+    public GameObject pScreen; //initial pause screen
     public GameObject oMenu; //options
     public GameObject cMenu; //confirmation
     public GameObject cScreen; //controls
@@ -15,31 +16,31 @@ public class pause : MonoBehaviour
     public GameObject XboxScreen;
 
 
-    public bool isPause;
+    public bool isPause = false;
 
     void Start()
     {
-          pMenu.SetActive(false);
+          //makes sure sub pause menus don't all activate once pause turns on
           oMenu.SetActive(false);
           cMenu.SetActive(false);
           cScreen.SetActive(false);
+          Debug.Log("Menus are inactive");
     }
 
     // Update is called once per frame
     void Update()
     {
-            if (Keyboard.current.escapeKey.isPressed)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
-                 if (isPause == false) 
-            { 
+                Debug.Log("I pressed Escape");
+                if (isPause == false) 
+                {
                 pauseGame(); 
-            } //else
-                   // {
-               //resumeGame(); NEEDS A DELAY CODE FOR SOFTLOCK PREVENTION
-            //}
-                
+                } else
+                    {
+               resumeGame();
+                }    
             }
-       
     }
 
     public void restartScene() { 
@@ -55,10 +56,10 @@ public class pause : MonoBehaviour
    public void pauseGame()
     {
         //pauses game activity and turns menu on
-        Time.timeScale = 0f;
+        Debug.Log("pauseGame is running");
         pMenu.SetActive(true);
+        Time.timeScale = 0f;
         isPause = true;
-
     }
 
     public void resumeGame()
@@ -72,12 +73,12 @@ public class pause : MonoBehaviour
 
 public void options(){
     oMenu.SetActive(true);
-    pMenu.SetActive(false);
+    pScreen.SetActive(false);
 
 }
 
 public void back(){
-pMenu.SetActive(true);
+pScreen.SetActive(true);
 oMenu.SetActive(false);
 cMenu.SetActive(false);
 cScreen.SetActive(false);
@@ -95,7 +96,7 @@ public void askPlayer(){
 public void goMainMenu(){
     isPause = false;
     Time.timeScale = 1f; //stops going back to menu breaking the game
-SceneManager.LoadScene(0);
+    SceneManager.LoadScene(0);
 
 }
 

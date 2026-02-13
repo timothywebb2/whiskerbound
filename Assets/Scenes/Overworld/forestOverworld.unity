@@ -2274,7 +2274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4348198917622344151, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.45454547
       objectReference: {fileID: 0}
     - target: {fileID: 4348198917622344151, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2286,7 +2286,7 @@ PrefabInstance:
       objectReference: {fileID: 753951291}
     - target: {fileID: 4457921894065681278, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.45454547
       objectReference: {fileID: 0}
     - target: {fileID: 4457921894065681278, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2294,7 +2294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4457921894065681278, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.45454547
       objectReference: {fileID: 0}
     - target: {fileID: 4550142417147806117, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2306,7 +2306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5125546212657924306, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3708,6 +3708,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 543892deef5646146a8a2a7520de5041, type: 3}
   m_PrefabInstance: {fileID: 442071565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &450888196 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+  m_PrefabInstance: {fileID: 296668331}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &480998037
 GameObject:
@@ -6087,11 +6092,15 @@ PrefabInstance:
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: pMenu
       value: 
-      objectReference: {fileID: 296668335}
+      objectReference: {fileID: 450888196}
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: cScreen
       value: 
       objectReference: {fileID: 296668332}
+    - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
+      propertyPath: pScreen
+      value: 
+      objectReference: {fileID: 296668335}
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: KeyScreen
       value: 
