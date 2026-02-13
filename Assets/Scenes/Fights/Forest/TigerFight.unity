@@ -6099,7 +6099,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b80f79a71ba1846837245ef0aa07fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::pause
-  pMenu: {fileID: 1765631330}
+  pMenu: {fileID: 6169680619562384546}
+  pScreen: {fileID: 1765631330}
   oMenu: {fileID: 1774202670}
   cMenu: {fileID: 255363189}
   cScreen: {fileID: 2055446865}
@@ -9645,7 +9646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5125546212657924306, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9696,6 +9697,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+--- !u!1 &6169680619562384546 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+  m_PrefabInstance: {fileID: 6169680619562384545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
