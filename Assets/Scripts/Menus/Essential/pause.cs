@@ -28,10 +28,29 @@ public class pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (Keyboard.current.escapeKey.isPressed){
-            pauseGame();
-        }
+            if (Keyboard.current.escapeKey.isPressed)
+            {
+                 if (isPause == false) 
+            { 
+                pauseGame(); 
+            } //else
+                   // {
+               //resumeGame(); NEEDS A DELAY CODE FOR SOFTLOCK PREVENTION
+            //}
+                
+            }
+       
     }
+
+    public void restartScene() { 
+    var currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        resumeGame();
+
+    }
+
 
    public void pauseGame()
     {
