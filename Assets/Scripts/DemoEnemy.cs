@@ -9,38 +9,53 @@ public class DemoEnemy : MonoBehaviour
     public int curHealth;
     public int damageType;
     public GameObject knightPlayer;
-        public TextMeshProUGUI HealthText;
+     public GameObject sorcererPlayer;
+     public int selectingMove;
+          public int selectingTarget;
+          public int damageOutput;
+        
         public GameObject VictoryText;
         public float timePassed = 0.0f;
         public bool VictoryAchieved;
+        public Slider EnemyHealthBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
-        curHealth = 75;
+        sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+        curHealth = 20;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
+        selectingMove = 1;
+        selectingTarget = 1;
         VictoryText.SetActive(false);
         VictoryAchieved = false;
-        UpdateHUD();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (VictoryAchieved == true) {
-        timePassed += Time.deltaTime;
-        if (timePassed > 3.0f)
-{
+        knightPlayer.GetComponent<KnightMoveset>().NotSquirrelFight();
+        sorcererPlayer.GetComponent<SorcererMoveset>().NotSquirrelFight();
+        
+        if (VictoryAchieved == true)
+        {
+            PlayerPrefs.SetInt("BeatFerret", 1);
+            timePassed += Time.deltaTime;
+            
+            if (timePassed > 3.0f)
+            {
 Debug.Log("Change scene");
-SceneManager.LoadScene(2);
-}
+                SceneManager.LoadScene("forestOverworld");
+            }
         }
     }
 
     public void TakeDamage(int amount) {
         curHealth -= amount;
-        UpdateHUD();
+        EnemyHealthBar.value -= amount;
+        
         if (curHealth <= 0) {
             Victory();
         }
@@ -50,16 +65,34 @@ SceneManager.LoadScene(2);
         // Here is where the code will be for the enemy when they're goaded once allies are added
     }
 
-    public void BeginTurn() {
-        Debug.Log("Damaged player by 2");
-        knightPlayer.GetComponent<KnightMoveset>().TakeDamage(2);
-    }
-
-    void UpdateHUD()
+    public void gotStunned()
     {
-        HealthText.text = "HP: " + curHealth;
+        // Here is where the code will be for the enemy when they're stunned
     }
 
+    public void BeginTurn() {
+        selectingMove = Random.Range(1, 3);
+        selectingTarget = Random.Range(1, 3);
+if (selectingMove == 1) {
+    if (selectingTarget == 1) {
+    Debug.Log("Lash is used!");
+    damageOutput = Random.Range(1, 7) + 1;
+    knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
+    }
+    if (selectingTarget == 2) {
+    Debug.Log("Lash is used!");
+    damageOutput = Random.Range(1, 7) + 1;
+    sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+    }
+}
+else if (selectingMove == 2) {
+    Debug.Log("Recuperate is used!");
+    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
+    curHealth += damageOutput;
+}
+    }
+
+   
 public void Victory() {
 VictoryAchieved = true;
 VictoryText.SetActive(true);

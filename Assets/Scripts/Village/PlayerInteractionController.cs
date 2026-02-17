@@ -1,15 +1,35 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteractionController : MonoBehaviour
 {
     public UI_DialoguePanel dialoguePanel;
     public UI_ShopPanel shopPanel;
 
-    // 可选：拖入你的玩家移动脚本（例如PlayerMovement）
+   
     public MonoBehaviour movementScript;
 
     private NPCInteractable currentTarget;
     private bool isBusy = false;
+
+    public InputActionReference interactActionRef;
+    private InputAction interactAction;
+
+
+    private void OnEnable()
+    {
+        if (interactActionRef != null)
+        {
+            interactAction = interactActionRef.action;
+            interactAction.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (interactAction != null)
+            interactAction.Disable();
+    }
 
     public void SetCurrentTarget(NPCInteractable npc)
     {
@@ -28,11 +48,23 @@ public class PlayerInteractionController : MonoBehaviour
         return currentTarget;
     }
 
+
     private void Update()
     {
-        if (isBusy) return;
+        bool interactPressed = interactAction.WasPressedThisFrame();
 
-        if (Input.GetKeyDown(KeyCode.E) && currentTarget != null)
+        if (isBusy)
+        {
+            if (dialoguePanel != null &&
+                dialoguePanel.IsOpen() &&
+                interactPressed)
+            {
+                dialoguePanel.CloseDialogue();
+            }
+            return;
+        }
+
+        if (interactPressed && currentTarget != null)
         {
             switch (currentTarget.interactionType)
             {
@@ -46,6 +78,7 @@ public class PlayerInteractionController : MonoBehaviour
             }
         }
     }
+
 
     void OpenDialogueFromNPC(NPCInteractable npc)
     {
@@ -71,7 +104,6 @@ public class PlayerInteractionController : MonoBehaviour
 
         shopPanel.ShowShop(
             npc.shopTitle,
-            npc.shopInventoryDescription,
             OnShopClosed
         );
     }

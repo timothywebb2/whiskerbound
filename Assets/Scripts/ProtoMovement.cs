@@ -2,12 +2,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using UnityEngine.SceneManagement;
-
+//Matthew
 public class ProtoMovement : MonoBehaviour
 {
     //references
     public InputActionAsset InputActions;
     public CinemachineCamera frontCamera;
+    public Transform villageSpawn;
+    public Transform squirrelSpawn;
+    public Transform ferretSpawn;
+    public Transform tigerSpawn;
 
     //movement variables
     public float speed = 12f;
@@ -26,6 +30,31 @@ public class ProtoMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         moveAction = InputActions.FindActionMap("Player").FindAction("Move");
         animator = this.GetComponent<Animator>();
+
+        // player is entering village 1 from overworld
+        if(isSceneLoaded("ProtoVillage") && PlayerPrefs.GetInt("FromOverworld", 0) == 1)
+        {
+            this.transform.position = villageSpawn.transform.position;
+            PlayerPrefs.SetInt("FromOverworld", 0);
+        }
+        else if(isSceneLoaded("Overworld"))
+        {
+            if(PlayerPrefs.GetInt("FromSquirrel", 0) == 1)
+            {
+                this.transform.position = squirrelSpawn.transform.position;
+                PlayerPrefs.SetInt("FromSquirrel", 0);
+            }
+            else if(PlayerPrefs.GetInt("FromFerret", 0) == 1)
+            {
+                this.transform.position = ferretSpawn.transform.position;
+                PlayerPrefs.SetInt("FromFerret", 0);
+            }
+            else if(PlayerPrefs.GetInt("FromTiger", 0) == 1)
+            {
+                this.transform.position = tigerSpawn.transform.position;
+                PlayerPrefs.SetInt("FromTiger", 0);
+            }
+        }
     }
 
     private void OnEnable()
@@ -60,13 +89,26 @@ public class ProtoMovement : MonoBehaviour
             RotateCharacter(moveDirection);
         }*/
 
-        animator.SetInteger("XDirection", (int)moveInput.x);
-        animator.SetInteger("YDirection", (int)moveInput.y);
+        //sprite animation with controller, should still work with keyboard
+        float deadZone = 0.1f;
+        Vector3 worldMove = moveDirection.normalized;
 
-        if (moveInput.x == 0 && moveInput.y == 0)
-            animator.speed = 0f;
-        else
-            animator.speed = 1f;
+        int xDir = 0;
+        int yDir = 0;
+
+        if (worldMove.x > deadZone) xDir = 1;
+        else if (worldMove.x < -deadZone) xDir = -1;
+        else xDir = 0;
+
+        if (worldMove.z > deadZone) yDir = 1;
+        else if (worldMove.z < -deadZone) yDir = -1;
+        else yDir = 0;
+
+        int rotatedX = -yDir;
+        int rotatedY = xDir;
+
+        animator.SetInteger("XDirection", rotatedX);
+        animator.SetInteger("YDirection", rotatedY);
 
         Vector3 horizontalVelocity = moveDirection.normalized * speed;
         Vector3 finalVelocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);
@@ -98,9 +140,15 @@ public class ProtoMovement : MonoBehaviour
         transform.rotation = targetRotation;
     }
 
-    private void OnTriggerEnter(Collider whatIHit)
+    public bool isSceneLoaded(string sceneName)
     {
-        if (whatIHit.tag == "EnterOverworld")
-            SceneManager.LoadScene("ProtoFight");
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            if (scene.name == sceneName)
+                return true;
+        }
+        return false;
     }
 }
