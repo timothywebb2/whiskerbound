@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &22282540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+  m_PrefabInstance: {fileID: 6169680619562384545}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &50324093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,7 +219,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1789423013383660567, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_text
-      value: Offensive; Deal 1d12 + Might PHY to up to 3 adjacent enemies
+      value: "Offensive; Deal 1\u201312 + Might (PHY) physical damage to up to 3
+        adjacent enemies"
       objectReference: {fileID: 0}
     - target: {fileID: 1789423013383660567, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_fontSize
@@ -258,7 +264,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2756431309586787045, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_text
-      value: Offensive; Deal 2d12 + Might PHY to 1 enemy & apply goad for 1 turn
+      value: "Offensive; Deal 2\u201324 + Might (PHY) physical damage to 1 enemy
+        and Goad for 1 turn"
       objectReference: {fileID: 0}
     - target: {fileID: 2756431309586787045, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_fontSize
@@ -1140,10 +1147,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2118593065}
-  - {fileID: 615189519}
-  - {fileID: 1614237610}
-  - {fileID: 1598696854}
-  - {fileID: 1286326363}
+  - {fileID: 1114512128}
+  - {fileID: 1184320229}
   - {fileID: 1881302847}
   - {fileID: 455517197}
   - {fileID: 2058336668}
@@ -1833,7 +1838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4196079, g: 0.5568628, b: 0.1372549, a: 1}
+  m_Color: {r: 0.9843138, g: 0.8000001, b: 0.6156863, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2539,8 +2544,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2911263371374471649, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_text
-      value: Defensive; Heal targeted ally 4d4 + Might HP and apply blessed for 1
-        turn
+      value: "Defensive; Heal a target ally for 4\u201316 + Might HP and apply Blessed
+        for 1 turn"
       objectReference: {fileID: 0}
     - target: {fileID: 2911263371374471649, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_fontSize
@@ -2584,7 +2589,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3302225085787040168, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_text
-      value: Offensive; Deal 3d4 + Might SPR and heal allies for 2d4 + Might HP
+      value: "Offensive; Deal 3\u201312 + Might (SPR) damage and heal allies for
+        2\u20138 + Might HP"
       objectReference: {fileID: 0}
     - target: {fileID: 3302225085787040168, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_fontSize
@@ -2615,8 +2621,24 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4084832707832165360, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084832707832165360, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084832707832165360, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084832707832165360, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_fontSizeBase
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084832707832165360, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4288993279
       objectReference: {fileID: 0}
     - target: {fileID: 5252723833449634330, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_IsActive
@@ -2624,15 +2646,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692698567947928146, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Color.b
-      value: 0.13333334
+      value: 0.6156863
       objectReference: {fileID: 0}
     - target: {fileID: 5692698567947928146, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Color.g
-      value: 0.54509807
+      value: 0.8000001
       objectReference: {fileID: 0}
     - target: {fileID: 5692698567947928146, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Color.r
-      value: 0.41960788
+      value: 0.9843138
       objectReference: {fileID: 0}
     - target: {fileID: 5702360981443154154, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2644,15 +2666,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6180275380075545073, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Color.b
-      value: 0.9215687
+      value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 6180275380075545073, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Color.g
-      value: 0.8078432
+      value: 0.24313727
       objectReference: {fileID: 0}
     - target: {fileID: 6180275380075545073, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Color.r
-      value: 0.5294118
+      value: 0.36078432
       objectReference: {fileID: 0}
     - target: {fileID: 6374884328252832056, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_Name
@@ -2720,7 +2742,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9173375279698427752, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_text
-      value: Offensive; Deal 3d4 + Might SPR and curse the target for 2 turns
+      value: "Offensive; Deal 3\u201312 + Might (SPR) damage and Curse the target
+        for 2 turns"
       objectReference: {fileID: 0}
     - target: {fileID: 9173375279698427752, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_fontSize
@@ -2732,7 +2755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9221649971424046263, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_text
-      value: Defensive; Targeted ally gains graced, dealing 2d4  extra SPR
+      value: "Defensive; Grant Graced to a target ally, adding +2\u20138 (SPR) damage"
       objectReference: {fileID: 0}
     - target: {fileID: 9221649971424046263, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_fontSize
@@ -3573,15 +3596,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615189518}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -293.57306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 85696431}
+  m_Father: {fileID: 1114512128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 550, y: 3}
+  m_AnchoredPosition: {x: -594.3838, y: 72.03354}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &615189520
@@ -3842,7 +3865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.8078432, b: 0.9803922, a: 1}
+  m_Color: {r: 0.57254905, g: 0.7725491, b: 0.4901961, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4664,6 +4687,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831140140}
   m_CullTransparentMesh: 1
+--- !u!1 &832122067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 832122068}
+  m_Layer: 0
+  m_Name: == SCENE OBJECTS ==
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &832122068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832122067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1144.3838, y: 470.96646, z: 293.57306}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &835292661
 GameObject:
   m_ObjectHideFlags: 0
@@ -5230,6 +5284,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054309159}
   m_CullTransparentMesh: 1
+--- !u!1 &1114512127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114512128}
+  m_Layer: 0
+  m_Name: Knight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1114512128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114512127}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 184.38379, y: -69.03354, z: 293.57306}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 615189519}
+  - {fileID: 1614237610}
+  m_Father: {fileID: 85696431}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168968375
 GameObject:
   m_ObjectHideFlags: 0
@@ -5320,6 +5407,39 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1184320228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184320229}
+  m_Layer: 0
+  m_Name: Sorcerer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1184320229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184320228}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 184.38379, y: -69.03354, z: 293.57306}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1598696854}
+  - {fileID: 1286326363}
+  m_Father: {fileID: 85696431}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1199477236 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1152465084409062329, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
@@ -5711,17 +5831,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286326362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -293.57306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1273523594}
   - {fileID: 633425581}
-  m_Father: {fileID: 85696431}
+  m_Father: {fileID: 1184320229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 268, y: -228}
+  m_AnchoredPosition: {x: -876.3838, y: -158.96646}
   m_SizeDelta: {x: 212, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286326364
@@ -6219,6 +6339,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8586262138396038816, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
   m_PrefabInstance: {fileID: 50324093}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1431104877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431104878}
+  m_Layer: 0
+  m_Name: SquirrelEnemy2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1431104878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431104877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1144.3838, y: 470.96646, z: 293.57306}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448395941
 GameObject:
   m_ObjectHideFlags: 0
@@ -6263,7 +6414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b80f79a71ba1846837245ef0aa07fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::pause
-  pMenu: {fileID: 1765631330}
+  pMenu: {fileID: 22282540}
+  pScreen: {fileID: 1765631330}
   oMenu: {fileID: 1774202670}
   cMenu: {fileID: 255363189}
   cScreen: {fileID: 2055446865}
@@ -6484,8 +6636,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Passive; You and your allies heal 1d4 * Might at the beginning of your
-    turn
+  m_text: "Passive; At the start of your turn, you and your allies heal (1\u20134)
+    \xD7 Might HP."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6591,15 +6743,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598696853}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -293.57306}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 85696431}
+  m_Father: {fileID: 1184320229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 277, y: -94}
+  m_AnchoredPosition: {x: -867.3838, y: -24.966461}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1598696856
@@ -6878,17 +7030,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614237609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -293.57306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1618706736}
   - {fileID: 1565589575}
-  m_Father: {fileID: 85696431}
+  m_Father: {fileID: 1114512128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 564, y: -150}
+  m_AnchoredPosition: {x: -580.3838, y: -80.96646}
   m_SizeDelta: {x: 212, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1614237611
@@ -9347,6 +9499,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SorcererCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2954061253644790741, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954061253644790741, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954061253644790741, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9843138
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088239038692284158, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088239038692284158, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7725491
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088239038692284158, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.r
+      value: 0.57254905
+      objectReference: {fileID: 0}
     - target: {fileID: 3180948691113575811, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 118.46002
@@ -9354,6 +9530,34 @@ PrefabInstance:
     - target: {fileID: 3180948691113575811, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380265365130289442, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.b
+      value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380265365130289442, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.g
+      value: 0.24313727
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380265365130289442, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.r
+      value: 0.36078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647273373915760275, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647273373915760275, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647273373915760275, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647273373915760275, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4288993279
       objectReference: {fileID: 0}
     - target: {fileID: 4702038162155433931, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_UiScaleMode
@@ -9366,6 +9570,18 @@ PrefabInstance:
     - target: {fileID: 4702038162155433931, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_ReferenceResolution.y
       value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817725548418975246, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.b
+      value: 0.09411766
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817725548418975246, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817725548418975246, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4971034639904169203, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_IsActive
@@ -9589,7 +9805,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287676772067098407, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_text
-      value: 'Offensive; All enemies take 2d6 + Might MYS '
+      value: "Offensive; Deal 2\u201312 + Might (MYS) damage to all enemies"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309516364450425379, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_text
+      value: "Passive; After dealing 30 \xD7 Might damage, deal (1\u201312) \xD7
+        Might (MYS) damage to all enemies"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379777979388677870, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379777979388677870, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379777979388677870, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9843138
       objectReference: {fileID: 0}
     - target: {fileID: 6863522574101439695, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -9697,13 +9930,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6869283871858607350, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_text
-      value: Offensive; Two enemies take 2d6 + Might MYS ; 50% chance to stun for
-        1 turn
+      value: "Offensive; Deal 2\u201312 + Might (MYS) damage to 2 enemies. 50% chance
+        to Stun for 1 turn"
       objectReference: {fileID: 0}
     - target: {fileID: 7588496018246444961, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_text
-      value: Defensive; Apply thorns to targeted ally that deals 1d6 + Might MYS
-        for 2 turns
+      value: "Defensive; Apply Thorns to an ally for 2 turns (1\u20136 + Might (MYS)
+        damage)"
       objectReference: {fileID: 0}
     - target: {fileID: 7588496018246444961, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_fontStyle
@@ -9711,7 +9944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748650269395108933, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_text
-      value: Defensive; Apply shielded to targeted ally with 3d6 + Might HP
+      value: "Defensive; Apply Shielded to a target ally for 3\u201318 + Might HP"
       objectReference: {fileID: 0}
     - target: {fileID: 8548956044898781372, guid: 825f840be574c4494aa2baaa535dc315, type: 3}
       propertyPath: m_Color.b
@@ -9768,18 +10001,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 180176333449247671, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 180176333449247671, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 180176333449247671, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 315628407598331844, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1133.1661
@@ -9828,14 +10049,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1448395943}
-    - target: {fileID: 1598545365848038756, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1598545365848038756, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2444122044103145231, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -9844,45 +10057,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1448395943}
-    - target: {fileID: 3635797782656471984, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3635797782656471984, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4348198917622344151, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4348198917622344151, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4351978481202073978, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1448395943}
-    - target: {fileID: 4457921894065681278, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4457921894065681278, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4457921894065681278, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_Name
       value: PAUSE OBJECT
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5125546212657924306, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9892,42 +10073,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1448395943}
-    - target: {fileID: 6623814759481649468, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6623814759481649468, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6623814759481649468, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6896707836820329925, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6896707836820329925, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6896707836820329925, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7081272871866320636, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1448395943}
-    - target: {fileID: 8469462244421364861, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8469462244421364861, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9999,9 +10148,11 @@ SceneRoots:
   - {fileID: 509862187}
   - {fileID: 1866763348}
   - {fileID: 1448395942}
+  - {fileID: 832122068}
   - {fileID: 6169680619562384545}
   - {fileID: 50324093}
   - {fileID: 439571910}
   - {fileID: 1823856398003355725}
   - {fileID: 85696431}
   - {fileID: 8635011825808112540}
+  - {fileID: 1431104878}

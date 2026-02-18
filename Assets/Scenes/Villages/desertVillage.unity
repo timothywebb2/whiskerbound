@@ -4852,6 +4852,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2127595345780561815, guid: 4d7a47216842ef44d9db20b73f8beed5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 3843895248616269416, guid: 4d7a47216842ef44d9db20b73f8beed5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -15948,7 +15952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5125546212657924306, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -16041,6 +16045,11 @@ GameObject:
 --- !u!1 &1888492481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2383074036941029740, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
+  m_PrefabInstance: {fileID: 1888492477}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1888492482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
   m_PrefabInstance: {fileID: 1888492477}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900769870
@@ -20040,11 +20049,15 @@ PrefabInstance:
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: pMenu
       value: 
-      objectReference: {fileID: 1888492481}
+      objectReference: {fileID: 1888492482}
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: cScreen
       value: 
       objectReference: {fileID: 1888492478}
+    - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
+      propertyPath: pScreen
+      value: 
+      objectReference: {fileID: 1888492481}
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: KeyScreen
       value: 
