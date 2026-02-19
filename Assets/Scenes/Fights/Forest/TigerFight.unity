@@ -6128,7 +6128,7 @@ MonoBehaviour:
   firstEnemy: {fileID: 0}
   loseCondition: 0
   HealthText: {fileID: 0}
-  SorcererSkills: {fileID: 0}
+  SorcererSkills: {fileID: 1789964553644107942}
   LoseText: {fileID: 1865203645}
   Knighthealthbar: {fileID: 1286326364}
   currentAction: {fileID: 424966650}
@@ -8560,9 +8560,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 942029216434041950, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1263296566601172887, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_Name
-      value: SorcererCanvas (1)
+      value: SorcererCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1263296566601172887, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_IsActive
@@ -8662,11 +8666,11 @@ PrefabInstance:
       objectReference: {fileID: 1598696858}
     - target: {fileID: 3517598994253591322, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3517598994253591322, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3661678185343419263, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8681,6 +8685,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
+--- !u!1 &1789964553644107942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 942029216434041950, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
+  m_PrefabInstance: {fileID: 1789964553644107941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6169680619562384545
 PrefabInstance:
   m_ObjectHideFlags: 0
