@@ -2535,6 +2535,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d1d589a72e6b74591afc7f7dcbfd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Options
+  Mixer: {fileID: 0}
+  masterSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
   brightSlider: {fileID: 995925551}
   profile: {fileID: 11400000, guid: a0fce7ca0da255447a546d21f0bae13b, type: 2}
 --- !u!1 &297170750
@@ -6756,7 +6760,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: -2
   far clip plane: 50
   field of view: 60
   orthographic: 1
@@ -12609,7 +12613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890428991}
   m_Layer: 0
-  m_Name: === UI' ===
+  m_Name: === UI ===
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
