@@ -2,17 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Audio;
 
 public class Options : MonoBehaviour
 {
-    /*public AudioMixer Mixer;
+    public AudioMixer Mixer;
    	AudioManager audioManager;
 	AudioSource musicSource;
    	AudioSource sfxSource;
 
    	public Slider masterSlider;
    	public Slider musicSlider;
-   	public Slider sfxSlider;*/
+   	public Slider sfxSlider;
 
     public Slider brightSlider;
     public VolumeProfile profile;
@@ -21,14 +22,14 @@ public class Options : MonoBehaviour
 	private void Start()
 	{
         //Audio Sources
-        /*audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         musicSource = audioManager.transform.GetChild(0).gameObject.GetComponent<AudioSource>();
-        sfxSource = audioManager.transform.GetChild(1).gameObject.GetComponent<AudioSource>();*/
+        sfxSource = audioManager.transform.GetChild(1).gameObject.GetComponent<AudioSource>();
 
         //Sliders
-        /*masterSlider.value = PlayerPrefs.GetFloat("Volume", 0.75f);
+        masterSlider.value = PlayerPrefs.GetFloat("Volume", 0.75f);
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);*/
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
 
         //brightSlider.value = PlayerPrefs.GetFloat("Brightness", 1f);
 
@@ -44,7 +45,7 @@ public class Options : MonoBehaviour
         PlayerPrefs.SetFloat("Brightness", value);
     }
 
-    /*public void ChangeMasterAudio(float value)
+    public void ChangeMasterAudio(float value)
     {
         Mixer.SetFloat("Volume", Mathf.Log10(value) * 20);
 
@@ -66,5 +67,5 @@ public class Options : MonoBehaviour
 
         PlayerPrefs.SetFloat("SFXVolume", value);
        	PlayerPrefs.Save();
-    }*/
+    }
 }

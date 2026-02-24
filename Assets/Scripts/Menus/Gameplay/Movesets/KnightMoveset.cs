@@ -13,7 +13,7 @@ public class KnightMoveset : MonoBehaviour
    public int maxHealth;
    public int curHealth;
    public int damageType;
-   public int mightBonus;
+   public int CurrentMight;
    public int damageOutput;
    public int healOutput;
    int hasThorns;
@@ -164,7 +164,7 @@ KnightSkills.SetActive(false);
    public void Provoke() {
 
 
-damageOutput = Random.Range(1, 13) + Random.Range(1, 13) + mightBonus;
+damageOutput = Random.Range(1, 13) + Random.Range(1, 13) + CurrentMight;
 if (squirrelFight == 1) {
    firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
    firstEnemy.GetComponent<DemoEnemy>().gotGoaded();
@@ -189,7 +189,7 @@ PassTurn();
    public void Cleave() {
 
 
-damageOutput = Random.Range(1, 13) + mightBonus;
+damageOutput = Random.Range(1, 13) + CurrentMight;
 if (squirrelFight == 1) {
 firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
 }
@@ -254,7 +254,7 @@ PassTurn();
 
     public void LastStand() {
        if (sorcererLastStand == false) {
-mightBonus += 2;
+CurrentMight += 2;
 sorcererLastStand = true;
        }
    }
@@ -262,7 +262,7 @@ sorcererLastStand = true;
 
    public void UnLastStand() {
 if (sorcererLastStand == true) {
-mightBonus -= 2;
+CurrentMight -= 2;
 sorcererLastStand = false;
        }
    }
