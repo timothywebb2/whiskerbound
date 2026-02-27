@@ -31,6 +31,8 @@ public class SquirrelEnemy : MonoBehaviour
        public bool VictoryAchieved;
        public Slider EnemyHealthBar1;
        public Slider EnemyHealthBar2;
+       public AudioClip damageSound;
+       private AudioSource audioSource;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,6 +54,7 @@ public class SquirrelEnemy : MonoBehaviour
        VictoryText.SetActive(false);
        VictoryAchieved = false;
        UpdateHUD();
+       audioSource = GetComponent<AudioSource>();
    }
 
 
@@ -79,6 +82,10 @@ Debug.Log("Change scene");
 
 
    public void TakeDamage(int amount) {
+    if (damageSound != null)
+{
+    audioSource.PlayOneShot(damageSound);
+}
        if (squirrelOneDown == false && squirrelTwoDown == false) {
        attackedEnemy = Random.Range(1, 3);
        }

@@ -31,6 +31,8 @@ public class KnightMoveset : MonoBehaviour
    public GameObject KnightSkills;
    public GameObject LoseText;
    public Slider Knighthealthbar;
+   public AudioClip damageSound;
+   private AudioSource audioSource;
 
 
    public TextMeshProUGUI currentAction;
@@ -57,6 +59,7 @@ public class KnightMoveset : MonoBehaviour
        squirrelFight = 1;
        LoseText.SetActive(false);
        UpdateHUD();
+       audioSource = GetComponent<AudioSource>();
 
 
    }
@@ -132,6 +135,10 @@ KnightSkills.SetActive(false);
    public void TakeDamage(int amount) {
        if (intercedeOn == false) {
            curHealth -= amount;
+           if (damageSound != null)
+{
+    audioSource.PlayOneShot(damageSound);
+}
            Knighthealthbar.value -= amount;
            if(!printing)
                StartCoroutine(printCurrentAction("Knight took " + amount + " damage!", 1f));

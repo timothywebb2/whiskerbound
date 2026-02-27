@@ -33,6 +33,8 @@ public class SorcererMoveset : MonoBehaviour
    public GameObject SorcererSkills;
     public GameObject LoseText;
     public Slider Knighthealthbar;
+    public AudioClip damageSound;
+private AudioSource audioSource;
 
 
    public TextMeshProUGUI currentAction;
@@ -59,6 +61,7 @@ public class SorcererMoveset : MonoBehaviour
        squirrelFight = 1;
          LoseText.SetActive(false);
        UpdateHUD();
+       audioSource = GetComponent<AudioSource>();
 
 
    }
@@ -144,6 +147,10 @@ SorcererSkills.SetActive(false);
    public void TakeDamage(int amount) {
       if (intercedeOn == false) {
            curHealth -= amount;
+           if (damageSound != null)
+{
+    audioSource.PlayOneShot(damageSound);
+}
            Knighthealthbar.value -= amount;
            if(!printing)
                StartCoroutine(printCurrentAction("Sorcerer took " + amount + " damage!", 1f));
