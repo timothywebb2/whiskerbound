@@ -11,6 +11,7 @@ public class UI_InventoryManager : MonoBehaviour
             var slot = consumableSlots[i];
             if (slot != null && !slot.IsEmpty && slot.HasItem(id))
             {
+Debug.Log("Got " + amount + " of " + id);
                 slot.AddAmount(amount);
                 return;
             }
@@ -21,6 +22,7 @@ public class UI_InventoryManager : MonoBehaviour
             var slot = consumableSlots[i];
             if (slot != null && slot.IsEmpty)
             {
+Debug.Log("Got " + amount + " of " + id);
                 slot.SetItem(id, icon, displayName, amount);
                 return;
             }
