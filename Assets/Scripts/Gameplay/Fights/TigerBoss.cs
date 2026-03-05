@@ -22,6 +22,8 @@ public class TigerBoss : MonoBehaviour
        public float timePassed = 0.0f;
        public bool VictoryAchieved;
        public Slider EnemyHealthBar;
+       public AudioClip damageSound;
+private AudioSource audioSource;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +41,7 @@ public class TigerBoss : MonoBehaviour
        VictoryText.SetActive(false);
        VictoryAchieved = false;
        UpdateHUD();
+       audioSource = GetComponent<AudioSource>();
    }
 
 
@@ -64,6 +67,10 @@ Debug.Log("Change scene");
 
    public void TakeDamage(int amount) {
        curHealth -= amount;
+       if (damageSound != null)
+{
+    audioSource.PlayOneShot(damageSound);
+}
        UpdateHUD();
        if (curHealth <= 0) {
            Victory();
