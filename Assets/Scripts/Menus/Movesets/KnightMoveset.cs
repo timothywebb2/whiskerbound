@@ -31,8 +31,10 @@ public class KnightMoveset : MonoBehaviour
    public GameObject KnightSkills;
    public GameObject LoseText;
    public Slider Knighthealthbar;
+   public Slider SidePanelHealthbar;
    public AudioClip damageSound;
    private AudioSource audioSource;
+   
 
 
    public TextMeshProUGUI currentAction;
@@ -135,11 +137,13 @@ KnightSkills.SetActive(false);
    public void TakeDamage(int amount) {
        if (intercedeOn == false) {
            curHealth -= amount;
+           
            if (damageSound != null)
 {
     audioSource.PlayOneShot(damageSound);
 }
            Knighthealthbar.value -= amount;
+           SidePanelHealthbar.value -= amount;
            if(!printing)
                StartCoroutine(printCurrentAction("Knight took " + amount + " damage!", 1f));
            if (hasThorns > 0) {

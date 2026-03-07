@@ -33,6 +33,7 @@ public class SorcererMoveset : MonoBehaviour
    public GameObject SorcererSkills;
     public GameObject LoseText;
     public Slider Knighthealthbar;
+    public Slider SidePanelHealthbar;
     public AudioClip damageSound;
 private AudioSource audioSource;
 
@@ -152,6 +153,7 @@ SorcererSkills.SetActive(false);
     audioSource.PlayOneShot(damageSound);
 }
            Knighthealthbar.value -= amount;
+           SidePanelHealthbar.value -= amount;
            if(!printing)
                StartCoroutine(printCurrentAction("Sorcerer took " + amount + " damage!", 1f));
        }
