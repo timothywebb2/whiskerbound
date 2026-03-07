@@ -373,7 +373,7 @@ Debug.Log("You lose!");
     if (loseCondition) return;
 
 
-/*
+
 
 
 if (squirrelFight == 1) {
@@ -385,7 +385,7 @@ else if (squirrelFight == 2) {
 else if (squirrelFight == 3) {
        firstEnemy.GetComponent<TigerBoss>().BeginTurn();
       
-}*/
+}
 
 
 battlePhase.GetComponent<BattlePhase>().ActionInputted();

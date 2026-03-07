@@ -23,6 +23,7 @@ public class DemoEnemy : MonoBehaviour
        public Slider EnemyHealthBar;
        public AudioClip damageSound;
        private AudioSource audioSource;
+       private Animator animator;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +40,7 @@ public class DemoEnemy : MonoBehaviour
        VictoryAchieved = false;
        UpdateHUD();
        audioSource = GetComponent<AudioSource>();
+       animator = this.GetComponent<Animator>();
    }
 
 
@@ -87,6 +89,7 @@ Debug.Log("Change scene");
 
 
    public void BeginTurn() {
+    animator.SetBool("isAttacking", true);
        selectingMove = Random.Range(1, 3);
        selectingTarget = Random.Range(1, 3);
 if (selectingMove == 1) {
@@ -106,6 +109,7 @@ else if (selectingMove == 2) {
    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
    curHealth += damageOutput;
 }
+animator.SetBool("isAttacking", false);
    }
 
 
