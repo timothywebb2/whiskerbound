@@ -46,7 +46,7 @@ public class KnightMoveset : MonoBehaviour
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
    {
-       maxHealth = 50;
+       maxHealth = 100;
        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
        sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle");
        firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");

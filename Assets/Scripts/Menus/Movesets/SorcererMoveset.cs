@@ -48,7 +48,7 @@ private AudioSource audioSource;
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
    {
-       maxHealth = 30;
+       maxHealth = 60;
         intercedeOn = false;
         rallyOrNot = false;
         volcanicTally = 0;
@@ -375,7 +375,7 @@ Debug.Log("You lose!");
     if (loseCondition) return;
 
 
-/*
+
 
 
 if (squirrelFight == 1) {
@@ -387,7 +387,7 @@ else if (squirrelFight == 2) {
 else if (squirrelFight == 3) {
        firstEnemy.GetComponent<TigerBoss>().BeginTurn();
       
-}*/
+}
 
 
 battlePhase.GetComponent<BattlePhase>().ActionInputted();
