@@ -23,6 +23,7 @@ public class TigerBoss : MonoBehaviour
     public AudioClip damageSound;
     private AudioSource audioSource;
     private Animator animator;
+    public GameObject fightManager;
 
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +31,7 @@ public class TigerBoss : MonoBehaviour
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
+          fightManager = GameObject.FindGameObjectWithTag("FightManager");
         curHealth = 120;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
@@ -146,6 +148,7 @@ Debug.Log("Tiger Ward is used!");
 
     public void Victory()
     {
+        fightManager.GetComponent<FightManager>().BattleComplete();
         VictoryAchieved = true;
         VictoryText.SetActive(true);
 Debug.Log("Victory achieved!");

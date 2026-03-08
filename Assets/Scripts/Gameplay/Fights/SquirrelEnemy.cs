@@ -32,6 +32,7 @@ public class SquirrelEnemy : MonoBehaviour
     private AudioSource audioSource;
     private Animator animator1;
     private Animator animator2;
+    public GameObject fightManager;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,6 +41,7 @@ public class SquirrelEnemy : MonoBehaviour
        knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
        sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
+       fightManager = GameObject.FindGameObjectWithTag("FightManager");
        curHealth1 = 30;
        curHealth2 = 30;
        multiHitting = 1;
@@ -177,7 +179,7 @@ Debug.Log("Lash is used!");
             else if (selectingMove == 2)
             {
 Debug.Log("Recuperate is used!");
-                damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
+                damageOutput = Random.Range(1, 5) + 1;
                 curHealth1 += damageOutput;
                 EnemyHealthBar1.value = curHealth1;
             }  
@@ -214,7 +216,7 @@ Debug.Log("Lash is used!");
             else if (selectingMove == 2)
             {
 Debug.Log("Recuperate is used!");
-                damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + Random.Range(1, 5) + Random.Range(1, 5) + 1;
+                damageOutput = Random.Range(1, 5) + 1;
                 curHealth2 += damageOutput;
                 EnemyHealthBar2.value = curHealth2;
             }
@@ -236,8 +238,10 @@ Debug.Log("Recuperate is used!");
 
     public void Victory()
     {
+        fightManager.GetComponent<FightManager>().BattleComplete();
         VictoryAchieved = true;
         VictoryText.SetActive(true);
+    
 Debug.Log("Victory achieved!");
     }
 }

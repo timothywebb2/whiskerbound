@@ -48,7 +48,7 @@ private AudioSource audioSource;
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
    {
-       maxHealth = 30;
+       maxHealth = 60;
         intercedeOn = false;
         rallyOrNot = false;
         volcanicTally = 0;

@@ -16,6 +16,7 @@ public class DemoEnemy : MonoBehaviour
          public int selectingTarget;
          public int damageOutput;
                    public GameObject battlePhase;
+public GameObject fightManager;
        public TextMeshProUGUI HealthText;
        public GameObject VictoryText;
        public float timePassed = 0.0f;
@@ -32,6 +33,7 @@ public class DemoEnemy : MonoBehaviour
        knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
        sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
+        fightManager = GameObject.FindGameObjectWithTag("FightManager");
        curHealth = 20;
        damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
        selectingMove = 1;
@@ -118,8 +120,13 @@ animator.SetBool("isAttacking", false);
     //   HealthText.text = "HP: " + curHealth;
    }
 
+  /* void NotFerretFight() {
+    gameObject.active = false;
+   } */
+
 
 public void Victory() {
+fightManager.GetComponent<FightManager>().BattleComplete();
 VictoryAchieved = true;
 VictoryText.SetActive(true);
 Debug.Log("Victory achieved!");
