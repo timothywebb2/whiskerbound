@@ -47,6 +47,11 @@ public class KnightMoveset : MonoBehaviour
    void Start()
    {
        maxHealth = 100;
+       curHealth = maxHealth;
+       Knighthealthbar.maxValue = maxHealth;
+       Knighthealthbar.value = curHealth;
+       SidePanelHealthbar.maxValue = maxHealth;
+       SidePanelHealthbar.value = curHealth;
        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
        sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle");
        firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
@@ -137,13 +142,14 @@ KnightSkills.SetActive(false);
    public void TakeDamage(int amount) {
        if (intercedeOn == false) {
            curHealth -= amount;
+           Knighthealthbar.value = curHealth;
+           SidePanelHealthbar.value = curHealth;
            
            if (damageSound != null)
 {
     audioSource.PlayOneShot(damageSound);
 }
-           Knighthealthbar.value -= amount;
-           SidePanelHealthbar.value -= amount;
+           
            if(!printing)
                StartCoroutine(printCurrentAction("Knight took " + amount + " damage!", 1f));
            if (hasThorns > 0) {

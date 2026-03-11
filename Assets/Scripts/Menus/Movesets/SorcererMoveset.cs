@@ -32,7 +32,7 @@ public class SorcererMoveset : MonoBehaviour
    public TextMeshProUGUI HealthText;
    public GameObject SorcererSkills;
     public GameObject LoseText;
-    public Slider Knighthealthbar;
+    public Slider Sorcererhealthbar;
     public Slider SidePanelHealthbar;
     public AudioClip damageSound;
 private AudioSource audioSource;
@@ -49,6 +49,11 @@ private AudioSource audioSource;
    void Start()
    {
        maxHealth = 60;
+       curHealth = maxHealth;
+       Sorcererhealthbar.maxValue = maxHealth;
+       Sorcererhealthbar.value = curHealth;
+       SidePanelHealthbar.maxValue = maxHealth;
+       SidePanelHealthbar.value = curHealth;
         intercedeOn = false;
         rallyOrNot = false;
         volcanicTally = 0;
@@ -148,12 +153,13 @@ SorcererSkills.SetActive(false);
    public void TakeDamage(int amount) {
       if (intercedeOn == false) {
            curHealth -= amount;
+           Sorcererhealthbar.value = curHealth;
+           SidePanelHealthbar.value = curHealth;
            if (damageSound != null)
 {
     audioSource.PlayOneShot(damageSound);
 }
-           Knighthealthbar.value -= amount;
-           SidePanelHealthbar.value -= amount;
+           
            if(!printing)
                StartCoroutine(printCurrentAction("Sorcerer took " + amount + " damage!", 1f));
        }
