@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +14,8 @@ public class mainMenu : MonoBehaviour
     public GameObject KeyScreen;
     public GameObject XboxScreen;
 
+    public GameObject blackScreen;
+
     void Start(){ // only main menu is active on start not the other canvases.
     optionsMenu.SetActive(false);
     creditsMenu.SetActive(false);
@@ -19,9 +23,17 @@ public class mainMenu : MonoBehaviour
     }
 
     public void playGame(){
+        StartCoroutine(delayLoad());
+    }
+
+    IEnumerator delayLoad()
+    {
+        yield return new WaitForSeconds(1.8f);
+        blackScreen.SetActive(true);
         SceneManager.LoadScene("forestVillage");
     }
-//prevents overlap
+
+    //prevents overlap
     public void options(){// show only options screen
          optionsMenu.SetActive(true);
           mainMenuObject.SetActive(false);
@@ -55,8 +67,6 @@ public void key(){
     KeyScreen.SetActive(true);
     XboxScreen.SetActive(false);
 }
-
-
     public void quit(){
         Application.Quit();
     }
