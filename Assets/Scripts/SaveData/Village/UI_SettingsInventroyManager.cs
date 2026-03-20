@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class UI_SettingsInventoryManager : MonoBehaviour
 {
+    //opacity - cecil
+    public GameObject opacity;
+
     [Header("Panels")]
     public GameObject panelSettings;
     public GameObject panelInventory;
@@ -11,6 +14,15 @@ public class UI_SettingsInventoryManager : MonoBehaviour
     public InputActionAsset inputActions;
     private InputAction toggleSettingsAction;
     private InputAction toggleInventoryAction;
+
+    private void Update() //cecil
+    {
+        if (Keyboard.current.iKey.wasPressedThisFrame) {
+            panelInventory.SetActive(true);
+            opacity.SetActive(true);
+        }
+    }
+
 
     private void Awake()
     {
