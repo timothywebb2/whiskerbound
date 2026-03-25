@@ -9,20 +9,24 @@ public class UI_SettingsInventoryManager : MonoBehaviour
     [Header("Panels")]
     public GameObject panelSettings;
     public GameObject panelInventory;
+    public GameObject topRightGroup;
+
+    [Header("Audio")]
+    public AudioSource uiAudioSource;
+    public AudioClip inventoryOpenClip;
 
     [Header("Input Actions")]
     public InputActionAsset inputActions;
     private InputAction toggleSettingsAction;
     private InputAction toggleInventoryAction;
 
-    private void Update() //cecil
+    private void Update()
     {
-        if (Keyboard.current.iKey.wasPressedThisFrame) {
-            panelInventory.SetActive(true);
-            opacity.SetActive(true);
+        if (Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            ToggleInventoryPanel();
         }
     }
-
 
     private void Awake()
     {
@@ -35,7 +39,6 @@ public class UI_SettingsInventoryManager : MonoBehaviour
             return;
         }
 
-        // Subscribe to performed events
         toggleSettingsAction.performed += ctx => ToggleSettingsPanel();
         toggleInventoryAction.performed += ctx => ToggleInventoryPanel();
     }
@@ -52,22 +55,53 @@ public class UI_SettingsInventoryManager : MonoBehaviour
         toggleInventoryAction?.Disable();
     }
 
-    // ===== panels =====
     public void ToggleSettingsPanel()
     {
+        if (panelSettings == null) return;
+
         bool newState = !panelSettings.activeSelf;
         panelSettings.SetActive(newState);
 
         if (newState && panelInventory.activeSelf)
-            panelInventory.SetActive(false);
+            CloseInventoryPanel();
+
+        if (opacity != null)
+            opacity.SetActive(newState);
+    }
+
+    public void OpenInventoryPanel()
+    {
+        panelInventory.SetActive(true);
+
+        if (panelSettings.activeSelf)
+            panelSettings.SetActive(false);
+
+        if (opacity != null)
+            opacity.SetActive(true);
+
+        if (topRightGroup != null)
+            topRightGroup.SetActive(false);
+
+        if (uiAudioSource != null && inventoryOpenClip != null)
+            uiAudioSource.PlayOneShot(inventoryOpenClip);
+    }
+
+    public void CloseInventoryPanel()
+    {
+        panelInventory.SetActive(false);
+
+        if (opacity != null)
+            opacity.SetActive(false);
+
+        if (topRightGroup != null)
+            topRightGroup.SetActive(true);
     }
 
     public void ToggleInventoryPanel()
     {
-        bool newState = !panelInventory.activeSelf;
-        panelInventory.SetActive(newState);
-
-        if (newState && panelSettings.activeSelf)
-            panelSettings.SetActive(false);
+        if (panelInventory.activeSelf)
+            CloseInventoryPanel();
+        else
+            OpenInventoryPanel();
     }
 }
