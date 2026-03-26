@@ -8,6 +8,10 @@ public class UI_ShopPanel : MonoBehaviour
     public ItemData[] possibleItems;
     public UI_ShopSlots[] shopSlots;
 
+    [Header("Audio")]
+    public AudioSource uiAudioSource;
+    public AudioClip purchaseClip;
+
     public TMP_Text shopTitleText;
     public TMP_Text itemListText;
     public TMP_Text coinText;
@@ -63,7 +67,6 @@ public class UI_ShopPanel : MonoBehaviour
         }
     }
 
-
     public void ShowDescription(string text)
     {
         if (descriptionText != null)
@@ -95,6 +98,8 @@ public class UI_ShopPanel : MonoBehaviour
 
             slot.SellItem();
 
+            PlayPurchaseSound();
+
             return true;
         }
         else
@@ -116,7 +121,16 @@ public class UI_ShopPanel : MonoBehaviour
         UpdateCoinText();
 
         inventoryManager.AddItem(itemId, icon, displayName, amount);
+
+        PlayPurchaseSound();
+
         return true;
+    }
+
+    void PlayPurchaseSound()
+    {
+        if (uiAudioSource != null && purchaseClip != null)
+            uiAudioSource.PlayOneShot(purchaseClip);
     }
 
     public void OpenShop()
