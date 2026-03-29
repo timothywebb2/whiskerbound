@@ -12313,6 +12313,9 @@ MonoBehaviour:
   ferretEnemy: {fileID: 0}
   squirrelEnemy: {fileID: 0}
   tigerBoss: {fileID: 0}
+  tazEnemy: {fileID: 0}
+  meerkatEnemy: {fileID: 0}
+  kangarooBoss: {fileID: 0}
 --- !u!4 &412632758
 Transform:
   m_ObjectHideFlags: 0
@@ -21016,6 +21019,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721772520}
   m_CullTransparentMesh: 1
+--- !u!1 &724798976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724798977}
+  m_Layer: 0
+  m_Name: Filler4
+  m_TagString: FerretBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &724798977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724798976}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 989870714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &725933285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27119,6 +27153,9 @@ Transform:
   - {fileID: 1513580719}
   - {fileID: 200867102}
   - {fileID: 541929651}
+  - {fileID: 724798977}
+  - {fileID: 1799606384}
+  - {fileID: 2055225928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &991527090 stripped
@@ -53209,6 +53246,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5480483916148925338, guid: 2e84839ac41bdc24198c7ec8bd9c8476, type: 3}
   m_PrefabInstance: {fileID: 3813237132750731425}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1799606383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1799606384}
+  m_Layer: 0
+  m_Name: Filler5
+  m_TagString: TazBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1799606384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799606383}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 989870714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1802965397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62339,6 +62407,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2293531777971929806, guid: a856ca9fb58726845ad008f050f5ab99, type: 3}
   m_PrefabInstance: {fileID: 640874544}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2055225927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055225928}
+  m_Layer: 0
+  m_Name: Filler6
+  m_TagString: KangarooBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2055225928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055225927}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 989870714}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056817875
 GameObject:
   m_ObjectHideFlags: 0

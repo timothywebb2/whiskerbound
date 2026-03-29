@@ -119,6 +119,43 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6621147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6621148}
+  m_Layer: 0
+  m_Name: FillerObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6621148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 300.753, y: 0, z: 10397.738}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 564064375}
+  - {fileID: 1894025379}
+  - {fileID: 889282684}
+  - {fileID: 494073810}
+  - {fileID: 1241740566}
+  - {fileID: 1779820200}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &32627588
 GameObject:
   m_ObjectHideFlags: 0
@@ -5082,6 +5119,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492128039}
   m_CullTransparentMesh: 1
+--- !u!1 &494073809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494073810}
+  m_Layer: 0
+  m_Name: Filler4
+  m_TagString: FerretBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494073810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494073809}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6621148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &494434102
 GameObject:
   m_ObjectHideFlags: 0
@@ -5592,6 +5660,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5452016394927959822, guid: df31d001eb263fb4ea182ab3117564da, type: 3}
   m_PrefabInstance: {fileID: 1054012372}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &564064374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 564064375}
+  m_Layer: 0
+  m_Name: Filler1
+  m_TagString: FerretBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &564064375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564064374}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6621148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582724376
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,6 +6831,9 @@ MonoBehaviour:
   opacity: {fileID: 0}
   panelSettings: {fileID: 420435434}
   panelInventory: {fileID: 1902336447}
+  topRightGroup: {fileID: 0}
+  uiAudioSource: {fileID: 0}
+  inventoryOpenClip: {fileID: 0}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &713821388
 MonoBehaviour:
@@ -8427,6 +8529,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888852984}
   m_CullTransparentMesh: 1
+--- !u!1 &889282683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889282684}
+  m_Layer: 0
+  m_Name: Filler3
+  m_TagString: TigerBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &889282684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889282683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6621148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &898456830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7986479485055224367, guid: ca6222a546d957b4f968a297f3a9a00c, type: 3}
@@ -12194,6 +12327,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1241740565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1241740566}
+  m_Layer: 0
+  m_Name: Filler5
+  m_TagString: TazBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1241740566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241740565}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6621148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1252825641
 GameObject:
   m_ObjectHideFlags: 0
@@ -17588,6 +17752,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5452016394927959822, guid: df31d001eb263fb4ea182ab3117564da, type: 3}
   m_PrefabInstance: {fileID: 1164368878}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1779820199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1779820200}
+  m_Layer: 0
+  m_Name: Filler6
+  m_TagString: KangarooBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1779820200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779820199}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6621148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1793597822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 39baf07697f45ac43bac2363489bc1b4, type: 3}
@@ -19006,6 +19201,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4680731778075177242, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
   m_PrefabInstance: {fileID: 1888492477}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1894025378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1894025379}
+  m_Layer: 0
+  m_Name: Filler2
+  m_TagString: SquirrelBossParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1894025379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894025378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6621148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1900769870
 GameObject:
   m_ObjectHideFlags: 0
@@ -23310,12 +23536,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5722299213254162394, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 682412994}
-    - targetCorrespondingSourceObject: {fileID: 7122713453999096855, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2119362861}
     - targetCorrespondingSourceObject: {fileID: 2804827150208811608, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 730572958}
+    - targetCorrespondingSourceObject: {fileID: 7122713453999096855, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2119362861}
     - targetCorrespondingSourceObject: {fileID: 6795123644131540655, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 862402799}
@@ -23988,3 +24214,4 @@ SceneRoots:
   - {fileID: 632594864}
   - {fileID: 1660363718}
   - {fileID: 1252825642}
+  - {fileID: 6621148}
