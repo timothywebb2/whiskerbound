@@ -89,15 +89,16 @@ public class UI_ShopPanel : MonoBehaviour
             coins -= cost;
             UpdateCoinText();
 
+            int amountToAdd = Mathf.Max(1, slot.GetAmount());
+
             inventoryManager.AddItem(
                 slot.GetItem().itemId,
                 slot.GetItem().icon,
                 slot.GetItem().displayName,
-                slot.GetAmount()
+                amountToAdd
             );
 
             slot.SellItem();
-
             PlayPurchaseSound();
 
             return true;

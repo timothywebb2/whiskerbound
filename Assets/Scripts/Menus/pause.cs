@@ -64,6 +64,9 @@ public class pause : MonoBehaviour
         Time.timeScale = 0f;
         isPause = true;
 
+        if (villageMusic != null)
+            villageMusic.Pause();
+
         if (uiAudioSource != null && pauseOpenClip != null)
             uiAudioSource.PlayOneShot(pauseOpenClip);
     }
