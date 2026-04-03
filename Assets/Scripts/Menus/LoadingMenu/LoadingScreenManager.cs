@@ -11,6 +11,12 @@ public class LoadingScreenManager : MonoBehaviour
 
     bool firstSceneLoaded = false;
 
+    void Start()
+    {
+        if (loadingPanel != null)
+            loadingPanel.SetActive(false);
+    }
+
     void Awake()
     {
         if (Instance != null)
@@ -35,9 +41,12 @@ public class LoadingScreenManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!firstSceneLoaded)
+        string sceneName = scene.name.ToLower();
+
+
+        if (sceneName == "main menu")
         {
-            firstSceneLoaded = true;
+            loadingPanel.SetActive(false);
             return;
         }
 
@@ -46,6 +55,9 @@ public class LoadingScreenManager : MonoBehaviour
 
     IEnumerator ShowOverlay()
     {
+        if (loadingPanel == null)
+            yield break;
+
         loadingPanel.SetActive(true);
 
         Time.timeScale = 0f;
