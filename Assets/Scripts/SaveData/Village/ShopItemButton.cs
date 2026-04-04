@@ -16,5 +16,6 @@ public class ShopItemButton : MonoBehaviour
         {
             shopPanel.TryBuyItem(itemId, icon, displayName, cost, amount);
         }
+        ItemManager.Instance.AddItemCharge(itemId, amount);
     }
 }
