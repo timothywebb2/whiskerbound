@@ -41,12 +41,18 @@ private AudioSource audioSource;
    public TextMeshProUGUI currentAction;
    public bool printing;
 
+    public bool doubleCastActive = false;
+    private System.Action lastMove;
+    public bool healUsedThisTurn = false;
+    public bool damageReductionActive = false;
+    public bool damageReductionUsedThisTurn = false;
+    public float damageReductionPercent = 0.75f;
 
-   // testing
+    // testing
 
 
-   // Start is called once before the first execution of Update after the MonoBehaviour is created
-   void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
    {
        maxHealth = 60;
        curHealth = maxHealth;
@@ -152,8 +158,17 @@ SorcererSkills.SetActive(false);
 
    public void TakeDamage(int amount) {
       if (intercedeOn == false) {
-           curHealth -= amount;
-           Sorcererhealthbar.value = curHealth;
+            int finalDamage = amount;
+            if (damageReductionActive)
+            {
+                finalDamage = Mathf.RoundToInt(amount * damageReductionPercent);
+                damageReductionActive = false; //consumes the effect
+
+                Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
+            }
+
+            curHealth -= finalDamage;
+            Sorcererhealthbar.value = curHealth;
            SidePanelHealthbar.value = curHealth;
            if (damageSound != null)
 {
@@ -161,7 +176,7 @@ SorcererSkills.SetActive(false);
 }
            
            if(!printing)
-               StartCoroutine(printCurrentAction("Sorcerer took " + amount + " damage!", 1f));
+               StartCoroutine(printCurrentAction("Sorcerer took " + finalDamage + " damage!", 1f));
        }
        else if (intercedeOn == true) {
            Debug.Log("Damage blocked!");
@@ -181,91 +196,159 @@ SorcererSkills.SetActive(false);
        UpdateHUD();
    }
 
+    public void HealPotion()
+    {
+        if (healUsedThisTurn)
+        {
+            if (!printing)
+                StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
+            return;
+        }
 
-   public void Incinerate() {
+        if (!ItemManager.Instance.UseItem("HealPotion"))
+        {
+            StartCoroutine(printCurrentAction("No charges left!", 0f));
+            return;
+        }
 
+        healUsedThisTurn = true;
 
-damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
-if (squirrelFight == 1) {
-firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 2) {
-   firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-}
-volcanicTally += damageOutput;
-Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
-       if (!printing)
-           StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Incinerate!", 0f));
-VolcanicHex();
-PassTurn();
+        int oldHealth = curHealth;
 
+        int healAmount = Random.Range(2, 9);
+
+        curHealth += healAmount;
+
+        if (curHealth > maxHealth)
+            curHealth = maxHealth;
+
+        int actualHeal = curHealth - oldHealth;
+
+        Sorcererhealthbar.value = curHealth;
+        SidePanelHealthbar.value = curHealth;
+
+        Debug.Log("Healed for " + actualHeal);
+
+        StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+    }
+
+        public void DamageReductionPotion()
+    {
+        if (damageReductionUsedThisTurn)
+        {
+            if (!printing)
+                StartCoroutine(printCurrentAction("Already used this turn!", 0f));
+            return;
+        }
+
+        if (!ItemManager.Instance.UseItem("ArcaneEssence"))
+        {
+            StartCoroutine(printCurrentAction("No charges left!", 0f));
+            return;
+        }
+
+        damageReductionUsedThisTurn = true;
+        damageReductionActive = true;
+
+        Debug.Log("Damage reduction activated!");
+
+        if (!printing)
+            StartCoroutine(printCurrentAction("Damage taken reduced by 25% for next hit!", 0f));
+    }
+
+    public void Incinerate() {
+        lastMove = Incinerate;
+        ExecuteMove(() =>
+        {
+
+            damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
+            if (squirrelFight == 1)
+            {
+                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            }
+            else if (squirrelFight == 2)
+            {
+                firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+                firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+            }
+            else if (squirrelFight == 3)
+            {
+                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            }
+            volcanicTally += damageOutput;
+            Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
+            VolcanicHex();
+            PassTurn();
+        }, () => "Damaged enemy by " + damageOutput + " with Incinerate!");
 
    }
 
 
    public void Enervate() {
+        lastMove = Enervate;
+        ExecuteMove(() =>
+        {
 
-
-damageOutput = Random.Range(1, 7) + mightBonus;
-if (squirrelFight == 1) {
-firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 2) {
-   firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-}
-volcanicTally += damageOutput;
-if (squirrelFight == 1) {
-       firstEnemy.GetComponent<DemoEnemy>().gotStunned();
-}
-else if (squirrelFight == 2) {
-       firstEnemy.GetComponent<SquirrelEnemy>().gotStunned();
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().gotStunned();
-}
-       Debug.Log("Damaged enemy by " + damageOutput);
-       if (!printing)
-           StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Enervate!", 0f));
-VolcanicHex();
-PassTurn();
-
+            damageOutput = Random.Range(1, 7) + mightBonus;
+            if (squirrelFight == 1)
+            {
+                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            }
+            else if (squirrelFight == 2)
+            {
+                firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+                firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+            }
+            else if (squirrelFight == 3)
+            {
+                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            }
+            volcanicTally += damageOutput;
+            if (squirrelFight == 1)
+            {
+                firstEnemy.GetComponent<DemoEnemy>().gotStunned();
+            }
+            else if (squirrelFight == 2)
+            {
+                firstEnemy.GetComponent<SquirrelEnemy>().gotStunned();
+            }
+            else if (squirrelFight == 3)
+            {
+                firstEnemy.GetComponent<TigerBoss>().gotStunned();
+            }
+            Debug.Log("Damaged enemy by " + damageOutput);
+            VolcanicHex();
+            PassTurn();
+        }, () => "Damaged enemy by " + damageOutput + " with Enervate!");
 
    }
 
 
    public void Ward() {
+        lastMove = Ward;
+        ExecuteMove(() =>
+        {
 
-
-Debug.Log("Ward activated!");
-       shieldOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
-       knightAlly.GetComponent<KnightMoveset>().gotShielded(shieldOutput);
-       if (!printing)
-           StartCoroutine(printCurrentAction("Ward used on ally!", 0f));
-PassTurn();
-
+            Debug.Log("Ward activated!");
+            shieldOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
+            knightAlly.GetComponent<KnightMoveset>().gotShielded(shieldOutput);
+            PassTurn();
+        }, () => "Ward used on Knight!");
 
    }
 
 
    public void Scourge()
    {
+        lastMove = Scourge;
+        ExecuteMove(() =>
+        {
 
-
-       Debug.Log("Scourge activated!");
-       thornsOutput = Random.Range(1, 7) + mightBonus;
-       knightAlly.GetComponent<KnightMoveset>().gotThorns(thornsOutput);
-       if (!printing)
-           StartCoroutine(printCurrentAction("Thorns used on ally!", 0f));
-       PassTurn();
-
+            Debug.Log("Scourge activated!");
+            thornsOutput = Random.Range(1, 7) + mightBonus;
+            knightAlly.GetComponent<KnightMoveset>().gotThorns(thornsOutput);
+            PassTurn();
+        }, () => "Scourge used on Knight!");
 
    }
 
@@ -303,8 +386,6 @@ else if (squirrelFight == 3) {
 firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
 }
 Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
-       if (!printing)
-           StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Incinerate!", 0f));
    }
 
 
@@ -330,8 +411,6 @@ else if (squirrelFight == 3) {
 firstEnemy.GetComponent<TigerBoss>().gotStunned();
 }
        Debug.Log("Damaged enemy by " + damageOutput);
-       if (!printing)
-           StartCoroutine(printCurrentAction("Damaged enemy by " + damageOutput + " with Enervate!", 0f));
    }
 
 
@@ -375,10 +454,54 @@ LoseText.SetActive(true);
 Debug.Log("You lose!");
 }
 
+    void ExecuteMove(System.Action move, System.Func<string> getMessage)
+    {
+        StartCoroutine(ExecuteMoveRoutine(move, getMessage));
+    }
 
-   public void PassTurn()
+    IEnumerator ExecuteMoveRoutine(System.Action move, System.Func<string> getMessage)
+    {
+        move.Invoke();
+        yield return StartCoroutine(printCurrentAction(getMessage(), 0f));
+
+        if (doubleCastActive && Random.value <= 1f)
+        {
+            Debug.Log("Double cast triggered!");
+
+            move.Invoke();
+            yield return StartCoroutine(printCurrentAction(getMessage() + " (Double Cast!)", 0f));
+        }
+    }
+
+    public void ActivateDoubleCast()
+    {
+        if (doubleCastActive)
+        {
+            if (!printing)
+                StartCoroutine(printCurrentAction("Double Cast already active!", 0f));
+            return;
+        }
+
+        if (!ItemManager.Instance.UseItem("Adrenaline"))
+        {
+            StartCoroutine(printCurrentAction("No charges left!", 0f));
+            return;
+        }
+
+        doubleCastActive = true;
+
+        Debug.Log("Double Cast ACTIVATED!");
+
+        if (!printing)
+            StartCoroutine(printCurrentAction("Double Cast activated!", 0f));
+    }
+
+    public void PassTurn()
    {
-    if (loseCondition) return;
+        healUsedThisTurn = false;
+        damageReductionUsedThisTurn = false;
+
+        if (loseCondition) return;
 
 
 
@@ -423,7 +546,4 @@ battlePhase.GetComponent<BattlePhase>().ActionInputted();
    }
 
 
-   }
-  
-
-
+}
