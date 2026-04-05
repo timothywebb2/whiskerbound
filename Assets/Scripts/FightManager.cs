@@ -72,18 +72,21 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       ferretEnemy.SetActive(true);
       squirrelEnemy.SetActive(false);
       tigerBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 1);
        }
        if (CurrentEncounter == 2) {
        // ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
        ferretEnemy.SetActive(false);
       squirrelEnemy.SetActive(true);
       tigerBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 2);
        }
        if (CurrentEncounter == 3) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
       ferretEnemy.SetActive(false);
       squirrelEnemy.SetActive(false);
       tigerBoss.SetActive(true);
+      PlayerPrefs.SetInt("SpawnPoint", 3);
        }
    }
 
