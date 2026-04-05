@@ -9,9 +9,6 @@ public int CurrentEncounter;
 public GameObject ferretEnemy;
 public GameObject squirrelEnemy;
 public GameObject tigerBoss;
-public GameObject tazEnemy;
-public GameObject meerkatEnemy;
-public GameObject kangarooBoss;
 
 
    void Awake() {
@@ -21,9 +18,6 @@ public GameObject kangarooBoss;
        ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
        squirrelEnemy = GameObject.FindGameObjectWithTag("SquirrelBossParent");
        tigerBoss = GameObject.FindGameObjectWithTag("TigerBossParent");
-       tazEnemy = GameObject.FindGameObjectWithTag("TazBossParent");
-       meerkatEnemy = GameObject.FindGameObjectWithTag("MeerkatBossParent");
-       kangarooBoss = GameObject.FindGameObjectWithTag("KangarooBossParent");
 
      /*  if (CurrentEncounter == 1) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
@@ -72,63 +66,24 @@ public GameObject kangarooBoss;
 ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
        squirrelEnemy = GameObject.FindGameObjectWithTag("SquirrelBossParent");
        tigerBoss = GameObject.FindGameObjectWithTag("TigerBossParent");
-       tazEnemy = GameObject.FindGameObjectWithTag("TazBossParent");
-       meerkatEnemy = GameObject.FindGameObjectWithTag("MeerkatBossParent");
-       kangarooBoss = GameObject.FindGameObjectWithTag("KangarooBossParent");
 
       if (CurrentEncounter == 1) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
       ferretEnemy.SetActive(true);
       squirrelEnemy.SetActive(false);
       tigerBoss.SetActive(false);
-      tazEnemy.SetActive(false);
-      meerkatEnemy.SetActive(false);
-      kangarooBoss.SetActive(false);
        }
        if (CurrentEncounter == 2) {
        // ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
        ferretEnemy.SetActive(false);
       squirrelEnemy.SetActive(true);
       tigerBoss.SetActive(false);
-      tazEnemy.SetActive(false);
-      meerkatEnemy.SetActive(false);
-      kangarooBoss.SetActive(false);
        }
        if (CurrentEncounter == 3) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
       ferretEnemy.SetActive(false);
       squirrelEnemy.SetActive(false);
       tigerBoss.SetActive(true);
-      tazEnemy.SetActive(false);
-      meerkatEnemy.SetActive(false);
-      kangarooBoss.SetActive(false);
-       }
-       if (CurrentEncounter == 4) {
-      //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
-      ferretEnemy.SetActive(false);
-      squirrelEnemy.SetActive(false);
-      tigerBoss.SetActive(false);
-      tazEnemy.SetActive(true);
-      meerkatEnemy.SetActive(false);
-      kangarooBoss.SetActive(false);
-       }
-       if (CurrentEncounter == 5) {
-       // ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
-       ferretEnemy.SetActive(false);
-      squirrelEnemy.SetActive(false);
-      tigerBoss.SetActive(false);
-      tazEnemy.SetActive(false);
-      meerkatEnemy.SetActive(true);
-      kangarooBoss.SetActive(false);
-       }
-       if (CurrentEncounter == 6) {
-      //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
-      ferretEnemy.SetActive(false);
-      squirrelEnemy.SetActive(false);
-      tigerBoss.SetActive(false);
-      tazEnemy.SetActive(false);
-      meerkatEnemy.SetActive(false);
-      kangarooBoss.SetActive(true);
        }
    }
 
