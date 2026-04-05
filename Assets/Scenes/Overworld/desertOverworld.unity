@@ -9451,7 +9451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 5
+  myScene: desertVillage
+  spawnPoint: 1
 --- !u!65 &425192369
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9519,7 +9520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 4
+  myScene: BATTLE
+  spawnPoint: 999
 --- !u!212 &426491708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19399,11 +19401,11 @@ PrefabInstance:
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: KeyScreen
       value: 
-      objectReference: {fileID: 2127032557}
+      objectReference: {fileID: 0}
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: XboxScreen
       value: 
-      objectReference: {fileID: 1373342572}
+      objectReference: {fileID: 0}
     - target: {fileID: 4423231713978935246, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: m_Name
       value: pauseManager
@@ -29348,11 +29350,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370771171}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1373342572 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5209695880675832871, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-  m_PrefabInstance: {fileID: 296668331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1377657464
 GameObject:
   m_ObjectHideFlags: 0
@@ -33913,6 +33910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: 5
+  spawnPoint: 0
 --- !u!65 &1583481223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44877,11 +44875,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1037342752}
   m_LocalEulerAnglesHint: {x: 89.819, y: 0, z: 0}
---- !u!1 &2127032557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 641881780395336333, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-  m_PrefabInstance: {fileID: 296668331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2129845575
 GameObject:
   m_ObjectHideFlags: 0
@@ -45429,6 +45422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: 3
+  spawnPoint: 0
 --- !u!4 &5965413126416704400
 Transform:
   m_ObjectHideFlags: 0
@@ -45456,7 +45450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 2
+  myScene: BATTLE
+  spawnPoint: 999
 --- !u!65 &5965413126416704402
 BoxCollider:
   m_ObjectHideFlags: 0
