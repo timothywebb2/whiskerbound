@@ -213,6 +213,8 @@ MonoBehaviour:
   iconImage: {fileID: 919047158}
   nameText: {fileID: 1505591784}
   quantityText: {fileID: 865573432}
+  button: {fileID: 0}
+  selectedMarker: {fileID: 0}
 --- !u!1001 &21716334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4527,12 +4529,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2804827150208811608, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 906140627}
-    - targetCorrespondingSourceObject: {fileID: 7122713453999096855, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 859485066}
     - targetCorrespondingSourceObject: {fileID: 6795123644131540655, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1563311594}
+    - targetCorrespondingSourceObject: {fileID: 7122713453999096855, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 859485066}
   m_SourcePrefab: {fileID: 100100000, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
 --- !u!1 &340030567
 GameObject:
@@ -5337,7 +5339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 4
+  myScene: 7
 --- !u!212 &426491708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9696,6 +9698,8 @@ MonoBehaviour:
   iconImage: {fileID: 1326196999}
   nameText: {fileID: 759405625}
   quantityText: {fileID: 2039986996}
+  button: {fileID: 0}
+  selectedMarker: {fileID: 0}
 --- !u!4 &791263894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1355840074114787205, guid: 854b1bf2f3f6f594d887616c22b474f0, type: 3}
@@ -11328,11 +11332,11 @@ PrefabInstance:
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: KeyScreen
       value: 
-      objectReference: {fileID: 2127032557}
+      objectReference: {fileID: 0}
     - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: XboxScreen
       value: 
-      objectReference: {fileID: 1373342572}
+      objectReference: {fileID: 0}
     - target: {fileID: 4423231713978935246, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: m_Name
       value: pauseManager
@@ -14946,6 +14950,8 @@ MonoBehaviour:
   iconImage: {fileID: 1803625865}
   nameText: {fileID: 1979994273}
   quantityText: {fileID: 1957207885}
+  button: {fileID: 0}
+  selectedMarker: {fileID: 0}
 --- !u!1001 &1244271140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16106,11 +16112,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 710724fd5f4452e4498922bc88cbb884, type: 3}
---- !u!1 &1373342572 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5209695880675832871, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-  m_PrefabInstance: {fileID: 296668331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1375065027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 710724fd5f4452e4498922bc88cbb884, type: 3}
@@ -18305,6 +18306,8 @@ MonoBehaviour:
   iconImage: {fileID: 1810926755}
   nameText: {fileID: 871048577}
   quantityText: {fileID: 118351870}
+  button: {fileID: 0}
+  selectedMarker: {fileID: 0}
 --- !u!1 &1542511566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7187750900893606089, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
@@ -18504,7 +18507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 4
+  myScene: 7
 --- !u!212 &1557536964
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22562,13 +22565,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d6ccd1e886e5142981140f1dc8a9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_InventoryManager
-  consumableSlots:
-  - {fileID: 791010887}
-  - {fileID: 1240803204}
-  - {fileID: 2065381826}
-  - {fileID: 1663392}
-  - {fileID: 1540203704}
-  - {fileID: 1962960005}
+  adrenalineSlot: {fileID: 0}
+  healingSlot: {fileID: 0}
+  essenceSlot: {fileID: 0}
+  extraSlot1: {fileID: 0}
+  extraSlot2: {fileID: 0}
+  selectedItemIcon: {fileID: 0}
+  selectedItemNameText: {fileID: 0}
+  selectedItemDescriptionText: {fileID: 0}
+  targetDropdown: {fileID: 0}
+  useButton: {fileID: 0}
 --- !u!114 &1838059163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25003,6 +25009,8 @@ MonoBehaviour:
   iconImage: {fileID: 1960213406}
   nameText: {fileID: 1513891291}
   quantityText: {fileID: 1596480474}
+  button: {fileID: 0}
+  selectedMarker: {fileID: 0}
 --- !u!224 &1962960006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26199,6 +26207,8 @@ MonoBehaviour:
   iconImage: {fileID: 818265021}
   nameText: {fileID: 978788144}
   quantityText: {fileID: 265293189}
+  button: {fileID: 0}
+  selectedMarker: {fileID: 0}
 --- !u!1 &2080469004
 GameObject:
   m_ObjectHideFlags: 0
@@ -26600,11 +26610,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120740584}
   m_CullTransparentMesh: 1
---- !u!1 &2127032557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 641881780395336333, guid: 17c0e0d45496ab74caae6696324172d0, type: 3}
-  m_PrefabInstance: {fileID: 296668331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139589219
 GameObject:
   m_ObjectHideFlags: 0
@@ -27264,7 +27269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 4
+  myScene: 7
 --- !u!4 &5965413126416704400
 Transform:
   m_ObjectHideFlags: 0
@@ -27292,7 +27297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611a0a6c05775ef4cbfc06286a8b7342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
-  myScene: 4
+  myScene: 7
 --- !u!1001 &7065095809517876749
 PrefabInstance:
   m_ObjectHideFlags: 0
