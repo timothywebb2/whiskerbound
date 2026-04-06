@@ -33,7 +33,6 @@ public class SorcererMoveset : MonoBehaviour
    public GameObject SorcererSkills;
     public GameObject LoseText;
     public Slider Sorcererhealthbar;
-    public Slider SidePanelHealthbar;
     public AudioClip damageSound;
 private AudioSource audioSource;
 
@@ -58,8 +57,7 @@ private AudioSource audioSource;
        curHealth = maxHealth;
        Sorcererhealthbar.maxValue = maxHealth;
        Sorcererhealthbar.value = curHealth;
-       SidePanelHealthbar.maxValue = maxHealth;
-       SidePanelHealthbar.value = curHealth;
+       
         intercedeOn = false;
         rallyOrNot = false;
         volcanicTally = 0;
@@ -169,7 +167,7 @@ SorcererSkills.SetActive(false);
 
             curHealth -= finalDamage;
             Sorcererhealthbar.value = curHealth;
-           SidePanelHealthbar.value = curHealth;
+           
            if (damageSound != null)
 {
     audioSource.PlayOneShot(damageSound);
@@ -225,7 +223,7 @@ SorcererSkills.SetActive(false);
         int actualHeal = curHealth - oldHealth;
 
         Sorcererhealthbar.value = curHealth;
-        SidePanelHealthbar.value = curHealth;
+        
 
         Debug.Log("Healed for " + actualHeal);
 
