@@ -22,6 +22,11 @@ public class NPCFollow : MonoBehaviour
         followCharacterPositions.Add(followCharacter.position);
         followSpeed = fastSpeed;
 
+        /*int spawnPosition = PlayerPrefs.GetInt("SpawnPoint", 0); //index of spawn is set from last scene, call it
+        if(spawnPosition <= spawnPoints.Length) //if spawn point doesnt exist, put the player at the default spawn
+            gameObject.transform.position = spawnPoints[spawnPosition].transform.position; //set player to spawn position
+        PlayerPrefs.SetInt("SpawnPoint", 999); //reset spawn index*/
+
         animator = this.GetComponent<Animator>();
     }
 
