@@ -4844,7 +4844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &156668013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7672,7 +7672,7 @@ RectTransform:
   - {fileID: 1779252411}
   - {fileID: 341221048}
   - {fileID: 1998829436}
-  m_Father: {fileID: 2055040056}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -11337,9 +11337,6 @@ MonoBehaviour:
   ferretEnemy: {fileID: 0}
   squirrelEnemy: {fileID: 0}
   tigerBoss: {fileID: 0}
-  tazEnemy: {fileID: 0}
-  meerkatEnemy: {fileID: 0}
-  kangarooBoss: {fileID: 0}
 --- !u!4 &412632758
 Transform:
   m_ObjectHideFlags: 0
@@ -19527,7 +19524,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1854228700}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -39947,7 +39944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
-  m_Content: {fileID: 2055040056}
+  m_Content: {fileID: 0}
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 2
@@ -40331,8 +40328,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2055040056}
+  m_Children: []
   m_Father: {fileID: 1503001073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -44390,7 +44386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1684124400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53946,7 +53942,7 @@ MonoBehaviour:
   m_text: Option A
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a8d647affdb3da748842b93621a8c7ea, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -5070023387332909087, guid: a8d647affdb3da748842b93621a8c7ea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -60668,3 +60664,5 @@ SceneRoots:
   - {fileID: 1660363718}
   - {fileID: 316603904}
   - {fileID: 989870714}
+  - {fileID: 277846323}
+  - {fileID: 721772521}
