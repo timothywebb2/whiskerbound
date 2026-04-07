@@ -8,10 +8,7 @@ public class ProtoMovement : MonoBehaviour
     //references
     public InputActionAsset InputActions;
     public CinemachineCamera frontCamera;
-    /*public Transform villageSpawn;
-    public Transform squirrelSpawn;
-    public Transform ferretSpawn;
-    public Transform tigerSpawn;*/
+    public GameObject[] spawnPoints;
 
     //movement variables
     public float speed = 12f;
@@ -26,35 +23,14 @@ public class ProtoMovement : MonoBehaviour
 
     private void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
         controller = GetComponent<CharacterController>();
         moveAction = InputActions.FindActionMap("Player").FindAction("Move");
         animator = this.GetComponent<Animator>();
-
-        // player is entering village 1 from overworld
-        /*if(isSceneLoaded("ProtoVillage") && PlayerPrefs.GetInt("FromOverworld", 0) == 1)
-        {
-            this.transform.position = villageSpawn.transform.position;
-            PlayerPrefs.SetInt("FromOverworld", 0);
-        }
-        else if(isSceneLoaded("Overworld"))
-        {
-            if(PlayerPrefs.GetInt("FromSquirrel", 0) == 1)
-            {
-                this.transform.position = squirrelSpawn.transform.position;
-                PlayerPrefs.SetInt("FromSquirrel", 0);
-            }
-            else if(PlayerPrefs.GetInt("FromFerret", 0) == 1)
-            {
-                this.transform.position = ferretSpawn.transform.position;
-                PlayerPrefs.SetInt("FromFerret", 0);
-            }
-            else if(PlayerPrefs.GetInt("FromTiger", 0) == 1)
-            {
-                this.transform.position = tigerSpawn.transform.position;
-                PlayerPrefs.SetInt("FromTiger", 0);
-            }
-        }*/
+        
+        int spawnPosition = PlayerPrefs.GetInt("SpawnPoint", 0); //index of spawn is set from last scene, call it
+        if(spawnPosition <= spawnPoints.Length) //if spawn point doesnt exist, put the player at the default spawn
+            gameObject.transform.position = spawnPoints[spawnPosition].transform.position; //set player to spawn position
+        PlayerPrefs.SetInt("SpawnPoint", 999); //reset spawn index
     }
 
     private void OnEnable()
