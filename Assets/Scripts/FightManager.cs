@@ -84,6 +84,7 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       tazEnemy.SetActive(false);
       meerkatEnemy.SetActive(false);
       kangarooBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 1);
        }
        if (CurrentEncounter == 2) {
        // ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
@@ -93,6 +94,7 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       tazEnemy.SetActive(false);
       meerkatEnemy.SetActive(false);
       kangarooBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 2);
        }
        if (CurrentEncounter == 3) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
@@ -102,6 +104,7 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       tazEnemy.SetActive(false);
       meerkatEnemy.SetActive(false);
       kangarooBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 3);
        }
        if (CurrentEncounter == 4) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
@@ -111,6 +114,7 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       tazEnemy.SetActive(true);
       meerkatEnemy.SetActive(false);
       kangarooBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 1);
        }
        if (CurrentEncounter == 5) {
        // ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
@@ -120,6 +124,7 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       tazEnemy.SetActive(false);
       meerkatEnemy.SetActive(true);
       kangarooBoss.SetActive(false);
+      PlayerPrefs.SetInt("SpawnPoint", 2);
        }
        if (CurrentEncounter == 6) {
       //  ferretEnemy.GetComponent<DemoEnemy>().NotFerretFight();
@@ -129,6 +134,7 @@ ferretEnemy = GameObject.FindGameObjectWithTag("FerretBossParent");
       tazEnemy.SetActive(false);
       meerkatEnemy.SetActive(false);
       kangarooBoss.SetActive(true);
+      PlayerPrefs.SetInt("SpawnPoint", 3);
        }
    }
 
