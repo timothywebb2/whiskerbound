@@ -536,7 +536,7 @@ battlePhase.GetComponent<BattlePhase>().ActionInputted();
        currentAction.text = toPrint;
 
 
-       yield return new WaitForSeconds(2);
+       yield return new WaitForSeconds(5);
 
 
        printing = false;
