@@ -25,6 +25,7 @@ public class mainMenu : MonoBehaviour
 
     public void showcase() {
         SceneManager.LoadScene("#SHOWCASE");
+        PlayerPrefs.SetInt("SpawnPoint", 0);
     }
 
     IEnumerator delayLoad()
