@@ -45,7 +45,7 @@ public class FightManager : MonoBehaviour
       kangarooBoss = GameObject.FindGameObjectWithTag("KangarooBossParent");
       batEnemy = GameObject.FindGameObjectWithTag("BatBossParent");
       lionEnemy = GameObject.FindGameObjectWithTag("CaveLionBossParent");
-      bearBoss = GameObject.FindGameObjectWithTag("GrizzlyBearBossParent");
+      bearBoss = GameObject.FindGameObjectWithTag("GrizzlyBearParent");
       walrusBoss = GameObject.FindGameObjectWithTag("WalrusBossParent");
 
 
