@@ -10,7 +10,7 @@ public class ArcticDoor : MonoBehaviour
             this.gameObject.SetActive(false);
     }
 
-    void OnTriggerEnter(Collider whatIHit)
+    void OnCollisionEnter(Collision whatIHit)
     {
         if(whatIHit.tag == "Player" && PlayerPrefs.GetInt("ArcticKey", 0) == 1)
         {
