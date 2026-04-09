@@ -2079,6 +2079,7 @@ GameObject:
   - component: {fileID: 307280336}
   - component: {fileID: 307280335}
   - component: {fileID: 307280334}
+  - component: {fileID: 307280337}
   m_Layer: 0
   m_Name: ArcticDoor
   m_TagString: Untagged
@@ -2143,6 +2144,27 @@ Transform:
   - {fileID: 1337403626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &307280337
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307280333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.04, y: 3.05, z: 4.62}
+  m_Center: {x: 0.17, y: 0, z: 0}
 --- !u!1001 &309661918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3848,15 +3870,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.16
+      value: -0.46
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.53
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.29
+      value: -21.52
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6813,7 +6835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: c0561f9a13912994385324cc066c3adc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.43
+      value: -11.01
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: c0561f9a13912994385324cc066c3adc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6821,7 +6843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: c0561f9a13912994385324cc066c3adc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.29
+      value: -23.73
       objectReference: {fileID: 0}
     - target: {fileID: 5965413125128549821, guid: c0561f9a13912994385324cc066c3adc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7956,7 +7978,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18831512, y: 0.6815698, z: -0.18831512, w: 0.6815698}
-  m_LocalPosition: {x: -3.8400002, y: 7.4, z: -18.220001}
+  m_LocalPosition: {x: -13.46, y: 7.4700003, z: -21.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14874,15 +14896,15 @@ PrefabInstance:
       objectReference: {fileID: 513175158}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8400002
+      value: -13.46
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.4
+      value: 7.4700003
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.220001
+      value: -21.45
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalRotation.w

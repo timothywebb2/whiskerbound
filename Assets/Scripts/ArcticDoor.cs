@@ -10,13 +10,17 @@ public class ArcticDoor : MonoBehaviour
             this.gameObject.SetActive(false);
     }
 
-    void OnCollisionEnter(Collision whatIHit)
+    void OnTriggerEnter(Collider whatIHit)
     {
-        if(whatIHit.collider.tag == "Player" && PlayerPrefs.GetInt("ArcticKey", 0) == 1)
+        if(whatIHit.tag == "Player")
         {
-            audioManager.PlaySFX(audioClip);
-            PlayerPrefs.SetInt("ArcticKeyUsed", 1);
-            this.gameObject.SetActive(false);
+            Debug.Log("touched door");
+            if(PlayerPrefs.GetInt("BeatKangaroo", 0) == 1)
+            {
+                audioManager.PlaySFX(audioClip);
+                PlayerPrefs.SetInt("ArcticKeyUsed", 1);
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }

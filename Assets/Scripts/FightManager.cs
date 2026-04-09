@@ -42,7 +42,6 @@ public class FightManager : MonoBehaviour
             break;
          case 6:
             PlayerPrefs.SetInt("BeatKangaroo", 1);
-            PlayerPrefs.SetInt("ArcticKey", 1);
             break;
          case 7:
             PlayerPrefs.SetInt("BeatBat", 1);
