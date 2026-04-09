@@ -12,7 +12,7 @@ public class ArcticDoor : MonoBehaviour
 
     void OnCollisionEnter(Collision whatIHit)
     {
-        if(whatIHit.tag == "Player" && PlayerPrefs.GetInt("ArcticKey", 0) == 1)
+        if(whatIHit.collider.tag == "Player" && PlayerPrefs.GetInt("ArcticKey", 0) == 1)
         {
             audioManager.PlaySFX(audioClip);
             PlayerPrefs.SetInt("ArcticKeyUsed", 1);
