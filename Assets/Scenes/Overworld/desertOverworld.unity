@@ -20978,6 +20978,7 @@ GameObject:
   - component: {fileID: 810205706}
   - component: {fileID: 810205705}
   - component: {fileID: 810205704}
+  - component: {fileID: 810205707}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -21034,7 +21035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: BATTLE
-  spawnPoint: 999
+  spawnPoint: 2
 --- !u!212 &810205706
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21093,6 +21094,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &810205707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810205702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc87ff9ba4734d4297aba720d5ec403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentifier
+  enemyInt: 5
 --- !u!1 &814511209
 GameObject:
   m_ObjectHideFlags: 0
@@ -22579,63 +22593,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1037342752}
   m_LocalEulerAnglesHint: {x: 89.819, y: 0, z: 0}
---- !u!1001 &869061155
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8270159178726163108, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_Name
-      value: Diamond
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.184
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.458
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9365787
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.12575792
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.27937302
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.17016493
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -8.076
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 34.874
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759027764374837278, guid: 77d854703d785d948a8583e5374623ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -23.136
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 77d854703d785d948a8583e5374623ea, type: 3}
 --- !u!1001 &871652241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43310,6 +43267,7 @@ GameObject:
   - component: {fileID: 1631857322}
   - component: {fileID: 1631857321}
   - component: {fileID: 1631857320}
+  - component: {fileID: 1631857323}
   m_Layer: 0
   m_Name: Enemy (2)
   m_TagString: Untagged
@@ -43366,7 +43324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: BATTLE
-  spawnPoint: 999
+  spawnPoint: 3
 --- !u!212 &1631857322
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -43425,6 +43383,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1631857323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631857318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc87ff9ba4734d4297aba720d5ec403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentifier
+  enemyInt: 6
 --- !u!1 &1636066356
 GameObject:
   m_ObjectHideFlags: 0
@@ -61430,6 +61401,7 @@ GameObject:
   - component: {fileID: 561538999400626228}
   - component: {fileID: 5965413126416704401}
   - component: {fileID: 5965413126416704402}
+  - component: {fileID: 5965413126416704403}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -61465,7 +61437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: BATTLE
-  spawnPoint: 999
+  spawnPoint: 1
 --- !u!65 &5965413126416704402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61487,6 +61459,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.92, y: 0.64, z: 1.28}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5965413126416704403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697149593200951439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc87ff9ba4734d4297aba720d5ec403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentifier
+  enemyInt: 4
 --- !u!1001 &7065095809517876749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61743,7 +61728,6 @@ SceneRoots:
   - {fileID: 702327694}
   - {fileID: 917359411}
   - {fileID: 102155872}
-  - {fileID: 869061155}
   - {fileID: 1451571149}
   - {fileID: 5715829397512340}
   - {fileID: 2090868021}

@@ -3871,7 +3871,7 @@ Transform:
   m_GameObject: {fileID: 297170750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1008.63, y: 0.42, z: -704.22}
+  m_LocalPosition: {x: -1011.922, y: 0.42, z: -717.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6117,6 +6117,7 @@ GameObject:
   - component: {fileID: 426491709}
   - component: {fileID: 426491708}
   - component: {fileID: 426491707}
+  - component: {fileID: 426491710}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Untagged
@@ -6152,7 +6153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: BATTLE
-  spawnPoint: 999
+  spawnPoint: 3
 --- !u!212 &426491708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6232,6 +6233,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 39.94, y: 33.71, z: 44.14}
   m_Center: {x: 3.17, y: 0, z: 0}
+--- !u!114 &426491710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426491705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc87ff9ba4734d4297aba720d5ec403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentifier
+  enemyInt: 3
 --- !u!1001 &427579064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23264,7 +23278,7 @@ Transform:
   m_GameObject: {fileID: 1698074512}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -995.68, y: 0.42, z: -734.62}
+  m_LocalPosition: {x: -995.68, y: 0.42, z: -733.671}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30048,6 +30062,7 @@ GameObject:
   - component: {fileID: 5668142334196464084}
   - component: {fileID: 561538999400626228}
   - component: {fileID: 5965413126416704401}
+  - component: {fileID: 5965413126416704402}
   m_Layer: 0
   m_Name: SquirrelLinked
   m_TagString: Untagged
@@ -30067,6 +30082,7 @@ GameObject:
   - component: {fileID: 5668142333618838374}
   - component: {fileID: 561538998940146310}
   - component: {fileID: 5965413125956256035}
+  - component: {fileID: 5965413125956256036}
   m_Layer: 0
   m_Name: Ferret
   m_TagString: Untagged
@@ -30102,7 +30118,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: BATTLE
-  spawnPoint: 999
+  spawnPoint: 1
+--- !u!114 &5965413125956256036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697149593663791677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc87ff9ba4734d4297aba720d5ec403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentifier
+  enemyInt: 1
 --- !u!4 &5965413126416704400
 Transform:
   m_ObjectHideFlags: 0
@@ -30132,7 +30161,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneChange
   myScene: BATTLE
-  spawnPoint: 999
+  spawnPoint: 2
+--- !u!114 &5965413126416704402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697149593200951439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc87ff9ba4734d4297aba720d5ec403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentifier
+  enemyInt: 2
 --- !u!1 &5988785057152706090 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2696986268254518863, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}

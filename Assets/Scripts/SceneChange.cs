@@ -3,10 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    /*public enum NewScene
-    {
-        ForestVillage, ForestOverworld, SquirrelFight, FerretFight, TigerFight, DesertVillage, DesertOverworld, BATTLE
-    }*/
     public string myScene;
     public int spawnPoint;
 
