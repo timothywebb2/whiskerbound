@@ -59,7 +59,11 @@ public GameObject fightManager;
            if (timePassed > 3.0f)
            {
 Debug.Log("Change scene");
-               SceneManager.LoadScene("forestOverworld");
+                if(PlayerPrefs.GetInt("Enemy", 0) == 10)
+                    SceneManager.LoadScene("MAIN MENU");
+                
+                else
+                    SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
            }
        }
    }

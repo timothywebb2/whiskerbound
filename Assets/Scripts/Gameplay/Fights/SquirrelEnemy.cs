@@ -75,7 +75,7 @@ public class SquirrelEnemy : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("forestOverworld");
+                SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
             }
         }
     }
