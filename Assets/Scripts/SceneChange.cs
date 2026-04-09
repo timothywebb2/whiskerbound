@@ -11,7 +11,8 @@ public class SceneChange : MonoBehaviour
         if(WhatIHit.tag == "Player")
         {
             SceneManager.LoadScene(myScene);
-
+            if(myScene != "BATTLE")
+                PlayerPrefs.SetString("LastScene", myScene);
             PlayerPrefs.SetInt("SpawnPoint", spawnPoint);
         }
     }

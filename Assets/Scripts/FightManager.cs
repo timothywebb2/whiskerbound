@@ -24,6 +24,7 @@ public class FightManager : MonoBehaviour
 
    public void BattleComplete()
    {
+      //note: add specific code for when specific enemies are beaten ie. might upgrades
       Debug.Log("Battle complete");
    }
 
