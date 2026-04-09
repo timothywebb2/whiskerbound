@@ -31,7 +31,6 @@ public class KnightMoveset : MonoBehaviour
    public GameObject KnightSkills;
    public GameObject LoseText;
    public Slider Knighthealthbar;
-   public Slider SidePanelHealthbar;
    public AudioClip damageSound;
    private AudioSource audioSource;
    
@@ -61,8 +60,7 @@ public class KnightMoveset : MonoBehaviour
        curHealth = maxHealth;
        Knighthealthbar.maxValue = maxHealth;
        Knighthealthbar.value = curHealth;
-       SidePanelHealthbar.maxValue = maxHealth;
-       SidePanelHealthbar.value = curHealth;
+       
        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
        sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle");
        firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
@@ -163,7 +161,7 @@ KnightSkills.SetActive(false);
 
             curHealth -= finalDamage;
            Knighthealthbar.value = curHealth;
-           SidePanelHealthbar.value = curHealth;
+           
            
            if (damageSound != null)
 {
@@ -227,7 +225,7 @@ KnightSkills.SetActive(false);
         int actualHeal = curHealth - oldHealth;
 
         Knighthealthbar.value = curHealth;
-        SidePanelHealthbar.value = curHealth;
+        
 
         Debug.Log("Healed for " + actualHeal);
 
@@ -437,7 +435,7 @@ squirrelFight = amount;
        currentAction.text = toPrint;
 
 
-       yield return new WaitForSeconds(2);
+       yield return new WaitForSeconds(5);
 
 
        printing = false;

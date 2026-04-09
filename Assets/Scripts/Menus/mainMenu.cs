@@ -23,11 +23,17 @@ public class mainMenu : MonoBehaviour
         StartCoroutine(delayLoad());
     }
 
+    public void showcase() {
+        SceneManager.LoadScene("#SHOWCASE");
+        PlayerPrefs.SetInt("SpawnPoint", 0);
+    }
+
     IEnumerator delayLoad()
     {
         yield return new WaitForSeconds(1.8f);
         blackScreen.SetActive(true);
-        SceneManager.LoadScene("forestVillage");
+        //SceneManager.LoadScene("forestVillage");
+        SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
     }
 
     //prevents overlap

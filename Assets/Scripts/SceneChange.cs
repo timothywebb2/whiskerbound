@@ -3,10 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    /*public enum NewScene
-    {
-        ForestVillage, ForestOverworld, SquirrelFight, FerretFight, TigerFight, DesertVillage, DesertOverworld, BATTLE
-    }*/
     public string myScene;
     public int spawnPoint;
 
@@ -15,7 +11,8 @@ public class SceneChange : MonoBehaviour
         if(WhatIHit.tag == "Player")
         {
             SceneManager.LoadScene(myScene);
-
+            if(myScene != "BATTLE")
+                PlayerPrefs.SetString("LastScene", myScene);
             PlayerPrefs.SetInt("SpawnPoint", spawnPoint);
         }
     }

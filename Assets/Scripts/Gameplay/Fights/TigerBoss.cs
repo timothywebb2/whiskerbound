@@ -32,7 +32,7 @@ public class TigerBoss : MonoBehaviour
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
           fightManager = GameObject.FindGameObjectWithTag("FightManager");
-        curHealth = 120;
+        curHealth = 40;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
         selectingTarget = 1;
@@ -59,7 +59,7 @@ public class TigerBoss : MonoBehaviour
             if (timePassed > 3.0f)
             {
 Debug.Log("Change scene");
-                SceneManager.LoadScene("forestOverworld");
+                SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
             }
         }
     }
