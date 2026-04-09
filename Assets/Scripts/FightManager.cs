@@ -26,6 +26,8 @@ public class FightManager : MonoBehaviour
    {
       //note: add specific code for when specific enemies are beaten ie. might upgrades
       Debug.Log("Battle complete");
+      if(PlayerPrefs.GetInt("Enemy", 0) == 6)
+         PlayerPrefs.SetInt("ArcticKey", 0);
    }
 
    public void BattleBegin()
