@@ -3,14 +3,25 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
+    //forest enemies
    public GameObject ferretEnemy;
    public GameObject squirrelEnemy;
    public GameObject tigerBoss;
+
+    //desert enemies
    public GameObject tazEnemy;
    public GameObject meerkatEnemy;
    public GameObject kangarooBoss;
 
-   void Awake()
+    //cave enemies
+    public GameObject batEnemy;
+    public GameObject lionEnemy;
+    public GameObject bearBoss;
+
+    //arctic
+    public GameObject walrusBoss;
+
+    void Awake()
    {
       DontDestroyOnLoad(this.gameObject);
 
