@@ -6,6 +6,9 @@ public class ItemPickup : MonoBehaviour
     public int amount;
     public UI_InventoryManager inventoryManager;
 
+    public AudioManager audioManager;
+    public AudioClip audioClip;
+
     public void Start()
     {
         this.gameObject.GetComponent<SpriteRenderer>().sprite = item.icon;
@@ -14,6 +17,7 @@ public class ItemPickup : MonoBehaviour
     {
         if(whatIHit.tag == "Player")
         {
+            audioManager.PlaySFX(audioClip);
             inventoryManager.AddItem(item.itemId, item.icon, item.displayName, amount);
             Destroy(this.gameObject);
         }

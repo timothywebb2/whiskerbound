@@ -28,9 +28,9 @@ public class ProtoMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
         
         int spawnPosition = PlayerPrefs.GetInt("SpawnPoint", 0); //index of spawn is set from last scene, call it
-        if(spawnPosition <= spawnPoints.Length) //if spawn point doesnt exist, put the player at the default spawn
-            gameObject.transform.position = spawnPoints[spawnPosition].transform.position; //set player to spawn position
-        PlayerPrefs.SetInt("SpawnPoint", 999); //reset spawn index
+        if(spawnPosition > spawnPoints.Length) //if spawn point doesnt exist, put the player at the default spawn
+            PlayerPrefs.SetInt("SpawnPoint", 0);
+        gameObject.transform.position = spawnPoints[spawnPosition].transform.position; //set player to spawn position
     }
 
     private void OnEnable()
