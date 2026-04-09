@@ -7,6 +7,9 @@ public class CrestManager : MonoBehaviour
     public Image crestImage;
     public Sprite forestCrest;
     public Sprite desertCrest;
+    public Sprite caveCrest;
+    public Sprite arcticCrest;
+   
 
     void Awake()
     {
@@ -32,6 +35,14 @@ public class CrestManager : MonoBehaviour
         if (sceneName.Contains("desert"))
         {
             crestImage.sprite = desertCrest;
+        }
+        if (sceneName.Contains("arctic"))
+        {
+            crestImage.sprite = arcticCrest;
+        }
+        if (sceneName.Contains("cave"))
+        {
+            crestImage.sprite = caveCrest;
         }
         else
         {

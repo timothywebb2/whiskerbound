@@ -4,16 +4,24 @@ using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
 {
+
+   [Header("Forest Enemies")]
    public GameObject ferretEnemy;
    public GameObject squirrelEnemy;
    public GameObject tigerBoss;
+
+   [Header("Desert Enemies")]
    public GameObject tazEnemy;
    public GameObject meerkatEnemy;
    public GameObject kangarooBoss;
+
+   [Header("Cave Enemies")]
    public GameObject batEnemy;
    public GameObject lionEnemy;
    public GameObject bearBoss;
-   public GameObject walrusBoss;
+
+    [Header("Arctic Enemies")]
+    public GameObject walrusBoss;
 
    public RawImage background;
    public Texture forestBackground;

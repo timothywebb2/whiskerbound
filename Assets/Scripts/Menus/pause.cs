@@ -6,24 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class pause : MonoBehaviour
 {
-    public GameObject pMenu; //full pause object
-    public GameObject pScreen; //initial pause screen
-    public GameObject oMenu; //options
-    public GameObject cMenu; //confirmation
-    public GameObject cScreen; //controls
+    [Header("Pause")]
+    public GameObject pauseObject; 
+    public GameObject pauseMenu;
+    public bool isPause = false;
 
+    [Header("Other Menus")]
+    public GameObject optionsMenu;
+    public GameObject controlsScreen;
+    public GameObject confirmationMenu;
+
+    [Header("Audio")]
     public AudioSource villageMusic;
     public AudioSource uiAudioSource;
     public AudioClip pauseOpenClip;
 
-    public bool isPause = false;
 
     void Start()
     {
         //makes sure sub pause menus don't all activate once pause turns on
-        oMenu.SetActive(false);
-        cMenu.SetActive(false);
-        cScreen.SetActive(false);
+        optionsMenu.SetActive(false);
+        confirmationMenu.SetActive(false);
+        controlsScreen.SetActive(false);
         Debug.Log("Menus are inactive");
     }
 
@@ -58,7 +62,7 @@ public class pause : MonoBehaviour
     {
         //pauses game activity and turns menu on
         Debug.Log("pauseGame is running");
-        pMenu.SetActive(true);
+        pauseObject.SetActive(true);
         Time.timeScale = 0f;
         isPause = true;
 
@@ -72,7 +76,7 @@ public class pause : MonoBehaviour
     public void resumeGame()
     {
         //resumes game activity, turning menu off
-        pMenu.SetActive(false);
+        pauseObject.SetActive(false);
         isPause = false;
         Time.timeScale = 1f;
 
@@ -82,27 +86,27 @@ public class pause : MonoBehaviour
 
     public void options()
     {
-        oMenu.SetActive(true);
-        pScreen.SetActive(false);
+        optionsMenu.SetActive(true);
+        pauseMenu.SetActive(false);
     }
 
     public void back()
     {
-        pScreen.SetActive(true);
-        oMenu.SetActive(false);
-        cMenu.SetActive(false);
-        cScreen.SetActive(false);
+        pauseMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+        confirmationMenu.SetActive(false);
+        controlsScreen.SetActive(false);
     }
 
     public void controls()
     {
-        cScreen.SetActive(true);
-        oMenu.SetActive(false);
+        controlsScreen.SetActive(true);
+        optionsMenu.SetActive(false);
     }
 
     public void askPlayer()
     {
-        cMenu.SetActive(true);
+        confirmationMenu.SetActive(true);
     }
 
     public void goMainMenu()
