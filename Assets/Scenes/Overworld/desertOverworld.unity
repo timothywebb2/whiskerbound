@@ -3196,6 +3196,7 @@ Transform:
   - {fileID: 1776095218}
   - {fileID: 1698074513}
   - {fileID: 297170751}
+  - {fileID: 1141823077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &134849974
@@ -14847,7 +14848,7 @@ PrefabInstance:
       objectReference: {fileID: 2396640048958529984}
     - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
@@ -14869,6 +14870,10 @@ PrefabInstance:
       propertyPath: 'spawnPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 297170750}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: 'spawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1141823076}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19656,12 +19661,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 702327693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21dd04235051a4f4082a4f92db096fa4, type: 3}
+  m_Script: {fileID: 11500000, guid: b81491d268bd76d48a375d9aca5c353c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  squirrelEnemy: {fileID: 5697149593200951439}
-  ferretEnemy: {fileID: 0}
-  tigerEnemy: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManagerDesert
+  tazEnemy: {fileID: 5697149593200951439}
+  meerkatEnemy: {fileID: 810205702}
+  kangarooEnemy: {fileID: 1631857318}
 --- !u!1 &703256499 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3175440164894266055, guid: c93c8fec334ae984aa39beabfd5aff62, type: 3}
@@ -28191,7 +28196,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18831512, y: 0.6815698, z: -0.18831512, w: 0.6815698}
-  m_LocalPosition: {x: -19.74, y: 7.276, z: 26.199999}
+  m_LocalPosition: {x: -22.09, y: 8.816, z: 26.199999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33069,6 +33074,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09be578871888a64da87c21b566a725f, type: 3}
+--- !u!1 &1141823076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1141823077}
+  m_Layer: 0
+  m_Name: LadderLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1141823077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141823076}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1023.69, y: 0.42, z: -688.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 134742114}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1145286385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2371433523785752683, guid: 6b89c38e390d7f045b500aca717337b5, type: 3}
@@ -55922,7 +55958,7 @@ Transform:
   m_GameObject: {fileID: 1776095217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1037.15, y: 0.63, z: -701.23}
+  m_LocalPosition: {x: -1031.77, y: 0.63, z: -703.663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66997,11 +67033,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1043452016179209701, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: FollowOffset.x
-      value: -10.65
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 1043452016179209701, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: FollowOffset.y
-      value: 6.46
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2397124167386458987, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: Lens.NearClipPlane
@@ -67013,11 +67049,11 @@ PrefabInstance:
       objectReference: {fileID: 513175158}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.74
+      value: -22.09
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.276
+      value: 8.816
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.z

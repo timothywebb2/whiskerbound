@@ -10,15 +10,4 @@ public class BeginBattle : MonoBehaviour
         fightManager = GameObject.FindGameObjectWithTag("FightManager");
         fightManager.GetComponent<FightManager>().BattleBegin();
     }
-    
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

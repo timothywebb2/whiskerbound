@@ -53,13 +53,16 @@ public GameObject fightManager;
       
        if (VictoryAchieved == true)
        {
-           PlayerPrefs.SetInt("BeatFerret", 1);
            timePassed += Time.deltaTime;
           
            if (timePassed > 3.0f)
            {
 Debug.Log("Change scene");
-               SceneManager.LoadScene("forestOverworld");
+                if(PlayerPrefs.GetInt("Enemy", 0) == 10)
+                    SceneManager.LoadScene("MAIN MENU");
+                
+                else
+                    SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
            }
        }
    }
