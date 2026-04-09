@@ -53,7 +53,6 @@ public GameObject fightManager;
       
        if (VictoryAchieved == true)
        {
-           PlayerPrefs.SetInt("BeatFerret", 1);
            timePassed += Time.deltaTime;
           
            if (timePassed > 3.0f)

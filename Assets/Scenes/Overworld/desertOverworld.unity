@@ -19656,12 +19656,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 702327693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21dd04235051a4f4082a4f92db096fa4, type: 3}
+  m_Script: {fileID: 11500000, guid: b81491d268bd76d48a375d9aca5c353c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  squirrelEnemy: {fileID: 5697149593200951439}
-  ferretEnemy: {fileID: 0}
-  tigerEnemy: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManagerDesert
+  tazEnemy: {fileID: 5697149593200951439}
+  meerkatEnemy: {fileID: 810205702}
+  kangarooEnemy: {fileID: 1631857318}
 --- !u!1 &703256499 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3175440164894266055, guid: c93c8fec334ae984aa39beabfd5aff62, type: 3}
@@ -28191,7 +28191,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18831512, y: 0.6815698, z: -0.18831512, w: 0.6815698}
-  m_LocalPosition: {x: -19.74, y: 7.276, z: 26.199999}
+  m_LocalPosition: {x: -22.09, y: 8.816, z: 26.199999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66997,11 +66997,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1043452016179209701, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: FollowOffset.x
-      value: -10.65
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 1043452016179209701, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: FollowOffset.y
-      value: 6.46
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2397124167386458987, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: Lens.NearClipPlane
@@ -67013,11 +67013,11 @@ PrefabInstance:
       objectReference: {fileID: 513175158}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.74
+      value: -22.09
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.276
+      value: 8.816
       objectReference: {fileID: 0}
     - target: {fileID: 3714982341346985251, guid: cd86a690c6b7b6645b0ea274b73d0ea2, type: 3}
       propertyPath: m_LocalPosition.z

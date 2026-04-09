@@ -29,8 +29,34 @@ public class FightManager : MonoBehaviour
    {
       //note: add specific code for when specific enemies are beaten ie. might upgrades
       Debug.Log("Battle complete");
-      if(PlayerPrefs.GetInt("Enemy", 0) == 6)
-         PlayerPrefs.SetInt("ArcticKey", 0);
+      switch(PlayerPrefs.GetInt("Enemy", 0))
+      {
+         case 1:
+            PlayerPrefs.SetInt("BeatFerret", 1);
+            break;
+         case 4:
+            PlayerPrefs.SetInt("BeatTaz", 1);
+            break;
+         case 5:
+            PlayerPrefs.SetInt("BeatMeerkat", 1);
+            break;
+         case 6:
+            PlayerPrefs.SetInt("BeatKangaroo", 1);
+            PlayerPrefs.SetInt("ArcticKey", 1);
+            break;
+         case 7:
+            PlayerPrefs.SetInt("BeatBat", 1);
+            break;
+         case 8:
+            PlayerPrefs.SetInt("BeatLion", 1);
+            break;
+         case 9:
+            PlayerPrefs.SetInt("BeatBear", 1);
+            break;
+         default:
+            Debug.Log("This enemy doesn't exist or is the final boss!");
+            break;
+      }
    }
 
    public void BattleBegin()
