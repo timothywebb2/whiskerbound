@@ -23,6 +23,10 @@ public class mainMenu : MonoBehaviour
         StartCoroutine(delayLoad());
     }
 
+    public void showcase() {
+        SceneManager.LoadScene("#SHOWCASE");
+    }
+
     IEnumerator delayLoad()
     {
         yield return new WaitForSeconds(1.8f);
