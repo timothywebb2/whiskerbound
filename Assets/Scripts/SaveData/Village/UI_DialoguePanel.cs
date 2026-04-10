@@ -22,6 +22,7 @@ public class UI_DialoguePanel : MonoBehaviour
 
         gameObject.SetActive(true);
         isOpen = true;
+        Debug.Log("Character Dialogue is open");
     }
 
     public void CloseDialogue()
