@@ -2862,6 +2862,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+--- !u!114 &313550726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 629243862706035649, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+  m_PrefabInstance: {fileID: 313550725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543427a63cedee468c50a91fd0fc458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_ShopPanel
+--- !u!114 &313550727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+  m_PrefabInstance: {fileID: 313550725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b6fbdefd129446afb38483c86dc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DialoguePanel
 --- !u!1001 &316125078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21343,11 +21365,11 @@ PrefabInstance:
     - target: {fileID: 4305780474337279711, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: shopPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 313550726}
     - target: {fileID: 4305780474337279711, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: dialoguePanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 313550727}
     - target: {fileID: 4305780474337279711, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: interactActionRef
       value: 
