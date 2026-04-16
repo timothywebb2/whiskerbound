@@ -265,7 +265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 278.85657, y: -444.0565}
+  m_AnchoredPosition: {x: 278.85742, y: -444.0565}
   m_SizeDelta: {x: 378.93, y: 144.9874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44564446
@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3152312091893672807, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 434.11255
+      value: 434.11328
       objectReference: {fileID: 0}
     - target: {fileID: 3152312091893672807, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -840,7 +840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7112595206733544119, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -180.51
+      value: -180.50977
       objectReference: {fileID: 0}
     - target: {fileID: 7131120760804726986, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1012,7 +1012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7995356886839498770, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 176.62
+      value: 176.61914
       objectReference: {fileID: 0}
     - target: {fileID: 7995356886839498770, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1432,7 +1432,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8586262138396038816, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 426640244}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
 --- !u!114 &50324094 stripped
@@ -1454,6 +1457,11 @@ GameObject:
 --- !u!1 &50324096 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5680666553247710094, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
+  m_PrefabInstance: {fileID: 50324093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &50324097 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8586262138396038816, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
   m_PrefabInstance: {fileID: 50324093}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &72680236
@@ -1689,7 +1697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &98485113
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1957,10 +1965,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -1972,6 +1980,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 529420157}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &158437611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,6 +2183,104 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &234641196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234641197}
+  - component: {fileID: 234641200}
+  - component: {fileID: 234641199}
+  - component: {fileID: 234641198}
+  m_Layer: 5
+  m_Name: VFX Sorcerer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &234641197
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234641196}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -22}
+  m_LocalScale: {x: 3.25506, y: 3.25506, z: 3.25506}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1789964553644107943}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -810, y: -60}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &234641198
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234641196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2a9fdcf51ba22c41b6eca734632f3c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &234641199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234641196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 340cbd18af6879a4398338ff495f4db0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &234641200
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234641196}
+  m_CullTransparentMesh: 1
 --- !u!1 &239643198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,10 +3350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -3258,6 +3365,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 926364328}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &346398080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3988,6 +4096,104 @@ RectTransform:
   m_AnchoredPosition: {x: -3.407, y: 0}
   m_SizeDelta: {x: -11.5037, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &426640243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426640244}
+  - component: {fileID: 426640247}
+  - component: {fileID: 426640246}
+  - component: {fileID: 426640245}
+  m_Layer: 5
+  m_Name: VFX Knight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &426640244
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426640243}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -22}
+  m_LocalScale: {x: 3.25506, y: 3.25506, z: 3.25506}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 50324097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -540, y: 56}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &426640245
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426640243}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2a9fdcf51ba22c41b6eca734632f3c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &426640246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426640243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 340cbd18af6879a4398338ff495f4db0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &426640247
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426640243}
+  m_CullTransparentMesh: 1
 --- !u!1 &432555251
 GameObject:
   m_ObjectHideFlags: 0
@@ -4181,7 +4387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608249490737376889, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 438.15308
+      value: 438.15234
       objectReference: {fileID: 0}
     - target: {fileID: 2608249490737376889, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4429,11 +4635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6610134854008853614, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 542.2
+      value: 542.1992
       objectReference: {fileID: 0}
     - target: {fileID: 6610134854008853614, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 83.4
+      value: 83.40039
       objectReference: {fileID: 0}
     - target: {fileID: 7072425503996978553, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_IsActive
@@ -4952,7 +5158,7 @@ RectTransform:
   m_Father: {fileID: 18983901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.1306, y: 0}
   m_SizeDelta: {x: 0.3237, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5429,6 +5635,7 @@ RectTransform:
   - {fileID: 1842954370}
   - {fileID: 1511703900}
   - {fileID: 98485113}
+  - {fileID: 777539189}
   m_Father: {fileID: 85696431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5913,13 +6120,13 @@ MonoBehaviour:
   healOutput: 0
   thornDamage: 0
   rallyRandom: 0
+  intercedeOn: 0
   sorcererAlly: {fileID: 0}
   sorcererLastStand: 0
   battlePhase: {fileID: 0}
   firstEnemy: {fileID: 0}
   squirrelFight: 0
   timePassed: 0
-  intercedeOn: 0
   loseCondition: 0
   HealthText: {fileID: 0}
   KnightSkills: {fileID: 601086827}
@@ -6394,10 +6601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -6409,6 +6616,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 216556930}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &691816163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7141,6 +7349,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767939088}
   m_CullTransparentMesh: 1
+--- !u!1 &777539188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777539189}
+  - component: {fileID: 777539192}
+  - component: {fileID: 777539191}
+  - component: {fileID: 777539190}
+  m_Layer: 5
+  m_Name: VFX Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &777539189
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777539188}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -22}
+  m_LocalScale: {x: 5.0352855, y: 5.0352855, z: 5.0352855}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 541094303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 576, y: -32}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &777539190
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777539188}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2a9fdcf51ba22c41b6eca734632f3c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &777539191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777539188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 340cbd18af6879a4398338ff495f4db0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &777539192
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777539188}
+  m_CullTransparentMesh: 1
 --- !u!1 &777707473
 GameObject:
   m_ObjectHideFlags: 0
@@ -7211,7 +7517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1176.8947, y: 484}
+  m_AnchoredPosition: {x: 1104, y: 88}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &786045991
@@ -7345,10 +7651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -7360,6 +7666,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 1663101016}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 777539188}
 --- !u!114 &786045994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7576,7 +7883,7 @@ RectTransform:
   m_Father: {fileID: 367753855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 43.010735, y: 0}
   m_SizeDelta: {x: 0.6108, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8052,7 +8359,7 @@ RectTransform:
   m_Father: {fileID: 419120488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9609,7 +9916,7 @@ RectTransform:
   m_Father: {fileID: 1360448164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.31311035, y: 0}
   m_SizeDelta: {x: -0.068, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11183,10 +11490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -11198,6 +11505,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 922162956}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &1292633474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11817,10 +12125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -11832,6 +12140,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 928788558}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &1331569031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12013,7 +12322,7 @@ RectTransform:
   m_Father: {fileID: 1541896471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13434,7 +13743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1511703900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14020,6 +14329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3320447fc378f43f3a7edcadfb6d04b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SorcererMoveset
+  SorcererSkills: {fileID: 372684724}
   maxHealth: 60
   curHealth: 60
   damageType: 2
@@ -14031,15 +14341,14 @@ MonoBehaviour:
   healOutput: 0
   rallyOrNot: 0
   volcanicTally: 0
+  intercedeOn: 0
+  knightAlly: {fileID: 0}
   squirrelFight: 0
   battlePhase: {fileID: 0}
-  intercedeOn: 0
   timePassed: 0
-  knightAlly: {fileID: 0}
   firstEnemy: {fileID: 0}
   loseCondition: 0
   HealthText: {fileID: 0}
-  SorcererSkills: {fileID: 372684724}
   LoseText: {fileID: 50324095}
   Sorcererhealthbar: {fileID: 1286326364}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
@@ -14336,7 +14645,7 @@ Transform:
   m_GameObject: {fileID: 1621476411}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -616.895, y: -552.1569, z: 11861.948}
+  m_LocalPosition: {x: -683, y: -154, z: 11861.948}
   m_LocalScale: {x: 1.14082, y: 1.14082, z: 1.14082}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14376,7 +14685,7 @@ RectTransform:
   m_Father: {fileID: 530589006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.20259094, y: 0}
   m_SizeDelta: {x: 0.3299, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15970,7 +16279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1842954370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16014,7 +16323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1867565476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16038,10 +16347,10 @@ MonoBehaviour:
   bearBoss: {fileID: 0}
   walrusBoss: {fileID: 0}
   background: {fileID: 0}
-  forestBackground: {fileID: 0}
-  desertBackground: {fileID: 0}
-  caveBackground: {fileID: 0}
-  arcticBackground: {fileID: 0}
+  forestBackground: {fileID: 2800000, guid: db4dae469b0a67341b5aef4601b221c2, type: 3}
+  desertBackground: {fileID: 2800000, guid: 70825163cf6c1d542afbfe759de11ac3, type: 3}
+  caveBackground: {fileID: 2800000, guid: 662e8f7f7c583064f975009c6951e413, type: 3}
+  arcticBackground: {fileID: 2800000, guid: cff99d52876a36640b710e2ae478f1a2, type: 3}
 --- !u!4 &1867565477
 Transform:
   m_ObjectHideFlags: 0
@@ -17144,10 +17453,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -17159,6 +17468,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 1684526721}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &1988554975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17357,7 +17667,7 @@ RectTransform:
   m_Father: {fileID: 639350600}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.04270935, y: 0}
   m_SizeDelta: {x: 0.0932, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17612,10 +17922,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b04b040d3f842bfbc5ab8bfaceaece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  curHealth: 20
-  damageType: 20
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  curHealth: 20
+  damageType: 20
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
@@ -17627,6 +17937,7 @@ MonoBehaviour:
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 1462527344}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
+  enemyVFX: {fileID: 0}
 --- !u!114 &2052926099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17953,22 +18264,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8371674d77ec4f119bf256a322475d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SquirrelEnemy
-  curHealth1: 0
-  curHealth2: 0
-  damageType: 0
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
   squirrelOne: {fileID: 2112149619}
   squirrelTwo: {fileID: 0}
+  curHealth1: 0
+  curHealth2: 0
+  damageType: 0
+  squirrelCoordination: 0
   squirrelOneDown: 0
   squirrelTwoDown: 0
   battlePhase: {fileID: 0}
-  squirrelCoordination: 0
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
   attackedEnemy: 0
   multiHitting: 0
+  fightManager: {fileID: 0}
   HealthText1: {fileID: 0}
   HealthText2: {fileID: 0}
   VictoryText: {fileID: 50324096}
@@ -17977,7 +18289,6 @@ MonoBehaviour:
   EnemyHealthBar1: {fileID: 1098282885}
   EnemyHealthBar2: {fileID: 1417535331}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
-  fightManager: {fileID: 0}
 --- !u!1 &2064871823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8423408523938321560, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
@@ -19455,7 +19766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8847501208561069392, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 438.15308
+      value: 438.15234
       objectReference: {fileID: 0}
     - target: {fileID: 8847501208561069392, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -19491,7 +19802,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1988302491039737603, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 234641197}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
 --- !u!1 &1789964553644107942
@@ -19510,6 +19824,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!224 &1789964553644107943 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1988302491039737603, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
+  m_PrefabInstance: {fileID: 1789964553644107941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

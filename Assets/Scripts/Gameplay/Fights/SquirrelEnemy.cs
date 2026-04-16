@@ -5,22 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class SquirrelEnemy : MonoBehaviour
 {
-    public int curHealth1;
-    public int curHealth2;
-    public int damageType;
+    [Header("Player and Enemies")]
     public GameObject knightPlayer;
     public GameObject sorcererPlayer;
     public GameObject squirrelOne;
     public GameObject squirrelTwo;
+
+    [Header("Enemy Values")]
+    public int curHealth1;
+    public int curHealth2;
+    public int damageType;
+    public bool squirrelCoordination;
     public bool squirrelOneDown;
     public bool squirrelTwoDown;
     public GameObject battlePhase;
-    public bool squirrelCoordination;
     public int selectingMove;
     public int selectingTarget;
     public int damageOutput;
     public int attackedEnemy;
     public int multiHitting;
+
+    [Header("Fight Management")]
+    public GameObject fightManager;
+
+    [Header("UI/Audio")]
     public TextMeshProUGUI HealthText1;
     public TextMeshProUGUI HealthText2;
     public GameObject VictoryText;
@@ -32,7 +40,6 @@ public class SquirrelEnemy : MonoBehaviour
     private AudioSource audioSource;
     private Animator animator1;
     private Animator animator2;
-    public GameObject fightManager;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,8 +71,6 @@ public class SquirrelEnemy : MonoBehaviour
    // Update is called once per frame
    void Update()
    {
-        //knightPlayer.GetComponent<KnightMoveset>().SquirrelFight();
-        //sorcererPlayer.GetComponent<SorcererMoveset>().SquirrelFight();
         battlePhase.GetComponent<BattlePhase>().NumberedFight(2);
 
         if (VictoryAchieved)
@@ -74,7 +79,6 @@ public class SquirrelEnemy : MonoBehaviour
             timePassed += Time.deltaTime;
             if (timePassed > 3.0f)
             {
-Debug.Log("Change scene");
                 SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
             }
         }
@@ -101,7 +105,7 @@ Debug.Log("Change scene");
                 curHealth1 -= amount;
                 EnemyHealthBar1.value = curHealth1;
                 UpdateHUD();
-                
+Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " health");
                 if (curHealth1 <= 0)
                     squirrelOneDown = true;
             }
@@ -111,7 +115,7 @@ Debug.Log("Change scene");
                 curHealth2 -= amount;
                 EnemyHealthBar2.value = curHealth2;
                 UpdateHUD();
-                
+Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " health");
                 if (curHealth2 <= 0) 
                     squirrelTwoDown = true;
             }
@@ -124,7 +128,10 @@ Debug.Log("Change scene");
             EnemyHealthBar1.value = curHealth1;
             EnemyHealthBar2.value = curHealth2;
             UpdateHUD();
-            
+
+Debug.Log("Both enemies took " + amount + " damage");
+Debug.Log("Squrrel 1 has " + curHealth1 + " and Squirrel 2 has " + curHealth2);
+
             if (curHealth1 <= 0)
                 squirrelOneDown = true;
 
@@ -141,23 +148,21 @@ Debug.Log("Change scene");
             Victory();   
     }
 
-
     public void gotGoaded()
     {
         //Here is where the code will be for the enemy when they're goaded once allies are added
     }
-
 
     public void gotStunned()
     {
         //Here is where the code will be for the enemy when they're stunned
     }
 
-
     public void BeginTurn()
     {
         if (squirrelOneDown == false)
         {
+Debug.Log("Squirrel 1 has started attacking!");
             selectingMove = Random.Range(1, 3);
             selectingTarget = Random.Range(1, 3);
 
@@ -165,15 +170,20 @@ Debug.Log("Change scene");
 
             if (selectingMove == 1)
             {
-Debug.Log("Lash is used!");
                 damageOutput = Random.Range(1, 7) + 1;
                 if(squirrelCoordination)
                     damageOutput+= Random.Range(1, 7);
                     
                 if(selectingTarget == 1)
+                {
+Debug.Log("Lash is used on the Knight!");
                     knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
+                }
                 else if(selectingTarget == 2)
+                {
+Debug.Log("Lash is used on the Sorcerer");
                     sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+                }
             }
             
             else if (selectingMove == 2)
@@ -186,7 +196,7 @@ Debug.Log("Recuperate is used!");
 
             animator1.SetBool("isAttacking", false);
         }
-
+Debug.Log("Squirrel 1 has finished attacking!");
         BeginTurn2();
     }
 
@@ -194,6 +204,7 @@ Debug.Log("Recuperate is used!");
     {
         if (squirrelTwoDown == false)
         {
+Debug.Log("Squirrel 2 has started attacking!");
             selectingMove = Random.Range(1, 3);
             selectingTarget = Random.Range(1, 3);
 
@@ -201,16 +212,20 @@ Debug.Log("Recuperate is used!");
         
             if (selectingMove == 1)
             {
-Debug.Log("Lash is used!");
-
                 damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7);
                 if(squirrelCoordination)
                     damageOutput+= Random.Range(1, 7);
                     
                 if(selectingTarget == 1)
+                {
+Debug.Log("Lash is used on the Knight!");
                     knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
+                }
                 else if(selectingTarget == 2)
+                {
+Debug.Log("Lash is used on the Sorcerer!");
                     sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+                }
             }
 
             else if (selectingMove == 2)
@@ -220,7 +235,7 @@ Debug.Log("Recuperate is used!");
                 curHealth2 += damageOutput;
                 EnemyHealthBar2.value = curHealth2;
             }
-            
+Debug.Log("Squirrel 1 has finished attacking!");
             animator2.SetBool("isAttacking", false);
         }
     }

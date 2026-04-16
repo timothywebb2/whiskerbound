@@ -20,9 +20,10 @@ public class FightManager : MonoBehaviour
    public GameObject lionEnemy;
    public GameObject bearBoss;
 
-    [Header("Arctic Enemies")]
-    public GameObject walrusBoss;
+   [Header("Arctic Enemies")]
+   public GameObject walrusBoss;
 
+   [Header("Backgrounds")]
    public RawImage background;
    public Texture forestBackground;
    public Texture desertBackground;

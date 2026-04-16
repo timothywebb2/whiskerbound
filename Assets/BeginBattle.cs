@@ -6,7 +6,8 @@ public class BeginBattle : MonoBehaviour
     
     public GameObject fightManager;
 
-    void Awake() {
+    void Awake()
+    {
         fightManager = GameObject.FindGameObjectWithTag("FightManager");
         fightManager.GetComponent<FightManager>().BattleBegin();
     }

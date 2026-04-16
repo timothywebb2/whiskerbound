@@ -8,37 +8,40 @@ using UnityEngine.SceneManagement;
 
 public class KnightMoveset : MonoBehaviour
 {
+    [Header("Knight Values")]
+    public int maxHealth;
+    public int curHealth;
+    public int damageType;
+    public int CurrentMight;
+    public int damageOutput;
+    public int healOutput;
+    int hasThorns;
+    public int thornDamage;
+    public int rallyRandom; // This is temporary
+    public bool intercedeOn;
 
+    [Header("Allies")]
+    public GameObject sorcererAlly;
+    public bool sorcererLastStand;
 
-   public int maxHealth;
-   public int curHealth;
-   public int damageType;
-   public int CurrentMight;
-   public int damageOutput;
-   public int healOutput;
-   int hasThorns;
-   public int thornDamage;
-   public int rallyRandom; // This is temporary
-   public GameObject sorcererAlly;
-   public bool sorcererLastStand;
-       public GameObject battlePhase;
-   public GameObject firstEnemy;
-   public int squirrelFight;
-   public float timePassed = 0.0f;
-   public bool intercedeOn;
-   public bool loseCondition;
-   public TextMeshProUGUI HealthText;
-   public GameObject KnightSkills;
-   public GameObject LoseText;
-   public Slider Knighthealthbar;
-   public AudioClip damageSound;
-   private AudioSource audioSource;
-   
+    [Header("Fight Management")]
+    public GameObject battlePhase;
+    public GameObject firstEnemy;
+    public int squirrelFight;
+    public float timePassed = 0.0f;
+    public bool loseCondition;
 
+    [Header("UI/Audio")]
+    public TextMeshProUGUI HealthText;
+    public GameObject KnightSkills;
+    public GameObject LoseText;
+    public Slider Knighthealthbar;
+    public AudioClip damageSound;
+    private AudioSource audioSource;
+    public TextMeshProUGUI currentAction;
+    public bool printing;
 
-   public TextMeshProUGUI currentAction;
-   public bool printing;
-
+    [Header("Items")]
     //ITEM booleans
     //tracks if the buff is applied this fight
     public bool doubleCastActive = false;
@@ -55,145 +58,93 @@ public class KnightMoveset : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-   {
-       maxHealth = 100;
-       curHealth = maxHealth;
-       Knighthealthbar.maxValue = maxHealth;
-       Knighthealthbar.value = curHealth;
+    {
+        maxHealth = 100;
+        curHealth = maxHealth;
+        Knighthealthbar.maxValue = maxHealth;
+        Knighthealthbar.value = curHealth;
        
-       damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
-       sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle");
-       firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
-       battlePhase = GameObject.FindGameObjectWithTag("BattleController");
-       rallyRandom = 1;
-       hasThorns = 0;
-       thornDamage = 0;
-       intercedeOn = false;
-       sorcererLastStand = false;
-       loseCondition = false;
-       currentAction.enabled = false;
-       squirrelFight = 1;
-       LoseText.SetActive(false);
-       UpdateHUD();
-       audioSource = GetComponent<AudioSource>();
-
-
-   }
-
+        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
+        sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle");
+        firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
+        rallyRandom = 1;
+        hasThorns = 0;
+        thornDamage = 0;
+        intercedeOn = false;
+        sorcererLastStand = false;
+        loseCondition = false;
+        currentAction.enabled = false;
+        squirrelFight = 1;
+        LoseText.SetActive(false);
+        UpdateHUD();
+        audioSource = GetComponent<AudioSource>();
+    }
 
    // Update is called once per frame
    void Update()
-   {
+    {
+        if (loseCondition == true)
+        {
+            timePassed += Time.deltaTime;
+            if (timePassed > 3.0f)
+            {
+                SceneManager.LoadScene(2);
+            }
+        }
 
+    }
 
-       if (loseCondition == true) {
-       timePassed += Time.deltaTime;
-       if (timePassed > 3.0f)
-{
-Debug.Log("Change scene");
-SceneManager.LoadScene(2);
-}
-       }
-/*
-if (Input.GetKeyDown(KeyCode.Alpha0))
-       {
-
-
-           if (KnightSkills.activeSelf == true) {
-KnightSkills.SetActive(false);
-           }
-           else {
-                       if (!printing) {
-KnightSkills.SetActive(true);
-                       }
-           }
-       }
-
-
-       if (Input.GetKeyDown(KeyCode.Alpha1))
-       {
-           if (KnightSkills.activeSelf == true) {
-Provoke();
-KnightSkills.SetActive(false);
-           }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-       {
-           if (KnightSkills.activeSelf == true) {
-Cleave();
-KnightSkills.SetActive(false);
-           }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-       {
-           if (KnightSkills.activeSelf == true) {
-Intercede();
-KnightSkills.SetActive(false);
-           }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-       {
-           if (KnightSkills.activeSelf == true) {
-Rally();
-KnightSkills.SetActive(false);
-           }
-       }
-       */
-   }
-
-
-   public void TakeDamage(int amount) {
-       if (intercedeOn == false) {
+    public void TakeDamage(int amount)
+    {
+        if (intercedeOn == false)
+        {
             int finalDamage = amount;
             if (damageReductionActive)
             {
                 finalDamage = Mathf.RoundToInt(amount * damageReductionPercent);
                 damageReductionActive = false; //consumes the effect
 
-                Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
+Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
             }
 
             curHealth -= finalDamage;
-           Knighthealthbar.value = curHealth;
+            Knighthealthbar.value = curHealth;
            
            
-           if (damageSound != null)
-{
-    audioSource.PlayOneShot(damageSound);
-}
+            if (damageSound != null)
+                audioSource.PlayOneShot(damageSound);
            
-           if(!printing)
-               StartCoroutine(printCurrentAction("Knight took " + finalDamage + " damage!", 1f));
-           if (hasThorns > 0) {
-               if (squirrelFight == 1) {
-               firstEnemy.GetComponent<DemoEnemy>().TakeDamage(thornDamage);
-               }
-               else if (squirrelFight == 2) {
-               firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage);
-               }
-               else if (squirrelFight == 3) {
-               firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage);
-               }
-               hasThorns -= 1;
-           }
+            if(!printing)
+                StartCoroutine(printCurrentAction("Knight took " + finalDamage + " damage!", 1f));
+            if (hasThorns > 0)
+            {
+                if (squirrelFight == 1) 
+                    firstEnemy.GetComponent<DemoEnemy>().TakeDamage(thornDamage);
+               
+                else if (squirrelFight == 2)
+                    firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage);
+               
+                else if (squirrelFight == 3)
+                    firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage);
+               
+                hasThorns -= 1;
+            }
        }
-       else if (intercedeOn == true) {
-           Debug.Log("Damage blocked!");
-           if (!printing)
-               StartCoroutine(printCurrentAction("Damage blocked!", 1f));
-           intercedeOn = false;
-       }
-       if (curHealth <= 0) {
-           Lose();
-       }
-       UpdateHUD();
-   }
+
+       else if (intercedeOn == true)
+       {
+Debug.Log("Damage blocked!");
+            if (!printing)
+                StartCoroutine(printCurrentAction("Damage blocked!", 1f));
+            intercedeOn = false;
+        }
+
+        if (curHealth <= 0) 
+            Lose();
+       
+        UpdateHUD();
+    }
 
     public void HealPotion()
     {
@@ -213,7 +164,6 @@ KnightSkills.SetActive(false);
         healUsedThisTurn = true;
 
         int oldHealth = curHealth;
-
         int healAmount = Random.Range(2, 9); // 2d4, can easily change the range if we want to
 
         curHealth += healAmount;
@@ -223,11 +173,10 @@ KnightSkills.SetActive(false);
             curHealth = maxHealth;
 
         int actualHeal = curHealth - oldHealth;
-
         Knighthealthbar.value = curHealth;
-        
-
-        Debug.Log("Healed for " + actualHeal);
+        //PUT HEAL ANIMTION
+        //PUT HEAL SFX
+Debug.Log("Healed for " + actualHeal);
 
         if (!printing)
             StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
@@ -308,9 +257,7 @@ KnightSkills.SetActive(false);
             Debug.Log("Damaged enemy by " + damageOutput);
             PassTurn();
         }, () => "Damaged enemy by " + damageOutput + " with Cleave!");
-
    }
-
 
    public void Intercede() {
         lastMove = Intercede;
@@ -322,9 +269,7 @@ KnightSkills.SetActive(false);
             Debug.Log("Intercede on Sorcerer!");
             PassTurn();
         }, () => "Intercede on Sorceror!");
-
    }
-
 
    public void Rally() {
         lastMove = Rally;
@@ -359,94 +304,85 @@ KnightSkills.SetActive(false);
         }, () => "Rally used on Sorcerer!");
    }
 
+    public void LastStand()
+    {
+        if (sorcererLastStand == false)
+        {
+            CurrentMight += 2;
+            sorcererLastStand = true;
+        }
+    }
 
-    public void LastStand() {
-       if (sorcererLastStand == false) {
-CurrentMight += 2;
-sorcererLastStand = true;
-       }
-   }
+    public void UnLastStand()
+    {
+        if (sorcererLastStand == true)
+        {
+            CurrentMight -= 2;
+            sorcererLastStand = false;
+        }
+    }
 
+    public void NotSquirrelFight()
+    {
+        squirrelFight = 1;
+    }
 
-   public void UnLastStand() {
-if (sorcererLastStand == true) {
-CurrentMight -= 2;
-sorcererLastStand = false;
-       }
-   }
+    public void SquirrelFight()
+    {
+        squirrelFight = 2;
+    }
 
+    public void NumberedFight(int amount)
+    {
+        squirrelFight = amount;
+    }
 
-   public void NotSquirrelFight() {
-squirrelFight = 1;
-   }
+    public void gotShielded(int amount)
+    {
+        curHealth += amount;
+    }
 
+    public void gotThorns(int amount)
+    {
+        hasThorns += 2;
+        thornDamage = amount;
+    }
 
-   public void SquirrelFight() {
-squirrelFight = 2;
-   }
+    void UpdateHUD()
+    {
+        //  HealthText.text = "HP: " + curHealth;
+    }
 
-
-   public void NumberedFight(int amount) {
-squirrelFight = amount;
-   }
-
-
-   public void gotShielded(int amount)
-   {
-       curHealth += amount;
-   }
-
-
-   public void gotThorns(int amount)
-   {
-       hasThorns += 2;
-       thornDamage = amount;
-   }
-
-
-   void UpdateHUD()
-   {
-     //  HealthText.text = "HP: " + curHealth;
-   }
-
-
-   public void PassTurn()
-   {
+    public void PassTurn()
+    {
         //reset each turn
         healUsedThisTurn = false;
         damageReductionUsedThisTurn = false;
 
         battlePhase.GetComponent<BattlePhase>().ActionInputted();
+    }
 
+    IEnumerator printCurrentAction(string toPrint, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        yield return new WaitUntil(() => !printing);
 
-   }
+        printing = true;
 
+        currentAction.enabled = true;
+        currentAction.text = toPrint;
 
-   IEnumerator printCurrentAction(string toPrint, float delay)
-   {
-       yield return new WaitForSeconds(delay);
-       yield return new WaitUntil(() => !printing);
+        yield return new WaitForSeconds(5);
 
-
-       printing = true;
-
-
-       currentAction.enabled = true;
-       currentAction.text = toPrint;
-
-
-       yield return new WaitForSeconds(5);
-
-
-       printing = false;
-       currentAction.enabled = false;
-   }
+        printing = false;
+        currentAction.enabled = false;
+    }
   
-   public void OpenKnightSkills()
-   {
-       if (!printing)
-           KnightSkills.SetActive(true);
-   }
+    public void OpenKnightSkills()
+    {
+        if (!printing)
+            KnightSkills.SetActive(true);
+    }
 
     void ExecuteMove(System.Action move, System.Func<string> getMessage)
     {
@@ -490,9 +426,10 @@ squirrelFight = amount;
             StartCoroutine(printCurrentAction("Double Cast activated!", 0f));
     }
 
-    public void Lose() {
-loseCondition = true;
-LoseText.SetActive(true);
+    public void Lose()
+    {
+        loseCondition = true;
+        LoseText.SetActive(true);
 Debug.Log("You lose!");
-}
+    }
 }
