@@ -41,6 +41,7 @@ public class SorcererMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+    private Animator animator;
 
     [Header("Items")]
     public bool doubleCastActive = false;
@@ -72,6 +73,7 @@ public class SorcererMoveset : MonoBehaviour
         LoseText.SetActive(false);
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -205,7 +207,7 @@ Debug.Log("Damage reduction activated!");
             damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
             if (squirrelFight == 1)
             {
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
             }
             else if (squirrelFight == 2)
             {
@@ -232,7 +234,7 @@ Debug.Log("Damage reduction activated!");
             damageOutput = Random.Range(1, 7) + mightBonus;
             if (squirrelFight == 1)
             {
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
             }
             else if (squirrelFight == 2)
             {
@@ -296,7 +298,7 @@ Debug.Log("Damage reduction activated!");
             damageOutput = Random.Range(1, 13) + mightBonus;
 
             if (squirrelFight == 1) 
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
 
             else if (squirrelFight == 2)
             {
@@ -316,7 +318,7 @@ Debug.Log("Damage reduction activated!");
         damageOutput = Random.Range(1, 4) + Random.Range(1, 4) + mightBonus;
 
         if (squirrelFight == 1)
-            firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
 
         else if (squirrelFight == 2)
         {
@@ -336,7 +338,7 @@ Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
 
         if (squirrelFight == 1)
         {
-            firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
             firstEnemy.GetComponent<DemoEnemy>().gotStunned();
         }
 
@@ -379,7 +381,7 @@ Debug.Log("Intercede on Sorcerer!");
 
     void UpdateHUD()
     {
-        //  HealthText.text = "HP: " + curHealth;
+        HealthText.text = curHealth + "/" + maxHealth;
     }
 
     public void OpenSorcererSkills()
@@ -402,7 +404,9 @@ Debug.Log("You lose!");
 
     IEnumerator ExecuteMoveRoutine(System.Action move, System.Func<string> getMessage)
     {
+        animator.SetBool("isAttacking", true);
         move.Invoke();
+Debug.Log("SorcererMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
         yield return StartCoroutine(printCurrentAction(getMessage(), 0f));
 
         if (doubleCastActive && Random.value <= 1f)
@@ -410,8 +414,11 @@ Debug.Log("You lose!");
             Debug.Log("Double cast triggered!");
 
             move.Invoke();
+Debug.Log("SorcererMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
             yield return StartCoroutine(printCurrentAction(getMessage() + " (Double Cast!)", 0f));
         }
+
+        animator.SetBool("isAttacking", false);
     }
 
     public void ActivateDoubleCast()
@@ -459,7 +466,9 @@ Debug.Log("You lose!");
 
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
+Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
+Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing until printing is false");
         yield return new WaitUntil(() => !printing);
 
         printing = true;
@@ -467,6 +476,7 @@ Debug.Log("You lose!");
         currentAction.enabled = true;
         currentAction.text = toPrint;
 
+Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for 5 seconds");
         yield return new WaitForSeconds(5);
 
         printing = false;

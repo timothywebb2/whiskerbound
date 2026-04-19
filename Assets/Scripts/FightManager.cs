@@ -30,6 +30,9 @@ public class FightManager : MonoBehaviour
    public Texture caveBackground;
    public Texture arcticBackground;
 
+   [Header("UI/Audio/Animation")]
+   public ParentAnimation VFXObject;
+
    public void Start()
    {
       DontDestroyOnLoad(this.gameObject);
@@ -98,42 +101,52 @@ public class FightManager : MonoBehaviour
       {
          case 1:
             ferretEnemy.SetActive(true);
+            VFXObject.parent = ferretEnemy.transform.GetChild(0).gameObject;
             background.texture = forestBackground;
             break;
          case 2:
             squirrelEnemy.SetActive(true);
+            VFXObject.parent = squirrelEnemy.transform.GetChild(0).gameObject;
             background.texture = forestBackground;
             break;
          case 3:
             tigerBoss.SetActive(true);
+            VFXObject.parent = tigerBoss.transform.GetChild(0).gameObject;
             background.texture = forestBackground;
             break;
          case 4:
             tazEnemy.SetActive(true);
+            VFXObject.parent = tazEnemy.transform.GetChild(0).gameObject;
             background.texture = desertBackground;
             break;
          case 5:
             meerkatEnemy.SetActive(true);
+            VFXObject.parent = meerkatEnemy.transform.GetChild(0).gameObject;
             background.texture = desertBackground;
             break;
          case 6:
             kangarooBoss.SetActive(true);
+            VFXObject.parent = kangarooBoss.transform.GetChild(0).gameObject;
             background.texture = desertBackground;
             break;
          case 7:
             batEnemy.SetActive(true);
+            VFXObject.parent = batEnemy.transform.GetChild(0).gameObject;
             background.texture = caveBackground;
             break;
          case 8:
             lionEnemy.SetActive(true);
+            VFXObject.parent = lionEnemy.transform.GetChild(0).gameObject;
             background.texture = caveBackground;
             break;
          case 9:
             bearBoss.SetActive(true);
+            VFXObject.parent = bearBoss.transform.GetChild(0).gameObject;
             background.texture = caveBackground;
             break;
          case 10:
             walrusBoss.SetActive(true);
+            VFXObject.parent = walrusBoss.transform.GetChild(0).gameObject;
             background.texture = arcticBackground;
             break;
       }
