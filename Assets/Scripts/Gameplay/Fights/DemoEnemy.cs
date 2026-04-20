@@ -47,7 +47,7 @@ public class DemoEnemy : MonoBehaviour
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         fightManager = GameObject.FindGameObjectWithTag("FightManager");
-        curHealth = 200;
+        curHealth = 20;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
         selectingTarget = 1;
@@ -177,7 +177,7 @@ Debug.Log("Lash is used on the Knight!");
             if (selectingTarget == 2)
             {
 Debug.Log("Lash is used on the Sorcerer!");
-                sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+                StartCoroutine(sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput));
             }
 Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation is done");
             yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish

@@ -42,6 +42,9 @@ public class SorcererMoveset : MonoBehaviour
     public TextMeshProUGUI currentAction;
     public bool printing;
     private Animator animator;
+    public GameObject VFXObject;
+    private Animator VFXanimator;
+    private bool animationDone;
 
     [Header("Items")]
     public bool doubleCastActive = false;
@@ -74,6 +77,7 @@ public class SorcererMoveset : MonoBehaviour
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        VFXanimator = VFXObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -87,7 +91,7 @@ public class SorcererMoveset : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public IEnumerator TakeDamage(int amount)
     {
         if (intercedeOn == false)
         {
@@ -102,7 +106,9 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
 
             curHealth -= finalDamage;
             Sorcererhealthbar.value = curHealth;
-           
+
+            VFXanimator.SetBool("isAttacked", true);
+
             if (damageSound != null)
             {
                 audioSource.PlayOneShot(damageSound);
@@ -110,6 +116,9 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
            
             if(!printing)
                 StartCoroutine(printCurrentAction("Sorcerer took " + finalDamage + " damage!", 1f));
+            
+            yield return new WaitUntil(() => animationDone);
+            animationDone = false;
        }
        
         else if (intercedeOn == true)
@@ -138,40 +147,46 @@ Debug.Log("Damage blocked!");
         UpdateHUD();
     }
 
-    public void HealPotion()
+    public IEnumerator HealPotion()
     {
         if (healUsedThisTurn)
         {
             if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
-            return;
+            //return;
         }
 
         if (!ItemManager.Instance.UseItem("HealPotion"))
         {
             StartCoroutine(printCurrentAction("No charges left!", 0f));
-            return;
+            //return;
         }
 
-        healUsedThisTurn = true;
+        if(!healUsedThisTurn && ItemManager.Instance.UseItem("HealPotion"))
+        {
+            healUsedThisTurn = true;
 
-        int oldHealth = curHealth;
-        int healAmount = Random.Range(2, 9);
+            int oldHealth = curHealth;
+            int healAmount = Random.Range(2, 9);
 
-        curHealth += healAmount;
+            curHealth += healAmount;
 
-        if (curHealth > maxHealth)
-            curHealth = maxHealth;
+            if (curHealth > maxHealth)
+                curHealth = maxHealth;
 
-        int actualHeal = curHealth - oldHealth;
-        Sorcererhealthbar.value = curHealth;
-        
-        //PUT HEAL ANIMTION
-        //PUT HEAL SFX
+            int actualHeal = curHealth - oldHealth;
+            Sorcererhealthbar.value = curHealth;
+            
+            VFXanimator.SetBool("isHealing", true);
+            //PUT HEAL SFX
 
-Debug.Log("Healed for " + actualHeal);
-        if (!printing)
-            StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+    Debug.Log("Healed for " + actualHeal);
+            if (!printing)
+                StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+            
+            yield return new WaitForSeconds(2);
+            VFXanimator.SetBool("isHealing", false);
+        }
     }
 
     public void DamageReductionPotion()
@@ -481,5 +496,10 @@ Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for 5 second
 
         printing = false;
         currentAction.enabled = false;
+    }
+
+    public void AnimationDone()
+    {
+        animationDone = true;
     }
 }
