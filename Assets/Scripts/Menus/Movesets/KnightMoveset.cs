@@ -40,6 +40,10 @@ public class KnightMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+    private Animator animator;
+    public GameObject VFXObject;
+    private Animator VFXanimator;
+    private bool animationDone;
 
     [Header("Items")]
     //ITEM booleans
@@ -79,6 +83,8 @@ public class KnightMoveset : MonoBehaviour
         LoseText.SetActive(false);
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        VFXanimator = VFXObject.GetComponent<Animator>();
     }
 
    // Update is called once per frame
@@ -95,7 +101,7 @@ public class KnightMoveset : MonoBehaviour
 
     }
 
-    public void TakeDamage(int amount)
+    public IEnumerator TakeDamage(int amount)
     {
         if (intercedeOn == false)
         {
@@ -111,6 +117,7 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
             curHealth -= finalDamage;
             Knighthealthbar.value = curHealth;
            
+           VFXanimator.SetBool("isAttacked", true);
            
             if (damageSound != null)
                 audioSource.PlayOneShot(damageSound);
@@ -120,7 +127,7 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
             if (hasThorns > 0)
             {
                 if (squirrelFight == 1) 
-                    firstEnemy.GetComponent<DemoEnemy>().TakeDamage(thornDamage);
+                    StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(thornDamage, false));
                
                 else if (squirrelFight == 2)
                     firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage);
@@ -128,6 +135,9 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
                 else if (squirrelFight == 3)
                     firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage);
                
+                yield return new WaitUntil(() => animationDone);
+                animationDone = false;
+
                 hasThorns -= 1;
             }
        }
@@ -146,40 +156,45 @@ Debug.Log("Damage blocked!");
         UpdateHUD();
     }
 
-    public void HealPotion()
+    public IEnumerator HealPotion()
     {
         if (healUsedThisTurn)
         {
             if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
-            return;
+            //return;
         }
 
         if (!ItemManager.Instance.UseItem("HealPotion"))
         {
             StartCoroutine(printCurrentAction("No charges left!", 0f));
-            return;
+            //return;
         }
 
-        healUsedThisTurn = true;
+        if(!healUsedThisTurn && ItemManager.Instance.UseItem("HealPotion"))
+        {
+            healUsedThisTurn = true;
 
-        int oldHealth = curHealth;
-        int healAmount = Random.Range(2, 9); // 2d4, can easily change the range if we want to
+            int oldHealth = curHealth;
+            int healAmount = Random.Range(2, 9); // 2d4, can easily change the range if we want to
 
-        curHealth += healAmount;
+            curHealth += healAmount;
 
-        //clamp to max
-        if (curHealth > maxHealth)
-            curHealth = maxHealth;
+            //clamp to max
+            if (curHealth > maxHealth)
+                curHealth = maxHealth;
 
-        int actualHeal = curHealth - oldHealth;
-        Knighthealthbar.value = curHealth;
-        //PUT HEAL ANIMTION
-        //PUT HEAL SFX
-Debug.Log("Healed for " + actualHeal);
+            int actualHeal = curHealth - oldHealth;
+            VFXanimator.SetBool("isHealing", true);
+            //PUT HEAL SFX
 
-        if (!printing)
-            StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+    Debug.Log("Healed for " + actualHeal);
+            if (!printing)
+                StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+            
+            yield return new WaitForSeconds(2);
+            VFXanimator.SetBool("isHealing", false);
+        }
     }
 
     public void DamageReductionPotion()
@@ -215,7 +230,7 @@ Debug.Log("Healed for " + actualHeal);
             damageOutput = Random.Range(1, 13) + Random.Range(1, 13) + CurrentMight;
             if (squirrelFight == 1)
             {
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, false));
                 firstEnemy.GetComponent<DemoEnemy>().gotGoaded();
             }
             else if (squirrelFight == 2)
@@ -243,7 +258,7 @@ Debug.Log("Healed for " + actualHeal);
             damageOutput = Random.Range(1, 13) + CurrentMight;
             if (squirrelFight == 1)
             {
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, false));
             }
             else if (squirrelFight == 2)
             {
@@ -350,7 +365,7 @@ Debug.Log("Healed for " + actualHeal);
 
     void UpdateHUD()
     {
-        //  HealthText.text = "HP: " + curHealth;
+        HealthText.text = curHealth + "/" + maxHealth;
     }
 
     public void PassTurn()
@@ -364,15 +379,21 @@ Debug.Log("Healed for " + actualHeal);
 
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
+Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
-        yield return new WaitUntil(() => !printing);
+        
+        if(printing)
+        {
+Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing until printing is false");
+            yield return new WaitUntil(() => !printing);
+        }
 
         printing = true;
-
+Debug.Log("Current action enabled");
         currentAction.enabled = true;
         currentAction.text = toPrint;
-
-        yield return new WaitForSeconds(5);
+Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for 5 seconds");
+        yield return new WaitForSeconds(3);
 
         printing = false;
         currentAction.enabled = false;
@@ -391,7 +412,9 @@ Debug.Log("Healed for " + actualHeal);
 
     IEnumerator ExecuteMoveRoutine(System.Action move, System.Func<string> getMessage)
     {
+        animator.SetBool("isAttacking", true);
         move.Invoke();
+Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
         yield return StartCoroutine(printCurrentAction(getMessage(), 0f));
 
         if (doubleCastActive && Random.value <= 1f)
@@ -399,8 +422,11 @@ Debug.Log("Healed for " + actualHeal);
             Debug.Log("Double cast triggered!");
 
             move.Invoke();
+Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
             yield return StartCoroutine(printCurrentAction(getMessage + " (Double Cast!)", 0f));
         }
+
+        animator.SetBool("isAttacking", false);
     }
 
     public void ActivateDoubleCast()
@@ -431,5 +457,10 @@ Debug.Log("Healed for " + actualHeal);
         loseCondition = true;
         LoseText.SetActive(true);
 Debug.Log("You lose!");
+    }
+
+    public void AnimationDone()
+    {
+        animationDone = true;
     }
 }

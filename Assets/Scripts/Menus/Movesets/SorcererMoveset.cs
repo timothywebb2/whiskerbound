@@ -41,6 +41,10 @@ public class SorcererMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+    private Animator animator;
+    public GameObject VFXObject;
+    private Animator VFXanimator;
+    private bool animationDone;
 
     [Header("Items")]
     public bool doubleCastActive = false;
@@ -72,6 +76,8 @@ public class SorcererMoveset : MonoBehaviour
         LoseText.SetActive(false);
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        VFXanimator = VFXObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -85,7 +91,7 @@ public class SorcererMoveset : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public IEnumerator TakeDamage(int amount)
     {
         if (intercedeOn == false)
         {
@@ -100,7 +106,9 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
 
             curHealth -= finalDamage;
             Sorcererhealthbar.value = curHealth;
-           
+
+            VFXanimator.SetBool("isAttacked", true);
+
             if (damageSound != null)
             {
                 audioSource.PlayOneShot(damageSound);
@@ -108,6 +116,9 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
            
             if(!printing)
                 StartCoroutine(printCurrentAction("Sorcerer took " + finalDamage + " damage!", 1f));
+            
+            yield return new WaitUntil(() => animationDone);
+            animationDone = false;
        }
        
         else if (intercedeOn == true)
@@ -136,40 +147,46 @@ Debug.Log("Damage blocked!");
         UpdateHUD();
     }
 
-    public void HealPotion()
+    public IEnumerator HealPotion()
     {
         if (healUsedThisTurn)
         {
             if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
-            return;
+            //return;
         }
 
         if (!ItemManager.Instance.UseItem("HealPotion"))
         {
             StartCoroutine(printCurrentAction("No charges left!", 0f));
-            return;
+            //return;
         }
 
-        healUsedThisTurn = true;
+        if(!healUsedThisTurn && ItemManager.Instance.UseItem("HealPotion"))
+        {
+            healUsedThisTurn = true;
 
-        int oldHealth = curHealth;
-        int healAmount = Random.Range(2, 9);
+            int oldHealth = curHealth;
+            int healAmount = Random.Range(2, 9);
 
-        curHealth += healAmount;
+            curHealth += healAmount;
 
-        if (curHealth > maxHealth)
-            curHealth = maxHealth;
+            if (curHealth > maxHealth)
+                curHealth = maxHealth;
 
-        int actualHeal = curHealth - oldHealth;
-        Sorcererhealthbar.value = curHealth;
-        
-        //PUT HEAL ANIMTION
-        //PUT HEAL SFX
+            int actualHeal = curHealth - oldHealth;
+            Sorcererhealthbar.value = curHealth;
+            
+            VFXanimator.SetBool("isHealing", true);
+            //PUT HEAL SFX
 
-Debug.Log("Healed for " + actualHeal);
-        if (!printing)
-            StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+    Debug.Log("Healed for " + actualHeal);
+            if (!printing)
+                StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+            
+            yield return new WaitForSeconds(2);
+            VFXanimator.SetBool("isHealing", false);
+        }
     }
 
     public void DamageReductionPotion()
@@ -205,7 +222,7 @@ Debug.Log("Damage reduction activated!");
             damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
             if (squirrelFight == 1)
             {
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
             }
             else if (squirrelFight == 2)
             {
@@ -232,7 +249,7 @@ Debug.Log("Damage reduction activated!");
             damageOutput = Random.Range(1, 7) + mightBonus;
             if (squirrelFight == 1)
             {
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
             }
             else if (squirrelFight == 2)
             {
@@ -296,7 +313,7 @@ Debug.Log("Damage reduction activated!");
             damageOutput = Random.Range(1, 13) + mightBonus;
 
             if (squirrelFight == 1) 
-                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
 
             else if (squirrelFight == 2)
             {
@@ -316,7 +333,7 @@ Debug.Log("Damage reduction activated!");
         damageOutput = Random.Range(1, 4) + Random.Range(1, 4) + mightBonus;
 
         if (squirrelFight == 1)
-            firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
 
         else if (squirrelFight == 2)
         {
@@ -336,7 +353,7 @@ Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
 
         if (squirrelFight == 1)
         {
-            firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
             firstEnemy.GetComponent<DemoEnemy>().gotStunned();
         }
 
@@ -379,7 +396,7 @@ Debug.Log("Intercede on Sorcerer!");
 
     void UpdateHUD()
     {
-        //  HealthText.text = "HP: " + curHealth;
+        HealthText.text = curHealth + "/" + maxHealth;
     }
 
     public void OpenSorcererSkills()
@@ -402,7 +419,9 @@ Debug.Log("You lose!");
 
     IEnumerator ExecuteMoveRoutine(System.Action move, System.Func<string> getMessage)
     {
+        animator.SetBool("isAttacking", true);
         move.Invoke();
+Debug.Log("SorcererMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
         yield return StartCoroutine(printCurrentAction(getMessage(), 0f));
 
         if (doubleCastActive && Random.value <= 1f)
@@ -410,8 +429,11 @@ Debug.Log("You lose!");
             Debug.Log("Double cast triggered!");
 
             move.Invoke();
+Debug.Log("SorcererMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
             yield return StartCoroutine(printCurrentAction(getMessage() + " (Double Cast!)", 0f));
         }
+
+        animator.SetBool("isAttacking", false);
     }
 
     public void ActivateDoubleCast()
@@ -459,7 +481,9 @@ Debug.Log("You lose!");
 
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
+Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
+Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing until printing is false");
         yield return new WaitUntil(() => !printing);
 
         printing = true;
@@ -467,9 +491,15 @@ Debug.Log("You lose!");
         currentAction.enabled = true;
         currentAction.text = toPrint;
 
+Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for 5 seconds");
         yield return new WaitForSeconds(5);
 
         printing = false;
         currentAction.enabled = false;
+    }
+
+    public void AnimationDone()
+    {
+        animationDone = true;
     }
 }
