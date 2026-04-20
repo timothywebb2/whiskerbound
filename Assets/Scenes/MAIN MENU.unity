@@ -445,6 +445,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b89c38e390d7f045b500aca717337b5, type: 3}
+--- !u!82 &46827024 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 308668007325782773, guid: 6b89c38e390d7f045b500aca717337b5, type: 3}
+  m_PrefabInstance: {fileID: 46827023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &78476491
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +926,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 46827024}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: f2b39dcd099d1864a9575d0f4ca529f7, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &149191972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,9 +1123,13 @@ MonoBehaviour:
   tazEnemy: {fileID: 0}
   meerkatEnemy: {fileID: 0}
   kangarooBoss: {fileID: 0}
+  batEnemy: {fileID: 0}
+  lionEnemy: {fileID: 0}
+  bearBoss: {fileID: 0}
+  walrusBoss: {fileID: 0}
   background: {fileID: 0}
-  forestBackground: {fileID: 2800000, guid: db4dae469b0a67341b5aef4601b221c2, type: 3}
-  desertBackground: {fileID: 2800000, guid: 70825163cf6c1d542afbfe759de11ac3, type: 3}
+  forestBackground: {fileID: 2800000, guid: 71604be80803b5d4991925c7e7028476, type: 3}
+  desertBackground: {fileID: 2800000, guid: 4ad568a14dd5afe4cb1f69fef1e4d699, type: 3}
   caveBackground: {fileID: 2800000, guid: 662e8f7f7c583064f975009c6951e413, type: 3}
   arcticBackground: {fileID: 2800000, guid: cff99d52876a36640b710e2ae478f1a2, type: 3}
 --- !u!4 &263030402
@@ -2268,7 +2289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V.B2.45
+  m_text: V.B2.66
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a8d647affdb3da748842b93621a8c7ea, type: 2}
   m_sharedMaterial: {fileID: -5070023387332909087, guid: a8d647affdb3da748842b93621a8c7ea, type: 2}
@@ -2436,6 +2457,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 46827024}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: e004f22f2ffa12e47b893f1ff4eb1fcc, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4359,6 +4392,8 @@ MonoBehaviour:
   crestImage: {fileID: 1677719642}
   forestCrest: {fileID: 21300000, guid: 148d381c55393784a9287bd43b8b928b, type: 3}
   desertCrest: {fileID: 21300000, guid: 841a476cc25a5074686aa687de142c0f, type: 3}
+  caveCrest: {fileID: 21300000, guid: 4b59a5047a5776945a5838b2db41b1bb, type: 3}
+  arcticCrest: {fileID: 21300000, guid: 27ebcfd2bf78cfa42874750f36a77c8b, type: 3}
 --- !u!1 &1682947241
 GameObject:
   m_ObjectHideFlags: 0

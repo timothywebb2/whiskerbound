@@ -12,6 +12,7 @@ public class UI_ShopPanel : MonoBehaviour
     public AudioSource uiAudioSource;
     public AudioClip purchaseClip;
 
+    [Header("Shop Objects")]
     public TMP_Text shopTitleText;
     public TMP_Text itemListText;
     public TMP_Text coinText;
@@ -36,6 +37,7 @@ public class UI_ShopPanel : MonoBehaviour
 
         gameObject.SetActive(true);
         isOpen = true;
+        
     }
 
     public void ShowShop(string shopTitle, Action onCloseCallback)
@@ -50,6 +52,7 @@ public class UI_ShopPanel : MonoBehaviour
 
         gameObject.SetActive(true);
         isOpen = true;
+        Debug.Log("Shop Menu is Open");
     }
 
     // -------------------- Shop functionality --------------------

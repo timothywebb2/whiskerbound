@@ -8,38 +8,41 @@ using UnityEngine.SceneManagement;
 
 public class SorcererMoveset : MonoBehaviour
 {
+    [Header("Sorcerer Values")]
+    public GameObject SorcererSkills;
+    public int maxHealth;
+    public int curHealth;
+    public int damageType;
+    public int mightBonus;
+    public int damageOutput;
+    public int damageOutputBefore; // This is temporary
+    public int shieldOutput;
+    public int thornsOutput;
+    public int healOutput;
+    public bool rallyOrNot;
+    public int volcanicTally;
+    public bool intercedeOn;
 
+    [Header("Allies")]
+    public GameObject knightAlly;
 
-   public int maxHealth;
-   public int curHealth;
-   public int damageType;
-   public int mightBonus;
-   public int damageOutput;
-   public int damageOutputBefore; // This is temporary
-   public int shieldOutput;
-   public int thornsOutput;
-   public int healOutput;
-   public bool rallyOrNot;
-   public int volcanicTally;
-       public int squirrelFight;
-       public GameObject battlePhase;
-       public bool intercedeOn;
-           public float timePassed = 0.0f;
-   public GameObject knightAlly;
-   public GameObject firstEnemy;
-       public bool loseCondition;
-   //  public bool intercedeOn;
-   public TextMeshProUGUI HealthText;
-   public GameObject SorcererSkills;
+    [Header("Fight Management")]
+    public int squirrelFight;
+    public GameObject battlePhase;
+    public float timePassed = 0.0f;
+    public GameObject firstEnemy;
+    public bool loseCondition;
+
+    [Header("UI/Audio")]
+    public TextMeshProUGUI HealthText;
     public GameObject LoseText;
     public Slider Sorcererhealthbar;
     public AudioClip damageSound;
-private AudioSource audioSource;
+    private AudioSource audioSource;
+    public TextMeshProUGUI currentAction;
+    public bool printing;
 
-
-   public TextMeshProUGUI currentAction;
-   public bool printing;
-
+    [Header("Items")]
     public bool doubleCastActive = false;
     private System.Action lastMove;
     public bool healUsedThisTurn = false;
@@ -47,152 +50,91 @@ private AudioSource audioSource;
     public bool damageReductionUsedThisTurn = false;
     public float damageReductionPercent = 0.75f;
 
-    // testing
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-   {
-       maxHealth = 60;
-       curHealth = maxHealth;
-       Sorcererhealthbar.maxValue = maxHealth;
-       Sorcererhealthbar.value = curHealth;
+    {
+        maxHealth = 60;
+        curHealth = maxHealth;
+        Sorcererhealthbar.maxValue = maxHealth;
+        Sorcererhealthbar.value = curHealth;
        
         intercedeOn = false;
         rallyOrNot = false;
         volcanicTally = 0;
-       //   damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-       knightAlly = GameObject.FindGameObjectWithTag("KnightBattle");
-       firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
-       battlePhase = GameObject.FindGameObjectWithTag("BattleController");
-    //   intercedeOn = false;
-       currentAction.enabled = false;
+        // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
+        knightAlly = GameObject.FindGameObjectWithTag("KnightBattle");
+        firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
+        // intercedeOn = false;
+        currentAction.enabled = false;
         loseCondition = false;
-       squirrelFight = 1;
-         LoseText.SetActive(false);
-       UpdateHUD();
-       audioSource = GetComponent<AudioSource>();
+        squirrelFight = 1;
+        LoseText.SetActive(false);
+        UpdateHUD();
+        audioSource = GetComponent<AudioSource>();
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (loseCondition == true)
+        {
+            timePassed += Time.deltaTime;
+            if (timePassed > 3.0f)
+                SceneManager.LoadScene(2);
+        }
+    }
 
-   }
-
-
-   // Update is called once per frame
-   void Update()
-   {
-
-
-       if (loseCondition == true) {
-       timePassed += Time.deltaTime;
-       if (timePassed > 3.0f)
-{
-Debug.Log("Change scene");
-SceneManager.LoadScene(2);
-}
-       }
-
-
-  
-
-
-       /*
-
-
-if (Input.GetKeyDown(KeyCode.Alpha0))
-       {
-
-
-           if (SorcererSkills.activeSelf == true) {
-SorcererSkills.SetActive(false);
-           }
-           else {
-                       if (!printing) {
-SorcererSkills.SetActive(true);
-                       }
-           }
-       }
-
-
-       if (Input.GetKeyDown(KeyCode.Alpha1))
-       {
-           if (SorcererSkills.activeSelf == true) {
-Provoke();
-SorcererSkills.SetActive(false);
-           }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-       {
-           if (SorcererSkills.activeSelf == true) {
-Cleave();
-SorcererSkills.SetActive(false);
-           }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-       {
-           if (SorcererSkills.activeSelf == true) {
-Intercede();
-SorcererSkills.SetActive(false);
-           }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-       {
-           if (SorcererSkills.activeSelf == true) {
-Rally();
-SorcererSkills.SetActive(false);
-           }
-       }
-
-
-        */
-       
-   }
-
-
-   public void TakeDamage(int amount) {
-      if (intercedeOn == false) {
+    public void TakeDamage(int amount)
+    {
+        if (intercedeOn == false)
+        {
             int finalDamage = amount;
             if (damageReductionActive)
             {
                 finalDamage = Mathf.RoundToInt(amount * damageReductionPercent);
                 damageReductionActive = false; //consumes the effect
 
-                Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
+Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
             }
 
             curHealth -= finalDamage;
             Sorcererhealthbar.value = curHealth;
            
-           if (damageSound != null)
-{
-    audioSource.PlayOneShot(damageSound);
-}
+            if (damageSound != null)
+            {
+                audioSource.PlayOneShot(damageSound);
+            }
            
-           if(!printing)
-               StartCoroutine(printCurrentAction("Sorcerer took " + finalDamage + " damage!", 1f));
+            if(!printing)
+                StartCoroutine(printCurrentAction("Sorcerer took " + finalDamage + " damage!", 1f));
        }
-       else if (intercedeOn == true) {
-           Debug.Log("Damage blocked!");
-           if (!printing)
-               StartCoroutine(printCurrentAction("Damage blocked from Sorcerer!", 1f));
-           intercedeOn = false;
-       }
-       if (curHealth >= 25) {
-           knightAlly.GetComponent<KnightMoveset>().UnLastStand();
-       }
-          else if (curHealth < 25) {
-           knightAlly.GetComponent<KnightMoveset>().LastStand();
-       }
-        if (curHealth <= 0) {
-           Lose();
-       }
-       UpdateHUD();
-   }
+       
+        else if (intercedeOn == true)
+        {
+Debug.Log("Damage blocked!");
+            if (!printing)
+                StartCoroutine(printCurrentAction("Damage blocked from Sorcerer!", 1f));
+            intercedeOn = false;
+        }
+
+        if (curHealth >= 25)
+        {
+            knightAlly.GetComponent<KnightMoveset>().UnLastStand();
+        }
+        
+        else if (curHealth < 25)
+        {
+            knightAlly.GetComponent<KnightMoveset>().LastStand();
+        }
+        
+        if (curHealth <= 0)
+        {
+            Lose();
+        }
+
+        UpdateHUD();
+    }
 
     public void HealPotion()
     {
@@ -212,7 +154,6 @@ SorcererSkills.SetActive(false);
         healUsedThisTurn = true;
 
         int oldHealth = curHealth;
-
         int healAmount = Random.Range(2, 9);
 
         curHealth += healAmount;
@@ -221,16 +162,17 @@ SorcererSkills.SetActive(false);
             curHealth = maxHealth;
 
         int actualHeal = curHealth - oldHealth;
-
         Sorcererhealthbar.value = curHealth;
         
+        //PUT HEAL ANIMTION
+        //PUT HEAL SFX
 
-        Debug.Log("Healed for " + actualHeal);
-
-        StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
+Debug.Log("Healed for " + actualHeal);
+        if (!printing)
+            StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
     }
 
-        public void DamageReductionPotion()
+    public void DamageReductionPotion()
     {
         if (damageReductionUsedThisTurn)
         {
@@ -248,13 +190,14 @@ SorcererSkills.SetActive(false);
         damageReductionUsedThisTurn = true;
         damageReductionActive = true;
 
-        Debug.Log("Damage reduction activated!");
+Debug.Log("Damage reduction activated!");
 
         if (!printing)
             StartCoroutine(printCurrentAction("Damage taken reduced by 25% for next hit!", 0f));
     }
 
-    public void Incinerate() {
+    public void Incinerate()
+    {
         lastMove = Incinerate;
         ExecuteMove(() =>
         {
@@ -278,11 +221,10 @@ SorcererSkills.SetActive(false);
             VolcanicHex();
             PassTurn();
         }, () => "Damaged enemy by " + damageOutput + " with Incinerate!");
-
    }
 
-
-   public void Enervate() {
+   public void Enervate()
+   {
         lastMove = Enervate;
         ExecuteMove(() =>
         {
@@ -318,11 +260,10 @@ SorcererSkills.SetActive(false);
             VolcanicHex();
             PassTurn();
         }, () => "Damaged enemy by " + damageOutput + " with Enervate!");
-
    }
 
-
-   public void Ward() {
+    public void Ward()
+    {
         lastMove = Ward;
         ExecuteMove(() =>
         {
@@ -332,12 +273,10 @@ SorcererSkills.SetActive(false);
             knightAlly.GetComponent<KnightMoveset>().gotShielded(shieldOutput);
             PassTurn();
         }, () => "Ward used on Knight!");
+    }
 
-   }
-
-
-   public void Scourge()
-   {
+    public void Scourge()
+    {
         lastMove = Scourge;
         ExecuteMove(() =>
         {
@@ -347,110 +286,114 @@ SorcererSkills.SetActive(false);
             knightAlly.GetComponent<KnightMoveset>().gotThorns(thornsOutput);
             PassTurn();
         }, () => "Scourge used on Knight!");
-
-   }
-
-
-   public void VolcanicHex() {
-       if (volcanicTally >= 30) {
-damageOutput = Random.Range(1, 13) + mightBonus;
-if (squirrelFight == 1) {
-firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 2) {
-   firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-}
-volcanicTally = 0;
-       }
+    }
 
 
-   }
+    public void VolcanicHex()
+    {
+        if (volcanicTally >= 30)
+        {
+            damageOutput = Random.Range(1, 13) + mightBonus;
 
+            if (squirrelFight == 1) 
+                firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
 
-public void RallyIncinerate() {
-damageOutput = Random.Range(1, 4) + Random.Range(1, 4) + mightBonus;
-if (squirrelFight == 1) {
-firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 2) {
-   firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-}
+            else if (squirrelFight == 2)
+            {
+                firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+                firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+            }
+            
+            else if (squirrelFight == 3) 
+                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+
+            volcanicTally = 0;
+        }
+    }
+
+    public void RallyIncinerate()
+    {
+        damageOutput = Random.Range(1, 4) + Random.Range(1, 4) + mightBonus;
+
+        if (squirrelFight == 1)
+            firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+
+        else if (squirrelFight == 2)
+        {
+            firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+            firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+        }
+
+        else if (squirrelFight == 3)
+            firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+
 Debug.Log("Damaged enemy by " + damageOutput + " with Incinerate");
-   }
+    }
 
+    public void RallyEnervate()
+    {
+        damageOutput = Random.Range(1, 4) + mightBonus;
 
-   public void RallyEnervate() {
-damageOutput = Random.Range(1, 4) + mightBonus;
-if (squirrelFight == 1) {
-firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 2) {
-   firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-}
-if (squirrelFight == 1) {
-       firstEnemy.GetComponent<DemoEnemy>().gotStunned();
-}
-else if (squirrelFight == 2) {
-        firstEnemy.GetComponent<SquirrelEnemy>().gotStunned();
-}
-else if (squirrelFight == 3) {
-firstEnemy.GetComponent<TigerBoss>().gotStunned();
-}
-       Debug.Log("Damaged enemy by " + damageOutput);
-   }
+        if (squirrelFight == 1)
+        {
+            firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput);
+            firstEnemy.GetComponent<DemoEnemy>().gotStunned();
+        }
 
+        else if (squirrelFight == 2)
+        {
+            firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+            firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+            firstEnemy.GetComponent<SquirrelEnemy>().gotStunned();
+        }
 
-   public void IntercedeSorcerer() {
-       Debug.Log("Intercede on Sorcerer!");
-       intercedeOn = true;
-   }
+        else if (squirrelFight == 3)   
+        {
+            firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            firstEnemy.GetComponent<TigerBoss>().gotStunned();
+        }
 
+Debug.Log("Damaged enemy by " + damageOutput);
+    }
 
-       public void NotSquirrelFight() {
-squirrelFight = 1;
-   }
+    public void IntercedeSorcerer()
+    {
+Debug.Log("Intercede on Sorcerer!");
+        intercedeOn = true;
+    }
 
+    public void NotSquirrelFight()
+    {
+        squirrelFight = 1;
+    }
 
-   public void SquirrelFight() {
-squirrelFight = 2;
-   }
+    public void SquirrelFight()
+    {
+        squirrelFight = 2;
+    }
 
+    public void NumberedFight(int amount)
+    {
+        squirrelFight = amount;
+    }
 
-       public void NumberedFight(int amount) {
-squirrelFight = amount;
-   }
+    void UpdateHUD()
+    {
+        //  HealthText.text = "HP: " + curHealth;
+    }
 
+    public void OpenSorcererSkills()
+    {
+        if (!printing)
+            SorcererSkills.SetActive(true);
+    }
 
-   void UpdateHUD()
-   {
-     //  HealthText.text = "HP: " + curHealth;
-   }
-
-
-      public void OpenSorcererSkills()
-   {
-       if (!printing)
-           SorcererSkills.SetActive(true);
-   }
-
-
-   public void Lose() {
-loseCondition = true;
-LoseText.SetActive(true);
+    public void Lose()
+    {
+        loseCondition = true;
+        LoseText.SetActive(true);
 Debug.Log("You lose!");
-}
+    }
 
     void ExecuteMove(System.Action move, System.Func<string> getMessage)
     {
@@ -495,53 +438,38 @@ Debug.Log("You lose!");
     }
 
     public void PassTurn()
-   {
+    {
         healUsedThisTurn = false;
         damageReductionUsedThisTurn = false;
 
-        if (loseCondition) return;
+        if (loseCondition)
+            return;
 
+        if (squirrelFight == 1) 
+            firstEnemy.GetComponent<DemoEnemy>().BeginTurn();
 
+        else if (squirrelFight == 2) 
+            firstEnemy.GetComponent<SquirrelEnemy>().BeginTurn();
 
+        else if (squirrelFight == 3) 
+            firstEnemy.GetComponent<TigerBoss>().BeginTurn();
 
+        battlePhase.GetComponent<BattlePhase>().ActionInputted();
+    }
 
-if (squirrelFight == 1) {
-       firstEnemy.GetComponent<DemoEnemy>().BeginTurn();
-}
-else if (squirrelFight == 2) {
-       firstEnemy.GetComponent<SquirrelEnemy>().BeginTurn();
-}
-else if (squirrelFight == 3) {
-       firstEnemy.GetComponent<TigerBoss>().BeginTurn();
-      
-}
+    IEnumerator printCurrentAction(string toPrint, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        yield return new WaitUntil(() => !printing);
 
+        printing = true;
 
-battlePhase.GetComponent<BattlePhase>().ActionInputted();
+        currentAction.enabled = true;
+        currentAction.text = toPrint;
 
+        yield return new WaitForSeconds(5);
 
-   }
-
-
-   IEnumerator printCurrentAction(string toPrint, float delay)
-   {
-       yield return new WaitForSeconds(delay);
-       yield return new WaitUntil(() => !printing);
-
-
-       printing = true;
-
-
-       currentAction.enabled = true;
-       currentAction.text = toPrint;
-
-
-       yield return new WaitForSeconds(5);
-
-
-       printing = false;
-       currentAction.enabled = false;
-   }
-
-
+        printing = false;
+        currentAction.enabled = false;
+    }
 }
