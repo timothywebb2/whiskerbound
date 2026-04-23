@@ -31,7 +31,7 @@ public class FightManager : MonoBehaviour
    public Texture arcticBackground;
 
    [Header("UI/Audio/Animation")]
-   public ParentAnimation VFXObject;
+   private GameObject VFXParent;
 
    public void Start()
    {
@@ -97,6 +97,12 @@ public class FightManager : MonoBehaviour
       bearBoss.SetActive(false);
       walrusBoss.SetActive(false);
 
+      VFXParent = GameObject.FindGameObjectWithTag("EnemyVFX");
+
+      ParentAnimation VFXObject = VFXParent.transform.GetChild(0).GetComponent<ParentAnimation>();
+      ParentAnimation VFXObjectDouble1 = VFXParent.transform.GetChild(1).GetComponent<ParentAnimation>();
+      ParentAnimation VFXObjectDouble2 = VFXParent.transform.GetChild(2).GetComponent<ParentAnimation>();
+
       switch(PlayerPrefs.GetInt("Enemy"))
       {
          case 1:
@@ -106,7 +112,8 @@ public class FightManager : MonoBehaviour
             break;
          case 2:
             squirrelEnemy.SetActive(true);
-            VFXObject.parent = squirrelEnemy.transform.GetChild(0).gameObject;
+            VFXObjectDouble1.parent = squirrelEnemy.transform.GetChild(0).gameObject;
+            VFXObjectDouble2.parent = squirrelEnemy.transform.GetChild(0).gameObject;
             background.texture = forestBackground;
             break;
          case 3:

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class SquirrelEnemy : MonoBehaviour
@@ -14,6 +15,8 @@ public class SquirrelEnemy : MonoBehaviour
     [Header("Enemy Values")]
     public int curHealth1;
     public int curHealth2;
+    private int maxHealth1;
+    private int maxHealth2;
     public int damageType;
     public bool squirrelCoordination;
     public bool squirrelOneDown;
@@ -24,6 +27,8 @@ public class SquirrelEnemy : MonoBehaviour
     public int damageOutput;
     public int attackedEnemy;
     public int multiHitting;
+    private bool isProvoked1;
+    private bool isProvoked2;
 
     [Header("Fight Management")]
     public GameObject fightManager;
@@ -40,6 +45,11 @@ public class SquirrelEnemy : MonoBehaviour
     private AudioSource audioSource;
     private Animator animator1;
     private Animator animator2;
+    public GameObject enemyVFX1;
+    public GameObject enemyVFX2;
+    private Animator VFXanimation1;
+    private Animator VFXanimation2;
+    private bool animationDone;
 
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,6 +61,8 @@ public class SquirrelEnemy : MonoBehaviour
        fightManager = GameObject.FindGameObjectWithTag("FightManager");
        curHealth1 = 30;
        curHealth2 = 30;
+       maxHealth1 = curHealth1;
+       maxHealth2 = curHealth2;
        multiHitting = 1;
        attackedEnemy = 1;
        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
@@ -66,6 +78,9 @@ public class SquirrelEnemy : MonoBehaviour
 
        animator1 = this.transform.GetChild(0).GetComponent<Animator>();
        animator2 = this.transform.GetChild(1).GetComponent<Animator>();
+
+       VFXanimation1 = enemyVFX1.GetComponent<Animator>();
+       VFXanimation2 = enemyVFX2.GetComponent<Animator>();
    }
 
    // Update is called once per frame
@@ -84,8 +99,9 @@ public class SquirrelEnemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public IEnumerator TakeDamage(int amount, bool isFire)
     {
+Debug.Log("SquirrelEnemy/TakeDamage: isFire is " + isFire);
         if (damageSound != null)     
             audioSource.PlayOneShot(damageSound);
 
@@ -103,8 +119,30 @@ public class SquirrelEnemy : MonoBehaviour
             if (attackedEnemy == 1)
             {
                 curHealth1 -= amount;
+                if(curHealth1 < 0)
+                    curHealth1 = 0;
                 EnemyHealthBar1.value = curHealth1;
                 UpdateHUD();
+
+                // set VFX to damaged animation
+                if(isFire)
+                {
+                    VFXanimation1.SetBool("isFireAttack", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Pausing to play fire animation");
+                    yield return new WaitForSeconds(1.5f);
+                }
+
+                else
+                {
+                    VFXanimation1.SetBool("isAttacked", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Playing slash animation");
+                    yield return new WaitUntil(() => animationDone);
+                    animationDone = false;
+                }
+
+                VFXanimation1.SetBool("isAttacked", false); // reset VFX
+                VFXanimation1.SetBool("isFireAttack", false);
+
 Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " health");
                 if (curHealth1 <= 0)
                     squirrelOneDown = true;
@@ -113,8 +151,29 @@ Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " heal
             else if (attackedEnemy == 2)
             {
                 curHealth2 -= amount;
+                if(curHealth2 < 0)
+                    curHealth2 = 0;
                 EnemyHealthBar2.value = curHealth2;
                 UpdateHUD();
+                // set VFX to damaged animation
+                if(isFire)
+                {
+                    VFXanimation2.SetBool("isFireAttack", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Pausing to play fire animation");
+                    yield return new WaitForSeconds(1.5f);
+                }
+
+                else
+                {
+                    VFXanimation2.SetBool("isAttacked", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Playing slash animation");
+                    yield return new WaitUntil(() => animationDone);
+                    animationDone = false;
+                }
+
+                VFXanimation2.SetBool("isAttacked", false); // reset VFX
+                VFXanimation2.SetBool("isFireAttack", false);
+
 Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " health");
                 if (curHealth2 <= 0) 
                     squirrelTwoDown = true;
@@ -148,9 +207,12 @@ Debug.Log("Squrrel 1 has " + curHealth1 + " and Squirrel 2 has " + curHealth2);
             Victory();   
     }
 
-    public void gotGoaded()
+    public void gotGoaded(int target)
     {
-        //Here is where the code will be for the enemy when they're goaded once allies are added
+        if(target == 1)
+            isProvoked1 = true;
+        else if (target == 2)
+            isProvoked2 = true;
     }
 
     public void gotStunned()
@@ -163,8 +225,18 @@ Debug.Log("Squrrel 1 has " + curHealth1 + " and Squirrel 2 has " + curHealth2);
         if (squirrelOneDown == false)
         {
 Debug.Log("Squirrel 1 has started attacking!");
-            selectingMove = Random.Range(1, 3);
-            selectingTarget = Random.Range(1, 3);
+            if(isProvoked1)
+            {
+Debug.Log("Squirrel 1 is provoked! Will only attack Knight!");
+                selectingMove = 1;
+                selectingTarget = 1;
+            }
+            
+            else
+            {
+                selectingMove = Random.Range(1, 3);
+                selectingTarget = Random.Range(1, 3);
+            }
 
             animator1.SetBool("isAttacking", true);
 
@@ -196,6 +268,8 @@ Debug.Log("Recuperate is used!");
 
             animator1.SetBool("isAttacking", false);
         }
+
+        isProvoked1 = false;
 Debug.Log("Squirrel 1 has finished attacking!");
         BeginTurn2();
     }
@@ -205,8 +279,19 @@ Debug.Log("Squirrel 1 has finished attacking!");
         if (squirrelTwoDown == false)
         {
 Debug.Log("Squirrel 2 has started attacking!");
-            selectingMove = Random.Range(1, 3);
-            selectingTarget = Random.Range(1, 3);
+
+            if(isProvoked1)
+            {
+Debug.Log("Squirrel 1 is provoked! Will only attack Knight!");
+                selectingMove = 1;
+                selectingTarget = 1;
+            }
+
+            else
+            {
+                selectingMove = Random.Range(1, 3);
+                selectingTarget = Random.Range(1, 3);
+            }
 
             animator2.SetBool("isAttacking", true);
         
@@ -235,7 +320,8 @@ Debug.Log("Recuperate is used!");
                 curHealth2 += damageOutput;
                 EnemyHealthBar2.value = curHealth2;
             }
-Debug.Log("Squirrel 1 has finished attacking!");
+Debug.Log("Squirrel 2 has finished attacking!");
+            isProvoked2 = false;
             animator2.SetBool("isAttacking", false);
         }
     }
@@ -247,8 +333,8 @@ Debug.Log("Squirrel 1 has finished attacking!");
 
     void UpdateHUD()
     {
-        //HealthText1.text = "HP: " + curHealth1;
-        //HealthText2.text = "HP: " + curHealth2;
+        HealthText1.text = curHealth1 + "/" + maxHealth1;
+        HealthText2.text = curHealth2 + "/" + maxHealth2;
     }
 
     public void Victory()
@@ -258,5 +344,15 @@ Debug.Log("Squirrel 1 has finished attacking!");
         VictoryText.SetActive(true);
     
 Debug.Log("Victory achieved!");
+    }
+
+    /*public void AnimationHit()
+    {
+        animationHit = true;
+    }*/
+
+    public void AnimationDone()
+    {
+        animationDone = true;
     }
 }

@@ -43,7 +43,6 @@ public class KnightMoveset : MonoBehaviour
     private Animator animator;
     public GameObject VFXObject;
     private Animator VFXanimator;
-    private bool animationDone;
 
     [Header("Items")]
     //ITEM booleans
@@ -101,7 +100,7 @@ public class KnightMoveset : MonoBehaviour
 
     }
 
-    public IEnumerator TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         if (intercedeOn == false)
         {
@@ -111,13 +110,13 @@ public class KnightMoveset : MonoBehaviour
                 finalDamage = Mathf.RoundToInt(amount * damageReductionPercent);
                 damageReductionActive = false; //consumes the effect
 
-Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
+Debug.Log("KnightMoveset/TakeDamage: Damage reduce from " + amount + " to " + finalDamage);
             }
 
             curHealth -= finalDamage;
             Knighthealthbar.value = curHealth;
            
-           VFXanimator.SetBool("isAttacked", true);
+            VFXanimator.SetBool("isAttacked", true);
            
             if (damageSound != null)
                 audioSource.PlayOneShot(damageSound);
@@ -126,25 +125,24 @@ Debug.Log("Damage reduce from " + amount + " to " + finalDamage);
                 StartCoroutine(printCurrentAction("Knight took " + finalDamage + " damage!", 1f));
             if (hasThorns > 0)
             {
+Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
                 if (squirrelFight == 1) 
                     StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(thornDamage, false));
                
                 else if (squirrelFight == 2)
-                    firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage);
+                    StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage, false));
                
                 else if (squirrelFight == 3)
                     firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage);
-               
-                yield return new WaitUntil(() => animationDone);
-                animationDone = false;
 
+                VFXanimator.SetBool("isAttacked", false);
                 hasThorns -= 1;
             }
        }
 
        else if (intercedeOn == true)
        {
-Debug.Log("Damage blocked!");
+Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
             if (!printing)
                 StartCoroutine(printCurrentAction("Damage blocked!", 1f));
             intercedeOn = false;
@@ -188,7 +186,7 @@ Debug.Log("Damage blocked!");
             VFXanimator.SetBool("isHealing", true);
             //PUT HEAL SFX
 
-    Debug.Log("Healed for " + actualHeal);
+    Debug.Log("KnightMoveset/HealPotion: Healed for " + actualHeal);
             if (!printing)
                 StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
             
@@ -215,7 +213,7 @@ Debug.Log("Damage blocked!");
         damageReductionUsedThisTurn = true;
         damageReductionActive = true;
 
-        Debug.Log("Damage reduction activated!");
+Debug.Log("KnightMoveset/DamageReductionPotion: Damage reduction activated!");
 
         if (!printing)
             StartCoroutine(printCurrentAction("Damage taken reduced by 25% for next hit!", 0f));
@@ -235,7 +233,7 @@ Debug.Log("Damage blocked!");
             }
             else if (squirrelFight == 2)
             {
-                firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, false));
                 firstEnemy.GetComponent<SquirrelEnemy>().gotGoaded();
             }
             else if (squirrelFight == 3)
@@ -243,7 +241,7 @@ Debug.Log("Damage blocked!");
                 firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
                 firstEnemy.GetComponent<TigerBoss>().gotGoaded();
             }
-            Debug.Log("Damaged enemy by " + damageOutput + " with Provoke");
+Debug.Log("KnightMoveset/Provoke: Damaged enemy by " + damageOutput + " with Provoke");
             PassTurn();
         }, () => "Damaged enemy by " + damageOutput + " with Provoke!");
 
@@ -263,13 +261,13 @@ Debug.Log("Damage blocked!");
             else if (squirrelFight == 2)
             {
                 firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-                firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, false));
             }
             else if (squirrelFight == 3)
             {
                 firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
             }
-            Debug.Log("Damaged enemy by " + damageOutput);
+    Debug.Log("KnightMoveset/Cleave: Damaged enemy by " + damageOutput + " with Cleave");
             PassTurn();
         }, () => "Damaged enemy by " + damageOutput + " with Cleave!");
    }
@@ -281,7 +279,7 @@ Debug.Log("Damage blocked!");
 
             // intercedeOn = true;
             sorcererAlly.GetComponent<SorcererMoveset>().IntercedeSorcerer();
-            Debug.Log("Intercede on Sorcerer!");
+Debug.Log("KnightMoveset/Intercede: Intercede on Sorcerer!");
             PassTurn();
         }, () => "Intercede on Sorceror!");
    }
@@ -314,7 +312,7 @@ Debug.Log("Damage blocked!");
             {
                 sorcererAlly.GetComponent<SorcererMoveset>().RallyEnervate();
             }
-            Debug.Log("Rally being used!");
+Debug.Log("Rally being used!");
             PassTurn();
         }, () => "Rally used on Sorcerer!");
    }
@@ -379,20 +377,20 @@ Debug.Log("Damage blocked!");
 
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
-Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
+//Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
         
         if(printing)
         {
-Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing until printing is false");
+//Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing until printing is false");
             yield return new WaitUntil(() => !printing);
         }
 
         printing = true;
-Debug.Log("Current action enabled");
+//Debug.Log("KnightMoveset/printCurrentAction: Current action enabled");
         currentAction.enabled = true;
         currentAction.text = toPrint;
-Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for 5 seconds");
+//Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for 5 seconds");
         yield return new WaitForSeconds(3);
 
         printing = false;
@@ -414,15 +412,15 @@ Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for 5 seconds"
     {
         animator.SetBool("isAttacking", true);
         move.Invoke();
-Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
+//Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
         yield return StartCoroutine(printCurrentAction(getMessage(), 0f));
 
         if (doubleCastActive && Random.value <= 1f)
         {
-            Debug.Log("Double cast triggered!");
+//Debug.Log("KnightMoveset/ExecuteMoveRoutine: Double cast triggered!");
 
             move.Invoke();
-Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
+//Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
             yield return StartCoroutine(printCurrentAction(getMessage + " (Double Cast!)", 0f));
         }
 
@@ -446,7 +444,7 @@ Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCu
 
         doubleCastActive = true;
 
-        Debug.Log("Double Cast ACTIVATED!");
+//Debug.Log("KnightMoveset/ActivateDoubleCast: Double Cast ACTIVATED!");
 
         if (!printing)
             StartCoroutine(printCurrentAction("Double Cast activated!", 0f));
@@ -456,11 +454,6 @@ Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCu
     {
         loseCondition = true;
         LoseText.SetActive(true);
-Debug.Log("You lose!");
-    }
-
-    public void AnimationDone()
-    {
-        animationDone = true;
+Debug.Log("KnightMoveset/Lose: You lose!");
     }
 }
