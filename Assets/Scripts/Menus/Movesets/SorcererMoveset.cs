@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class SorcererMoveset : MonoBehaviour
 {
     [Header("Sorcerer Values")]
-    public GameObject SorcererSkills;
     public int maxHealth;
     public int curHealth;
     public int damageType;
@@ -24,7 +23,7 @@ public class SorcererMoveset : MonoBehaviour
     public bool intercedeOn;
 
     [Header("Allies")]
-    public GameObject knightAlly;
+    public KnightMoveset knightAlly;
 
     [Header("Fight Management")]
     public int squirrelFight;
@@ -34,6 +33,9 @@ public class SorcererMoveset : MonoBehaviour
     public bool loseCondition;
 
     [Header("UI/Audio")]
+    public GameObject SorcererSkills;
+    public GameObject opacity;
+    public GameObject closeButton;
     public TextMeshProUGUI HealthText;
     public GameObject LoseText;
     public Slider Sorcererhealthbar;
@@ -41,7 +43,7 @@ public class SorcererMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
-    private Animator animator;
+    public Animator animator;
     public GameObject VFXObject;
     private Animator VFXanimator;
 
@@ -65,7 +67,7 @@ public class SorcererMoveset : MonoBehaviour
         rallyOrNot = false;
         volcanicTally = 0;
         // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-        knightAlly = GameObject.FindGameObjectWithTag("KnightBattle");
+        knightAlly = GameObject.FindGameObjectWithTag("KnightBattle").GetComponent<KnightMoveset>();
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         // intercedeOn = false;
@@ -129,12 +131,12 @@ Debug.Log("SorcererMoveset/TakeDamage: Damage blocked!");
 
         if (curHealth >= 25)
         {
-            knightAlly.GetComponent<KnightMoveset>().UnLastStand();
+            knightAlly.UnLastStand();
         }
         
         else if (curHealth < 25)
         {
-            knightAlly.GetComponent<KnightMoveset>().LastStand();
+            knightAlly.LastStand();
         }
         
         if (curHealth <= 0)
@@ -285,7 +287,7 @@ Debug.Log("SorcererMoveset/Enervate: Damaged enemy by " + damageOutput);
 
 Debug.Log("SorcererMoveset/Ward: Ward activated!");
             shieldOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
-            knightAlly.GetComponent<KnightMoveset>().gotShielded(shieldOutput);
+            knightAlly.gotShielded(shieldOutput);
             PassTurn();
         }, () => "Ward used on Knight!");
     }
@@ -298,7 +300,7 @@ Debug.Log("SorcererMoveset/Ward: Ward activated!");
 
 Debug.Log("SorcererMoveset/Scourge: Scourge activated!");
             thornsOutput = Random.Range(1, 7) + mightBonus;
-            knightAlly.GetComponent<KnightMoveset>().gotThorns(thornsOutput);
+            knightAlly.gotThorns(thornsOutput);
             PassTurn();
         }, () => "Scourge used on Knight!");
     }
@@ -397,11 +399,63 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
         HealthText.text = curHealth + "/" + maxHealth;
     }
 
-    public void OpenSorcererSkills()
-    {
-        if (!printing)
-            SorcererSkills.SetActive(true);
+     public void OpenKnightSkills()
+    {   
+        // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
+        // ADD CLERIC
+        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false)
+        {
+            // check if enemies are in middle of attack or being attacked/healed
+            bool enemyIsAttacking = true;
+            bool enemyIsAttacking2 = false;
+
+            bool enemyVFX = true;
+            bool enemyVFX2 = false;
+            if (squirrelFight == 1)
+            {
+                DemoEnemy enemy = firstEnemy.GetComponent<DemoEnemy>();
+                enemyIsAttacking = enemy.animator.GetBool("isAttacking");
+
+                var stateInfo = enemy.VFXanimation.GetCurrentAnimatorStateInfo(0);
+                if(stateInfo.IsTag("Neutral"))
+                    enemyVFX = false;
+            }
+            else if (squirrelFight == 2)
+            {
+                SquirrelEnemy enemy = firstEnemy.GetComponent<SquirrelEnemy>();
+                enemyIsAttacking = enemy.animator1.GetBool("isAttacking");
+                enemyIsAttacking2 = enemy.animator2.GetBool("isAttacking");
+
+                var stateInfo = enemy.VFXanimation1.GetCurrentAnimatorStateInfo(0);
+                var stateInfo2 = enemy.VFXanimation2.GetCurrentAnimatorStateInfo(0);
+                if(stateInfo.IsTag("Neutral"))
+                    enemyVFX = false;
+                if(stateInfo2.IsTag("Neutral"))
+                    enemyVFX2 = false;
+            }
+            /*else if (squirrelFight == 3)
+            {
+                TigerBoss enemy = firstEnemy.GetComponent<TigerBoss>();
+                enemyIsAttacking = enemy.animator.GetBool("isAttacking");
+
+                var stateInfo = enemy.VFXanimation.GetCurrentAnimatorStateInfo(0);
+                if(stateInfo.IsTag("Neutral"))
+                    enemyVFX = false;
+            }*/
+            if(!enemyIsAttacking && !enemyIsAttacking2 && !enemyVFX && !enemyVFX2)
+            {
+                SorcererSkills.SetActive(true);
+                opacity.SetActive(true);
+                closeButton.SetActive(true);
+            }
+            else
+Debug.Log("SorcererMoveset/OpenSorcererSkills: Can't open menu! Enemy is attacking or being attacked/healing!");
+        }
+
+        else
+Debug.Log("SorcererMoveset/OpenSorcererSkills: Can't open menu! Log is printing or player is attacking or being attacked/healing!");
     }
+
 
     public void Lose()
     {

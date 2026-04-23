@@ -37,9 +37,9 @@ public class DemoEnemy : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("Animation")]
-    private Animator animator;
+    public Animator animator;
     public GameObject enemyVFX;
-    private Animator VFXanimation;
+    public Animator VFXanimation;
     private bool animationHit;
     private bool animationDone;
     private bool isKnightAttacking;
@@ -119,8 +119,7 @@ Debug.Log("DemoEnemy/TakeDamage: Pausing to play fire animation");
         else
         {   
 Debug.Log("DemoEnemy/TakeDamage: Playing slash animation");
-            yield return new WaitUntil(() => animationDone);
-            animationDone = false;
+            yield return new WaitForSeconds(1.5f);
         }
         
         VFXanimation.SetBool("isAttacked", false); // reset VFX
@@ -138,7 +137,7 @@ Debug.Log("Enemy took " + amount + " damage and has " + curHealth + " health");
 
     public void gotStunned()
     {
-        gotStunned = true;
+        isStunned = true;
     }
 
     public IEnumerator BeginTurn()

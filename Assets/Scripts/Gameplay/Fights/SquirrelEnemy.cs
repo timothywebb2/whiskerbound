@@ -43,12 +43,12 @@ public class SquirrelEnemy : MonoBehaviour
     public Slider EnemyHealthBar2;
     public AudioClip damageSound;
     private AudioSource audioSource;
-    private Animator animator1;
-    private Animator animator2;
+    public Animator animator1;
+    public Animator animator2;
     public GameObject enemyVFX1;
     public GameObject enemyVFX2;
-    private Animator VFXanimation1;
-    private Animator VFXanimation2;
+    public Animator VFXanimation1;
+    public Animator VFXanimation2;
     private bool animationDone;
 
 
@@ -107,6 +107,114 @@ Debug.Log("SquirrelEnemy/TakeDamage: isFire is " + isFire);
 
         if (squirrelOneDown == false && squirrelTwoDown == false) 
             attackedEnemy = Random.Range(1, 3);
+       
+        if (squirrelOneDown == true && squirrelTwoDown == false) 
+            attackedEnemy = 2;
+       
+        if (squirrelOneDown == false && squirrelTwoDown == true)
+            attackedEnemy = 1;
+       
+        if (multiHitting == 1)
+        {
+            if (attackedEnemy == 1)
+            {
+                curHealth1 -= amount;
+                if(curHealth1 < 0)
+                    curHealth1 = 0;
+                EnemyHealthBar1.value = curHealth1;
+                UpdateHUD();
+
+                // set VFX to damaged animation
+                if(isFire)
+                {
+                    VFXanimation1.SetBool("isFireAttack", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Pausing to play fire animation");
+                    yield return new WaitForSeconds(1.5f);
+                }
+
+                else
+                {
+                    VFXanimation1.SetBool("isAttacked", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Playing slash animation");
+                    yield return new WaitUntil(() => animationDone);
+                    animationDone = false;
+                }
+
+                VFXanimation1.SetBool("isAttacked", false); // reset VFX
+                VFXanimation1.SetBool("isFireAttack", false);
+
+Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " health");
+                if (curHealth1 <= 0)
+                    squirrelOneDown = true;
+            }
+
+            else if (attackedEnemy == 2)
+            {
+                curHealth2 -= amount;
+                if(curHealth2 < 0)
+                    curHealth2 = 0;
+                EnemyHealthBar2.value = curHealth2;
+                UpdateHUD();
+                // set VFX to damaged animation
+                if(isFire)
+                {
+                    VFXanimation2.SetBool("isFireAttack", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Pausing to play fire animation");
+                    yield return new WaitForSeconds(1.5f);
+                }
+
+                else
+                {
+                    VFXanimation2.SetBool("isAttacked", true);
+Debug.Log("SquirrelEnemy/TakeDamage: Playing slash animation");
+                    yield return new WaitUntil(() => animationDone);
+                    animationDone = false;
+                }
+
+                VFXanimation2.SetBool("isAttacked", false); // reset VFX
+                VFXanimation2.SetBool("isFireAttack", false);
+
+Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " health");
+                if (curHealth2 <= 0) 
+                    squirrelTwoDown = true;
+            }
+        }
+    
+        if (multiHitting == 2)
+        {
+            curHealth1 -= amount;
+            curHealth2 -= amount;
+            EnemyHealthBar1.value = curHealth1;
+            EnemyHealthBar2.value = curHealth2;
+            UpdateHUD();
+
+Debug.Log("Both enemies took " + amount + " damage");
+Debug.Log("Squrrel 1 has " + curHealth1 + " and Squirrel 2 has " + curHealth2);
+
+            if (curHealth1 <= 0)
+                squirrelOneDown = true;
+
+            if (curHealth2 <= 0)
+                squirrelTwoDown = true;
+            
+            multiHitting = 1;
+        }
+
+        if (squirrelOneDown == true || squirrelTwoDown == true)
+            squirrelCoordination = false;
+
+        if (squirrelOneDown == true && squirrelTwoDown == true) 
+            Victory();   
+    }
+
+    // overload method to apply status effects
+    public IEnumerator TakeDamage(int target, int amount, bool isFire)
+    {
+Debug.Log("SquirrelEnemy/TakeDamage: isFire is " + isFire);
+        if (damageSound != null)     
+            audioSource.PlayOneShot(damageSound);
+
+        attackedEnemy = target;
        
         if (squirrelOneDown == true && squirrelTwoDown == false) 
             attackedEnemy = 2;
@@ -280,7 +388,7 @@ Debug.Log("Squirrel 1 has finished attacking!");
         {
 Debug.Log("Squirrel 2 has started attacking!");
 
-            if(isProvoked1)
+            if(isProvoked2)
             {
 Debug.Log("Squirrel 1 is provoked! Will only attack Knight!");
                 selectingMove = 1;

@@ -22,7 +22,7 @@ public class TigerBoss : MonoBehaviour
     public Slider EnemyHealthBar;
     public AudioClip damageSound;
     private AudioSource audioSource;
-    private Animator animator;
+    public Animator animator;
     public GameObject fightManager;
 
     //Start is called once before the first execution of Update after the MonoBehaviour is created
