@@ -19,7 +19,6 @@ public class DemoEnemy : MonoBehaviour
     public int selectingMove;
     public int selectingTarget;
     public int damageOutput;
-    private bool fireAttack; // checks if this enemy was hit with a sorcerer attack for proper VFX animation
     private bool isProvoked; // checks if this enemy was hit with the knight's Provoke attack
     private bool isStunned;
 
@@ -92,7 +91,6 @@ Debug.Log("DemoEnemy/Update: Change scene");
    public IEnumerator TakeDamage(int amount, bool isFire)
    {
 Debug.Log("DemoEnemy/TakeDamage: isFire is " + isFire);
-        fireAttack = isFire;
         // set VFX to damaged animation
         if(isFire)
             VFXanimation.SetBool("isFireAttack", true);
@@ -110,17 +108,7 @@ Debug.Log("DemoEnemy/TakeDamage: isFire is " + isFire);
         if (damageSound != null) // play damage sound 
             audioSource.PlayOneShot(damageSound);
 
-        if(isFire)
-        {
-Debug.Log("DemoEnemy/TakeDamage: Pausing to play fire animation");
-            yield return new WaitForSeconds(1.5f);
-        }
-        
-        else
-        {   
-Debug.Log("DemoEnemy/TakeDamage: Playing slash animation");
-            yield return new WaitForSeconds(1.5f);
-        }
+        yield return new WaitForSeconds(1.5f);
         
         VFXanimation.SetBool("isAttacked", false); // reset VFX
         VFXanimation.SetBool("isFireAttack", false);
@@ -150,10 +138,8 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
 
         int stun = 4;
         if(isStunned)
-        {
             stun = Random.Range(1, 5); //generates number 1-4, 1 means the enemy skips turn
-        }
-
+        
         if(stun == 1)
         {
             Debug.Log("Enemy is stunned! Skipping turn!");
@@ -173,6 +159,9 @@ Debug.Log("Enemy is provoked! Will only attack Knight!");
             {
                 selectingMove = Random.Range(1, 3);
                 selectingTarget = Random.Range(1, 3);
+
+                //FOR CLERIC
+                //selectingTarget = Random.Range(1, 4);
             }
             
             if (selectingMove == 1) 
@@ -180,7 +169,7 @@ Debug.Log("Enemy is provoked! Will only attack Knight!");
                 damageOutput = Random.Range(1, 7) + 1;
                 
                 animator.SetBool("isAttacking", true); // start attack animation
-Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation event");
+//Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation event");
                 yield return new WaitUntil(() => animationHit); // wait for animation to show enemy hitting
                 animationHit = false; // reset animation
                 
@@ -191,11 +180,18 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Knight!");
                     knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
                 }
                 
-                if (selectingTarget == 2)
+                else if (selectingTarget == 2)
                 {
 Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Sorcerer!");
                     sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
                 }
+
+                /*else if (selectingTarget == 3)
+                {
+Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
+                    clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
+                }*/
+                
 //Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation is done");
                 yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
                 animationDone = false;
@@ -204,12 +200,11 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Sorcerer!");
             
             else if (selectingMove == 2)
             {
-Debug.Log("DemoEnemy/BeginTurn: Recuperate is used!");
                 VFXanimation.SetBool("isHealing", true);
                 //ADD HEAL SFX
                 damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
                 curHealth += damageOutput;
-//Debug.Log("DemoEnemy/TakeDamage: Coroutine is pausing for 2 seconds");
+Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");
                 yield return new WaitForSeconds(2);
                 VFXanimation.SetBool("isHealing", false);
             }

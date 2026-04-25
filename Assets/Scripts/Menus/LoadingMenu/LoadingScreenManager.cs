@@ -9,7 +9,7 @@ public class LoadingScreenManager : MonoBehaviour
     public GameObject loadingPanel;
     public float overlayTime = 2.5f;
 
-    bool firstSceneLoaded = false;
+    //bool firstSceneLoaded = false;
 
     void Start()
     {

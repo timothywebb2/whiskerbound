@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KnightCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 139094269387944111, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 207248460806418843, guid: 9e72ac9ac0c444b43b001fb45a1575a0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4559,11 +4563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608249490737376889, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 438.15234
+      value: 438.15308
       objectReference: {fileID: 0}
     - target: {fileID: 2608249490737376889, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: -540.088
       objectReference: {fileID: 0}
     - target: {fileID: 2703761458688661314, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4591,7 +4595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3045687139941636675, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540
+      value: -540.088
       objectReference: {fileID: 0}
     - target: {fileID: 3167272903013229459, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8135,8 +8139,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -10397.738}
   m_LocalScale: {x: -0.8765625, y: 0.8765625, z: 0.8765625}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1663101015}
+  m_Children: []
   m_Father: {fileID: 1621476412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
@@ -8313,7 +8316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8f7ec2f251424de4a8447be564576242, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89f347cd6a0672b4e813da4f921137e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10431,7 +10434,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098282883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00024414062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10441,7 +10444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -172, y: -163}
+  m_AnchoredPosition: {x: -172.00018, y: -163.00012}
   m_SizeDelta: {x: 212, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098282885
@@ -13919,7 +13922,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417535329}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00024414062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13929,7 +13932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -166, y: -168}
+  m_AnchoredPosition: {x: -166.00018, y: -167.99997}
   m_SizeDelta: {x: 212, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1417535331
@@ -15632,6 +15635,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 786045990}
+  - {fileID: 1663101015}
   m_Father: {fileID: 239643199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654462263
@@ -15733,18 +15737,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663101014}
-  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10397.738}
+  m_LocalScale: {x: 0.8765625, y: 0.8765625, z: 0.8765625}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1910464125}
   - {fileID: 1675113907}
-  m_Father: {fileID: 786045990}
+  m_Father: {fileID: 1621476412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -171.27002, y: -170}
+  m_AnchoredPosition: {x: 1122.6445, y: -61.01564}
   m_SizeDelta: {x: 212, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1663101016
@@ -15810,6 +15814,7 @@ GameObject:
   - component: {fileID: 1665003085}
   - component: {fileID: 1665003084}
   - component: {fileID: 1665003083}
+  - component: {fileID: 1665003086}
   m_Layer: 5
   m_Name: EnemySprite (1)
   m_TagString: Untagged
@@ -15897,6 +15902,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665003081}
   m_CullTransparentMesh: 1
+--- !u!114 &1665003086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665003081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83347fa7dde80104099b49526ecac277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParentAnimation
+  parent: {fileID: 2064551317}
 --- !u!1 &1665078458
 GameObject:
   m_ObjectHideFlags: 0
@@ -19663,10 +19681,8 @@ MonoBehaviour:
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator1: {fileID: 0}
   animator2: {fileID: 0}
-  enemyVFX1: {fileID: 1621239116}
-  enemyVFX2: {fileID: 1909920923}
-  VFXanimation1: {fileID: 0}
-  VFXanimation2: {fileID: 0}
+  VFXanimation1: {fileID: 1621239118}
+  VFXanimation2: {fileID: 1909920925}
 --- !u!1 &2064871823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8423408523938321560, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
@@ -19891,6 +19907,7 @@ GameObject:
   - component: {fileID: 2112149623}
   - component: {fileID: 2112149622}
   - component: {fileID: 2112149621}
+  - component: {fileID: 2112149624}
   m_Layer: 5
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -19978,6 +19995,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112149619}
   m_CullTransparentMesh: 1
+--- !u!114 &2112149624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112149619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83347fa7dde80104099b49526ecac277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParentAnimation
+  parent: {fileID: 2064551317}
 --- !u!1 &2118593064
 GameObject:
   m_ObjectHideFlags: 0
@@ -21095,7 +21125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6834414838288178100, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -539.809
+      value: -540.088
       objectReference: {fileID: 0}
     - target: {fileID: 7147849890538234208, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -21111,7 +21141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7634188870810904404, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_text
-      value: Weaken an enemy with a spell that has a 50% chance to stun it for this
+      value: Weaken an enemy with a spell that has a 25% chance to stun it for this
         turn.
       objectReference: {fileID: 0}
     - target: {fileID: 8136872339363885925, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
@@ -21184,7 +21214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8847501208561069392, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -539.809
+      value: -540.088
       objectReference: {fileID: 0}
     - target: {fileID: 9143700594874173993, guid: 73dc8266a1c8b994881c7b4989254a4b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

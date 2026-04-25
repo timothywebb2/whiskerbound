@@ -37,7 +37,7 @@ public class BattlePhase : MonoBehaviour
             
             else if (squirrelFight == 2)
             {
-                firstEnemy.GetComponent<SquirrelEnemy>().BeginTurn();
+                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().BeginTurn());
                 battlePhaseTurn = 0;
             }
 

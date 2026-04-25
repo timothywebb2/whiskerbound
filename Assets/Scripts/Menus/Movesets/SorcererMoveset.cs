@@ -250,29 +250,22 @@ Debug.Log("SorcererMoveset/Incinerate: Damaged enemy by " + damageOutput + " wit
             if (squirrelFight == 1)
             {
                 StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
-            }
-            else if (squirrelFight == 2)
-            {
-                firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
-            }
-            else if (squirrelFight == 3)
-            {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-            }
-            volcanicTally += damageOutput;
-            if (squirrelFight == 1)
-            {
                 firstEnemy.GetComponent<DemoEnemy>().gotStunned();
             }
             else if (squirrelFight == 2)
             {
-                firstEnemy.GetComponent<SquirrelEnemy>().gotStunned();
+                //firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+                int attackedEnemy = Random.Range(1, 3);
+                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(attackedEnemy, damageOutput, true));
+                firstEnemy.GetComponent<SquirrelEnemy>().gotStunned(attackedEnemy);
             }
             else if (squirrelFight == 3)
             {
+                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
                 firstEnemy.GetComponent<TigerBoss>().gotStunned();
             }
+            volcanicTally += damageOutput;
+
 Debug.Log("SorcererMoveset/Enervate: Damaged enemy by " + damageOutput);
             VolcanicHex();
             PassTurn();
@@ -359,9 +352,9 @@ Debug.Log("SorcererMoveset/RallyIncinerate: Damaged enemy by " + damageOutput + 
 
         else if (squirrelFight == 2)
         {
-            firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+            int attackedEnemy = Random.Range(1, 3);
             StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
-            firstEnemy.GetComponent<SquirrelEnemy>().gotStunned();
+            firstEnemy.GetComponent<SquirrelEnemy>().gotStunned(attackedEnemy);
         }
 
         else if (squirrelFight == 3)   
@@ -399,7 +392,7 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
         HealthText.text = curHealth + "/" + maxHealth;
     }
 
-     public void OpenKnightSkills()
+     public void OpenSorcererSkills()
     {   
         // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
         // ADD CLERIC
@@ -428,10 +421,14 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
 
                 var stateInfo = enemy.VFXanimation1.GetCurrentAnimatorStateInfo(0);
                 var stateInfo2 = enemy.VFXanimation2.GetCurrentAnimatorStateInfo(0);
+        
                 if(stateInfo.IsTag("Neutral"))
                     enemyVFX = false;
                 if(stateInfo2.IsTag("Neutral"))
                     enemyVFX2 = false;
+
+Debug.Log("enemyVFX1 is " + enemyVFX);
+Debug.Log("enemyVFX2 is " + enemyVFX2);
             }
             /*else if (squirrelFight == 3)
             {
