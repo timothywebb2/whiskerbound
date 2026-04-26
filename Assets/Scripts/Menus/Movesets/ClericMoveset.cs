@@ -328,6 +328,41 @@ Debug.Log("Rally being used!");
         }, () => "Rally used on Sorcerer!");
    }
 
+   public void Devotion()
+    {
+        lastMove = Devotion;
+        ExecuteMove(() =>
+        {
+
+            damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + mightBonus;
+            if (squirrelFight == 1)
+            {
+                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
+                healOutput = Random.Range(1, 13);
+              knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
+              sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
+            }
+            else if (squirrelFight == 2)
+            {
+                firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
+                healOutput = Random.Range(1, 13);
+              knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
+              sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
+            }
+            else if (squirrelFight == 3)
+            {
+                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                healOutput = Random.Range(1, 13);
+              knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
+              sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
+            }
+Debug.Log("ClericMoveset/Devotion: Damaged enemy by " + damageOutput + " with Devotion");
+            VolcanicHex();
+            PassTurn();
+        }, () => "Damaged enemy by " + damageOutput + " with Devotion!");
+   }
+
     public void Scourge()
     {
         lastMove = Scourge;

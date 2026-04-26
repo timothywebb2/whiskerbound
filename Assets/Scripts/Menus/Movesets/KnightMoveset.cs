@@ -340,6 +340,14 @@ Debug.Log("Rally being used!");
         }
     }
 
+
+public void GotHealed(int amount) {
+if (curHealth + amount >= 100)
+                   curHealth = 100;
+               else
+                   curHealth += amount;
+}
+
     public void NotSquirrelFight()
     {
         squirrelFight = 1;

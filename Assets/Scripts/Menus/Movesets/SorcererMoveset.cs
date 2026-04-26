@@ -406,6 +406,13 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
         thornDamage = amount;
     }
 
+    public void GotHealed(int amount) {
+if (curHealth + amount >= 80)
+                   curHealth = 80;
+               else
+                   curHealth += amount;
+}
+
     void UpdateHUD()
     {
         HealthText.text = curHealth + "/" + maxHealth;
