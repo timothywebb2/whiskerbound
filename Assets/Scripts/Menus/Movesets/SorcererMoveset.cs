@@ -17,6 +17,8 @@ public class SorcererMoveset : MonoBehaviour
     public int damageOutputBefore; // This is temporary
     public int shieldOutput;
     public int thornsOutput;
+        int hasThorns;
+            public int thornDamage;
     public int healOutput;
     public bool rallyOrNot;
     public int volcanicTally;
@@ -24,6 +26,7 @@ public class SorcererMoveset : MonoBehaviour
 
     [Header("Allies")]
     public KnightMoveset knightAlly;
+    public ClericMoveset clericAlly;
 
     [Header("Fight Management")]
     public int squirrelFight;
@@ -65,9 +68,12 @@ public class SorcererMoveset : MonoBehaviour
        
         intercedeOn = false;
         rallyOrNot = false;
+                hasThorns = 0;
+                   thornDamage = 0;
         volcanicTally = 0;
         // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         knightAlly = GameObject.FindGameObjectWithTag("KnightBattle").GetComponent<KnightMoveset>();
+        clericAlly = GameObject.FindGameObjectWithTag("ClericBattle").GetComponent<ClericMoveset>();
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         // intercedeOn = false;
@@ -281,8 +287,9 @@ Debug.Log("SorcererMoveset/Enervate: Damaged enemy by " + damageOutput);
 Debug.Log("SorcererMoveset/Ward: Ward activated!");
             shieldOutput = Random.Range(1, 7) + Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
             knightAlly.gotShielded(shieldOutput);
+            clericAlly.gotShielded(shieldOutput);
             PassTurn();
-        }, () => "Ward used on Knight!");
+        }, () => "Ward used on Knight and Cleric!");
     }
 
     public void Scourge()
@@ -294,8 +301,9 @@ Debug.Log("SorcererMoveset/Ward: Ward activated!");
 Debug.Log("SorcererMoveset/Scourge: Scourge activated!");
             thornsOutput = Random.Range(1, 7) + mightBonus;
             knightAlly.gotThorns(thornsOutput);
+            clericAlly.gotThorns(thornsOutput);
             PassTurn();
-        }, () => "Scourge used on Knight!");
+        }, () => "Scourge used on Knight and Cleric!");
     }
 
 
@@ -387,6 +395,17 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
         squirrelFight = amount;
     }
 
+    public void gotShielded(int amount)
+    {
+        curHealth += amount;
+    }
+
+    public void gotThorns(int amount)
+    {
+        hasThorns += 2;
+        thornDamage = amount;
+    }
+
     void UpdateHUD()
     {
         HealthText.text = curHealth + "/" + maxHealth;
@@ -396,7 +415,7 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
     {   
         // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
         // ADD CLERIC
-        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false)
+        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false && clericAlly.animator.GetBool("isAttacking") == false)
         {
             // check if enemies are in middle of attack or being attacked/healed
             bool enemyIsAttacking = true;
