@@ -314,20 +314,6 @@ Debug.Log("ClericMoveset/Ward: Ward activated!");
         ExecuteMove(() =>
         {
 
-            /*   healOutput = Random.Range(1, 13);
-               if (curHealth + healOutput >= 50)
-                   curHealth = 50;
-               else
-                   curHealth += healOutput;
-
-
-               Debug.Log("Healing Knight by " + healOutput);
-               if (!printing)
-                   StartCoroutine(printCurrentAction("Healing Knight by " + healOutput + " with Rally!", 0f));
-        PassTurn();
-        */
-
-
             rallyRandom = Random.Range(1, 3);
             if (rallyRandom == 1)
             {
