@@ -11,6 +11,7 @@ public class DemoEnemy : MonoBehaviour
     [Header("Player")]
     public GameObject knightPlayer;
     public GameObject sorcererPlayer;
+    public GameObject clericPlayer;
 
     [Header("Enemy Values")]
     public int curHealth;
@@ -20,7 +21,7 @@ public class DemoEnemy : MonoBehaviour
     public int selectingTarget;
     public int damageOutput;
     private bool isProvoked; // checks if this enemy was hit with the knight's Provoke attack
-    private bool isStunned;
+    private bool isStunned; // checks if the enemy was stunned by sorcerer, if so rolls to skip turn
 
     [Header("Fight Management")]
     public GameObject battlePhase;
@@ -37,21 +38,25 @@ public class DemoEnemy : MonoBehaviour
 
     [Header("Animation")]
     public Animator animator;
-    public GameObject enemyVFX;
     public Animator VFXanimation;
     private bool animationHit;
     private bool animationDone;
+
     private bool isKnightAttacking;
     private bool isSorcererAttacking;
+    private bool isClericAttacking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+        clericPlayer = GameObject.FindGameObjectWithTag("ClericBattle");
+
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         fightManager = GameObject.FindGameObjectWithTag("FightManager");
-        curHealth = 200;
+
+        curHealth = 20;
         maxHealth = curHealth;
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
         selectingMove = 1;
@@ -61,7 +66,6 @@ public class DemoEnemy : MonoBehaviour
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
         animator = this.GetComponent<Animator>();
-        VFXanimation = enemyVFX.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -69,6 +73,7 @@ public class DemoEnemy : MonoBehaviour
     {
         isKnightAttacking = knightPlayer.GetComponent<Animator>().GetBool("isAttacking");
         isSorcererAttacking = sorcererPlayer.GetComponent<Animator>().GetBool("isAttacking");
+        isClericAttacking = clericPlayer.GetComponent<Animator>().GetBool("isAttacking");
 
         battlePhase.GetComponent<BattlePhase>().NumberedFight(1);
       
@@ -113,7 +118,7 @@ Debug.Log("DemoEnemy/TakeDamage: isFire is " + isFire);
         VFXanimation.SetBool("isAttacked", false); // reset VFX
         VFXanimation.SetBool("isFireAttack", false);
 
-Debug.Log("Enemy took " + amount + " damage and has " + curHealth + " health");
+Debug.Log("DemoEnemy/TakeDamage: Enemy took " + amount + " damage and has " + curHealth + " health");
         if (curHealth <= 0)
             Victory();
    }
@@ -133,6 +138,7 @@ Debug.Log("Enemy took " + amount + " damage and has " + curHealth + " health");
         // wait for player attacks to finish
         yield return new WaitUntil(() => !isKnightAttacking);
         yield return new WaitUntil(() => !isSorcererAttacking);
+        yield return new WaitUntil(() => !isClericAttacking);
 
 Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
 
@@ -158,10 +164,7 @@ Debug.Log("Enemy is provoked! Will only attack Knight!");
             else
             {
                 selectingMove = Random.Range(1, 3);
-                selectingTarget = Random.Range(1, 3);
-
-                //FOR CLERIC
-                //selectingTarget = Random.Range(1, 4);
+                selectingTarget = Random.Range(1, 4);
             }
             
             if (selectingMove == 1) 
@@ -179,18 +182,16 @@ Debug.Log("Enemy is provoked! Will only attack Knight!");
 Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Knight!");
                     knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
                 }
-                
                 else if (selectingTarget == 2)
                 {
 Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Sorcerer!");
                     sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
                 }
-
-                /*else if (selectingTarget == 3)
+                else if (selectingTarget == 3)
                 {
 Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
                     clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
-                }*/
+                }
                 
 //Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation is done");
                 yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
@@ -204,6 +205,7 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
                 //ADD HEAL SFX
                 damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
                 curHealth += damageOutput;
+                UpdateHUD();
 Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");
                 yield return new WaitForSeconds(2);
                 VFXanimation.SetBool("isHealing", false);

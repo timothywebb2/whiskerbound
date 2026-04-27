@@ -2460,6 +2460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -2474,7 +2475,6 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 529420157}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 0}
   VFXanimation: {fileID: 0}
 --- !u!114 &158437611
 MonoBehaviour:
@@ -3507,23 +3507,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75431675bdb504148894d396ca20063a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TigerBoss
-  curHealth: 120
-  damageType: 1
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
+  curHealth: 120
+  damageType: 1
   selectingMove: 0
   selectingTarget: 0
   blessTime: 0
   damageOutput: 0
   battlePhase: {fileID: 0}
-  HealthText: {fileID: 0}
+  fightManager: {fileID: 0}
+  HealthText: {fileID: 564206030}
   VictoryText: {fileID: 50324096}
   timePassed: 0
   VictoryAchieved: 0
   EnemyHealthBar: {fileID: 455517198}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  fightManager: {fileID: 0}
+  VFXanimation: {fileID: 777539194}
 --- !u!82 &339607688
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3938,6 +3940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -3952,7 +3955,6 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 926364328}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 0}
   VFXanimation: {fileID: 0}
 --- !u!114 &346398080
 MonoBehaviour:
@@ -5084,7 +5086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608249490737376889, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -552.15686
+      value: -539.7347
       objectReference: {fileID: 0}
     - target: {fileID: 2703761458688661314, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5112,7 +5114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3045687139941636675, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -552.15686
+      value: -539.7347
       objectReference: {fileID: 0}
     - target: {fileID: 3167272903013229459, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5634,6 +5636,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6032306045375345223, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+      propertyPath: m_TagString
+      value: ClericIcon
+      objectReference: {fileID: 0}
     - target: {fileID: 6405166994968273717, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -5856,12 +5862,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1152465084409062329, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 972568648}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
 --- !u!1 &439571911 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 833790315452060763, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
+  m_PrefabInstance: {fileID: 439571910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &439571912 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1152465084409062329, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
   m_PrefabInstance: {fileID: 439571910}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &449285597
@@ -8081,6 +8095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -8095,7 +8110,6 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 216556930}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 0}
   VFXanimation: {fileID: 0}
 --- !u!114 &691816163
 MonoBehaviour:
@@ -9152,7 +9166,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -10397.738}
   m_LocalScale: {x: -0.8765625, y: 0.8765625, z: 0.8765625}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1663101015}
   m_Father: {fileID: 1621476412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
@@ -9293,6 +9308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -9307,8 +9323,7 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 1663101016}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 777539188}
-  VFXanimation: {fileID: 0}
+  VFXanimation: {fileID: 777539194}
 --- !u!114 &786045994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9764,8 +9779,8 @@ Transform:
   m_GameObject: {fileID: 831989708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -616.895, y: -552.1569, z: 11861.948}
-  m_LocalScale: {x: 1.14082, y: 1.14082, z: 1.14082}
+  m_LocalPosition: {x: -616.8949, y: -552.1568, z: 11861.946}
+  m_LocalScale: {x: 1.1408199, y: 1.1408199, z: 1.1408199}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2064551318}
@@ -10640,6 +10655,104 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6032306045375345223, guid: 8d739eb9170f62048a446aca64429b4c, type: 3}
   m_PrefabInstance: {fileID: 439571910}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &972568644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972568648}
+  - component: {fileID: 972568647}
+  - component: {fileID: 972568646}
+  - component: {fileID: 972568645}
+  m_Layer: 5
+  m_Name: VFX Cleric
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &972568645
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972568644}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2a9fdcf51ba22c41b6eca734632f3c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &972568646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972568644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &972568647
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972568644}
+  m_CullTransparentMesh: 1
+--- !u!224 &972568648
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972568644}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -22}
+  m_LocalScale: {x: 5.0352855, y: 5.0352855, z: 5.0352855}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 439571912}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -729, y: -32}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &982349959
 GameObject:
   m_ObjectHideFlags: 0
@@ -13580,6 +13693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -13594,7 +13708,6 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 928788558}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 0}
   VFXanimation: {fileID: 0}
 --- !u!114 &1331569031
 MonoBehaviour:
@@ -15967,7 +16080,7 @@ Animator:
   m_GameObject: {fileID: 1598696853}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 93bc9ec747cf7ed4e9c2f0c99a7ec8fe, type: 2}
+  m_Controller: {fileID: 22100000, guid: 5a3d88ad5f71b444387242237acbc563, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16285,7 +16398,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 786045990}
-  - {fileID: 1663101015}
   m_Father: {fileID: 239643199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654462263
@@ -16387,18 +16499,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663101014}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10397.738}
-  m_LocalScale: {x: 0.8765625, y: 0.8765625, z: 0.8765625}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1910464125}
   - {fileID: 1675113907}
-  m_Father: {fileID: 1621476412}
+  m_Father: {fileID: 786045990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1122.6445, y: -61.01564}
+  m_AnchoredPosition: {x: -171.27002, y: -170}
   m_SizeDelta: {x: 212, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1663101016
@@ -17087,7 +17199,7 @@ Animator:
   m_GameObject: {fileID: 1745048117}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 06107801b0465c344a12e2d0884abd02, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -17277,7 +17389,7 @@ MonoBehaviour:
   currentAction: {fileID: 50324094}
   printing: 0
   animator: {fileID: 0}
-  VFXObject: {fileID: 0}
+  VFXObject: {fileID: 972568644}
   doubleCastActive: 0
   healUsedThisTurn: 0
   damageReductionActive: 0
@@ -19254,6 +19366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SquirrelEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   squirrelOne: {fileID: 372453601}
   squirrelTwo: {fileID: 199762523}
   curHealth1: 0
@@ -19262,12 +19375,12 @@ MonoBehaviour:
   squirrelCoordination: 0
   squirrelOneDown: 0
   squirrelTwoDown: 0
-  battlePhase: {fileID: 0}
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
   attackedEnemy: 0
   multiHitting: 0
+  battlePhase: {fileID: 0}
   fightManager: {fileID: 0}
   HealthText1: {fileID: 1100108951}
   HealthText2: {fileID: 758145311}
@@ -20133,6 +20246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -20147,7 +20261,6 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 1684526721}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 0}
   VFXanimation: {fileID: 0}
 --- !u!114 &1988554975
 MonoBehaviour:
@@ -20350,8 +20463,10 @@ MonoBehaviour:
   firstEnemy: {fileID: 0}
   KnightIcon: {fileID: 0}
   SorcererIcon: {fileID: 0}
+  ClericIcon: {fileID: 0}
   KnightBattle: {fileID: 0}
   SorcererBattle: {fileID: 0}
+  ClericBattle: {fileID: 0}
 --- !u!1 &2030992851
 GameObject:
   m_ObjectHideFlags: 0
@@ -20731,6 +20846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   curHealth: 20
   damageType: 20
   selectingMove: 0
@@ -20745,7 +20861,6 @@ MonoBehaviour:
   EnemyHealthBar: {fileID: 1462527344}
   damageSound: {fileID: 8300000, guid: a81c02a7dfce883488883696ac4cba04, type: 3}
   animator: {fileID: 0}
-  enemyVFX: {fileID: 0}
   VFXanimation: {fileID: 0}
 --- !u!114 &2052926099
 MonoBehaviour:
@@ -21075,6 +21190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SquirrelEnemy
   knightPlayer: {fileID: 0}
   sorcererPlayer: {fileID: 0}
+  clericPlayer: {fileID: 0}
   squirrelOne: {fileID: 2112149619}
   squirrelTwo: {fileID: 1665003081}
   curHealth1: 0
@@ -21083,12 +21199,12 @@ MonoBehaviour:
   squirrelCoordination: 0
   squirrelOneDown: 0
   squirrelTwoDown: 0
-  battlePhase: {fileID: 0}
   selectingMove: 0
   selectingTarget: 0
   damageOutput: 0
   attackedEnemy: 0
   multiHitting: 0
+  battlePhase: {fileID: 0}
   fightManager: {fileID: 0}
   HealthText1: {fileID: 1100108951}
   HealthText2: {fileID: 758145311}

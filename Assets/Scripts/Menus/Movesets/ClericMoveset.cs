@@ -47,6 +47,8 @@ public class ClericMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+
+    [Header("Animation")]
     public Animator animator;
     public GameObject VFXObject;
     private Animator VFXanimator;
@@ -135,7 +137,7 @@ Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
                     StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage, false));
                
                 else if (squirrelFight == 3)
-                    firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage);
+                    StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage, false));
 
                 VFXanimator.SetBool("isAttacked", false);
                 hasThorns -= 1;
@@ -244,18 +246,16 @@ Debug.Log("ClericMoveset/DamageReductionPotion: Damage reduction activated!");
 
             damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
             if (squirrelFight == 1)
-            {
                 StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
-            }
+            
             else if (squirrelFight == 2)
             {
                 firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
                 StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
             }
             else if (squirrelFight == 3)
-            {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
-            }
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
+            
             volcanicTally += damageOutput;
 Debug.Log("ClericMoveset/Incinerate: Damaged enemy by " + damageOutput + " with Incinerate");
             VolcanicHex();
@@ -284,7 +284,7 @@ Debug.Log("ClericMoveset/Incinerate: Damaged enemy by " + damageOutput + " with 
             }
             else if (squirrelFight == 3)
             {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
                 firstEnemy.GetComponent<TigerBoss>().gotStunned();
             }
             volcanicTally += damageOutput;
@@ -339,23 +339,23 @@ Debug.Log("Rally being used!");
             {
                 StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
                 healOutput = Random.Range(1, 13);
-              knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
-              sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
+                knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
+                sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
             }
             else if (squirrelFight == 2)
             {
                 firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
                 StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
                 healOutput = Random.Range(1, 13);
-              knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
-              sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
+                knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
+                sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
             }
             else if (squirrelFight == 3)
             {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
                 healOutput = Random.Range(1, 13);
-              knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
-              sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
+                knightAlly.GetComponent<KnightMoveset>().GotHealed(healOutput);
+                sorcererAlly.GetComponent<SorcererMoveset>().GotHealed(healOutput);
             }
 Debug.Log("ClericMoveset/Devotion: Damaged enemy by " + damageOutput + " with Devotion");
             VolcanicHex();
@@ -394,7 +394,7 @@ Debug.Log("ClericMoveset/Scourge: Scourge activated!");
             }
             
             else if (squirrelFight == 3) 
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
 
             volcanicTally = 0;
         }
@@ -414,7 +414,7 @@ Debug.Log("ClericMoveset/Scourge: Scourge activated!");
         }
 
         else if (squirrelFight == 3)
-            firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
 
 Debug.Log("ClericMoveset/RallyIncinerate: Damaged enemy by " + damageOutput + " with Incinerate");
     }
@@ -438,7 +438,7 @@ Debug.Log("ClericMoveset/RallyIncinerate: Damaged enemy by " + damageOutput + " 
 
         else if (squirrelFight == 3)   
         {
-            firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
             firstEnemy.GetComponent<TigerBoss>().gotStunned();
         }
 

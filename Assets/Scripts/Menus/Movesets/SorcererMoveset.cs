@@ -46,6 +46,8 @@ public class SorcererMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+
+    [Header("Animation")]
     public Animator animator;
     public GameObject VFXObject;
     private Animator VFXanimator;
@@ -237,7 +239,7 @@ Debug.Log("SorcererMoveset/DamageReductionPotion: Damage reduction activated!");
             }
             else if (squirrelFight == 3)
             {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
             }
             volcanicTally += damageOutput;
 Debug.Log("SorcererMoveset/Incinerate: Damaged enemy by " + damageOutput + " with Incinerate");
@@ -267,7 +269,7 @@ Debug.Log("SorcererMoveset/Incinerate: Damaged enemy by " + damageOutput + " wit
             }
             else if (squirrelFight == 3)
             {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
                 firstEnemy.GetComponent<TigerBoss>().gotStunned();
             }
             volcanicTally += damageOutput;
@@ -323,7 +325,7 @@ Debug.Log("SorcererMoveset/Scourge: Scourge activated!");
             }
             
             else if (squirrelFight == 3) 
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
 
             volcanicTally = 0;
         }
@@ -343,7 +345,7 @@ Debug.Log("SorcererMoveset/Scourge: Scourge activated!");
         }
 
         else if (squirrelFight == 3)
-            firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
 
 Debug.Log("SorcererMoveset/RallyIncinerate: Damaged enemy by " + damageOutput + " with Incinerate");
     }
@@ -367,7 +369,7 @@ Debug.Log("SorcererMoveset/RallyIncinerate: Damaged enemy by " + damageOutput + 
 
         else if (squirrelFight == 3)   
         {
-            firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+            StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
             firstEnemy.GetComponent<TigerBoss>().gotStunned();
         }
 

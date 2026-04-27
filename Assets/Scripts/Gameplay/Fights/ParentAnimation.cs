@@ -10,8 +10,8 @@ public class ParentAnimation : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("Enemy") == 2) //squirrel
             parent.GetComponent<SquirrelEnemy>().AnimationDone();
-        /*else if(PlayerPrefs.GetInt("Enemy") == 3) // tiger
-            parent.GetComponent<TigerBoss>().AnimationDone();*/
+        else if(PlayerPrefs.GetInt("Enemy") == 3) // tiger
+            parent.GetComponent<TigerBoss>().AnimationDone();
         else // all other enemies
             parent.GetComponent<DemoEnemy>().AnimationDone();
     }

@@ -43,6 +43,8 @@ public class KnightMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+
+    [Header("Animation")]
     public Animator animator;
     public GameObject VFXObject;
     private Animator VFXanimator;
@@ -136,7 +138,7 @@ Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
                     StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(thornDamage, false));
                
                 else if (squirrelFight == 3)
-                    firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage);
+                    firstEnemy.GetComponent<TigerBoss>().TakeDamage(thornDamage, false);
 
                 VFXanimator.SetBool("isAttacked", false);
                 hasThorns -= 1;
@@ -242,7 +244,7 @@ Debug.Log("KnightMoveset/DamageReductionPotion: Damage reduction activated!");
             }
             else if (squirrelFight == 3)
             {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, false);
                 firstEnemy.GetComponent<TigerBoss>().gotGoaded();
             }
 Debug.Log("KnightMoveset/Provoke: Damaged enemy by " + damageOutput + " with Provoke");
@@ -269,7 +271,7 @@ Debug.Log("KnightMoveset/Provoke: Damaged enemy by " + damageOutput + " with Pro
             }
             else if (squirrelFight == 3)
             {
-                firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput);
+                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, false));
             }
     Debug.Log("KnightMoveset/Cleave: Damaged enemy by " + damageOutput + " with Cleave");
             PassTurn();
@@ -444,7 +446,7 @@ if (curHealth + amount >= 100)
                 if(stateInfo2.IsTag("Neutral"))
                     enemyVFX2 = false;
             }
-            /*else if (squirrelFight == 3)
+            else if (squirrelFight == 3)
             {
                 TigerBoss enemy = firstEnemy.GetComponent<TigerBoss>();
                 enemyIsAttacking = enemy.animator.GetBool("isAttacking");
@@ -452,7 +454,7 @@ if (curHealth + amount >= 100)
                 var stateInfo = enemy.VFXanimation.GetCurrentAnimatorStateInfo(0);
                 if(stateInfo.IsTag("Neutral"))
                     enemyVFX = false;
-            }*/
+            }
             if(!enemyIsAttacking && !enemyIsAttacking2 && !enemyVFX && !enemyVFX2)
             {
                 KnightSkills.SetActive(true);

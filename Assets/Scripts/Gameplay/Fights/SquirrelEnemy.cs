@@ -9,6 +9,8 @@ public class SquirrelEnemy : MonoBehaviour
     [Header("Player and Enemies")]
     public GameObject knightPlayer;
     public GameObject sorcererPlayer;
+    public GameObject clericPlayer;
+
     public GameObject squirrelOne;
     public GameObject squirrelTwo;
 
@@ -21,7 +23,6 @@ public class SquirrelEnemy : MonoBehaviour
     public bool squirrelCoordination;
     public bool squirrelOneDown;
     public bool squirrelTwoDown;
-    public GameObject battlePhase;
     public int selectingMove;
     public int selectingTarget;
     public int damageOutput;
@@ -33,6 +34,7 @@ public class SquirrelEnemy : MonoBehaviour
     private bool isStunned2;
 
     [Header("Fight Management")]
+    public GameObject battlePhase;
     public GameObject fightManager;
 
     [Header("UI/Audio")]
@@ -45,6 +47,8 @@ public class SquirrelEnemy : MonoBehaviour
     public Slider EnemyHealthBar2;
     public AudioClip damageSound;
     private AudioSource audioSource;
+
+    [Header("Animation")]
     public Animator animator1;
     public Animator animator2;
     public Animator VFXanimation1;
@@ -52,44 +56,47 @@ public class SquirrelEnemy : MonoBehaviour
     private bool animationHit;
     private bool animationDone;
 
-
     private bool isKnightAttacking;
     private bool isSorcererAttacking;
+    private bool isClericAttacking;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
+        sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+        clericPlayer = GameObject.FindGameObjectWithTag("ClericBattle");
 
-   // Start is called once before the first execution of Update after the MonoBehaviour is created
-   void Start()
-   {
-       knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
-       sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
-       battlePhase = GameObject.FindGameObjectWithTag("BattleController");
-       fightManager = GameObject.FindGameObjectWithTag("FightManager");
-       curHealth1 = 30;
-       curHealth2 = 30;
-       maxHealth1 = curHealth1;
-       maxHealth2 = curHealth2;
-       multiHitting = 1;
-       attackedEnemy = 1;
-       damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
-       selectingMove = 1;
-       selectingTarget = 1;
-       squirrelOneDown = false;
-       squirrelTwoDown = false;
-       squirrelCoordination = true;
-       VictoryText.SetActive(false);
-       VictoryAchieved = false;
-       UpdateHUD();
-       audioSource = GetComponent<AudioSource>();
+        battlePhase = GameObject.FindGameObjectWithTag("BattleController");
+        fightManager = GameObject.FindGameObjectWithTag("FightManager");
 
-       animator1 = this.transform.GetChild(0).GetComponent<Animator>();
-       animator2 = this.transform.GetChild(1).GetComponent<Animator>();
-   }
+        curHealth1 = 30;
+        curHealth2 = 30;
+        maxHealth1 = curHealth1;
+        maxHealth2 = curHealth2;
+        multiHitting = 1;
+        attackedEnemy = 1;
+        damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
+        selectingMove = 1;
+        selectingTarget = 1;
+        squirrelOneDown = false;
+        squirrelTwoDown = false;
+        squirrelCoordination = true;
+        VictoryText.SetActive(false);
+        VictoryAchieved = false;
+        UpdateHUD();
+        audioSource = GetComponent<AudioSource>();
 
-   // Update is called once per frame
-   void Update()
-   {
+        animator1 = this.transform.GetChild(0).GetComponent<Animator>();
+        animator2 = this.transform.GetChild(1).GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         isKnightAttacking = knightPlayer.GetComponent<Animator>().GetBool("isAttacking");
         isSorcererAttacking = sorcererPlayer.GetComponent<Animator>().GetBool("isAttacking");
+        isClericAttacking = clericPlayer.GetComponent<Animator>().GetBool("isAttacking");
 
         battlePhase.GetComponent<BattlePhase>().NumberedFight(2);
 
@@ -365,6 +372,7 @@ Debug.Log("Reached begin turn, isKnightAttacking is " + isKnightAttacking + " an
         // wait for player to finish attacking
         yield return new WaitUntil(() => !isKnightAttacking);
         yield return new WaitUntil(() => !isSorcererAttacking);
+        yield return new WaitUntil(() => !isClericAttacking);
 
         if (squirrelOneDown == false)
         {
@@ -391,10 +399,7 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 is provoked! Will only attack Kni
                 else
                 {
                     selectingMove = Random.Range(1, 3);
-                    selectingTarget = Random.Range(1, 3);
-
-                    //FOR CLERIC
-                    //selectingTarget = Random.Range(1, 4);
+                    selectingTarget = Random.Range(1, 4);
                 }
 
                 if (selectingMove == 1)
@@ -420,14 +425,12 @@ Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Knight!");
 Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Sorcerer");
                         sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
                     }
-
-                    /*
                     else if(selectingTarget == 3)
                     {
 Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
-                        clericPlayer.GetComponenet<ClericMoveset>().TakeDamage(damageOutput);
+                        clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
                     }
-                    */
+                    
 
 //Debug.Log("SquirrelEnemy/BeginTurn: Coroutine is pausing until animation is done");
                     yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
@@ -482,10 +485,7 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 is provoked! Will only attack Kn
                 else
                 {
                     selectingMove = Random.Range(1, 3);
-                    selectingTarget = Random.Range(1, 3);
-
-                    //FOR CLERIC
-                    //selectingTarget = Random.Range(1, 4);
+                    selectingTarget = Random.Range(1, 4);
                 }
             
                 if (selectingMove == 1)
@@ -509,14 +509,11 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Knight!");
 Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Sorcerer!");
                         sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
                     }
-
-                    /*
                     else if(selectingTarget == 3)
                     {
 Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
-                        clericPlayer.GetComponenet<ClericMoveset>().TakeDamage(damageOutput);
+                        clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
                     }
-                    */
 
                 //Debug.Log("SquirrelEnemy/BeginTurn: Coroutine is pausing until animation is done");
                     yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
