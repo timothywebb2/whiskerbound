@@ -4602,6 +4602,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 250731469006042681, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c66f5373cb4de364596ad991cbb86c0f, type: 3}
     - target: {fileID: 509988487872424456, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_Name
       value: Canvas_GameUI
@@ -4610,6 +4614,14 @@ PrefabInstance:
       propertyPath: uiAudioSource
       value: 
       objectReference: {fileID: 1042883823}
+    - target: {fileID: 1966816828589553603, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d8f7c95ba297694f94aef5016c051f3, type: 3}
+    - target: {fileID: 3250208781825966795, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f41b0a8176afc944caf361331a6b27dc, type: 3}
     - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
@@ -5905,7 +5917,7 @@ MonoBehaviour:
   nameTagText: {fileID: 682421328}
   npcDisplayName: Shopkeeper
   npcPortrait: {fileID: 0}
-  dialogueLine: Hello!
+  dialogueLine: []
   shopTitle: Shop
   shopInventoryDescription: 
 --- !u!1001 &966991099
@@ -13366,7 +13378,7 @@ MonoBehaviour:
   nameTagText: {fileID: 451556329}
   npcDisplayName: Cleric
   npcPortrait: {fileID: 21300000, guid: cfd7fd6276680d54eb2b4c0be14bc99d, type: 3}
-  dialogueLine: Hello!
+  dialogueLine: []
   shopTitle: XXX's Shop
   shopInventoryDescription: 
 --- !u!1 &1925253186 stripped
@@ -13792,7 +13804,9 @@ MonoBehaviour:
   nameTagText: {fileID: 1376102603}
   npcDisplayName: Prairie Dog
   npcPortrait: {fileID: 21300000, guid: 48a3bf33486685547b42ddd4b483c88b, type: 3}
-  dialogueLine: Hello!
+  dialogueLine:
+  - Watch yer step out in that desert!
+  - The sand'll suck you in if you ain't careful!
   shopTitle: XXX's Shop
   shopInventoryDescription: 
 --- !u!1001 &1954134306

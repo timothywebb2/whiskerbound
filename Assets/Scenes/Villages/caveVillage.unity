@@ -3305,14 +3305,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 250731469006042681, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c66f5373cb4de364596ad991cbb86c0f, type: 3}
     - target: {fileID: 509988487872424456, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_Name
       value: Canvas_GameUI
       objectReference: {fileID: 0}
     - target: {fileID: 1044234372453874788, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1966816828589553603, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d8f7c95ba297694f94aef5016c051f3, type: 3}
+    - target: {fileID: 3250208781825966795, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f41b0a8176afc944caf361331a6b27dc, type: 3}
     - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
@@ -3419,6 +3431,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4842527072869808457, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186437341336777792, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8866159443235409797, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
@@ -9348,7 +9364,7 @@ MonoBehaviour:
   nameTagText: {fileID: 682421328}
   npcDisplayName: Shopkeeper
   npcPortrait: {fileID: 0}
-  dialogueLine: Hello!
+  dialogueLine: []
   shopTitle: Shop
   shopInventoryDescription: 
 --- !u!4 &967720132 stripped
@@ -22522,9 +22538,11 @@ MonoBehaviour:
   promptTextUI: {fileID: 2017658567}
   nameTagText: {fileID: 1376102603}
   npcDisplayName: Miner Mole
-  npcPortrait: {fileID: 0}
-  dialogueLine: We usually deliver ore to the arctic village, but some kangaroo blocked
-    it off and took the key!
+  npcPortrait: {fileID: 21300000, guid: 1b3a4adf9e341da478a74a7057e2ec42, type: 3}
+  dialogueLine:
+  - We used to deliver our ore to the Arctic Village...
+  - ...but some kangaroo locked it up and took the key!
+  - And now some bear's made himself comfortable!
   shopTitle: XXX's Shop
   shopInventoryDescription: 
 --- !u!1001 &1953678122
