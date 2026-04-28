@@ -13,14 +13,23 @@ public class UI_DialoguePanel : MonoBehaviour
     int lineMax;
     string[] lineCopy;
 
+    bool isRecruitCopy;
+    GameObject npcCopy;
+
     Action onCloseCallback;
     bool isOpen = false;
 
-    public void ShowDialogue(Sprite portrait, string npcName, string[] line, Action onCloseCallback)
+    public GameObject sorcererFollower;
+    public GameObject clericFollower;
+
+    public void ShowDialogue(Sprite portrait, string npcName, string[] line, bool isRecruit, GameObject npc, Action onCloseCallback)
     {
         if (portraitImage != null) portraitImage.sprite = portrait;
         if (npcNameText != null) npcNameText.text = npcName;
         
+        isRecruitCopy = isRecruit;
+        npcCopy = npc;
+
         if (bodyText != null) bodyText.text = line[0];
         lineCopy = line;
         lineIndex++;
@@ -38,6 +47,18 @@ public class UI_DialoguePanel : MonoBehaviour
         if(lineIndex > lineMax)
         {
             lineIndex = 0;
+
+            if(isRecruitCopy)
+            {
+                npcCopy.gameObject.SetActive(false);
+                int newPartySize = PlayerPrefs.GetInt("PartySize", 1) + 1;
+                PlayerPrefs.SetInt("PartySize", newPartySize);
+
+                if (newPartySize == 2)
+                    GameObject.FindGameObjectWithTag("SorcererFollower").SetActive(true);
+                else if (newPartySize == 3)
+                    GameObject.FindGameObjectWithTag("ClericFollower").SetActive(true);
+            }
 
             gameObject.SetActive(false);
             isOpen = false;

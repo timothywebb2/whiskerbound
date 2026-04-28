@@ -91,6 +91,8 @@ public class PlayerInteractionController : MonoBehaviour
             npc.npcPortrait,
             npc.npcDisplayName,
             npc.dialogueLine,
+            npc.isRecruit,
+            npc.gameObject,
             OnDialogueClosed
         );
     }

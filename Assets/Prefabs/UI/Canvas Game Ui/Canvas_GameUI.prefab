@@ -10079,6 +10079,10 @@ PrefabInstance:
       propertyPath: itemId
       value: HealPotion
       objectReference: {fileID: 0}
+    - target: {fileID: 358532875013932845, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d8f7c95ba297694f94aef5016c051f3, type: 3}
     - target: {fileID: 483398682024470950, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10163,6 +10167,14 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 9159816099167957558}
+    - target: {fileID: 2074061892787865303, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c66f5373cb4de364596ad991cbb86c0f, type: 3}
+    - target: {fileID: 3650524936021340709, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f41b0a8176afc944caf361331a6b27dc, type: 3}
     - target: {fileID: 6362363566580122798, guid: a0d77e2232f1d8c4ca7e6635e850f7bb, type: 3}
       propertyPath: m_Name
       value: Panel_Shop
@@ -10260,10 +10272,14 @@ PrefabInstance:
     - target: {fileID: 549531134852217415, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -4508173965544424082, guid: 601ca3942a8bcaf418c8b35478153fd7, type: 2}
+      objectReference: {fileID: -5070023387332909087, guid: a8d647affdb3da748842b93621a8c7ea, type: 2}
     - target: {fileID: 549531134852217415, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 549531134852217415, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4289972962
       objectReference: {fileID: 0}
     - target: {fileID: 549531134852217415, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -10327,7 +10343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2594436506608981961, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_fontSize
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2594436506608981961, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_margin.x
@@ -10351,8 +10367,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2594436506608981961, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 2594436506608981961, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5070023387332909087, guid: a8d647affdb3da748842b93621a8c7ea, type: 2}
     - target: {fileID: 2594436506608981961, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1
@@ -10361,6 +10381,10 @@ PrefabInstance:
       propertyPath: m_Transition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4084873119330977350, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 6168320789380770949}
     - target: {fileID: 4084873119330977350, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
       value: 0.78431374
@@ -10379,7 +10403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4477857591599199570, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6151454635453288941, guid: 00afed3d4236b2a45ad6a1baf86e424c, type: 3}
       propertyPath: m_AnchoredPosition.x

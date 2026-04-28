@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 public class NPCFollow : MonoBehaviour
 {
+    public enum FollowerType
+    {
+        Sorcerer, Cleric
+    };
+    public FollowerType followerType;
+
     public Transform followCharacter; // character this NPC will follow
     public float distanceFromCharacter;
     public List<Vector3> followCharacterPositions = new List<Vector3>(); // past positions of character for this NPC to pathfind to
@@ -18,6 +24,13 @@ public class NPCFollow : MonoBehaviour
 
     void Start()
     {
+        int partySize = PlayerPrefs.GetInt("PartySize", 1);
+
+        if(followerType == FollowerType.Sorcerer && partySize < 2)
+            this.gameObject.SetActive(false);
+        else if(followerType == FollowerType.Cleric && partySize < 3)
+            this.gameObject.SetActive(false);
+        
         sampleTime = Time.time;
         followCharacterPositions.Add(followCharacter.position);
         followSpeed = fastSpeed;
@@ -31,7 +44,7 @@ public class NPCFollow : MonoBehaviour
     }
 
     void Update()
-    {
+    {        
         if(Time.time > sampleTime)
         {
             sampleTime = Time.time + sampleTimeDifference;

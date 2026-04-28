@@ -2236,6 +2236,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &230806009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2098416601307755519, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+  m_PrefabInstance: {fileID: 313550725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &235011116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da132cc3a4fe6244a99288afe8d8b8b3, type: 3}
@@ -3325,6 +3330,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f41b0a8176afc944caf361331a6b27dc, type: 3}
+    - target: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: clericFollower
+      value: 
+      objectReference: {fileID: 1373752161}
+    - target: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: sorcererFollower
+      value: 
+      objectReference: {fileID: 886020152}
     - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
@@ -8620,6 +8633,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4862948840636096107, guid: c8271809395e50946a07f72331be02f6, type: 3}
   m_PrefabInstance: {fileID: 886020150}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &886020152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3483413949993857028, guid: c8271809395e50946a07f72331be02f6, type: 3}
+  m_PrefabInstance: {fileID: 886020150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &889174353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9367,6 +9385,7 @@ MonoBehaviour:
   dialogueLine: []
   shopTitle: Shop
   shopInventoryDescription: 
+  isRecruit: 0
 --- !u!4 &967720132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8160848343232137622, guid: b5d85f5aa2e33c747b4c54abe6fe648c, type: 3}
@@ -17850,6 +17869,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
+--- !u!1 &1373752161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3050212588533806757, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
+  m_PrefabInstance: {fileID: 1373752160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1376102601
 GameObject:
   m_ObjectHideFlags: 0
@@ -22533,8 +22557,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
   interactionType: 0
-  promptText: '[ E ]'
-  promptCanvas: {fileID: 230497489}
+  promptText: 
+  promptCanvas: {fileID: 230806009}
   promptTextUI: {fileID: 2017658567}
   nameTagText: {fileID: 1376102603}
   npcDisplayName: Miner Mole
@@ -22545,6 +22569,7 @@ MonoBehaviour:
   - And now some bear's made himself comfortable!
   shopTitle: XXX's Shop
   shopInventoryDescription: 
+  isRecruit: 0
 --- !u!1001 &1953678122
 PrefabInstance:
   m_ObjectHideFlags: 0

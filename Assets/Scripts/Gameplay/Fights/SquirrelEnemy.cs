@@ -399,8 +399,9 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 is provoked! Will only attack Kni
                 
                 else
                 {
+                    int partySize = PlayerPrefs.GetInt("PartySize", 1);
                     selectingMove = Random.Range(1, 3);
-                    selectingTarget = Random.Range(1, 4);
+                    selectingTarget = Random.Range(1, partySize + 1);
                 }
 
                 if (selectingMove == 1)
