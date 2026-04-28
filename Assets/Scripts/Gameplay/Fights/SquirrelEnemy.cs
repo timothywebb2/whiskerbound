@@ -74,11 +74,12 @@ public class SquirrelEnemy : MonoBehaviour
         curHealth2 = 30;
         maxHealth1 = curHealth1;
         maxHealth2 = curHealth2;
+        EnemyHealthBar1.maxValue = maxHealth1;
+        EnemyHealthBar2.maxValue = maxHealth2;
+        
         multiHitting = 1;
-        attackedEnemy = 1;
         damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
-        selectingMove = 1;
-        selectingTarget = 1;
+
         squirrelOneDown = false;
         squirrelTwoDown = false;
         squirrelCoordination = true;

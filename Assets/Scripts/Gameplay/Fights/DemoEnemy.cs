@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-
 public class DemoEnemy : MonoBehaviour
 {
     [Header("Player")]
@@ -58,9 +57,10 @@ public class DemoEnemy : MonoBehaviour
 
         curHealth = 20;
         maxHealth = curHealth;
+        EnemyHealthBar.maxValue = maxHealth;
+
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-        selectingMove = 1;
-        selectingTarget = 1;
+
         VictoryText.SetActive(false);
         VictoryAchieved = false;
         UpdateHUD();

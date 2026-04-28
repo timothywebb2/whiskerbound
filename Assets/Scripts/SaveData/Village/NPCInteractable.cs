@@ -21,7 +21,7 @@ public class NPCInteractable : MonoBehaviour
     public string npcDisplayName = "";
     public Sprite npcPortrait;
     [TextArea(2, 4)]
-    public string dialogueLine = "";
+    public string[] dialogueLine;
 
     public string shopTitle = "";
     [TextArea(3, 8)]

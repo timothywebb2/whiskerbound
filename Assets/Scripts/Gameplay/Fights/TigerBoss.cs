@@ -58,9 +58,10 @@ public class TigerBoss : MonoBehaviour
 
         curHealth = 40;
         maxHealth = curHealth;
+        EnemyHealthBar.maxValue = maxHealth;
+
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-        selectingMove = 1;
-        selectingTarget = 1;
+
         blessTime = 0;
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         VictoryText.SetActive(false);

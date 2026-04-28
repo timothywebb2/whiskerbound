@@ -423,7 +423,6 @@ if (curHealth + amount >= 80)
      public void OpenSorcererSkills()
     {   
         // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
-        // ADD CLERIC
         if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false && clericAlly.animator.GetBool("isAttacking") == false)
         {
             // check if enemies are in middle of attack or being attacked/healed
@@ -458,7 +457,7 @@ if (curHealth + amount >= 80)
 Debug.Log("enemyVFX1 is " + enemyVFX);
 Debug.Log("enemyVFX2 is " + enemyVFX2);
             }
-            /*else if (squirrelFight == 3)
+            else if (squirrelFight == 3)
             {
                 TigerBoss enemy = firstEnemy.GetComponent<TigerBoss>();
                 enemyIsAttacking = enemy.animator.GetBool("isAttacking");
@@ -466,7 +465,7 @@ Debug.Log("enemyVFX2 is " + enemyVFX2);
                 var stateInfo = enemy.VFXanimation.GetCurrentAnimatorStateInfo(0);
                 if(stateInfo.IsTag("Neutral"))
                     enemyVFX = false;
-            }*/
+            }
             if(!enemyIsAttacking && !enemyIsAttacking2 && !enemyVFX && !enemyVFX2)
             {
                 SorcererSkills.SetActive(true);
