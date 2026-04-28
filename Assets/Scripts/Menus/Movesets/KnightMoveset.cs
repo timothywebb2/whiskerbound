@@ -107,6 +107,13 @@ public class KnightMoveset : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (GameModeManager.Instance.IsGodMode())
+        {
+            curHealth = maxHealth;
+            UpdateHUD();
+            return;
+        }
+
         if (intercedeOn == false)
         {
             int finalDamage = amount;
@@ -159,23 +166,29 @@ Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
         UpdateHUD();
     }
 
+    //for button use
+    public void UseHealPotion()
+    {
+        StartCoroutine(HealPotion());
+    }
+
     public IEnumerator HealPotion()
     {
-        if (healUsedThisTurn)
+        if (!GameModeManager.Instance.IsInfiniteCoins() && healUsedThisTurn)
         {
             if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
             //return;
         }
 
-        if (!ItemManager.Instance.UseItem("HealPotion"))
+        bool usedItem = ItemManager.Instance.UseItem("HealPotion");
+
+        if (!GameModeManager.Instance.IsInfiniteCoins() && !usedItem)
         {
             StartCoroutine(printCurrentAction("No charges left!", 0f));
             //return;
         }
 
-        if(!healUsedThisTurn && ItemManager.Instance.UseItem("HealPotion"))
-        {
             healUsedThisTurn = true;
 
             int oldHealth = curHealth;
@@ -197,19 +210,18 @@ Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
             
             yield return new WaitForSeconds(2);
             VFXanimator.SetBool("isHealing", false);
-        }
     }
 
     public void DamageReductionPotion()
     {
-        if (damageReductionUsedThisTurn)
+        if (!GameModeManager.Instance.IsInfiniteCoins() && damageReductionUsedThisTurn)
         {
             if (!printing)
                 StartCoroutine(printCurrentAction("Already used this turn!", 0f));
             return;
         }
 
-        if (!ItemManager.Instance.UseItem("ArcaneEssence"))
+        if (!GameModeManager.Instance.IsInfiniteCoins() && !ItemManager.Instance.UseItem("ArcaneEssence"))
         {
             StartCoroutine(printCurrentAction("No charges left!", 0f));
             return;
@@ -481,13 +493,13 @@ Debug.Log("KnightMoveset/OpenKnightSkills: Can't open menu! Log is printing or p
 //Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
         yield return StartCoroutine(printCurrentAction(getMessage(), 0f));
 
-        if (doubleCastActive && Random.value <= 1f)
+        if (doubleCastActive && Random.value <= 0.5f)
         {
 //Debug.Log("KnightMoveset/ExecuteMoveRoutine: Double cast triggered!");
 
             move.Invoke();
 //Debug.Log("KnightMoveset/ExecuteMoveRoutine: Coroutine is pausing to run printCurrentAction");
-            yield return StartCoroutine(printCurrentAction(getMessage + " (Double Cast!)", 0f));
+            yield return StartCoroutine(printCurrentAction(getMessage() + " (Double Cast!)", 0f));
         }
 
         animator.SetBool("isAttacking", false);

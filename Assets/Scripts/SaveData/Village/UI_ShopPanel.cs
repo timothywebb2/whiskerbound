@@ -87,9 +87,10 @@ public class UI_ShopPanel : MonoBehaviour
 
     public bool PurchaseItem(UI_ShopSlots slot, int cost)
     {
-        if (coins >= cost)
+        if (GameModeManager.Instance.IsInfiniteCoins() || coins >= cost)
         {
-            coins -= cost;
+            if (!GameModeManager.Instance.IsInfiniteCoins())
+                coins -= cost;
             UpdateCoinText();
 
             int amountToAdd = Mathf.Max(1, slot.GetAmount());
@@ -115,14 +116,17 @@ public class UI_ShopPanel : MonoBehaviour
 
     public bool TryBuyItem(string itemId, Sprite icon, string displayName, int cost, int amount)
     {
-        if (coins < cost)
+        if (!GameModeManager.Instance.IsInfiniteCoins())
         {
-            Debug.Log("Not enough coins!");
-            return false;
-        }
+            if (coins < cost)
+            {
+                Debug.Log("Not enough coins!");
+                return false;
+            }
 
-        coins -= cost;
-        UpdateCoinText();
+            coins -= cost;
+            UpdateCoinText();
+        }
 
         inventoryManager.AddItem(itemId, icon, displayName, amount);
 
