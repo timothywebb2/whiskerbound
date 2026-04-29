@@ -47,6 +47,7 @@ public class ItemManager : MonoBehaviour
         if (items[itemId].currentCharges > 0)
         {
             items[itemId].currentCharges--;
+            PlayerPrefs.SetInt(itemId, items[itemId].currentCharges);
             return true;
         }
 

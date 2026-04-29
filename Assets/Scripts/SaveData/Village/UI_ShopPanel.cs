@@ -31,6 +31,7 @@ public class UI_ShopPanel : MonoBehaviour
         if (itemListText != null) itemListText.text = itemsDescription;
 
         this.onCloseCallback = onCloseCallback;
+        coins = PlayerPrefs.GetInt("Coins", 100);
 
         GenerateShopStock();
         UpdateCoinText();
@@ -46,6 +47,7 @@ public class UI_ShopPanel : MonoBehaviour
             shopTitleText.text = shopTitle;
 
         this.onCloseCallback = onCloseCallback;
+        coins = PlayerPrefs.GetInt("Coins", 100);
 
         GenerateShopStock();
         UpdateCoinText();
@@ -91,6 +93,7 @@ public class UI_ShopPanel : MonoBehaviour
         {
             if (!GameModeManager.Instance.IsInfiniteCoins())
                 coins -= cost;
+            PlayerPrefs.SetInt("Coins", coins);
             UpdateCoinText();
 
             int amountToAdd = Mathf.Max(1, slot.GetAmount());
@@ -125,6 +128,7 @@ public class UI_ShopPanel : MonoBehaviour
             }
 
             coins -= cost;
+            PlayerPrefs.SetInt("Coins", coins);
             UpdateCoinText();
         }
 
@@ -150,6 +154,7 @@ public class UI_ShopPanel : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+        PlayerPrefs.SetInt("Coins", coins);
         UpdateCoinText();
     }
 

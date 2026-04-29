@@ -73,6 +73,8 @@ public class UI_SettingsInventoryManager : MonoBehaviour
     {
         panelInventory.SetActive(true);
 
+        panelInventory.GetComponent<UI_InventoryManager>().SetSaveValues();
+
         if (panelSettings.activeSelf)
             panelSettings.SetActive(false);
 

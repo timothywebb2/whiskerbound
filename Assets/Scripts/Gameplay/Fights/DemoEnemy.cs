@@ -151,7 +151,7 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
             Debug.Log("Enemy is stunned! Skipping turn!");
         }
 
-        else
+        else if(curHealth > 0)
         {
             // if/else for selecting target/move when provoked
             if(isProvoked)
@@ -200,12 +200,18 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
                 animator.SetBool("isAttacking", false);
             }
             
-            else if (selectingMove == 2)
+            else if (selectingMove == 2 && curHealth < maxHealth)
             {
                 VFXanimation.SetBool("isHealing", true);
                 //ADD HEAL SFX
-                damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
+
+                if((curHealth + damageOutput) > maxHealth)
+                    curHealth = maxHealth;
+                else
+                    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
+
                 curHealth += damageOutput;
+                EnemyHealthBar.value = curHealth;
                 UpdateHUD();
 Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");
                 yield return new WaitForSeconds(2);

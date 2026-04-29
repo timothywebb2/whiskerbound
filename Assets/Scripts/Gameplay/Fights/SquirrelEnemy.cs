@@ -388,7 +388,7 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 has started attacking!");
 Debug.Log("SquirrelEnemy/BeginTurn: Enemy is stunned! Skipping turn!");
             }
 
-            else
+            else if(curHealth1 > 0)
             {
                 if(isProvoked1)
                 {
@@ -429,7 +429,7 @@ Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Sorcerer");
                     }
                     else if(selectingTarget == 3)
                     {
-Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
+Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Cleric!");
                         clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
                     }
                     
@@ -440,11 +440,16 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
                     animator1.SetBool("isAttacking", false);
                 }
                 
-                else if (selectingMove == 2)
+                else if (selectingMove == 2 && curHealth1 < maxHealth1)
                 {
                     VFXanimation1.SetBool("isHealing", true);
                     damageOutput = Random.Range(1, 5) + 1;
-                    curHealth1 += damageOutput;
+
+                    if((curHealth1 + damageOutput) > maxHealth1)
+                        curHealth1 = maxHealth1;
+                    else
+                        curHealth1 += damageOutput;
+                    
                     EnemyHealthBar1.value = curHealth1;
                     UpdateHUD();
 Debug.Log("SquirrelEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth1 + " health.");
@@ -475,7 +480,7 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has started attacking!");
 Debug.Log("SquirrelEnemy/BeginTurn2: Enemy is stunned! Skipping turn!");
             }
 
-            else
+            else if (curHealth2 > 0)
             {
                 if(isProvoked2)
                 {
@@ -523,11 +528,15 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
                     animator2.SetBool("isAttacking", false);
                 }
 
-                else if (selectingMove == 2)
+                else if (selectingMove == 2 && curHealth2 < maxHealth2)
                 {
                     VFXanimation2.SetBool("isHealing", true);
                     damageOutput = Random.Range(1, 5) + 1;
-                    curHealth2 += damageOutput;
+                    
+                    if((curHealth2 + damageOutput) > maxHealth2)
+                        curHealth2 = maxHealth2;
+                    else
+                        curHealth2 += damageOutput;
                     EnemyHealthBar2.value = curHealth2;
                     UpdateHUD();
 Debug.Log("SquirrelEnemy/BeginTurn2: Recuperate is used! Healed for " + damageOutput + " to " + curHealth2 + " health.");

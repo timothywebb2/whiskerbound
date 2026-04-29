@@ -10,10 +10,10 @@ public class UI_InventorySlot : MonoBehaviour
     public Button button;
     public GameObject selectedMarker;
 
-    string itemId = "";
+    public string itemId = "";
     string itemDisplayName = "";
     Sprite itemIcon;
-    int quantity = 0;
+    public int quantity = 0;
 
     UI_InventoryManager manager;
 
@@ -65,6 +65,8 @@ public class UI_InventorySlot : MonoBehaviour
         itemIcon = icon;
         quantity = amount;
 
+        PlayerPrefs.SetInt(id, amount);
+
         if (iconImage != null)
         {
             iconImage.sprite = icon;
@@ -78,6 +80,7 @@ public class UI_InventorySlot : MonoBehaviour
     public void AddAmount(int amount)
     {
         quantity += amount;
+        PlayerPrefs.SetInt(itemId, amount);
         if (quantityText != null) quantityText.text = "x" + quantity;
     }
 

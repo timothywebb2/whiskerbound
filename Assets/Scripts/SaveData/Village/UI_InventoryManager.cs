@@ -36,6 +36,15 @@ public class UI_InventoryManager : MonoBehaviour
             useButton.onClick.AddListener(OnUseClicked);
     }
 
+    public void SetSaveValues()
+    {
+        adrenalineSlot.quantity = PlayerPrefs.GetInt(adrenalineSlot.itemId, 0);
+        healingSlot.quantity = PlayerPrefs.GetInt(healingSlot.itemId, 0);
+        essenceSlot.quantity = PlayerPrefs.GetInt(essenceSlot.itemId, 0);
+        extraSlot1.quantity = PlayerPrefs.GetInt(extraSlot1.itemId, 0);
+        extraSlot2.quantity = PlayerPrefs.GetInt(extraSlot2.itemId, 0);
+    }
+
     void SetupDropdown()
     {
         if (targetDropdown == null) return;
@@ -66,6 +75,7 @@ public class UI_InventoryManager : MonoBehaviour
             {
                 Debug.Log("Got " + amount + " of " + id);
                 targetSlot.SetItem(id, icon, displayName, amount);
+                PlayerPrefs.SetInt(id, amount);
                 return;
             }
 
@@ -73,6 +83,7 @@ public class UI_InventoryManager : MonoBehaviour
             {
                 Debug.Log("Got " + amount + " of " + id);
                 targetSlot.AddAmount(amount);
+                PlayerPrefs.SetInt(id, amount);
                 return;
             }
         }
