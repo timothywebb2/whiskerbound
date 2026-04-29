@@ -73,8 +73,7 @@ public class KnightMoveset : MonoBehaviour
         Knighthealthbar.value = curHealth;
        
         damageType = 1; // 1 = PHYS, 2 = MYS, 3 = SPR
-        sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle").GetComponent<SorcererMoveset>();
-        clericAlly = GameObject.FindGameObjectWithTag("ClericBattle").GetComponent<ClericMoveset>();
+        
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         rallyRandom = 1;
@@ -425,10 +424,11 @@ if (curHealth + amount >= 100)
     }
   
     public void OpenKnightSkills()
-    {   
-        // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
-        // ADD CLERIC
-        if (!printing && animator.GetBool("isAttacking") == false && sorcererAlly.animator.GetBool("isAttacking") == false && clericAlly.animator.GetBool("isAttacking") == false)
+    {   int partySize = PlayerPrefs.GetInt("PartySize", 1);
+        // check party
+        if (!printing && animator.GetBool("isAttacking") == false && // if the knight isnt attacking
+        (sorcererAlly.animator.GetBool("isAttacking") == false || partySize < 2) && // if the sorcerer isnt attacking OR isnt unlocked yet
+        (clericAlly.animator.GetBool("isAttacking") == false || partySize < 3)) // same as sorcerer
         {
             // check if enemies are in middle of attack or being attacked/healed
             bool enemyIsAttacking = true;

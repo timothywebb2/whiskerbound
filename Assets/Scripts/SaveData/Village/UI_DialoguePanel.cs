@@ -55,9 +55,9 @@ public class UI_DialoguePanel : MonoBehaviour
                 PlayerPrefs.SetInt("PartySize", newPartySize);
 
                 if (newPartySize == 2)
-                    GameObject.FindGameObjectWithTag("SorcererFollower").SetActive(true);
+                    sorcererFollower.SetActive(true);
                 else if (newPartySize == 3)
-                    GameObject.FindGameObjectWithTag("ClericFollower").SetActive(true);
+                    clericFollower.SetActive(true);
             }
 
             gameObject.SetActive(false);

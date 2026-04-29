@@ -36,6 +36,7 @@ public class SorcererMoveset : MonoBehaviour
     public bool loseCondition;
 
     [Header("UI/Audio")]
+    public GameObject sorcererIcon;
     public GameObject SorcererSkills;
     public GameObject opacity;
     public GameObject closeButton;
@@ -63,6 +64,12 @@ public class SorcererMoveset : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(PlayerPrefs.GetInt("PartySize", 1) < 2)
+        {
+            sorcererIcon.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
+    
         maxHealth = 60;
         curHealth = maxHealth;
         Sorcererhealthbar.maxValue = maxHealth;
@@ -74,8 +81,7 @@ public class SorcererMoveset : MonoBehaviour
                    thornDamage = 0;
         volcanicTally = 0;
         // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-        knightAlly = GameObject.FindGameObjectWithTag("KnightBattle").GetComponent<KnightMoveset>();
-        clericAlly = GameObject.FindGameObjectWithTag("ClericBattle").GetComponent<ClericMoveset>();
+
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         // intercedeOn = false;
@@ -433,8 +439,10 @@ if (curHealth + amount >= 80)
 
      public void OpenSorcererSkills()
     {   
+        int partySize = PlayerPrefs.GetInt("PartySize", 1);
         // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
-        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false && clericAlly.animator.GetBool("isAttacking") == false)
+        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false &&
+        (clericAlly.animator.GetBool("isAttacking") == false || partySize < 3))
         {
             // check if enemies are in middle of attack or being attacked/healed
             bool enemyIsAttacking = true;

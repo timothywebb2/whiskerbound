@@ -1082,6 +1082,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+--- !u!114 &136650312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 629243862706035649, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+  m_PrefabInstance: {fileID: 136650311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543427a63cedee468c50a91fd0fc458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_ShopPanel
+--- !u!114 &136650313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+  m_PrefabInstance: {fileID: 136650311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b6fbdefd129446afb38483c86dc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DialoguePanel
 --- !u!4 &136811194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5965413125128549821, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
@@ -5623,6 +5645,10 @@ PrefabInstance:
       propertyPath: followCharacter
       value: 
       objectReference: {fileID: 136811194}
+    - target: {fileID: 1434301028161822078, guid: c8271809395e50946a07f72331be02f6, type: 3}
+      propertyPath: knightTransform
+      value: 
+      objectReference: {fileID: 136811194}
     - target: {fileID: 3483413949993857028, guid: c8271809395e50946a07f72331be02f6, type: 3}
       propertyPath: m_Name
       value: SorcererFollower
@@ -7067,6 +7093,10 @@ PrefabInstance:
       propertyPath: followCharacter
       value: 
       objectReference: {fileID: 924389257}
+    - target: {fileID: 3716438004125458959, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
+      propertyPath: knightTransform
+      value: 
+      objectReference: {fileID: 136811194}
     - target: {fileID: 8250861030125577684, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.797482
@@ -13918,11 +13948,11 @@ PrefabInstance:
     - target: {fileID: 4305780474337279711, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: shopPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 136650312}
     - target: {fileID: 4305780474337279711, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: dialoguePanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 136650313}
     - target: {fileID: 4305780474337279711, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: interactActionRef
       value: 
