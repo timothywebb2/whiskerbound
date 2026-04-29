@@ -37,6 +37,7 @@ public class ClericMoveset : MonoBehaviour
     public bool loseCondition;
 
     [Header("UI/Audio")]
+    public GameObject clericIcon;
     public GameObject ClericSkills;
     public GameObject opacity;
     public GameObject closeButton;
@@ -64,6 +65,12 @@ public class ClericMoveset : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(PlayerPrefs.GetInt("PartySize", 1) < 3)
+        {
+            clericIcon.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
+
         maxHealth = 60;
         curHealth = maxHealth;
         Clerichealthbar.maxValue = maxHealth;
@@ -76,8 +83,7 @@ public class ClericMoveset : MonoBehaviour
             hasThorns = 0;
         thornDamage = 0;
         // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-        knightAlly = GameObject.FindGameObjectWithTag("KnightBattle").GetComponent<KnightMoveset>();
-        sorcererAlly = GameObject.FindGameObjectWithTag("SorcererBattle").GetComponent<SorcererMoveset>();
+
         firstEnemy = GameObject.FindGameObjectWithTag("Enemy1");
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         // intercedeOn = false;
