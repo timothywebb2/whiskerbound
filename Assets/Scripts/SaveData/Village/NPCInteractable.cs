@@ -21,13 +21,14 @@ public class NPCInteractable : MonoBehaviour
     public string npcDisplayName = "";
     public Sprite npcPortrait;
     [TextArea(2, 4)]
-    public string dialogueLine = "";
+    public string[] dialogueLine;
 
     public string shopTitle = "";
     [TextArea(3, 8)]
     public string shopInventoryDescription =
         "";
 
+    public bool isRecruit;
     bool playerInRange = false;
     public bool IsPlayerInRange => playerInRange;
 
@@ -38,6 +39,16 @@ public class NPCInteractable : MonoBehaviour
 
         if (nameTagText != null)
             nameTagText.text = npcDisplayName;
+        
+        if(isRecruit && !promptCanvas.activeSelf)
+        {
+            int partySize = PlayerPrefs.GetInt("PartySize", 1);
+            if(partySize >= 2 && npcDisplayName == "Red Panda Sorcerer")
+                this.gameObject.SetActive(false);
+            
+            else if(partySize >= 3 && npcDisplayName == "Rabbit Cleric")
+                this.gameObject.SetActive(false);
+        }
     }
 
     void OnTriggerEnter(Collider other)

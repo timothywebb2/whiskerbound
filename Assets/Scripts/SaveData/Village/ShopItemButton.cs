@@ -7,7 +7,7 @@ public class ShopItemButton : MonoBehaviour
     public string itemId;
     public string displayName;
     public Sprite icon;
-    public int cost = 10;
+    public int cost = 20;
     public int amount = 1;
 
     public void OnBuyClicked()

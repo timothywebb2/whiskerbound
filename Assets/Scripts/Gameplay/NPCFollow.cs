@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 public class NPCFollow : MonoBehaviour
 {
+    public enum FollowerType
+    {
+        Sorcerer, Cleric
+    };
+    public FollowerType followerType;
+
+    public Transform knightTransform;
+
     public Transform followCharacter; // character this NPC will follow
     public float distanceFromCharacter;
     public List<Vector3> followCharacterPositions = new List<Vector3>(); // past positions of character for this NPC to pathfind to
@@ -18,20 +26,24 @@ public class NPCFollow : MonoBehaviour
 
     void Start()
     {
+        int partySize = PlayerPrefs.GetInt("PartySize", 1);
+
+        if(followerType == FollowerType.Sorcerer && partySize < 2)
+            this.gameObject.SetActive(false);
+        else if(followerType == FollowerType.Cleric && partySize < 3)
+            this.gameObject.SetActive(false);
+        
         sampleTime = Time.time;
-        followCharacterPositions.Add(followCharacter.position);
         followSpeed = fastSpeed;
 
-        /*int spawnPosition = PlayerPrefs.GetInt("SpawnPoint", 0); //index of spawn is set from last scene, call it
-        if(spawnPosition <= spawnPoints.Length) //if spawn point doesnt exist, put the player at the default spawn
-            gameObject.transform.position = spawnPoints[spawnPosition].transform.position; //set player to spawn position
-        PlayerPrefs.SetInt("SpawnPoint", 999); //reset spawn index*/
+        transform.position = knightTransform.position;
+        followCharacterPositions.Add(knightTransform.position);
 
         animator = this.GetComponent<Animator>();
     }
 
     void Update()
-    {
+    {        
         if(Time.time > sampleTime)
         {
             sampleTime = Time.time + sampleTimeDifference;

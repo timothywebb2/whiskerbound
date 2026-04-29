@@ -5,20 +5,22 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-
 public class DemoEnemy : MonoBehaviour
 {
     [Header("Player")]
     public GameObject knightPlayer;
     public GameObject sorcererPlayer;
+    public GameObject clericPlayer;
 
     [Header("Enemy Values")]
     public int curHealth;
+    private int maxHealth;
     public int damageType;
     public int selectingMove;
     public int selectingTarget;
     public int damageOutput;
-    private bool fireAttack;
+    private bool isProvoked; // checks if this enemy was hit with the knight's Provoke attack
+    private bool isStunned; // checks if the enemy was stunned by sorcerer, if so rolls to skip turn
 
     [Header("Fight Management")]
     public GameObject battlePhase;
@@ -34,34 +36,45 @@ public class DemoEnemy : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("Animation")]
-    private Animator animator;
-    public GameObject enemyVFX;
-    private Animator VFXanimation;
+    public Animator animator;
+    public Animator VFXanimation;
     private bool animationHit;
     private bool animationDone;
+
+    private bool isKnightAttacking;
+    private bool isSorcererAttacking;
+    private bool isClericAttacking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         knightPlayer = GameObject.FindGameObjectWithTag("KnightBattle");
         sorcererPlayer = GameObject.FindGameObjectWithTag("SorcererBattle");
+        clericPlayer = GameObject.FindGameObjectWithTag("ClericBattle");
+
         battlePhase = GameObject.FindGameObjectWithTag("BattleController");
         fightManager = GameObject.FindGameObjectWithTag("FightManager");
+
         curHealth = 20;
+        maxHealth = curHealth;
+        EnemyHealthBar.maxValue = maxHealth;
+
         damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
-        selectingMove = 1;
-        selectingTarget = 1;
+
         VictoryText.SetActive(false);
         VictoryAchieved = false;
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
         animator = this.GetComponent<Animator>();
-        VFXanimation = enemyVFX.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        isKnightAttacking = knightPlayer.GetComponent<Animator>().GetBool("isAttacking");
+        isSorcererAttacking = sorcererPlayer.GetComponent<Animator>().GetBool("isAttacking");
+        isClericAttacking = clericPlayer.GetComponent<Animator>().GetBool("isAttacking");
+
         battlePhase.GetComponent<BattlePhase>().NumberedFight(1);
       
         if (VictoryAchieved == true)
@@ -70,7 +83,7 @@ public class DemoEnemy : MonoBehaviour
           
             if (timePassed > 3.0f)
             {
-Debug.Log("Change scene");
+Debug.Log("DemoEnemy/Update: Change scene");
                 if(PlayerPrefs.GetInt("Enemy", 0) == 10)
                     SceneManager.LoadScene("MAIN MENU");
                 
@@ -83,7 +96,6 @@ Debug.Log("Change scene");
    public IEnumerator TakeDamage(int amount, bool isFire)
    {
 Debug.Log("DemoEnemy/TakeDamage: isFire is " + isFire);
-        fireAttack = isFire;
         // set VFX to damaged animation
         if(isFire)
             VFXanimation.SetBool("isFireAttack", true);
@@ -93,117 +105,122 @@ Debug.Log("DemoEnemy/TakeDamage: isFire is " + isFire);
         yield return new WaitForSeconds(1); // give time for animation to start
         
         curHealth -= amount; // take damage
+        if(curHealth < 0)
+            curHealth = 0;
         EnemyHealthBar.value -= amount;
+        UpdateHUD();
 
         if (damageSound != null) // play damage sound 
             audioSource.PlayOneShot(damageSound);
 
-        if(isFire)
-        {
-Debug.Log("DemoEnemy/TakeDamage: Pausing to play fire animation");
-            yield return new WaitForSeconds(1.5f);
-        }
-        
-        else
-        {   
-Debug.Log("DemoEnemy/TakeDamage: Playing slash animation");
-            yield return new WaitUntil(() => animationDone);
-            animationDone = false;
-        }
+        yield return new WaitForSeconds(1.5f);
         
         VFXanimation.SetBool("isAttacked", false); // reset VFX
         VFXanimation.SetBool("isFireAttack", false);
 
-Debug.Log("Enemy took " + amount + " damage and has " + curHealth + " health");
-        UpdateHUD();
+Debug.Log("DemoEnemy/TakeDamage: Enemy took " + amount + " damage and has " + curHealth + " health");
         if (curHealth <= 0)
             Victory();
    }
 
     public void gotGoaded()
     {
-        // Here is where the code will be for the enemy when they're goaded once allies are added
+        isProvoked = true;
     }
 
     public void gotStunned()
     {
-        // Here is where the code will be for the enemy when they're stunned
+        isStunned = true;
     }
 
-    //public void BeginTurn()
     public IEnumerator BeginTurn()
     {
-Debug.Log("DemoEnemy/BeginTurn: fireAttack is " + fireAttack);
         // wait for player attacks to finish
-        if(fireAttack)
+        yield return new WaitUntil(() => !isKnightAttacking);
+        yield return new WaitUntil(() => !isSorcererAttacking);
+        yield return new WaitUntil(() => !isClericAttacking);
+
+Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
+
+        int stun = 4;
+        if(isStunned)
+            stun = Random.Range(1, 5); //generates number 1-4, 1 means the enemy skips turn
+        
+        if(stun == 1)
         {
-Debug.Log("DemoEnemy/BeginTurn: Playing fire attack");
-            VFXanimation.SetBool("isFireAttack", true);
-            yield return new WaitForSeconds(2);
-            VFXanimation.SetBool("isFireAttack", false);
+            Debug.Log("Enemy is stunned! Skipping turn!");
         }
+
         else
         {
-Debug.Log("DemoEnemy/BeginTurn: Playing normal attack");
-            VFXanimation.SetBool("isAttacked", true);
-            yield return new WaitUntil(() => animationDone);
-            animationDone = false;
-            VFXanimation.SetBool("isAttacked", false);
-        }
-
-Debug.Log("Enemy has started attacking!");
-
-        selectingMove = Random.Range(1, 3);
-        selectingTarget = Random.Range(1, 3);
-        
-        if (selectingMove == 1) 
-        {
-            damageOutput = Random.Range(1, 7) + 1;
-            
-            animator.SetBool("isAttacking", true); // start attack animation
-Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation event");
-            yield return new WaitUntil(() => animationHit); // wait for animation to show enemy hitting
-            animationHit = false; // reset animation
-            
-            // attack sound effect is attached to player
-
-            // ADD PROVOKE FUNCTIONALITY
-            if (selectingTarget == 1)
+            // if/else for selecting target/move when provoked
+            if(isProvoked)
             {
-Debug.Log("Lash is used on the Knight!");
-                knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
+Debug.Log("Enemy is provoked! Will only attack Knight!");
+                selectingMove = 1;
+                selectingTarget = 1;
+            }
+
+            else
+            {
+                int partySize = PlayerPrefs.GetInt("PartySize", 1);
+                selectingMove = Random.Range(1, 3);
+                selectingTarget = Random.Range(1, partySize + 1);
             }
             
-            if (selectingTarget == 2)
+            if (selectingMove == 1) 
             {
-Debug.Log("Lash is used on the Sorcerer!");
-                StartCoroutine(sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput));
+                damageOutput = Random.Range(1, 7) + 1;
+                
+                animator.SetBool("isAttacking", true); // start attack animation
+//Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation event");
+                yield return new WaitUntil(() => animationHit); // wait for animation to show enemy hitting
+                animationHit = false; // reset animation
+                
+                // attack sound effect is attached to player
+                if (selectingTarget == 1)
+                {
+Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Knight!");
+                    knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
+                }
+                else if (selectingTarget == 2)
+                {
+Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Sorcerer!");
+                    sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+                }
+                else if (selectingTarget == 3)
+                {
+Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
+                    clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
+                }
+                
+//Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation is done");
+                yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
+                animationDone = false;
+                animator.SetBool("isAttacking", false);
             }
-Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation is done");
-            yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
-            animationDone = false;
-            animator.SetBool("isAttacking", false);
-        }
-        
-        else if (selectingMove == 2)
-        {
-Debug.Log("Recuperate is used!");
-            VFXanimation.SetBool("isHealing", true);
-            //ADD HEAL SFX
-            damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
-            curHealth += damageOutput;
-Debug.Log("DemoEnemy/TakeDamage: Coroutine is pausing for 2 seconds");
-            yield return new WaitForSeconds(2);
-            VFXanimation.SetBool("isHealing", false);
+            
+            else if (selectingMove == 2)
+            {
+                VFXanimation.SetBool("isHealing", true);
+                //ADD HEAL SFX
+                damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
+                curHealth += damageOutput;
+                UpdateHUD();
+Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");
+                yield return new WaitForSeconds(2);
+                VFXanimation.SetBool("isHealing", false);
+            }
         }
 
-        
-Debug.Log("Enemy has finished attacking!");
+        isProvoked = false;
+        isStunned = false;
+Debug.Log("DemoEnemy/BeginTurn: Enemy has finished attacking!");
     }
 
     void UpdateHUD()
     {
-        HealthText.text = curHealth + "/200"; 
+        HealthText.text = curHealth + "/" + maxHealth; 
     }
 
     public void Victory()
@@ -211,7 +228,7 @@ Debug.Log("Enemy has finished attacking!");
         fightManager.GetComponent<FightManager>().BattleComplete();
         VictoryAchieved = true;
         VictoryText.SetActive(true);
-Debug.Log("Victory achieved!");
+Debug.Log("DemoEnemy/Victory: Victory achieved!");
     }
 
     public void AnimationHit()
