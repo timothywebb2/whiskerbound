@@ -141,7 +141,16 @@ Debug.Log("TigerBoss/TakeDamage: Enemy took " + amount + " damage and has " + cu
 
         if (blessTime > 0)
         {
-            curHealth += Random.Range(1, 13);
+            damageOutput = Random.Range(1, 13);
+            
+            if((curHealth + damageOutput) > maxHealth)
+                curHealth = maxHealth;
+            else
+                curHealth += damageOutput;
+
+            EnemyHealthBar.value = curHealth;
+            UpdateHUD();
+
             blessTime -= 1;
 Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss has " + blessTime + " turns of Bless left.");
         }
@@ -155,7 +164,7 @@ Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss 
             Debug.Log("Enemy is stunned! Skipping turn!");
         }
 
-        else
+        else if (curHealth > 0)
         {
             // if/else for selecting target/move when provoked
             if(isProvoked)
@@ -229,11 +238,18 @@ Debug.Log("TigerBoss/BeginTurn: Empower is used! Gained 3 turns of blessing!");
                 blessTime += 3;
             }
 
-            else if (selectingMove == 4)
+            else if (selectingMove == 4 && curHealth < maxHealth)
             {
                 VFXanimation.SetBool("isHealing", true);
                 //ADD HEAL SFX
-                curHealth += Random.Range(1, 5) + Random.Range(1, 5);
+                damageOutput = Random.Range(1, 5) + Random.Range(1, 5);
+
+                if((curHealth + damageOutput) > maxHealth)
+                    curHealth = maxHealth;
+                else
+                    curHealth += damageOutput;
+
+                EnemyHealthBar.value = curHealth;
                 UpdateHUD();
 Debug.Log("TigerBoss/BeginTurn: Tiger Ward is used! Healed to " + curHealth);
                 yield return new WaitForSeconds(2);
