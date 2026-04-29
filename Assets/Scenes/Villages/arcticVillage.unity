@@ -958,6 +958,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 136811194}
+    - target: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: promptCanvas
+      value: 
+      objectReference: {fileID: 136650314}
+    - target: {fileID: 3897392166414861475, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: clericFollower
       value: 
       objectReference: {fileID: 1089107743}
@@ -1104,6 +1112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46b6fbdefd129446afb38483c86dc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_DialoguePanel
+--- !u!1 &136650314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2098416601307755519, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+  m_PrefabInstance: {fileID: 136650311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &136811194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5965413125128549821, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}

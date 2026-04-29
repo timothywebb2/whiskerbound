@@ -81,20 +81,23 @@ public class PlayerInteractionController : MonoBehaviour
 
 
     void OpenDialogueFromNPC(NPCInteractable npc)
-    {
-        if (dialoguePanel == null) return;
+    {   
+        if(npc.gameObject.activeSelf)
+        {
+            if (dialoguePanel == null) return;
 
-        isBusy = true;
-        if (movementScript != null) movementScript.enabled = false;
+            isBusy = true;
+            if (movementScript != null) movementScript.enabled = false;
 
-        dialoguePanel.ShowDialogue(
-            npc.npcPortrait,
-            npc.npcDisplayName,
-            npc.dialogueLine,
-            npc.isRecruit,
-            npc.gameObject,
-            OnDialogueClosed
-        );
+            dialoguePanel.ShowDialogue(
+                npc.npcPortrait,
+                npc.npcDisplayName,
+                npc.dialogueLine,
+                npc.isRecruit,
+                npc.gameObject,
+                OnDialogueClosed
+            );
+        }
     }
 
     void OpenShopFromNPC(NPCInteractable npc)
