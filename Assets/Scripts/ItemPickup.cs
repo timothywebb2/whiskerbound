@@ -12,6 +12,12 @@ public class ItemPickup : MonoBehaviour
     public void Start()
     {
         this.gameObject.GetComponent<SpriteRenderer>().sprite = item.icon;
+
+        if(PlayerPrefs.GetInt("GotAdrenaline", 0) == 1 && item.itemId == "adrenaline")
+            gameObject.SetActive(false);
+        if(PlayerPrefs.GetInt("GotPotion", 0 ) == 1 && item.itemId == "health_potion")
+            gameObject.SetActive(false);
+
     }
     void OnTriggerEnter(Collider whatIHit)
     {
@@ -19,6 +25,12 @@ public class ItemPickup : MonoBehaviour
         {
             audioManager.PlaySFX(audioClip);
             inventoryManager.AddItem(item.itemId, item.icon, item.displayName, amount);
+
+            if(item.itemId == "health_potion")
+                PlayerPrefs.SetInt("GotPotion", 1);
+            if(item.itemId == "adrenaline")
+                PlayerPrefs.SetInt("GotAdrenaline", 1);
+
             Destroy(this.gameObject);
         }
     }
