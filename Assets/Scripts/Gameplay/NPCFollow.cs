@@ -75,10 +75,8 @@ public class NPCFollow : MonoBehaviour
             else if(transform.position.x < /*followCharacterPositions[0].x*/ followCharacter.position.x) //backward, +y
                 yDir = 1;
             
-            //
-            //animator.SetInteger("XDirection", xDir);
-            //animator.SetInteger("YDirection", yDir);
-            //
+            animator.SetInteger("XDirection", xDir);
+            animator.SetInteger("YDirection", yDir);
 
             transform.position = Vector3.MoveTowards(transform.position, followCharacterPositions[0], Time.deltaTime * followSpeed);
 
@@ -87,8 +85,5 @@ public class NPCFollow : MonoBehaviour
                 followCharacterPositions.RemoveAt(0);
             } 
         }
-
-        animator.SetInteger("XDirection", xDir);
-        animator.SetInteger("YDirection", yDir);
     }
 }

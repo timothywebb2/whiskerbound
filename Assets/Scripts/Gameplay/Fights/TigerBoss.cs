@@ -34,6 +34,7 @@ public class TigerBoss : MonoBehaviour
     public bool VictoryAchieved;
     public Slider EnemyHealthBar;
     public AudioClip damageSound;
+    public AudioClip healSound;
     private AudioSource audioSource;
 
     [Header("Animation")]
@@ -170,7 +171,7 @@ Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss 
             if(isProvoked)
             {
 Debug.Log("Enemy is provoked! Will only attack Knight!");
-                selectingMove = Random.Range(1, 3);
+                selectingMove = 1;
                 selectingTarget = 1;
             }
             else
@@ -241,8 +242,10 @@ Debug.Log("TigerBoss/BeginTurn: Empower is used! Gained 3 turns of blessing!");
             else if (selectingMove == 4 && curHealth < maxHealth)
             {
                 VFXanimation.SetBool("isHealing", true);
-                //ADD HEAL SFX
                 damageOutput = Random.Range(1, 5) + Random.Range(1, 5);
+
+                if (damageSound != null) // play damage sound 
+                    audioSource.PlayOneShot(healSound);
 
                 if((curHealth + damageOutput) > maxHealth)
                     curHealth = maxHealth;

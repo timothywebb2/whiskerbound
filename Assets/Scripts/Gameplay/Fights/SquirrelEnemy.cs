@@ -46,6 +46,7 @@ public class SquirrelEnemy : MonoBehaviour
     public Slider EnemyHealthBar1;
     public Slider EnemyHealthBar2;
     public AudioClip damageSound;
+    public AudioClip healSound;
     private AudioSource audioSource;
 
     [Header("Animation")]
@@ -445,6 +446,9 @@ Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Cleric!");
                     VFXanimation1.SetBool("isHealing", true);
                     damageOutput = Random.Range(1, 5) + 1;
 
+                    if (damageSound != null) // play damage sound 
+                        audioSource.PlayOneShot(healSound);
+
                     if((curHealth1 + damageOutput) > maxHealth1)
                         curHealth1 = maxHealth1;
                     else
@@ -533,6 +537,9 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
                     VFXanimation2.SetBool("isHealing", true);
                     damageOutput = Random.Range(1, 5) + 1;
                     
+                    if (damageSound != null) // play damage sound 
+                        audioSource.PlayOneShot(healSound);
+
                     if((curHealth2 + damageOutput) > maxHealth2)
                         curHealth2 = maxHealth2;
                     else

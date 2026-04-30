@@ -8,7 +8,7 @@ public class ParentAnimation : MonoBehaviour
     public GameObject parent; // the script to be affected by the animation event
     public void AnimationDone()
     {
-        if(PlayerPrefs.GetInt("Enemy") == 2) //squirrel
+        if(PlayerPrefs.GetInt("Enemy") == 2 || PlayerPrefs.GetInt("Enemy") == 7) //squirrel or bat
             parent.GetComponent<SquirrelEnemy>().AnimationDone();
         else if(PlayerPrefs.GetInt("Enemy") == 3) // tiger
             parent.GetComponent<TigerBoss>().AnimationDone();

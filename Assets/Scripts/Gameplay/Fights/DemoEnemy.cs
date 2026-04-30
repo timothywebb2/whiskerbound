@@ -33,6 +33,7 @@ public class DemoEnemy : MonoBehaviour
     public bool VictoryAchieved;
     public Slider EnemyHealthBar;
     public AudioClip damageSound;
+    public AudioClip healSound;
     private AudioSource audioSource;
 
     [Header("Animation")]
@@ -203,7 +204,10 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
             else if (selectingMove == 2 && curHealth < maxHealth)
             {
                 VFXanimation.SetBool("isHealing", true);
-                //ADD HEAL SFX
+
+                if (damageSound != null) // play damage sound 
+                    audioSource.PlayOneShot(healSound);
+
                 damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
 
                 if((curHealth + damageOutput) > maxHealth)
