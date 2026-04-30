@@ -32,8 +32,9 @@ public class mainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(1.8f);
         blackScreen.SetActive(true);
-        //SceneManager.LoadScene("forestVillage");
-        SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
+        
+        PlayerPrefs.SetInt("SpawnPoint", 0);
+        SceneManager.LoadScene(PlayerPrefs.GetString("LastVillage", "forestVillage"));
     }
 
     //prevents overlap
