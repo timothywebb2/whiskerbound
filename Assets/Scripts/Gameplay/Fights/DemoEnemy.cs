@@ -204,13 +204,13 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
             {
                 VFXanimation.SetBool("isHealing", true);
                 //ADD HEAL SFX
+                damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
 
                 if((curHealth + damageOutput) > maxHealth)
                     curHealth = maxHealth;
                 else
-                    damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
-
-                curHealth += damageOutput;
+                    curHealth += damageOutput;
+                
                 EnemyHealthBar.value = curHealth;
                 UpdateHUD();
 Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");

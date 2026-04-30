@@ -65,7 +65,6 @@ public class NPCFollow : MonoBehaviour
 
         if(Vector3.Distance(transform.position, followCharacter.position) > distanceFromCharacter) // if the current distance between NPC and character is above max
         {
-
             if(transform.position.z > /*followCharacterPositions[0].z*/ followCharacter.position.z) //walking to the right, +x
                 xDir = 1;
             else if(transform.position.z < /*followCharacterPositions[0].z*/ followCharacter.position.z) //to the left, -x
@@ -76,6 +75,11 @@ public class NPCFollow : MonoBehaviour
             else if(transform.position.x < /*followCharacterPositions[0].x*/ followCharacter.position.x) //backward, +y
                 yDir = 1;
             
+            //
+            //animator.SetInteger("XDirection", xDir);
+            //animator.SetInteger("YDirection", yDir);
+            //
+
             transform.position = Vector3.MoveTowards(transform.position, followCharacterPositions[0], Time.deltaTime * followSpeed);
 
             if(Vector3.Distance(transform.position, followCharacterPositions[0]) < removeDistance && followCharacterPositions.Count > 1)
