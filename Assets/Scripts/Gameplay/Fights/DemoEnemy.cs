@@ -234,6 +234,7 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has finished attacking!");
         fightManager.GetComponent<FightManager>().BattleComplete();
         VictoryAchieved = true;
         VictoryText.SetActive(true);
+        animator.SetBool("isDefeated", true);
 Debug.Log("DemoEnemy/Victory: Victory achieved!");
     }
 

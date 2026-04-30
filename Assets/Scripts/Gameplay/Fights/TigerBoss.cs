@@ -270,6 +270,7 @@ Debug.Log("TigerBoss/BeginTurn: Enemy has finished attacking!");
     public void Victory()
     {
         fightManager.GetComponent<FightManager>().BattleComplete();
+        animator.SetBool("isDefeated", true);
         VictoryAchieved = true;
         VictoryText.SetActive(true);
 Debug.Log("Victory achieved!");

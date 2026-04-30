@@ -571,6 +571,8 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has finished attacking!");
     public void Victory()
     {
         fightManager.GetComponent<FightManager>().BattleComplete();
+        animator1.SetBool("isDefeated", true);
+        animator2.SetBool("isDefeated", true);
         VictoryAchieved = true;
         VictoryText.SetActive(true);
     
