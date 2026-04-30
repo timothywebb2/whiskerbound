@@ -6407,16 +6407,60 @@ PrefabInstance:
       value: PlayOneShot
       objectReference: {fileID: 0}
     - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 753951291}
+      objectReference: {fileID: 920080385}
     - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: restartScene
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621020050016998816, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4164478067244646571, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
       propertyPath: m_Name
       value: Pause Overworld
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649167481460552550, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649167481460552550, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 920080385}
+    - target: {fileID: 4649167481460552550, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 523932226}
+    - target: {fileID: 4649167481460552550, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649167481460552550, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649167481460552550, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5172614810448913505, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6441,6 +6485,14 @@ PrefabInstance:
     - target: {fileID: 7375883707263184025, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: goMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494533044680198280, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 753951291}
+    - target: {fileID: 7494533044680198280, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: restartScene
       objectReference: {fileID: 0}
     - target: {fileID: 9182674518819536008, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -7873,6 +7925,10 @@ PrefabInstance:
       propertyPath: confirmationMenu
       value: 
       objectReference: {fileID: 755366895}
+    - target: {fileID: 2864202067766737204, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
+      propertyPath: confirmationRestart
+      value: 
+      objectReference: {fileID: 920080385}
     - target: {fileID: 4423231713978935246, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
       propertyPath: m_Name
       value: pauseManager
@@ -7922,6 +7978,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acea6af8ef9d81449ae9cb115df33959, type: 3}
+--- !u!1 &920080385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7137366490177357717, guid: 901f4db336b2f2f4ead68c2aea03a911, type: 3}
+  m_PrefabInstance: {fileID: 755366894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &927255830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11891,6 +11952,22 @@ PrefabInstance:
     - target: {fileID: 4033261297766364017, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 753951291}
+    - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 523932226}
+    - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: pauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314924485135734241, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOneShot
       objectReference: {fileID: 0}
     - target: {fileID: 4842527072869808457, guid: 260488d4458809840a037e95c8cb4fac, type: 3}
       propertyPath: m_Pivot.x
