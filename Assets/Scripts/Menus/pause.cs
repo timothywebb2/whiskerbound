@@ -15,6 +15,7 @@ public class pause : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject controlsScreen;
     public GameObject confirmationMenu;
+    public GameObject confirmationRestart;
 
     [Header("Audio")]
     public AudioSource villageMusic;

@@ -40,26 +40,26 @@ public class mainMenu : MonoBehaviour
     //prevents overlap
     public void options(){// show only options screen
          optionsMenu.SetActive(true);
-          //mainMenuObject.SetActive(false);
+          
     }
 
     public void credits(){//ditto
     creditsMenu.SetActive(true);
-          //mainMenuObject.SetActive(false);
+          
 
     }
 
 public void controls(){//ditto but close options screen
      controlsMenu.SetActive(true);
      optionsMenu.SetActive(false);
-        //mainMenuObject.SetActive(false);
+        
 }
 
     public void backButton(){ // no matter which back button, sends back to main screen.
   optionsMenu.SetActive(false);
     creditsMenu.SetActive(false);
     controlsMenu.SetActive(false);
-    //mainMenuObject.SetActive(true);
+    
     }
 
     public void quit(){
