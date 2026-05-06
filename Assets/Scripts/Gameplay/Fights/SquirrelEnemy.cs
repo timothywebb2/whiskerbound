@@ -47,6 +47,10 @@ public class SquirrelEnemy : MonoBehaviour
     public Slider EnemyHealthBar2;
     public AudioClip damageSound;
     public AudioClip healSound;
+    private bool printing;
+    public TextMeshProUGUI currentAction;
+    public string enemyName1;
+    public string enemyName2;
     private AudioSource audioSource;
 
     [Header("Animation")]
@@ -387,12 +391,16 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 has started attacking!");
             if(stun == 1)
             {
 Debug.Log("SquirrelEnemy/BeginTurn: Enemy is stunned! Skipping turn!");
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName1 + " is stunned and can't attack!", 0f));
             }
 
             else if(curHealth1 > 0)
             {
                 if(isProvoked1)
                 {
+                    if (!printing)
+                        StartCoroutine(printCurrentAction(enemyName1 + " is provoked! It will only attack the Knight!", 0f));
 Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 is provoked! Will only attack Knight!");
                     selectingMove = 1;
                     selectingTarget = 1;
@@ -456,6 +464,8 @@ Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Cleric!");
                     
                     EnemyHealthBar1.value = curHealth1;
                     UpdateHUD();
+                    if (!printing)
+                        StartCoroutine(printCurrentAction(enemyName1 + " healed for " + damageOutput + "!", 0f));
 Debug.Log("SquirrelEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth1 + " health.");
                     yield return new WaitForSeconds(2);
                     VFXanimation1.SetBool("isHealing", false);
@@ -482,12 +492,16 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has started attacking!");
             if(stun == 1)
             {
 Debug.Log("SquirrelEnemy/BeginTurn2: Enemy is stunned! Skipping turn!");
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName1 + " is stunned and can't attack!", 0f));
             }
 
             else if (curHealth2 > 0)
             {
                 if(isProvoked2)
                 {
+                    if (!printing)
+                        StartCoroutine(printCurrentAction(enemyName1 + " is provoked! It will only attack the Knight!", 0f));
 Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 is provoked! Will only attack Knight!");
                     selectingMove = 1;
                     selectingTarget = 1;
@@ -541,11 +555,13 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
                         audioSource.PlayOneShot(healSound);
 
                     if((curHealth2 + damageOutput) > maxHealth2)
-                        curHealth2 = maxHealth2;
-                    else
-                        curHealth2 += damageOutput;
+                        damageOutput = maxHealth2 - curHealth2;
+                    curHealth2 += damageOutput;
+
                     EnemyHealthBar2.value = curHealth2;
                     UpdateHUD();
+                    if (!printing)
+                        StartCoroutine(printCurrentAction(enemyName2 + " healed for " + damageOutput + "!", 0f));
 Debug.Log("SquirrelEnemy/BeginTurn2: Recuperate is used! Healed for " + damageOutput + " to " + curHealth2 + " health.");
                     yield return new WaitForSeconds(2);
                     VFXanimation2.SetBool("isHealing", false);
@@ -584,6 +600,28 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has finished attacking!");
         VictoryText.SetActive(true);
     
 Debug.Log("Victory achieved!");
+    }
+
+    IEnumerator printCurrentAction(string toPrint, float delay)
+    {
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
+        yield return new WaitForSeconds(delay);
+        
+        if(printing)
+        {
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing until printing is false");
+            yield return new WaitUntil(() => !printing);
+        }
+
+        printing = true;
+//Debug.Log("DemoEnemy/printCurrentAction: Current action enabled");
+        currentAction.enabled = true;
+        currentAction.text = toPrint;
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for 5 seconds");
+        yield return new WaitForSeconds(3);
+
+        printing = false;
+        currentAction.enabled = false;
     }
 
     public void AnimationHit()

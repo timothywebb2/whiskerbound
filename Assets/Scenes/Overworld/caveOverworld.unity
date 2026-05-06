@@ -4179,6 +4179,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2396640048958529984}
     - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: clericAnimator
+      value: 
+      objectReference: {fileID: 928775591}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: sorcererAnimator
+      value: 
+      objectReference: {fileID: 523294913}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: spawnPoints.Array.size
       value: 9
       objectReference: {fileID: 0}
@@ -4335,6 +4343,11 @@ PrefabInstance:
 --- !u!4 &523294912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4862948840636096107, guid: c8271809395e50946a07f72331be02f6, type: 3}
+  m_PrefabInstance: {fileID: 523294911}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &523294913 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7442675201670737028, guid: c8271809395e50946a07f72331be02f6, type: 3}
   m_PrefabInstance: {fileID: 523294911}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &523932225
@@ -8160,6 +8173,11 @@ PrefabInstance:
 --- !u!4 &928775590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8250861030125577684, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
+  m_PrefabInstance: {fileID: 928775589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &928775591 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7340919394168504746, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
   m_PrefabInstance: {fileID: 928775589}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &938055721

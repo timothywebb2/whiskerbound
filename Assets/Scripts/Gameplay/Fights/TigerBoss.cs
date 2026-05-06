@@ -35,7 +35,10 @@ public class TigerBoss : MonoBehaviour
     public Slider EnemyHealthBar;
     public AudioClip damageSound;
     public AudioClip healSound;
+    public TextMeshProUGUI currentAction;
+    public string enemyName;
     private AudioSource audioSource;
+    private bool printing;
 
     [Header("Animation")]
     public Animator animator;
@@ -140,29 +143,35 @@ Debug.Log("TigerBoss/TakeDamage: Enemy took " + amount + " damage and has " + cu
         yield return new WaitUntil(() => !isSorcererAttacking);
         yield return new WaitUntil(() => !isClericAttacking);
 
-        if (blessTime > 0)
+        if(curHealth > 0)
         {
-            damageOutput = Random.Range(1, 13);
-            
-            if((curHealth + damageOutput) > maxHealth)
-                curHealth = maxHealth;
-            else
+            if (blessTime > 0)
+            {
+                damageOutput = Random.Range(1, 13);
+                
+                if((curHealth + damageOutput) > maxHealth)
+                    damageOutput = maxHealth - curHealth;
                 curHealth += damageOutput;
 
-            EnemyHealthBar.value = curHealth;
-            UpdateHUD();
+                EnemyHealthBar.value = curHealth;
+                UpdateHUD();
 
-            blessTime -= 1;
+                blessTime -= 1;
+                if (!printing)
+                        StartCoroutine(printCurrentAction("Empower healed " + enemyName + " healed for " + damageOutput + "! " + blessTime + " turns of Empower left!", 0f));
 Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss has " + blessTime + " turns of Bless left.");
-        }
-       
-        int stun = 4;
-        if(isStunned)
-            stun = Random.Range(1, 5); //generates number 1-4, 1 means the enemy skips turn
+            }
         
-        if(stun == 1)
-        {
-            Debug.Log("Enemy is stunned! Skipping turn!");
+            int stun = 4;
+            if(isStunned)
+                stun = Random.Range(1, 5); //generates number 1-4, 1 means the enemy skips turn
+            
+            if(stun == 1)
+            {
+Debug.Log("TigerBoss/BeginTurn: Enemy is stunned! Skipping turn!");
+                if (!printing)
+                        StartCoroutine(printCurrentAction(enemyName + " is stunned and can't attack!", 0f));
+            }
         }
 
         else if (curHealth > 0)
@@ -170,9 +179,12 @@ Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss 
             // if/else for selecting target/move when provoked
             if(isProvoked)
             {
-Debug.Log("Enemy is provoked! Will only attack Knight!");
+Debug.Log("TigerBoss/BeginTurn: Enemy is provoked! Will only attack Knight!");
                 selectingMove = 1;
                 selectingTarget = 1;
+
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName + " is provoked! It will only attack the Knight!", 0f));
             }
             else
             {
@@ -235,6 +247,8 @@ Debug.Log("TigerBoss/BeginTurn: Sweep is used!");
             else if (selectingMove == 3)
             {
                 //ADD VFX (MAYBE DIFFERENT FROM HEALING ONE?)
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName + " used empower! Will passively heal for three turns!", 0f));
 Debug.Log("TigerBoss/BeginTurn: Empower is used! Gained 3 turns of blessing!");
                 blessTime += 3;
             }
@@ -248,12 +262,13 @@ Debug.Log("TigerBoss/BeginTurn: Empower is used! Gained 3 turns of blessing!");
                     audioSource.PlayOneShot(healSound);
 
                 if((curHealth + damageOutput) > maxHealth)
-                    curHealth = maxHealth;
-                else
-                    curHealth += damageOutput;
+                    damageOutput = maxHealth - curHealth;
+                curHealth += damageOutput;
 
                 EnemyHealthBar.value = curHealth;
                 UpdateHUD();
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName + " healed for " + damageOutput + "!", 0f));
 Debug.Log("TigerBoss/BeginTurn: Tiger Ward is used! Healed to " + curHealth);
                 yield return new WaitForSeconds(2);
                 VFXanimation.SetBool("isHealing", false);
@@ -278,7 +293,27 @@ Debug.Log("TigerBoss/BeginTurn: Enemy has finished attacking!");
         VictoryText.SetActive(true);
 Debug.Log("Victory achieved!");
     }
+    IEnumerator printCurrentAction(string toPrint, float delay)
+    {
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
+        yield return new WaitForSeconds(delay);
+        
+        if(printing)
+        {
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing until printing is false");
+            yield return new WaitUntil(() => !printing);
+        }
 
+        printing = true;
+//Debug.Log("DemoEnemy/printCurrentAction: Current action enabled");
+        currentAction.enabled = true;
+        currentAction.text = toPrint;
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for 5 seconds");
+        yield return new WaitForSeconds(3);
+
+        printing = false;
+        currentAction.enabled = false;
+    }
     public void AnimationHit()
     {
         animationHit = true;

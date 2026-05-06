@@ -34,7 +34,10 @@ public class DemoEnemy : MonoBehaviour
     public Slider EnemyHealthBar;
     public AudioClip damageSound;
     public AudioClip healSound;
+    public TextMeshProUGUI currentAction;
+    public string enemyName;
     private AudioSource audioSource;
+    private bool printing;
 
     [Header("Animation")]
     public Animator animator;
@@ -149,7 +152,9 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
         
         if(stun == 1)
         {
-            Debug.Log("Enemy is stunned! Skipping turn!");
+Debug.Log("DemoEnemy/BeginTurn: Enemy is stunned! Skipping turn!");
+            if (!printing)
+                StartCoroutine(printCurrentAction(enemyName + " is stunned and can't attack!", 0f));
         }
 
         else if(curHealth > 0)
@@ -157,9 +162,12 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
             // if/else for selecting target/move when provoked
             if(isProvoked)
             {
-Debug.Log("Enemy is provoked! Will only attack Knight!");
+Debug.Log("DemoEnemy/BeginTurn: Enemy is provoked! Will only attack Knight!");
                 selectingMove = 1;
                 selectingTarget = 1;
+                
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName + " is provoked! It will only attack the Knight!", 0f));
             }
 
             else
@@ -169,6 +177,7 @@ Debug.Log("Enemy is provoked! Will only attack Knight!");
                 selectingTarget = Random.Range(1, partySize + 1);
             }
             
+            // log printing attached to player
             if (selectingMove == 1) 
             {
                 damageOutput = Random.Range(1, 7) + 1;
@@ -211,12 +220,13 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
                 damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + 1;
 
                 if((curHealth + damageOutput) > maxHealth)
-                    curHealth = maxHealth;
-                else
-                    curHealth += damageOutput;
+                    damageOutput = maxHealth - curHealth;
+                curHealth += damageOutput;
                 
                 EnemyHealthBar.value = curHealth;
                 UpdateHUD();
+                if (!printing)
+                    StartCoroutine(printCurrentAction(enemyName + " healed for " + damageOutput + "!", 0f));
 Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");
                 yield return new WaitForSeconds(2);
                 VFXanimation.SetBool("isHealing", false);
@@ -242,6 +252,27 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has finished attacking!");
 Debug.Log("DemoEnemy/Victory: Victory achieved!");
     }
 
+    IEnumerator printCurrentAction(string toPrint, float delay)
+    {
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
+        yield return new WaitForSeconds(delay);
+        
+        if(printing)
+        {
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing until printing is false");
+            yield return new WaitUntil(() => !printing);
+        }
+
+        printing = true;
+//Debug.Log("DemoEnemy/printCurrentAction: Current action enabled");
+        currentAction.enabled = true;
+        currentAction.text = toPrint;
+//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for 5 seconds");
+        yield return new WaitForSeconds(3);
+
+        printing = false;
+        currentAction.enabled = false;
+    }
     public void AnimationHit()
     {
         animationHit = true;

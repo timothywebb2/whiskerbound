@@ -51,13 +51,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProtoMovement
   InputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   frontCamera: {fileID: 0}
-  villageSpawn: {fileID: 0}
-  squirrelSpawn: {fileID: 0}
-  ferretSpawn: {fileID: 0}
-  tigerSpawn: {fileID: 0}
+  spawnPoints: []
   speed: 6
-  rotationSpeed: 10
   groundedGravity: -4
+  animator: {fileID: 1067737296207583749}
+  isSprinting: 0
+  sorcererAnimator: {fileID: 0}
+  clericAnimator: {fileID: 0}
 --- !u!114 &4305780474337279711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ Animator:
   m_GameObject: {fileID: 5697149592818767522}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1740855daeb5b574284731c33c355e50, type: 2}
+  m_Controller: {fileID: 9100000, guid: 06d363f32440b3b4a97fa406bf841721, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

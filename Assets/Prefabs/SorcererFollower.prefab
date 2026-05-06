@@ -105,13 +105,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCFollow
   followerType: 0
+  knightTransform: {fileID: 0}
   followCharacter: {fileID: 0}
   distanceFromCharacter: 1.5
   followCharacterPositions: []
-  allowableSampleDistance: 0.25
-  sampleTimeDifference: 0.25
+  playerInputs: []
+  allowableSampleDistance: 0.05
+  sampleTimeDifference: 0.05
   baseSpeed: 6
-  fastSpeed: 12
+  fastSpeed: 10
   fastDistance: 2
   removeDistance: 0.1
 --- !u!95 &7442675201670737028

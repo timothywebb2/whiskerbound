@@ -35,6 +35,7 @@ public class KnightMoveset : MonoBehaviour
     [Header("UI/Audio")]
     public TextMeshProUGUI HealthText;
     public GameObject KnightSkills;
+    public GameObject intercedeIcon;
     public GameObject opacity;
     public GameObject closeButton;
     public GameObject LoseText;
@@ -67,6 +68,9 @@ public class KnightMoveset : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(PlayerPrefs.GetInt("PartySize", 1) == 1)
+            intercedeIcon.SetActive(false);
+
         maxHealth = 100;
         curHealth = maxHealth;
         Knighthealthbar.maxValue = maxHealth;
@@ -240,7 +244,6 @@ Debug.Log("KnightMoveset/DamageReductionPotion: Damage reduction activated!");
         lastMove = Provoke;
         ExecuteMove(() =>
         {
-
             damageOutput = Random.Range(1, 13) + Random.Range(1, 13) + CurrentMight;
             if (squirrelFight == 1)
             {
@@ -286,20 +289,23 @@ Debug.Log("KnightMoveset/Provoke: Damaged enemy by " + damageOutput + " with Pro
             }
     Debug.Log("KnightMoveset/Cleave: Damaged enemy by " + damageOutput + " with Cleave");
             PassTurn();
-        }, () => "Damaged enemy by " + damageOutput + " with Cleave!");
+        }, () => "Damaged all enemies by " + damageOutput + " with Cleave!");
    }
 
    public void Intercede() {
-        lastMove = Intercede;
-        ExecuteMove(() =>
+        if(PlayerPrefs.GetInt("PartySize", 1) > 1)
         {
-
-            // intercedeOn = true;
-            sorcererAlly.IntercedeSorcerer();
-            clericAlly.IntercedeCleric();
-Debug.Log("KnightMoveset/Intercede: Intercede on Sorcerer and Cleric!");
-            PassTurn();
-        }, () => "Intercede on Sorceror and Cleric!");
+            lastMove = Intercede;
+            ExecuteMove(() =>
+            {
+                // intercedeOn = true;
+                sorcererAlly.IntercedeSorcerer();
+                if(PlayerPrefs.GetInt("PartySize", 1) > 2)
+                    clericAlly.IntercedeCleric();
+    Debug.Log("KnightMoveset/Intercede: Intercede on all allies!");
+                PassTurn();
+            }, () => "Intercede on all allies!");
+        }
    }
 
    public void Rally() {
@@ -352,14 +358,13 @@ Debug.Log("Rally being used!");
             sorcererLastStand = false;
         }
     }
-
-
-public void GotHealed(int amount) {
-if (curHealth + amount >= 100)
-                   curHealth = 100;
-               else
-                   curHealth += amount;
-}
+    public void GotHealed(int amount)
+    {
+        if (curHealth + amount >= 100)
+            curHealth = 100;
+        else
+            curHealth += amount;
+    }
 
     public void NotSquirrelFight()
     {

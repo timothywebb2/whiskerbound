@@ -5335,6 +5335,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3483413949993857028, guid: c8271809395e50946a07f72331be02f6, type: 3}
   m_PrefabInstance: {fileID: 846879828}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &846879831 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7442675201670737028, guid: c8271809395e50946a07f72331be02f6, type: 3}
+  m_PrefabInstance: {fileID: 846879828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &848926375
 GameObject:
   m_ObjectHideFlags: 0
@@ -12866,6 +12871,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3050212588533806757, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
   m_PrefabInstance: {fileID: 1676739278}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1676739280 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7340919394168504746, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
+  m_PrefabInstance: {fileID: 1676739278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1676739283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8250861030125577684, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
@@ -16351,6 +16361,14 @@ PrefabInstance:
       propertyPath: squirrelSpawn
       value: 
       objectReference: {fileID: 1534404737}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: clericAnimator
+      value: 
+      objectReference: {fileID: 1676739280}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: sorcererAnimator
+      value: 
+      objectReference: {fileID: 846879831}
     - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: spawnPoints.Array.size
       value: 2

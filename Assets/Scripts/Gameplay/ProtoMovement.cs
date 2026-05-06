@@ -11,26 +11,60 @@ public class ProtoMovement : MonoBehaviour
     public GameObject[] spawnPoints;
 
     //movement variables
-    public float speed = 12f;
-    public float rotationSpeed = 10f;
+    public float speed;
+    private float baseSpeed;
     public float groundedGravity = -4f;
 
     private InputAction moveAction;
-    private Vector2 moveInput;
+    private InputAction sprintAction;
+    public Vector2 moveInput;
     private CharacterController controller;
     private float verticalVelocity;
-    private Animator animator;
+    public Animator animator;
+
+    public bool isSprinting;
+    
+    public Animator sorcererAnimator;
+    public Animator clericAnimator;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         moveAction = InputActions.FindActionMap("Player").FindAction("Move");
-        animator = this.GetComponent<Animator>();
+        sprintAction = InputActions.FindActionMap("Player").FindAction("Sprint");
         
+        baseSpeed = speed;
+
         int spawnPosition = PlayerPrefs.GetInt("SpawnPoint", 0); //index of spawn is set from last scene, call it
         if(spawnPosition > spawnPoints.Length) //if spawn point doesnt exist, put the player at the default spawn
             PlayerPrefs.SetInt("SpawnPoint", 0);
         gameObject.transform.position = spawnPoints[spawnPosition].transform.position; //set player to spawn position
+
+
+        sprintAction.performed +=
+        ctx =>
+        {
+            isSprinting = true;
+        };
+
+        sprintAction.canceled +=
+        ctx =>
+        {
+            isSprinting = false;
+        };
+    }
+
+    private void UpdateSpeed(float newSpeed)
+    {
+        speed = baseSpeed * newSpeed;
+        // set speed of followers
+        animator.speed = newSpeed;
+        if(PlayerPrefs.GetInt("PartySize", 1) > 1)
+        {
+            sorcererAnimator.speed = newSpeed;
+            if(PlayerPrefs.GetInt("PartySize", 1) > 2)
+                clericAnimator.speed = newSpeed;
+        }
     }
 
     private void OnEnable()
@@ -58,14 +92,6 @@ public class ProtoMovement : MonoBehaviour
 
         Vector3 moveDirection = (cameraForward * moveInput.y + cameraRight * moveInput.x);
 
-        //rotate character
-        //if (moveDirection.magnitude > 0.1f)
-        /*if (moveDirection.magnitude > 0.1f)
-        {
-            RotateCharacter(moveDirection);
-        }*/
-
-        //sprite animation with controller, should still work with keyboard
         float deadZone = 0.1f;
         Vector3 worldMove = moveDirection.normalized;
 
@@ -85,6 +111,14 @@ public class ProtoMovement : MonoBehaviour
 
         animator.SetInteger("XDirection", rotatedX);
         animator.SetInteger("YDirection", rotatedY);
+        //animator.SetFloat("XDirection", rotatedX);
+        //animator.SetFloat("YDirection", rotatedY);
+
+        if(isSprinting)
+            UpdateSpeed(1.65f);
+        
+        else
+            UpdateSpeed(1.0f);
 
         Vector3 horizontalVelocity = moveDirection.normalized * speed;
         Vector3 finalVelocity = new Vector3(horizontalVelocity.x, verticalVelocity, horizontalVelocity.z);

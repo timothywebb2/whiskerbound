@@ -2999,6 +2999,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1434301028161822078, guid: c8271809395e50946a07f72331be02f6, type: 3}
+      propertyPath: fastSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434301028161822078, guid: c8271809395e50946a07f72331be02f6, type: 3}
       propertyPath: followCharacter
       value: 
       objectReference: {fileID: 136811194}
@@ -3006,6 +3010,14 @@ PrefabInstance:
       propertyPath: knightTransform
       value: 
       objectReference: {fileID: 136811194}
+    - target: {fileID: 1434301028161822078, guid: c8271809395e50946a07f72331be02f6, type: 3}
+      propertyPath: sampleTimeDifference
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434301028161822078, guid: c8271809395e50946a07f72331be02f6, type: 3}
+      propertyPath: allowableSampleDistance
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3483413949993857028, guid: c8271809395e50946a07f72331be02f6, type: 3}
       propertyPath: m_Name
       value: SorcererFollower
@@ -3078,6 +3090,11 @@ Transform:
 --- !u!1 &103577586 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3483413949993857028, guid: c8271809395e50946a07f72331be02f6, type: 3}
+  m_PrefabInstance: {fileID: 103577584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &103577587 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7442675201670737028, guid: c8271809395e50946a07f72331be02f6, type: 3}
   m_PrefabInstance: {fileID: 103577584}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &103628578 stripped
@@ -22481,6 +22498,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3050212588533806757, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
   m_PrefabInstance: {fileID: 1041810468}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1041810470 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7340919394168504746, guid: c5ae5a22c37f3b14fa81bcbbb2b8db6c, type: 3}
+  m_PrefabInstance: {fileID: 1041810468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1041938274
 GameObject:
   m_ObjectHideFlags: 0
@@ -26508,6 +26530,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5216212093632543057, guid: 09be578871888a64da87c21b566a725f, type: 3}
   m_PrefabInstance: {fileID: 1982283736}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1198948007 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1067737296207583749, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+  m_PrefabInstance: {fileID: 1981370191508458366}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1199273835
 PrefabInstance:
@@ -49868,6 +49895,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1198948007}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: tigerSpawn
       value: 
       objectReference: {fileID: 1534404737}
@@ -49887,6 +49918,14 @@ PrefabInstance:
       propertyPath: squirrelSpawn
       value: 
       objectReference: {fileID: 1534404737}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: clericAnimator
+      value: 
+      objectReference: {fileID: 1041810470}
+    - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
+      propertyPath: sorcererAnimator
+      value: 
+      objectReference: {fileID: 103577587}
     - target: {fileID: 6366518617880443676, guid: 4dc4981d8af5bd1449cfa9dc0d0c9f03, type: 3}
       propertyPath: spawnPoints.Array.size
       value: 2
