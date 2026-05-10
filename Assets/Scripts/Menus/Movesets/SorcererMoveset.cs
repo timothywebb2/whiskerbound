@@ -17,8 +17,8 @@ public class SorcererMoveset : MonoBehaviour
     public int damageOutputBefore; // This is temporary
     public int shieldOutput;
     public int thornsOutput;
-        int hasThorns;
-            public int thornDamage;
+    int hasThorns;
+    public int thornDamage;
     public int healOutput;
     public bool rallyOrNot;
     public int volcanicTally;
@@ -47,6 +47,7 @@ public class SorcererMoveset : MonoBehaviour
     private AudioSource audioSource;
     public TextMeshProUGUI currentAction;
     public bool printing;
+    public TextMeshProUGUI hexText;
 
     [Header("Animation")]
     public Animator animator;
@@ -69,16 +70,19 @@ public class SorcererMoveset : MonoBehaviour
             sorcererIcon.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
         }
-    
-        maxHealth = 60;
+
+        // KEEP BETWEEN BATTLES
+
+        //curHealth = PlayerPrefs.GetInt("SorcererHealth", 60);
         curHealth = maxHealth;
+
         Sorcererhealthbar.maxValue = maxHealth;
         Sorcererhealthbar.value = curHealth;
        
         intercedeOn = false;
         rallyOrNot = false;
-                hasThorns = 0;
-                   thornDamage = 0;
+        hasThorns = 0;
+        thornDamage = 0;
         volcanicTally = 0;
         // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
 
@@ -89,6 +93,7 @@ public class SorcererMoveset : MonoBehaviour
         loseCondition = false;
         squirrelFight = 1;
         LoseText.SetActive(false);
+        hexText.text = "0/30";
         UpdateHUD();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
@@ -102,7 +107,7 @@ public class SorcererMoveset : MonoBehaviour
         {
             timePassed += Time.deltaTime;
             if (timePassed > 3.0f)
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(PlayerPrefs.GetString("LastVillage", "forestVillage"));
         }
     }
 
@@ -127,16 +132,16 @@ Debug.Log("SorcererMoveset/TakeDamage: Damage reduce from " + amount + " to " + 
             }
 
             curHealth -= finalDamage;
+            if(curHealth < 0)
+                curHealth = 0;
             Sorcererhealthbar.value = curHealth;
 
             VFXanimator.SetBool("isAttacked", true);
 
             if (damageSound != null)
-            {
                 audioSource.PlayOneShot(damageSound);
-            }
            
-            if(!printing)
+            //if(!printing)
                 StartCoroutine(printCurrentAction("Sorcerer took " + finalDamage + " damage!", 1f));
             
             VFXanimator.SetBool("isAttacked", false);
@@ -145,7 +150,7 @@ Debug.Log("SorcererMoveset/TakeDamage: Damage reduce from " + amount + " to " + 
         else if (intercedeOn == true)
         {
 Debug.Log("SorcererMoveset/TakeDamage: Damage blocked!");
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Damage blocked from Sorcerer!", 1f));
             intercedeOn = false;
         }
@@ -177,7 +182,7 @@ Debug.Log("SorcererMoveset/TakeDamage: Damage blocked!");
     {
         if (!GameModeManager.Instance.IsInfiniteCoins() && healUsedThisTurn)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
             //return;
         }
@@ -207,7 +212,7 @@ Debug.Log("SorcererMoveset/TakeDamage: Damage blocked!");
             //PUT HEAL SFX
 
 Debug.Log("SorcererMoveset/HealPotion: Healed for " + actualHeal);
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
             
             yield return new WaitForSeconds(2);
@@ -218,7 +223,7 @@ Debug.Log("SorcererMoveset/HealPotion: Healed for " + actualHeal);
     {
         if (!GameModeManager.Instance.IsInfiniteCoins() && damageReductionUsedThisTurn)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Already used this turn!", 0f));
             return;
         }
@@ -234,7 +239,7 @@ Debug.Log("SorcererMoveset/HealPotion: Healed for " + actualHeal);
 
 Debug.Log("SorcererMoveset/DamageReductionPotion: Damage reduction activated!");
 
-        if (!printing)
+        //if (!printing)
             StartCoroutine(printCurrentAction("Damage taken reduced by 25% for next hit!", 0f));
     }
 
@@ -259,6 +264,7 @@ Debug.Log("SorcererMoveset/DamageReductionPotion: Damage reduction activated!");
                 StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
             }
             volcanicTally += damageOutput;
+            hexText.text = volcanicTally + "/30";
 Debug.Log("SorcererMoveset/Incinerate: Damaged enemy by " + damageOutput + " with Incinerate");
             VolcanicHex();
             PassTurn();
@@ -290,6 +296,7 @@ Debug.Log("SorcererMoveset/Incinerate: Damaged enemy by " + damageOutput + " wit
                 firstEnemy.GetComponent<TigerBoss>().gotStunned();
             }
             volcanicTally += damageOutput;
+            hexText.text = volcanicTally + "/30";
 
 Debug.Log("SorcererMoveset/Enervate: Damaged enemy by " + damageOutput);
             VolcanicHex();
@@ -316,7 +323,7 @@ Debug.Log("SorcererMoveset/Ward: Ward activated!");
         lastMove = Scourge;
         ExecuteMove(() =>
         {
-
+            //SELECT ALLY
 Debug.Log("SorcererMoveset/Scourge: Scourge activated!");
             thornsOutput = Random.Range(1, 7) + mightBonus;
             knightAlly.gotThorns(thornsOutput);
@@ -331,20 +338,40 @@ Debug.Log("SorcererMoveset/Scourge: Scourge activated!");
         if (volcanicTally >= 30)
         {
             damageOutput = Random.Range(1, 13) + mightBonus;
-
-            if (squirrelFight == 1) 
-                StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
+            
+            if (squirrelFight == 1)
+            { 
+                int health = firstEnemy.GetComponent<DemoEnemy>().curHealth;
+                if(health > 0)
+                {
+                    StartCoroutine(printCurrentAction("Volcanic Hex unleashed on all enemies!", 0f));
+                    StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
+                }
+            }
 
             else if (squirrelFight == 2)
             {
-                firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
-                StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
+                int health1 = firstEnemy.GetComponent<SquirrelEnemy>().curHealth1;
+                int health2 = firstEnemy.GetComponent<SquirrelEnemy>().curHealth2;
+                if(health1 > 0 || health2 > 0)
+                {
+                    firstEnemy.GetComponent<SquirrelEnemy>().multiHit();
+                    StartCoroutine(printCurrentAction("Volcanic Hex unleashed on all enemies!", 0f));
+                    StartCoroutine(firstEnemy.GetComponent<SquirrelEnemy>().TakeDamage(damageOutput, true));
+                }
             }
             
-            else if (squirrelFight == 3) 
-                StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
-
+            else if (squirrelFight == 3)
+            {
+                int health = firstEnemy.GetComponent<TigerBoss>().curHealth;
+                if(health > 0)
+                {
+                    StartCoroutine(printCurrentAction("Volcanic Hex unleashed on all enemies!", 0f));
+                    StartCoroutine(firstEnemy.GetComponent<TigerBoss>().TakeDamage(damageOutput, true));
+                }
+            }
             volcanicTally = 0;
+            hexText.text = "0/30";
         }
     }
 
@@ -425,12 +452,13 @@ Debug.Log("SorcererMoveset/IntercedeSorcerer: Intercede on Sorcerer!");
         thornDamage = amount;
     }
 
-    public void GotHealed(int amount) {
-if (curHealth + amount >= 80)
-                   curHealth = 80;
-               else
-                   curHealth += amount;
-}
+    public void GotHealed(int amount)
+    {
+        if (curHealth + amount >= maxHealth)
+            curHealth = maxHealth;
+        else
+            curHealth += amount;
+    }
 
     void UpdateHUD()
     {
@@ -440,9 +468,12 @@ if (curHealth + amount >= 80)
      public void OpenSorcererSkills()
     {   
         int partySize = PlayerPrefs.GetInt("PartySize", 1);
-        // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
-        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false &&
-        (clericAlly.animator.GetBool("isAttacking") == false || partySize < 3))
+
+        if (!printing &&// if the log isnt printing...
+        animator.GetBool("isAttacking") == false && // AND if no party members are in the middle of an attack or being attacked/healed..
+        knightAlly.animator.GetBool("isAttacking") == false &&
+        (clericAlly.animator.GetBool("isAttacking") == false || partySize < 3) &&  // (animation check skips cleric if not unlocked)
+        curHealth > 0) //... AND sorcerer isnt downed
         {
             // check if enemies are in middle of attack or being attacked/healed
             bool enemyIsAttacking = true;
@@ -502,9 +533,18 @@ Debug.Log("SorcererMoveset/OpenSorcererSkills: Can't open menu! Log is printing 
 
     public void Lose()
     {
-        loseCondition = true;
-        LoseText.SetActive(true);
+        // player has to have knight if they have sorcerer, check if knight is downed
+        if(knightAlly.GetComponent<KnightMoveset>().curHealth <= 0)
+        {
+            // if knight is downed, then player loses if cleric is not unlocked OR cleric is down
+            if(PlayerPrefs.GetInt("PartySize", 1) <= 2 || clericAlly.GetComponent<ClericMoveset>().curHealth <= 0)
+            {
+                loseCondition = true;
+                LoseText.SetActive(true);
+                PlayerPrefs.SetInt("SpawnPoint", 0);
 Debug.Log("SorcererMoveset/Lose: You lose!");
+            }
+        }
     }
 
     void ExecuteMove(System.Action move, System.Func<string> getMessage)
@@ -535,7 +575,7 @@ Debug.Log("SorcererMoveset/Lose: You lose!");
     {
         if (doubleCastActive)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Double Cast already active!", 0f));
             return;
         }
@@ -550,7 +590,7 @@ Debug.Log("SorcererMoveset/Lose: You lose!");
 
 //Debug.Log("SorcererMoveset/ActivateDoubleCast: Double Cast ACTIVATED!");
 
-        if (!printing)
+        //if (!printing)
             StartCoroutine(printCurrentAction("Double Cast activated!", 0f));
     }
 
@@ -579,8 +619,9 @@ Debug.Log("SorcererMoveset/Lose: You lose!");
 //Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
 //Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing until printing is false");
-        yield return new WaitUntil(() => !printing);
-
+Debug.Log("SorcererMoveset/printCurrentAction: Waiting until text is blank");
+        yield return new WaitUntil(() => currentAction.text == "");
+Debug.Log("SorcererMoveset/printCurrentAction: Printing current action");
         printing = true;
 
         currentAction.enabled = true;
@@ -588,7 +629,8 @@ Debug.Log("SorcererMoveset/Lose: You lose!");
 
 //Debug.Log("SorcererMoveset/printCurrentAction: Coroutine is pausing for 3 seconds");
         yield return new WaitForSeconds(3);
-
+        currentAction.text = "";
+        
         printing = false;
         currentAction.enabled = false;
     }

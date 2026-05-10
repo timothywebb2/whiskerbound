@@ -33,36 +33,41 @@ public class mainMenu : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
         blackScreen.SetActive(true);
         
-        PlayerPrefs.SetInt("SpawnPoint", 0);
-        SceneManager.LoadScene(PlayerPrefs.GetString("LastVillage", "forestVillage"));
-    }
+        PlayerPrefs.SetInt("SpawnPoint", 0); // put player at start of village
 
-    //prevents overlap
-    public void options(){// show only options screen
-         optionsMenu.SetActive(true);
-          
-    }
-
-    public void credits(){//ditto
-    creditsMenu.SetActive(true);
-          
-
-    }
-
-public void controls(){//ditto but close options screen
-     controlsMenu.SetActive(true);
-     optionsMenu.SetActive(false);
+        // heal all party members
+        //PlayerPrefs.SetInt("KnightHealth", 100);
+        //PlayerPrefs.SetInt("SorcererHealth", 60);
+        //PlayerPrefs.SetInt("ClericHealth", 80);
         
-}
-
-    public void backButton(){ // no matter which back button, sends back to main screen.
-  optionsMenu.SetActive(false);
-    creditsMenu.SetActive(false);
-    controlsMenu.SetActive(false);
-    
+        SceneManager.LoadScene(PlayerPrefs.GetString("LastVillage", "forestVillage")); // load last village
     }
 
-    public void quit(){
+    public void options() // show only options screen; prevents overlap
+    {
+        optionsMenu.SetActive(true);  
+    }
+
+    public void credits() //ditto
+    {
+        creditsMenu.SetActive(true);
+    }
+
+    public void controls() //ditto but close options screen
+    {
+        controlsMenu.SetActive(true);
+        optionsMenu.SetActive(false);  
+    }
+
+    public void backButton() // no matter which back button, sends back to main screen.
+    {
+        optionsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+    }
+
+    public void quit()
+    {
         Application.Quit();
     }
 }

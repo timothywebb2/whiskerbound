@@ -17,7 +17,13 @@ public class SceneChange : MonoBehaviour
 
             // if loading into a village, save scene to be loaded when game is started
             if(myScene == "forestVillage" || myScene == "desertVillage" || myScene == "caveVillage" || myScene == "arcticVillage")
+            {
                 PlayerPrefs.SetString("LastVillage", myScene);
+                // heal party
+                //PlayerPrefs.SetInt("KnightHealth", 100);
+                //PlayerPrefs.SetInt("SorcererHealth", 60);
+                //PlayerPrefs.SetInt("ClericHealth", 80);
+            }
         }
 
         // if loading from main menu, send to village

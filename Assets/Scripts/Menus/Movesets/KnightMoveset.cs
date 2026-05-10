@@ -71,8 +71,9 @@ public class KnightMoveset : MonoBehaviour
         if(PlayerPrefs.GetInt("PartySize", 1) == 1)
             intercedeIcon.SetActive(false);
 
-        maxHealth = 100;
+        //curHealth = PlayerPrefs.GetInt("KnightHealth", 100);
         curHealth = maxHealth;
+       
         Knighthealthbar.maxValue = maxHealth;
         Knighthealthbar.value = curHealth;
        
@@ -103,7 +104,7 @@ public class KnightMoveset : MonoBehaviour
             timePassed += Time.deltaTime;
             if (timePassed > 3.0f)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(PlayerPrefs.GetString("LastVillage", "forestVillage"));
             }
         }
     }
@@ -129,6 +130,8 @@ Debug.Log("KnightMoveset/TakeDamage: Damage reduce from " + amount + " to " + fi
             }
 
             curHealth -= finalDamage;
+            if(curHealth < 0)
+                curHealth = 0;
             Knighthealthbar.value = curHealth;
            
             VFXanimator.SetBool("isAttacked", true);
@@ -136,8 +139,7 @@ Debug.Log("KnightMoveset/TakeDamage: Damage reduce from " + amount + " to " + fi
             if (damageSound != null)
                 audioSource.PlayOneShot(damageSound);
            
-            if(!printing)
-                StartCoroutine(printCurrentAction("Knight took " + finalDamage + " damage!", 1f));
+            StartCoroutine(printCurrentAction("Knight took " + finalDamage + " damage!", 1f));
             if (hasThorns > 0)
             {
 Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
@@ -153,15 +155,17 @@ Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
                 VFXanimator.SetBool("isAttacked", false);
                 hasThorns -= 1;
             }
-       }
+        }
 
-       else if (intercedeOn == true)
-       {
+        else if (intercedeOn == true)
+        {
 Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Damage blocked!", 1f));
             intercedeOn = false;
         }
+
+        //PlayerPrefs.SetInt("KnightHealth", curHealth);
 
         if (curHealth <= 0) 
             Lose();
@@ -179,7 +183,7 @@ Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
     {
         if (!GameModeManager.Instance.IsInfiniteCoins() && healUsedThisTurn)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
             //return;
         }
@@ -208,7 +212,7 @@ Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
             //PUT HEAL SFX
 
     Debug.Log("KnightMoveset/HealPotion: Healed for " + actualHeal);
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
             
             yield return new WaitForSeconds(2);
@@ -219,7 +223,7 @@ Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
     {
         if (!GameModeManager.Instance.IsInfiniteCoins() && damageReductionUsedThisTurn)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Already used this turn!", 0f));
             return;
         }
@@ -235,7 +239,7 @@ Debug.Log("KnightMoveset/TakeDamage: Damage blocked!");
 
 Debug.Log("KnightMoveset/DamageReductionPotion: Damage reduction activated!");
 
-        if (!printing)
+        //if (!printing)
             StartCoroutine(printCurrentAction("Damage taken reduced by 25% for next hit!", 0f));
     }
 
@@ -410,19 +414,22 @@ Debug.Log("Rally being used!");
     {
 //Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
+Debug.Log("KnightMoveset/printCurrentAction: Waiting until text is blank");
+        yield return new WaitUntil(() => currentAction.text == "");
         
-        if(printing)
+        /*if(printing)
         {
 //Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing until printing is false");
             yield return new WaitUntil(() => !printing);
-        }
+        }*/
 
         printing = true;
-//Debug.Log("KnightMoveset/printCurrentAction: Current action enabled");
+Debug.Log("KnightMoveset/printCurrentAction: Printing current action");
         currentAction.enabled = true;
         currentAction.text = toPrint;
 //Debug.Log("KnightMoveset/printCurrentAction: Coroutine is pausing for 5 seconds");
         yield return new WaitForSeconds(3);
+        currentAction.text = "";
 
         printing = false;
         currentAction.enabled = false;
@@ -430,10 +437,12 @@ Debug.Log("Rally being used!");
   
     public void OpenKnightSkills()
     {   int partySize = PlayerPrefs.GetInt("PartySize", 1);
-        // check party
-        if (!printing && animator.GetBool("isAttacking") == false && // if the knight isnt attacking
+
+        if (!printing && // if the log isnt printing...
+        animator.GetBool("isAttacking") == false && // if the knight isnt attacking
         (sorcererAlly.animator.GetBool("isAttacking") == false || partySize < 2) && // if the sorcerer isnt attacking OR isnt unlocked yet
-        (clericAlly.animator.GetBool("isAttacking") == false || partySize < 3)) // same as sorcerer
+        (clericAlly.animator.GetBool("isAttacking") == false || partySize < 3) && // same as sorcerer
+        curHealth > 0) // check is knight is downed
         {
             // check if enemies are in middle of attack or being attacked/healed
             bool enemyIsAttacking = true;
@@ -514,7 +523,7 @@ Debug.Log("KnightMoveset/OpenKnightSkills: Can't open menu! Log is printing or p
     {
         if (doubleCastActive)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Double Cast already active!", 0f));
             return;
         }
@@ -529,14 +538,23 @@ Debug.Log("KnightMoveset/OpenKnightSkills: Can't open menu! Log is printing or p
 
 //Debug.Log("KnightMoveset/ActivateDoubleCast: Double Cast ACTIVATED!");
 
-        if (!printing)
+        //if (!printing)
             StartCoroutine(printCurrentAction("Double Cast activated!", 0f));
     }
 
     public void Lose()
     {
-        loseCondition = true;
-        LoseText.SetActive(true);
-Debug.Log("KnightMoveset/Lose: You lose!");
+        // check if sorcerer is unlocked or downed
+        if (PlayerPrefs.GetInt("PartySize", 1) < 2 || sorcererAlly.GetComponent<SorcererMoveset>().curHealth <= 0)
+        {
+            // if sorcerer is not unlocked or downed, check cleric next
+            if(PlayerPrefs.GetInt("PartySize", 1) < 3 || clericAlly.GetComponent<ClericMoveset>().curHealth <= 0)
+            {
+                loseCondition = true;
+                LoseText.SetActive(true);
+                PlayerPrefs.SetInt("SpawnPoint", 0);
+    Debug.Log("KnightMoveset/Lose: You lose!");
+            }
+        }
     }
 }

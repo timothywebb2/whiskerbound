@@ -111,8 +111,6 @@ public class ProtoMovement : MonoBehaviour
 
         animator.SetInteger("XDirection", rotatedX);
         animator.SetInteger("YDirection", rotatedY);
-        //animator.SetFloat("XDirection", rotatedX);
-        //animator.SetFloat("YDirection", rotatedY);
 
         if(isSprinting)
             UpdateSpeed(1.65f);
@@ -142,12 +140,6 @@ public class ProtoMovement : MonoBehaviour
         Vector3 right = frontCamera.transform.right;
         right.y = 0;
         return right.normalized;
-    }
-
-    private void RotateCharacter(Vector3 direction)
-    {
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = targetRotation;
     }
 
     public bool isSceneLoaded(string sceneName)

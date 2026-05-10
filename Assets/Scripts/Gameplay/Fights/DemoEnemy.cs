@@ -37,7 +37,6 @@ public class DemoEnemy : MonoBehaviour
     public TextMeshProUGUI currentAction;
     public string enemyName;
     private AudioSource audioSource;
-    private bool printing;
 
     [Header("Animation")]
     public Animator animator;
@@ -92,21 +91,23 @@ Debug.Log("DemoEnemy/Update: Change scene");
                     SceneManager.LoadScene("MAIN MENU");
                 
                 else
-                    SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
+                    SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage")); 
            }
        }
    }
 
    public IEnumerator TakeDamage(int amount, bool isFire)
    {
+        // wait for previous attack animations to finish, especially for volcanic hex
+        yield return new WaitUntil(() => VFXanimation.GetBool("isAttacked") == false &&
+        VFXanimation.GetBool("isFireAttack") == false);
+
 Debug.Log("DemoEnemy/TakeDamage: isFire is " + isFire);
         // set VFX to damaged animation
         if(isFire)
             VFXanimation.SetBool("isFireAttack", true);
         else
             VFXanimation.SetBool("isAttacked", true);
-
-        yield return new WaitForSeconds(1); // give time for animation to start
         
         curHealth -= amount; // take damage
         if(curHealth < 0)
@@ -153,28 +154,66 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has started attacking!");
         if(stun == 1)
         {
 Debug.Log("DemoEnemy/BeginTurn: Enemy is stunned! Skipping turn!");
-            if (!printing)
-                StartCoroutine(printCurrentAction(enemyName + " is stunned and can't attack!", 0f));
+            StartCoroutine(printCurrentAction(enemyName + " is stunned and can't attack!", 0f));
         }
 
         else if(curHealth > 0)
         {
-            // if/else for selecting target/move when provoked
-            if(isProvoked)
+            // if enemy is at full health, they can only attack (move 1)
+            if(curHealth >= maxHealth)
+            {
+Debug.Log("DemoEnemy/BeginTurn: Enemy is at max health! Attacking!");
+                selectingMove = 1;
+            }
+            // if enemy is provoked and knight isnt downed, they have to target knight
+            if(isProvoked && knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
             {
 Debug.Log("DemoEnemy/BeginTurn: Enemy is provoked! Will only attack Knight!");
                 selectingMove = 1;
                 selectingTarget = 1;
-                
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName + " is provoked! It will only attack the Knight!", 0f));
+                StartCoroutine(printCurrentAction(enemyName + " is provoked! It will only attack the Knight!", 0f));
             }
 
             else
             {
                 int partySize = PlayerPrefs.GetInt("PartySize", 1);
                 selectingMove = Random.Range(1, 3);
-                selectingTarget = Random.Range(1, partySize + 1);
+
+                bool goodTarget = false;
+                if(selectingMove == 1) // if attacking, check if the chosen target has remaining HP
+                {
+                    while(!goodTarget)
+                    {
+Debug.Log("DemoEnemy/BeginTurn: Running target while loop!");
+                        selectingTarget = Random.Range(1, partySize + 1); // can only select party members unlocked
+
+                        switch(selectingTarget)
+                        {
+                            case 1: //targeting knight
+                                if(knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
+                                {
+Debug.Log("DemoEnemy/BeginTurn: Knight is not downed! Selecting knight!");
+                                    goodTarget = true;
+                                }
+                                break;
+
+                            case 2: // targeting sorcerer
+                                if(sorcererPlayer.GetComponent<SorcererMoveset>().curHealth > 0)
+                                {
+Debug.Log("DemoEnemy/BeginTurn: Sorcerer is not downed! Selecting sorcerer!");
+                                    goodTarget = true;
+                                }
+                                break;
+                            case 3: // targeting cleric
+                                if(clericPlayer.GetComponent<ClericMoveset>().curHealth > 0)
+                                {
+Debug.Log("DemoEnemy/BeginTurn: Cleric is not downed! Selecting cleric!");
+                                    goodTarget = true;
+                                }
+                                break;
+                        }
+                    }
+                }
             }
             
             // log printing attached to player
@@ -210,7 +249,7 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
                 animator.SetBool("isAttacking", false);
             }
             
-            else if (selectingMove == 2 && curHealth < maxHealth)
+            else if (selectingMove == 2)
             {
                 VFXanimation.SetBool("isHealing", true);
 
@@ -225,8 +264,7 @@ Debug.Log("DemoEnemy/BeginTurn: Lash is used on the Cleric!");
                 
                 EnemyHealthBar.value = curHealth;
                 UpdateHUD();
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName + " healed for " + damageOutput + "!", 0f));
+                StartCoroutine(printCurrentAction(enemyName + " healed for " + damageOutput + "!", 0f));
 Debug.Log("DemoEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth + " health.");
                 yield return new WaitForSeconds(2);
                 VFXanimation.SetBool("isHealing", false);
@@ -249,28 +287,20 @@ Debug.Log("DemoEnemy/BeginTurn: Enemy has finished attacking!");
         VictoryAchieved = true;
         VictoryText.SetActive(true);
         animator.SetBool("isDefeated", true);
-Debug.Log("DemoEnemy/Victory: Victory achieved!");
     }
 
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
-        
-        if(printing)
-        {
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing until printing is false");
-            yield return new WaitUntil(() => !printing);
-        }
-
-        printing = true;
-//Debug.Log("DemoEnemy/printCurrentAction: Current action enabled");
+Debug.Log("DemoEnemy/printCurrentAction: Waiting for text to be blank");
+        yield return new WaitUntil(() => currentAction.text == "");
+Debug.Log("DemoEnemy/printCurrentAction: Printing current action");
         currentAction.enabled = true;
         currentAction.text = toPrint;
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for 5 seconds");
-        yield return new WaitForSeconds(3);
 
-        printing = false;
+        yield return new WaitForSeconds(3);
+        currentAction.text = "";
+
         currentAction.enabled = false;
     }
     public void AnimationHit()

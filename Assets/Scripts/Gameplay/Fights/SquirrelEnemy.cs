@@ -28,6 +28,7 @@ public class SquirrelEnemy : MonoBehaviour
     public int damageOutput;
     public int attackedEnemy;
     public int multiHitting;
+    private bool enemy1Attacking;
     private bool isProvoked1;
     private bool isProvoked2;
     private bool isStunned1;
@@ -47,7 +48,6 @@ public class SquirrelEnemy : MonoBehaviour
     public Slider EnemyHealthBar2;
     public AudioClip damageSound;
     public AudioClip healSound;
-    private bool printing;
     public TextMeshProUGUI currentAction;
     public string enemyName1;
     public string enemyName2;
@@ -111,9 +111,7 @@ public class SquirrelEnemy : MonoBehaviour
             PlayerPrefs.SetInt("BeatSquirrel", 1);
             timePassed += Time.deltaTime;
             if (timePassed > 3.0f)
-            {
                 SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
-            }
         }
     }
 
@@ -121,24 +119,33 @@ public class SquirrelEnemy : MonoBehaviour
     {
 Debug.Log("SquirrelEnemy/TakeDamage: isFire is " + isFire);
         // check which enemies are still alive
+        //ALLOW PLAYER TO PICK
         attackedEnemy = Random.Range(1, 3);
        
-        if (squirrelOneDown) 
-            attackedEnemy = 2;      
+        if (squirrelOneDown)
+        {   
+            multiHitting = 1;
+            attackedEnemy = 2;
+        }      
         else if (squirrelTwoDown)
+        {
+            multiHitting = 1;
             attackedEnemy = 1;
+        }
        
         if (multiHitting == 1) // only 1 enemy is taking damage
         {
             if (attackedEnemy == 1)
             {
+                // wait for previous attack animations to finish, especially for volcanic hex
+                yield return new WaitUntil(() => VFXanimation1.GetBool("isAttacked") == false &&
+                VFXanimation1.GetBool("isFireAttack") == false);
                 // set VFX to damaged animation
                 if(isFire)
                     VFXanimation1.SetBool("isFireAttack", true);
                 else
                     VFXanimation1.SetBool("isAttacked", true);
 
-                yield return new WaitForSeconds(1); // give time for animation to start
                 curHealth1 -= amount;
                 if(curHealth1 < 0)
                     curHealth1 = 0;
@@ -160,13 +167,15 @@ Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " heal
 
             else if (attackedEnemy == 2)
             {
+                // wait for previous attack animations to finish, especially for volcanic hex
+                yield return new WaitUntil(() => VFXanimation2.GetBool("isAttacked") == false &&
+                VFXanimation2.GetBool("isFireAttack") == false);
                 // set VFX to damaged animation
                 if(isFire)
                     VFXanimation2.SetBool("isFireAttack", true);
                 else
                     VFXanimation2.SetBool("isAttacked", true);
 
-                yield return new WaitForSeconds(1); // give time for animation to start
                 curHealth2 -= amount;
                 if(curHealth2 < 0)
                     curHealth2 = 0;
@@ -176,7 +185,7 @@ Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " heal
                 if (damageSound != null)     
                     audioSource.PlayOneShot(damageSound);
 
-                yield return new WaitForSeconds(1.5f); 
+                yield return new WaitForSeconds(1.5f); // let animation play
 
                 VFXanimation2.SetBool("isAttacked", false); // reset VFX
                 VFXanimation2.SetBool("isFireAttack", false);
@@ -189,6 +198,11 @@ Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " heal
     
         if (multiHitting == 2) // both enemies are taking damage
         {
+            // wait for previous attack animations to finish, especially for volcanic hex
+            yield return new WaitUntil(() => VFXanimation1.GetBool("isAttacked") == false &&
+            VFXanimation1.GetBool("isFireAttack") == false &&
+            VFXanimation2.GetBool("isAttacked") == false &&
+            VFXanimation2.GetBool("isFireAttack") == false);
             // set VFX to damaged animation
             if(isFire)
             {
@@ -201,8 +215,6 @@ Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " heal
                 VFXanimation2.SetBool("isAttacked", true);
             }
 
-            yield return new WaitForSeconds(1); // give time for animation to start
-
             curHealth1 -= amount;
             curHealth2 -= amount;
             EnemyHealthBar1.value = curHealth1;
@@ -211,6 +223,7 @@ Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " heal
 
             if (damageSound != null)     
                 audioSource.PlayOneShot(damageSound);
+            yield return new WaitForSeconds(1.5f); // let animation play
 
             VFXanimation1.SetBool("isAttacked", false); // reset VFX
             VFXanimation1.SetBool("isFireAttack", false);
@@ -221,10 +234,18 @@ Debug.Log("Both enemies took " + amount + " damage");
 Debug.Log("Squrrel 1 has " + curHealth1 + " and Squirrel 2 has " + curHealth2);
 
             if (curHealth1 <= 0)
+            {
                 squirrelOneDown = true;
+                animator1.SetBool("isDefeated", true);
+                StartCoroutine("DisableEnemy1");
+            }
 
             if (curHealth2 <= 0)
+            {
                 squirrelTwoDown = true;
+                animator2.SetBool("isDefeated", true);
+                StartCoroutine("DisableEnemy2");
+            }
             
             multiHitting = 1;
         }
@@ -258,7 +279,6 @@ Debug.Log("SquirrelEnemy/TakeDamage: isFire is " + isFire);
                 else
                     VFXanimation1.SetBool("isAttacked", true);
 
-                yield return new WaitForSeconds(1); // give time for animation to start
                 curHealth1 -= amount;
                 if(curHealth1 < 0)
                     curHealth1 = 0;
@@ -286,7 +306,6 @@ Debug.Log("Squirrel 1 took " + amount + " damage and has " + curHealth1 + " heal
                 else
                     VFXanimation2.SetBool("isAttacked", true);
 
-                yield return new WaitForSeconds(1); // give time for animation to start
                 curHealth2 -= amount;
                 if(curHealth2 < 0)
                     curHealth2 = 0;
@@ -321,10 +340,12 @@ Debug.Log("Squirrel 2 took " + amount + " damage and has " + curHealth2 + " heal
                 VFXanimation2.SetBool("isAttacked", true);
             }
 
-            yield return new WaitForSeconds(1); // give time for animation to start
-
             curHealth1 -= amount;
             curHealth2 -= amount;
+            if(curHealth1 < 0)
+                    curHealth1 = 0;
+            if(curHealth2 < 0)
+                    curHealth2 = 0;
             EnemyHealthBar1.value = curHealth1;
             EnemyHealthBar2.value = curHealth2;
             UpdateHUD();
@@ -383,6 +404,7 @@ Debug.Log("Reached begin turn, isKnightAttacking is " + isKnightAttacking + " an
         if (squirrelOneDown == false)
         {
 Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 has started attacking!");
+            enemy1Attacking = true;
 
             int stun = 4;
             if(isStunned1)
@@ -391,26 +413,66 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 has started attacking!");
             if(stun == 1)
             {
 Debug.Log("SquirrelEnemy/BeginTurn: Enemy is stunned! Skipping turn!");
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName1 + " is stunned and can't attack!", 0f));
+                StartCoroutine(printCurrentAction(enemyName1 + " is stunned and can't attack!", 0f));
             }
 
             else if(curHealth1 > 0)
             {
-                if(isProvoked1)
+                // if enemy is at full health, they can only attack (move 1)
+                if(curHealth1 >= maxHealth1)
                 {
-                    if (!printing)
-                        StartCoroutine(printCurrentAction(enemyName1 + " is provoked! It will only attack the Knight!", 0f));
+Debug.Log("SquirrelEnemy/BeginTurn: Enemy is at max health! Attacking!");
+                    selectingMove = 1;
+                }
+                // if enemy is provoked and knight isnt downed, they have to target knight
+                if(isProvoked1 && knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
+                {
 Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 is provoked! Will only attack Knight!");
                     selectingMove = 1;
                     selectingTarget = 1;
+                    StartCoroutine(printCurrentAction(enemyName1 + " is provoked! It will only attack the Knight!", 0f));
                 }
-                
+
                 else
                 {
                     int partySize = PlayerPrefs.GetInt("PartySize", 1);
                     selectingMove = Random.Range(1, 3);
-                    selectingTarget = Random.Range(1, partySize + 1);
+                    
+                    bool goodTarget = false;
+                    if(selectingMove == 1) // if attacking, check if the chosen target has remaining HP
+                    {
+                        while(!goodTarget)
+                        {
+Debug.Log("SquirrelEnemy/BeginTurn: Running target while loop!");
+                            selectingTarget = Random.Range(1, partySize + 1); // can only select party members unlocked
+
+                            switch(selectingTarget)
+                            {
+                                case 1: //targeting knight
+                                    if(knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
+                                    {
+Debug.Log("SquirrelEnemy/BeginTurn: Knight is not downed! Selecting knight!");
+                                        goodTarget = true;
+                                    }
+                                    break;
+
+                                case 2: // targeting sorcerer
+                                    if(sorcererPlayer.GetComponent<SorcererMoveset>().curHealth > 0)
+                                    {
+Debug.Log("SquirrelEnemy/BeginTurn: Sorcerer is not downed! Selecting sorcerer!");
+                                        goodTarget = true;
+                                    }
+                                    break;
+                                case 3: // targeting cleric
+                                    if(clericPlayer.GetComponent<ClericMoveset>().curHealth > 0)
+                                    {
+Debug.Log("SquirrelEnemy/BeginTurn: Cleric is not downed! Selecting cleric!");
+                                        goodTarget = true;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 if (selectingMove == 1)
@@ -418,7 +480,6 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 is provoked! Will only attack Kni
                     damageOutput = Random.Range(1, 7) + 1;
 
                     animator1.SetBool("isAttacking", true);
-//Debug.Log("SquirrelEnemy/BeginTurn: Coroutine is pausing until animation event");
                     yield return new WaitUntil(() => animationHit); // wait for animation to show enemy hitting
                     animationHit = false; // reset animation
 
@@ -442,14 +503,12 @@ Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Cleric!");
                         clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
                     }
                     
-
-//Debug.Log("SquirrelEnemy/BeginTurn: Coroutine is pausing until animation is done");
                     yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
                     animationDone = false;
                     animator1.SetBool("isAttacking", false);
                 }
                 
-                else if (selectingMove == 2 && curHealth1 < maxHealth1)
+                else if (selectingMove == 2)
                 {
                     VFXanimation1.SetBool("isHealing", true);
                     damageOutput = Random.Range(1, 5) + 1;
@@ -464,8 +523,7 @@ Debug.Log("SquirrelEnemy/BeginTurn: Lash is used on the Cleric!");
                     
                     EnemyHealthBar1.value = curHealth1;
                     UpdateHUD();
-                    if (!printing)
-                        StartCoroutine(printCurrentAction(enemyName1 + " healed for " + damageOutput + "!", 0f));
+                    StartCoroutine(printCurrentAction(enemyName1 + " healed for " + damageOutput + "!", 0f));
 Debug.Log("SquirrelEnemy/BeginTurn: Recuperate is used! Healed for " + damageOutput + " to " + curHealth1 + " health.");
                     yield return new WaitForSeconds(2);
                     VFXanimation1.SetBool("isHealing", false);
@@ -475,6 +533,7 @@ Debug.Log("SquirrelEnemy/BeginTurn: Recuperate is used! Healed for " + damageOut
 
         isProvoked1 = false;
         isStunned1 = false;
+        enemy1Attacking = false;
 Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 has finished attacking!");
         StartCoroutine(BeginTurn2());
     }
@@ -484,7 +543,7 @@ Debug.Log("SquirrelEnemy/BeginTurn: Squirrel 1 has finished attacking!");
         if (squirrelTwoDown == false)
         {
 Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has started attacking!");
-
+            yield return new WaitUntil(() => !enemy1Attacking);
             int stun = 4;
             if(isStunned2)
                 stun = Random.Range(1, 5); //generates number 1-4, 1 means the enemy skips turn
@@ -492,31 +551,71 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has started attacking!");
             if(stun == 1)
             {
 Debug.Log("SquirrelEnemy/BeginTurn2: Enemy is stunned! Skipping turn!");
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName1 + " is stunned and can't attack!", 0f));
+                StartCoroutine(printCurrentAction(enemyName1 + " is stunned and can't attack!", 0f));
             }
 
             else if (curHealth2 > 0)
             {
-                if(isProvoked2)
+                if(curHealth2 >= maxHealth2)
                 {
-                    if (!printing)
-                        StartCoroutine(printCurrentAction(enemyName1 + " is provoked! It will only attack the Knight!", 0f));
-Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 is provoked! Will only attack Knight!");
+Debug.Log("SquirrelEnemy/BeginTurn2: Enemy 2 is at max health! Attacking!");
+                    selectingMove = 1;
+                }
+
+                // if enemy is provoked and knight isnt downed, they have to target knight
+                if(isProvoked2 && knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
+                {
+Debug.Log("SquirrelEnemy/BeginTurn2: Enemy 2 is provoked! Will only attack Knight!");
                     selectingMove = 1;
                     selectingTarget = 1;
+                    StartCoroutine(printCurrentAction(enemyName2 + " is provoked! It will only attack the Knight!", 0f));
                 }
 
                 else
                 {
+                    int partySize = PlayerPrefs.GetInt("PartySize", 1);
                     selectingMove = Random.Range(1, 3);
-                    selectingTarget = Random.Range(1, 4);
+                    
+                    bool goodTarget = false;
+                    if(selectingMove == 1) // if attacking, check if the chosen target has remaining HP
+                    {
+                        while(!goodTarget)
+                        {
+Debug.Log("SquirrelEnemy/BeginTurn2: Running target while loop!");
+                            selectingTarget = Random.Range(1, partySize + 1); // can only select party members unlocked
+
+                            switch(selectingTarget)
+                            {
+                                case 1: //targeting knight
+                                    if(knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
+                                    {
+Debug.Log("SquirrelEnemy/BeginTurn2: Knight is not downed! Selecting knight!");
+                                        goodTarget = true;
+                                    }
+                                    break;
+
+                                case 2: // targeting sorcerer
+                                    if(sorcererPlayer.GetComponent<SorcererMoveset>().curHealth > 0)
+                                    {
+Debug.Log("SquirrelEnemy/BeginTurn2: Sorcerer is not downed! Selecting sorcerer!");
+                                        goodTarget = true;
+                                    }
+                                    break;
+                                case 3: // targeting cleric
+                                    if(clericPlayer.GetComponent<ClericMoveset>().curHealth > 0)
+                                    {
+Debug.Log("SquirrelEnemy/BeginTurn2: Cleric is not downed! Selecting cleric!");
+                                        goodTarget = true;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
                 }
             
                 if (selectingMove == 1)
                 {
                     animator2.SetBool("isAttacking", true);
-//Debug.Log("SquirrelEnemy/BeginTurn: Coroutine is pausing until animation event");
                     yield return new WaitUntil(() => animationHit); // wait for animation to show enemy hitting
                     animationHit = false; // reset animation
 
@@ -560,8 +659,7 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Lash is used on the Cleric!");
 
                     EnemyHealthBar2.value = curHealth2;
                     UpdateHUD();
-                    if (!printing)
-                        StartCoroutine(printCurrentAction(enemyName2 + " healed for " + damageOutput + "!", 0f));
+                    StartCoroutine(printCurrentAction(enemyName2 + " healed for " + damageOutput + "!", 0f));
 Debug.Log("SquirrelEnemy/BeginTurn2: Recuperate is used! Healed for " + damageOutput + " to " + curHealth2 + " health.");
                     yield return new WaitForSeconds(2);
                     VFXanimation2.SetBool("isHealing", false);
@@ -594,33 +692,24 @@ Debug.Log("SquirrelEnemy/BeginTurn2: Squirrel 2 has finished attacking!");
     public void Victory()
     {
         fightManager.GetComponent<FightManager>().BattleComplete();
-        animator1.SetBool("isDefeated", true);
-        animator2.SetBool("isDefeated", true);
+        //animator1.SetBool("isDefeated", true);
+        //animator2.SetBool("isDefeated", true);
         VictoryAchieved = true;
         VictoryText.SetActive(true);
-    
-Debug.Log("Victory achieved!");
     }
 
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
-        
-        if(printing)
-        {
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing until printing is false");
-            yield return new WaitUntil(() => !printing);
-        }
+Debug.Log("SquirrelEnemy/printCurrentAction: Waiting for text to be blank");
+        yield return new WaitUntil(() => currentAction.text == "");
+Debug.Log("SquirrelEnemy/printCurrentAction: Printing current action");
 
-        printing = true;
-//Debug.Log("DemoEnemy/printCurrentAction: Current action enabled");
         currentAction.enabled = true;
         currentAction.text = toPrint;
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for 5 seconds");
-        yield return new WaitForSeconds(3);
 
-        printing = false;
+        yield return new WaitForSeconds(3);
+        currentAction.text = "";
         currentAction.enabled = false;
     }
 
@@ -632,5 +721,17 @@ Debug.Log("Victory achieved!");
     public void AnimationDone()
     {
         animationDone = true;
+    }
+
+    public IEnumerator DisableEnemy1()
+    {
+        yield return new WaitForSeconds(3);
+        squirrelOne.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public IEnumerator DisableEnemy2()
+    {
+        yield return new WaitForSeconds(3);
+        squirrelTwo.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

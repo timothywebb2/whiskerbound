@@ -18,8 +18,8 @@ public class ClericMoveset : MonoBehaviour
     public int shieldOutput;
     public int thornsOutput;
     public int healOutput;
-        int hasThorns;
-         public int rallyRandom; // This is temporary
+    int hasThorns;
+    public int rallyRandom; // This is temporary
     public int thornDamage;
     public bool rallyOrNot;
     public int volcanicTally;
@@ -71,7 +71,6 @@ public class ClericMoveset : MonoBehaviour
             this.gameObject.SetActive(false);
         }
 
-        maxHealth = 60;
         curHealth = maxHealth;
         Clerichealthbar.maxValue = maxHealth;
         Clerichealthbar.value = curHealth;
@@ -79,8 +78,8 @@ public class ClericMoveset : MonoBehaviour
         intercedeOn = false;
         rallyOrNot = false;
         volcanicTally = 0;
-              rallyRandom = 1;
-            hasThorns = 0;
+        rallyRandom = 1;
+        hasThorns = 0;
         thornDamage = 0;
         // damageType = 2; // 1 = PHYS, 2 = MYS, 3 = SPR
 
@@ -104,7 +103,7 @@ public class ClericMoveset : MonoBehaviour
         {
             timePassed += Time.deltaTime;
             if (timePassed > 3.0f)
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(PlayerPrefs.GetString("LastVillage", "forestVillage"));
         }
     }
 
@@ -129,6 +128,8 @@ Debug.Log("ClericMoveset/TakeDamage: Damage reduce from " + amount + " to " + fi
             }
 
             curHealth -= finalDamage;
+            if(curHealth < 0)
+                curHealth = 0;
             Clerichealthbar.value = curHealth;
 
             VFXanimator.SetBool("isAttacked", true);
@@ -138,9 +139,8 @@ Debug.Log("ClericMoveset/TakeDamage: Damage reduce from " + amount + " to " + fi
                 audioSource.PlayOneShot(damageSound);
             }
            
-            if(!printing)
-                StartCoroutine(printCurrentAction("Cleric took " + finalDamage + " damage!", 1f));
-                if (hasThorns > 0)
+            StartCoroutine(printCurrentAction("Cleric took " + finalDamage + " damage!", 1f));
+            if (hasThorns > 0)
             {
 Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
                 if (squirrelFight == 1) 
@@ -162,7 +162,7 @@ Debug.Log("KnightMoveset/TakeDamage: Enemy took damage from thorns!");
         else if (intercedeOn == true)
         {
 Debug.Log("ClericMoveset/TakeDamage: Damage blocked!");
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Damage blocked from Cleric!", 1f));
             intercedeOn = false;
         }
@@ -194,7 +194,7 @@ Debug.Log("ClericMoveset/TakeDamage: Damage blocked!");
     {
         if (!GameModeManager.Instance.IsInfiniteCoins() && healUsedThisTurn)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Potion already used this turn!", 0f));
             //return;
         }
@@ -224,7 +224,7 @@ Debug.Log("ClericMoveset/TakeDamage: Damage blocked!");
             //PUT HEAL SFX
 
 Debug.Log("ClericMoveset/HealPotion: Healed for " + actualHeal);
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Healed for " + actualHeal + " HP!", 0f));
             
             yield return new WaitForSeconds(2);
@@ -235,7 +235,7 @@ Debug.Log("ClericMoveset/HealPotion: Healed for " + actualHeal);
     {
         if (!GameModeManager.Instance.IsInfiniteCoins() && damageReductionUsedThisTurn)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Already used this turn!", 0f));
             return;
         }
@@ -251,7 +251,7 @@ Debug.Log("ClericMoveset/HealPotion: Healed for " + actualHeal);
 
 Debug.Log("ClericMoveset/DamageReductionPotion: Damage reduction activated!");
 
-        if (!printing)
+        //if (!printing)
             StartCoroutine(printCurrentAction("Damage taken reduced by 25% for next hit!", 0f));
     }
 
@@ -260,7 +260,6 @@ Debug.Log("ClericMoveset/DamageReductionPotion: Damage reduction activated!");
         lastMove = Incinerate;
         ExecuteMove(() =>
         {
-
             damageOutput = Random.Range(1, 7) + Random.Range(1, 7) + mightBonus;
             if (squirrelFight == 1)
                 StartCoroutine(firstEnemy.GetComponent<DemoEnemy>().TakeDamage(damageOutput, true));
@@ -350,7 +349,6 @@ Debug.Log("Rally being used!");
         lastMove = Devotion;
         ExecuteMove(() =>
         {
-
             damageOutput = Random.Range(1, 5) + Random.Range(1, 5) + mightBonus;
             if (squirrelFight == 1)
             {
@@ -501,9 +499,11 @@ Debug.Log("ClericMoveset/IntercedeCleric: Intercede on Cleric!");
 
      public void OpenClericSkills()
     {   
-        // if the log isnt printing, and if no party members are in the middle of an attack or being attacked/healed
-        // ADD CLERIC
-        if (!printing && animator.GetBool("isAttacking") == false && knightAlly.animator.GetBool("isAttacking") == false && sorcererAlly.animator.GetBool("isAttacking") == false)
+        if (!printing && //if the log isnt printing...
+        animator.GetBool("isAttacking") == false && // AND if no party members are in the middle of an attack or being attacked/healed...
+        knightAlly.animator.GetBool("isAttacking") == false && 
+        sorcererAlly.animator.GetBool("isAttacking") == false &&
+        curHealth > 0) // AND cleric isnt downed
         {
             // check if enemies are in middle of attack or being attacked/healed
             bool enemyIsAttacking = true;
@@ -562,10 +562,15 @@ Debug.Log("ClericMoveset/OpenClericSkills: Can't open menu! Log is printing or p
 
 
     public void Lose()
-    {
-        loseCondition = true;
-        LoseText.SetActive(true);
+    {   
+        // if both knight and sorcerer are downed and cleric is the last one to go down
+        if(knightAlly.GetComponent<KnightMoveset>().curHealth <= 0 && sorcererAlly.GetComponent<SorcererMoveset>().curHealth <= 0)
+        {
+            loseCondition = true;
+            LoseText.SetActive(true);
+            PlayerPrefs.SetInt("SpawnPoint", 0);
 Debug.Log("ClericMoveset/Lose: You lose!");
+        }
     }
 
     void ExecuteMove(System.Action move, System.Func<string> getMessage)
@@ -596,7 +601,7 @@ Debug.Log("ClericMoveset/Lose: You lose!");
     {
         if (doubleCastActive)
         {
-            if (!printing)
+            //if (!printing)
                 StartCoroutine(printCurrentAction("Double Cast already active!", 0f));
             return;
         }
@@ -611,7 +616,7 @@ Debug.Log("ClericMoveset/Lose: You lose!");
 
 //Debug.Log("ClericMoveset/ActivateDoubleCast: Double Cast ACTIVATED!");
 
-        if (!printing)
+        //if (!printing)
             StartCoroutine(printCurrentAction("Double Cast activated!", 0f));
     }
 
@@ -640,7 +645,7 @@ Debug.Log("ClericMoveset/Lose: You lose!");
 //Debug.Log("ClericMoveset/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
 //Debug.Log("ClericMoveset/printCurrentAction: Coroutine is pausing until printing is false");
-        yield return new WaitUntil(() => !printing);
+        yield return new WaitUntil(() => currentAction.text == "");
 
         printing = true;
 
@@ -649,6 +654,7 @@ Debug.Log("ClericMoveset/Lose: You lose!");
 
 //Debug.Log("ClericMoveset/printCurrentAction: Coroutine is pausing for 3 seconds");
         yield return new WaitForSeconds(3);
+        currentAction.text = "";
 
         printing = false;
         currentAction.enabled = false;

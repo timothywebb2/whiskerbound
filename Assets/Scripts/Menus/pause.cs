@@ -29,7 +29,7 @@ public class pause : MonoBehaviour
         optionsMenu.SetActive(false);
         confirmationMenu.SetActive(false);
         controlsScreen.SetActive(false);
-        Debug.Log("Menus are inactive");
+        //Debug.Log("Menus are inactive");
     }
 
     // Update is called once per frame

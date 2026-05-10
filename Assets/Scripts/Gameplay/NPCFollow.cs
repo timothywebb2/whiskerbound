@@ -21,6 +21,7 @@ public class NPCFollow : MonoBehaviour
     float sampleTime; // time since last sample
     float followSpeed; // current speed of NPC
     public float baseSpeed; // base NPC walking speed
+    private float sprintSpeed; // speed of player sprinting
     public float fastSpeed; // fast NPC walking speed to catch up
     public float fastDistance; // minimum distance character needs to be from follower to activate fastSpeed
     public float removeDistance; // margin of error when NPC travels to sample (smaller number = more accurate)
@@ -41,6 +42,7 @@ public class NPCFollow : MonoBehaviour
         
         sampleTime = Time.time;
         followSpeed = fastSpeed;
+        sprintSpeed = knightTransform.GetComponent<ProtoMovement>().speed * 1.65f;
 
         oldPosition = transform.position;
 
@@ -80,15 +82,17 @@ public class NPCFollow : MonoBehaviour
             }
         }
 
-        // move to player position
-        if((Vector3.Distance(transform.position, followCharacter.position) > fastDistance) || // if follower is too far away
-        knightTransform.gameObject.GetComponent<ProtoMovement>().isSprinting) // OR player is sprinting
-            followSpeed = fastSpeed; // then increase speed
-        else
+        // change speed
+        if(Vector3.Distance(transform.position, followCharacter.position) > fastDistance) // if too far, go faster than sprint speed to catch up with player
+            followSpeed = fastSpeed;
+        else if(knightTransform.gameObject.GetComponent<ProtoMovement>().isSprinting) // if player is sprinting, match sprint speed
+            followSpeed = sprintSpeed;
+        else // otherwise move at base speed
             followSpeed = baseSpeed;
 
         if(Vector3.Distance(transform.position, followCharacter.position) > distanceFromCharacter) // if the current distance between NPC and character is above max
         {
+            // change animations
             Vector3 cameraForward = GetCameraForward();
             Vector3 cameraRight = GetCameraRight();
 
@@ -114,8 +118,10 @@ public class NPCFollow : MonoBehaviour
             animator.SetInteger("XDirection", rotatedX);
             animator.SetInteger("YDirection", rotatedY);
 
+            // move to last saved player position
             transform.position = Vector3.MoveTowards(transform.position, followCharacterPositions[0], Time.deltaTime * followSpeed);
 
+            // if acceptable distance from last saved player position, remove it from list
             if(Vector3.Distance(transform.position, followCharacterPositions[0]) < removeDistance && followCharacterPositions.Count > 1)
             {
                 followCharacterPositions.RemoveAt(0);

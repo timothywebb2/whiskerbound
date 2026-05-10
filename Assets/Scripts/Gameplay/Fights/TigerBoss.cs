@@ -38,7 +38,6 @@ public class TigerBoss : MonoBehaviour
     public TextMeshProUGUI currentAction;
     public string enemyName;
     private AudioSource audioSource;
-    private bool printing;
 
     [Header("Animation")]
     public Animator animator;
@@ -89,15 +88,16 @@ public class TigerBoss : MonoBehaviour
             PlayerPrefs.SetInt("BeatTiger", 1);
             timePassed += Time.deltaTime;
             if (timePassed > 3.0f)
-            {
-Debug.Log("TigerBoss/Update: Change scene");
                 SceneManager.LoadScene(PlayerPrefs.GetString("LastScene", "forestVillage"));
-            }
         }
     }
 
     public IEnumerator TakeDamage(int amount, bool isFire)
     {
+        // wait for previous attack animations to finish, especially for volcanic hex
+        yield return new WaitUntil(() => VFXanimation.GetBool("isAttacked") == false &&
+        VFXanimation.GetBool("isFireAttack") == false);
+        
 Debug.Log("TigerBoss/TakeDamage: isFire is " + isFire);
         // set VFX to damaged animation
         if(isFire)
@@ -157,8 +157,7 @@ Debug.Log("TigerBoss/TakeDamage: Enemy took " + amount + " damage and has " + cu
                 UpdateHUD();
 
                 blessTime -= 1;
-                if (!printing)
-                        StartCoroutine(printCurrentAction("Empower healed " + enemyName + " healed for " + damageOutput + "! " + blessTime + " turns of Empower left!", 0f));
+                StartCoroutine(printCurrentAction("Empower healed " + enemyName + " healed for " + damageOutput + "! " + blessTime + " turns of Empower left!", 0f));
 Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss has " + blessTime + " turns of Bless left.");
             }
         
@@ -169,28 +168,68 @@ Debug.Log("TigerBoss/BeginTurn: Bless healed boss up to " + curHealth + ". Boss 
             if(stun == 1)
             {
 Debug.Log("TigerBoss/BeginTurn: Enemy is stunned! Skipping turn!");
-                if (!printing)
-                        StartCoroutine(printCurrentAction(enemyName + " is stunned and can't attack!", 0f));
+                StartCoroutine(printCurrentAction(enemyName + " is stunned and can't attack!", 0f));
             }
         }
 
-        else if (curHealth > 0)
-        {
-            // if/else for selecting target/move when provoked
-            if(isProvoked)
+        if (curHealth > 0)
+        {   
+
+
+            if(curHealth >= maxHealth)
+            {
+Debug.Log("TigerBoss/BeginTurn: Enemy is at max health!");
+                selectingMove = Random.Range(1, 4);
+            }
+            // if enemy is provoked and knight isnt downed, they have to target knight
+            if(isProvoked && knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
             {
 Debug.Log("TigerBoss/BeginTurn: Enemy is provoked! Will only attack Knight!");
                 selectingMove = 1;
                 selectingTarget = 1;
-
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName + " is provoked! It will only attack the Knight!", 0f));
+                StartCoroutine(printCurrentAction(enemyName + " is provoked! It will only attack the Knight!", 0f));
             }
+
             else
             {
                 int partySize = PlayerPrefs.GetInt("PartySize", 1);
                 selectingMove = Random.Range(1, 5);
-                selectingTarget = Random.Range(1, partySize + 1);
+                
+                bool goodTarget = false;
+                if(selectingMove == 1) // if attacking, check if the chosen target has remaining HP
+                {
+                    while(!goodTarget)
+                    {
+Debug.Log("SquirrelEnemy/BeginTurn: Running target while loop!");
+                        selectingTarget = Random.Range(1, partySize + 1); // can only select party members unlocked
+
+                        switch(selectingTarget)
+                        {
+                            case 1: //targeting knight
+                                if(knightPlayer.GetComponent<KnightMoveset>().curHealth > 0)
+                                {
+Debug.Log("SquirrelEnemy/BeginTurn: Knight is not downed! Selecting knight!");
+                                    goodTarget = true;
+                                }
+                                break;
+
+                            case 2: // targeting sorcerer
+                                if(sorcererPlayer.GetComponent<SorcererMoveset>().curHealth > 0)
+                                {
+Debug.Log("SquirrelEnemy/BeginTurn: Sorcerer is not downed! Selecting sorcerer!");
+                                    goodTarget = true;
+                                }
+                                break;
+                            case 3: // targeting cleric
+                                if(clericPlayer.GetComponent<ClericMoveset>().curHealth > 0)
+                                {
+Debug.Log("SquirrelEnemy/BeginTurn: Cleric is not downed! Selecting cleric!");
+                                    goodTarget = true;
+                                }
+                                break;
+                        }
+                    }
+                }
             }
 
             if (selectingMove == 1)
@@ -236,7 +275,12 @@ Debug.Log("TigerBoss/BeginTurn: Crush is used on the Cleric!");
 
 Debug.Log("TigerBoss/BeginTurn: Sweep is used!");
                 knightPlayer.GetComponent<KnightMoveset>().TakeDamage(damageOutput);
-                sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+                if(PlayerPrefs.GetInt("PartySize", 1) > 1)
+                {
+                    sorcererPlayer.GetComponent<SorcererMoveset>().TakeDamage(damageOutput);
+                    if(PlayerPrefs.GetInt("PartySize", 1) > 2)
+                        clericPlayer.GetComponent<ClericMoveset>().TakeDamage(damageOutput);
+                }
 
                 //Debug.Log("DemoEnemy/BeginTurn: Coroutine is pausing until animation is done");
                 yield return new WaitUntil(() => animationDone); // wait for rest of animation to finish
@@ -247,13 +291,12 @@ Debug.Log("TigerBoss/BeginTurn: Sweep is used!");
             else if (selectingMove == 3)
             {
                 //ADD VFX (MAYBE DIFFERENT FROM HEALING ONE?)
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName + " used empower! Will passively heal for three turns!", 0f));
+                StartCoroutine(printCurrentAction(enemyName + " used empower! Will passively heal for three turns!", 0f));
 Debug.Log("TigerBoss/BeginTurn: Empower is used! Gained 3 turns of blessing!");
                 blessTime += 3;
             }
 
-            else if (selectingMove == 4 && curHealth < maxHealth)
+            else if (selectingMove == 4)
             {
                 VFXanimation.SetBool("isHealing", true);
                 damageOutput = Random.Range(1, 5) + Random.Range(1, 5);
@@ -267,8 +310,7 @@ Debug.Log("TigerBoss/BeginTurn: Empower is used! Gained 3 turns of blessing!");
 
                 EnemyHealthBar.value = curHealth;
                 UpdateHUD();
-                if (!printing)
-                    StartCoroutine(printCurrentAction(enemyName + " healed for " + damageOutput + "!", 0f));
+                StartCoroutine(printCurrentAction(enemyName + " healed for " + damageOutput + "!", 0f));
 Debug.Log("TigerBoss/BeginTurn: Tiger Ward is used! Healed to " + curHealth);
                 yield return new WaitForSeconds(2);
                 VFXanimation.SetBool("isHealing", false);
@@ -295,23 +337,16 @@ Debug.Log("Victory achieved!");
     }
     IEnumerator printCurrentAction(string toPrint, float delay)
     {
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for " + delay + " seconds");
         yield return new WaitForSeconds(delay);
-        
-        if(printing)
-        {
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing until printing is false");
-            yield return new WaitUntil(() => !printing);
-        }
+Debug.Log("TigerBoss/printCurrentAction: Waiting for text to be blank");
+        yield return new WaitUntil(() => currentAction.text == "");
+Debug.Log("TigerBoss/printCurrentAction: Printing current action");
 
-        printing = true;
-//Debug.Log("DemoEnemy/printCurrentAction: Current action enabled");
         currentAction.enabled = true;
         currentAction.text = toPrint;
-//Debug.Log("DemoEnemy/printCurrentAction: Coroutine is pausing for 5 seconds");
+
         yield return new WaitForSeconds(3);
 
-        printing = false;
         currentAction.enabled = false;
     }
     public void AnimationHit()
